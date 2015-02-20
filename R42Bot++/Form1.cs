@@ -62,11 +62,6 @@ namespace R42Bot
         public int[] faceslist = new int[] { 0, 1, 2, 3, 4, 5, 12, 13, 14, 15 };
         #endregion
 
-        #region HELP SECTION
-        string[] possible_causes_botconnect_pt = new string[] { "Uma coisa que pode ter acontecido é que pôs um ID do mundo inválido, verifique.", "Pode ter escrito o email mal, a password mal ou os dois mal (conta que não existente)", "Se não tem o PlayerIO confirmado no seu firewall, confirma-o." };
-        string[] possible_causes_botconnect_eu = new string[] { "One thing that could have happend is an wrong WorldID, please check it again.", "You may writed the email wrong, writed the password wrong or both wrong (account doesnt exist)", "Please, in your firewall, enable PlayerIO if it isn't enabled." };
-        #endregion
-
         public void DefineLogZones()
         {
             string log1t = log1.Text;
@@ -108,7 +103,7 @@ namespace R42Bot
         public void Translate()
         {
             #region language-changer
-            if (enus.Checked == true)
+            if (enus.Checked)
             {
                 welcomeall.Text = "Welcome everyone who comes to the world.";
                 welcomemsg.Text = "Welcome to this world, ";
@@ -141,7 +136,7 @@ namespace R42Bot
                 autobolder.Text = "AutoBuilder";
                 autobuild1.Text = "Smiley Border";
             }
-            else if (ptbr.Checked == true)
+            else if (ptbr.Checked)
             {
                 welcomeall.Text = "Dizer bem vindo a quem entrar no mundo.";
                 welcomemsg.Text = "Bem vindo, ";
@@ -449,13 +444,17 @@ namespace R42Bot
                             Thread.Sleep(250);
                             if (names.ContainsKey(m.GetInt(0)))
                             {
-                                if (enus.Checked == true && ptbr.Checked == false)
+                                if (enus.Checked)
                                 {
                                     con.Send("say", string.Concat(names[m.GetInt(0)].ToString() + " won! Now he/she has " + player[m.GetInt(0)].wins + " wins!"));
                                 }
-                                else if (ptbr.Checked == true && enus.Checked == false)
+                                else if (ptbr.Checked)
                                 {
                                     con.Send("say", string.Concat(names[m.GetInt(0)].ToString() + " ganhou! Agora ele/ela ganhou " + player[m.GetInt(0)].wins + " vezes!"));
+                                }
+                                else if (ltu.Checked)
+                                {
+                                    
                                 }
                             }
                         }
@@ -580,10 +579,32 @@ namespace R42Bot
                     }
                     return;
                 case "access":
-                    con.Send("say", "[R42Bot++] Got Edit.");
+                    if (enus.Checked)
+                    {
+                        con.Send("say", "[R42Bot++] Got Edit.");
+                    }
+                    else if (ptbr.Checked)
+                    {
+                        con.Send("say", "[R42Bot++] Código recebido.");
+                    }
+                    else if (ltu.Checked)
+                    {
+                        
+                    }
                     return;
                 case "lostaccess":
-                    con.Send("say", "[R42Bot++] Lost Edit.");
+                    if (enus.Checked)
+                    {
+                        con.Send("say", "[R42Bot++] Lost Edit.");
+                    }
+                    else if (ptbr.Checked)
+                    {
+                        con.Send("say", "[R42Bot++] Código perdido.");
+                    }
+                    else if (ltu.Checked)
+                    {
+                        
+                    }
                     return;
                 case "left":
                     if (!kJoiners.Checked)
@@ -593,13 +614,13 @@ namespace R42Bot
                             #region case "left" code
                             if (leftall.Checked)
                             {
-                                if (leftallcase.Checked && !leftallupper.Checked)
+                                if (leftallcase.Checked)
                                 {
                                     Thread.Sleep(200);
                                     con.Send("say", "[R42Bot++] " + leftallmsg.Text + " " + names[m.GetInt(0)].ToString().ToLower() + " " + leftall2.Text);
                                     Thread.Sleep(200);
                                 }
-                                else if (!leftallcase.Checked && leftallupper.Checked)
+                                else if (leftallupper.Checked)
                                 {
                                     Thread.Sleep(200);
                                     con.Send("say", "[R42Bot++] " + leftallmsg.Text + " " + names[m.GetInt(0)].ToString().ToUpper() + " " + leftall2.Text);
