@@ -1,0 +1,19 @@
+C:\Users\Marco Santos\Documents\Visual Studio 2013\Projects\WindowsFormsApplication12\WindowsFormsApplication12\bin\Debug\WindowsFormsApplication12.exe.config
+C:\Users\Marco Santos\Documents\Visual Studio 2013\Projects\WindowsFormsApplication12\WindowsFormsApplication12\obj\Debug\WindowsFormsApplication12.exe
+C:\Users\Marco Santos\Documents\Visual Studio 2013\Projects\WindowsFormsApplication12\WindowsFormsApplication12\obj\Debug\WindowsFormsApplication12.pdb
+C:\Users\Marco Santos\Documents\Visual Studio 2013\Projects\WindowsFormsApplication12\WindowsFormsApplication12\bin\Debug\WindowsFormsApplication12.exe
+C:\Users\Marco Santos\Documents\Visual Studio 2013\Projects\WindowsFormsApplication12\WindowsFormsApplication12\bin\Debug\WindowsFormsApplication12.pdb
+C:\Users\Marco Santos\Documents\Visual Studio 2013\Projects\WindowsFormsApplication12\WindowsFormsApplication12\bin\Debug\PlayerIOClient.dll
+C:\Users\Marco Santos\Documents\Visual Studio 2013\Projects\WindowsFormsApplication12\WindowsFormsApplication12\obj\Debug\R42BotPLUSplus.csprojResolveAssemblyReference.cache
+C:\Users\Marco Santos\Documents\Visual Studio 2013\Projects\WindowsFormsApplication12\WindowsFormsApplication12\obj\Debug\R42Bot.Form1.resources
+C:\Users\Marco Santos\Documents\Visual Studio 2013\Projects\WindowsFormsApplication12\WindowsFormsApplication12\obj\Debug\R42Bot.Properties.Resources.resources
+C:\Users\Marco Santos\Documents\Visual Studio 2013\Projects\WindowsFormsApplication12\WindowsFormsApplication12\obj\Debug\R42BotPLUSplus.csproj.GenerateResource.Cache
+C:\Users\MarcoAntonio\Documents\Visual Studio 2015\Projects\WindowsFormsApplication12\WindowsFormsApplication12\bin\Debug\WindowsFormsApplication12.exe.config
+C:\Users\MarcoAntonio\Documents\Visual Studio 2015\Projects\WindowsFormsApplication12\WindowsFormsApplication12\obj\Debug\WindowsFormsApplication12.exe
+C:\Users\MarcoAntonio\Documents\Visual Studio 2015\Projects\WindowsFormsApplication12\WindowsFormsApplication12\obj\Debug\WindowsFormsApplication12.pdb
+C:\Users\MarcoAntonio\Documents\Visual Studio 2015\Projects\WindowsFormsApplication12\WindowsFormsApplication12\bin\Debug\WindowsFormsApplication12.exe
+C:\Users\MarcoAntonio\Documents\Visual Studio 2015\Projects\WindowsFormsApplication12\WindowsFormsApplication12\bin\Debug\WindowsFormsApplication12.pdb
+C:\Users\MarcoAntonio\Documents\Visual Studio 2015\Projects\WindowsFormsApplication12\WindowsFormsApplication12\obj\Debug\R42BotPLUSplus.csprojResolveAssemblyReference.cache
+C:\Users\MarcoAntonio\Documents\Visual Studio 2015\Projects\WindowsFormsApplication12\WindowsFormsApplication12\obj\Debug\R42Bot.Form1.resources
+C:\Users\MarcoAntonio\Documents\Visual Studio 2015\Projects\WindowsFormsApplication12\WindowsFormsApplication12\obj\Debug\R42Bot.Properties.Resources.resources
+C:\Users\MarcoAntonio\Documents\Visual Studio 2015\Projects\WindowsFormsApplication12\WindowsFormsApplication12\obj\Debug\R42BotPLUSplus.csproj.GenerateResource.Cache
