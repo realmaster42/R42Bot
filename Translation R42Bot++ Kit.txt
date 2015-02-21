@@ -1,0 +1,131 @@
+//Translated by realmaster(marcoantonimsantos)
+
+Advice_Language_Box = "Language is now EU/US!"
+Welcome_All = "Welcome everyone who comes to the world."
+Welcome_Msg = "Welcome to this world, " // remember to keep the space
+Left_All = "Tell something when anybody leaves the world."
+Left_All_Msg = "Ow... " // remember to keep the space
+Left_All_Msg2 = " left US behind..." // remember to keep the space
+Id_Of_World = "world ID"
+Add = "Add"
+Remove = "Remove"
+Left_All_Case = "non-caps"
+Left_All_Upper = "caps"
+Welcome_All_Lower = "non-caps"
+Welcome_All_Upper = "caps"
+code_box = "Code"
+
+//Bot application texts
+
+Label1 = "hmm... the bot needs admin to work the best."
+Label4 = "Welcome Message"
+Label6 = "text after username."
+Label7 = "Message"
+Label9 = "text after username."
+Label13 = "Language:"
+Label11 = "leaving username:"
+Label12 = "welcoming username:"
+Label10 = "Only choose one option for leaving and welcoming msg. (of username)"
+Label5 = "to"
+
+//Checkboxes
+
+Win_System = "WINS SYTEM"
+Kick_Joiners = "Kick Joiners"
+Kick_Bots = "Kick Bots"
+Free_Admin = "Free Admin"
+Free_Edit = "Free Edit"
+Smiley_Border = "Smiley Border"
+Water_Placer = "Water Placer"
+Filling = "Filling"
+Wet_Sand = "Wet Sand"
+BG_Delete = "Background Delete"
+PM_Result = "PM result"
+Allow_Stalking = "Allow Stalking."
+Auto_Change = "auto-change ':)' -> ':('"
+Snake_RBS = "Rainbow Basic Snake"
+Snake_FRBS = "Fast Rainbow Basic Snake"
+Snake_NBS = "Normal Basic Snake"
+Snake_FNBS = "Fast Normal Basic Snake"
+Snake_RMS = "Rainbow Mineral Snake"
+Snake_FRMS = "Fast Rainbow Mineral Snake"
+Snake_NMS = "Normal Mineral Snake"
+Snake_FNMS = "Fast Normal Mineral Snake"
+Auto_Reset = "Auto-Reset"
+Auto_Reset_Msg = "Auto reset Message"
+Pink_Glass_Explode = "Pink Glass Explode"
+PGE_Delete_Only = "Delete Only"
+PGE_Default = "Default"
+Lava_Snake = "Lava Snake"
+Allow = "Allow"
+
+
+//Buttons & Labels
+
+Customize = "Customize"
+Customize_Def = "Default"
+BG_Color = "Background Color:"
+Current = "Current:"
+Connect = "Connect"
+Disconnect = "Disconnect"
+Say = "Say!"
+Block_ID = "Block ID:"
+Clear_Stalking_One = "ClearStalkingOne"
+Save_Stalking_Data = "Save 'allow stalking' data"
+Randomize = "Randomize!"
+Auto_Reset_Time = "Auto-Reset Time (in ms)"
+Current_Poll = "Current poll:"
+Poll_Starter = "Poll Starter:"
+Choice1 = "Choice 1:"
+Choice2 = "Choice 2:"
+Choice3 = "Choice 3:"
+Votes = "Votes:"
+Bot_Log = "BotLog"
+
+//Connection
+
+Bot_Successfully_Connected = "[R42Bot++] R42Bot++ Version V has been connected successfully! :)"
+Banned_From_Bot = "You have been banned from this bot!!!"
+Banned = "[R42Bot++] Goodbye, the user using me is banned! :D"
+Joining_Disabled_Kick = "[R42Bot++] Joining disabled."
+Got_Edit = "[R42Bot++] Got Edit."
+Lost_Edit = "[R42Bot++] Lost Edit."
+Connect = "Connect"
+Disconnected = "Disconnected."
+System = "System"
+Email_Pass_WorldID_FillIn = "Email, Password and WorldID must be fillen up!"
+Token_WorldID_FillIn = "TokenID and WorldID must be fillen up!"
+
+
+//Tabs
+
+Index = "Index"
+Options = "Options"
+News = "News"
+Advanced_Options = "Advanced Options"
+Auto_Builder = "AutoBuilder"
+Stalk_Movement = "StalkMovement"
+Smiley_Changer = "Smiley Changer"
+Snakes = "Snakes"
+Auto = "Auto..."
+Polls = "Polls"
+Custom_User_Ideas = "Custom User Ideas"
+More = "More"
+Command_Restrictions = "Command Restrictions"
+Customize_Tab = "Customize..."
+Bot_System = "Bot System"
+Ban_List = "Ban List"
+
+//News Tab
+
+OutDated = "Your R42Bot++ version (V) is outdated! Newest version is V ! "
+Up_To_Date = "Your R42Bot++ version (V) is up-to-date."
+
+//Special
+Auto_Reset_Say = "[R42Bot++] World reseted. Reseting marked for every X ms!"
+Auto_Kick_Enabled = "[R42Bot++] Autokick enabled."
+Smiley_Changer_Enabled = "...S M I L E Y  C H A N G E R  C H O O S E  C H A N G E D..."
+
+//Translation R42Bot++ Kit Stable A2-preA2 Translation Kit
+//Please consider unstable translation versions may be changed and your translations
+//might need to be updated.
