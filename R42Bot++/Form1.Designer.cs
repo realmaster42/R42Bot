@@ -320,7 +320,6 @@ namespace R42Bot
             this.addText.Name = "addText";
             this.addText.Size = new System.Drawing.Size(117, 20);
             this.addText.TabIndex = 8;
-            this.addText.TextChanged += new System.EventHandler(this.addText_TextChanged);
             // 
             // removeText
             // 
