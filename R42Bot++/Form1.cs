@@ -25,6 +25,8 @@ namespace R42Bot
         string versionlink = "https://dl.dropbox.com/s/6x0q6qmhd4afu40/version.txt";
         string version = "1 - A new reborn!";
         string upgradedVersion = "1 - A new reborn!";
+        string UpToDate = "";
+        string OutOfDate = "";
         #endregion
 
         #region VARIABLES
@@ -2825,41 +2827,20 @@ namespace R42Bot
             #endregion
 
             this.Text = this.Text + this.version;
-
+            UpToDate = "Your R42Bot++ version (" + version + ") is up-to-date.";
+            OutOfDate = "Your R42Bot++ version (" + version + ") is outdated! Newest version is " + upgradedVersion + " ! ";
             //Checks or it needs to run the downloader
             if (new System.Net.WebClient().DownloadString(versionlink) != this.version)
             {
                 upgradedVersion = new System.Net.WebClient().DownloadString(versionlink);
-                label48.Text = "Your R42Bot++ version (" + version + ") is outdated! Newest version is " + upgradedVersion + " ! ";
+                label48.Text = OutOfDate;
             }
             else
             {
                 label48.Visible = true;
                 label48.ForeColor = Color.DarkOliveGreen;
-                label48.Text = "Your R42Bot++ version (" + version + ") is up-to-date.";
+                label48.Text = UpToDate;
             }
-        }
-
-        private void botconnectionfail_Click(object sender, EventArgs e)
-        {
-            if (enus.Checked == true && ptbr.Checked == false)
-            {
-                MessageBox.Show(possible_causes_botconnect_eu[new Random().Next(0, possible_causes_botconnect_eu.Length + 1)]);
-            }
-            else if (ptbr.Checked == true && enus.Checked == false)
-            {
-                MessageBox.Show(possible_causes_botconnect_pt[new Random().Next(0, possible_causes_botconnect_pt.Length + 1)]);
-            }
-        }
-
-        private void scommand_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void enus_CheckedChanged(object sender, EventArgs e)
