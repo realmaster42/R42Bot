@@ -16,7 +16,6 @@ namespace R42Bot
             TextWriter writer = new StreamWriter(filename);
             sr.Serialize(writer, obj);
             writer.Close();
-
         }
     }
 }
