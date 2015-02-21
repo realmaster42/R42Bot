@@ -1120,7 +1120,6 @@ namespace R42Bot
             this.idofit.Size = new System.Drawing.Size(32, 20);
             this.idofit.TabIndex = 7;
             this.idofit.Text = "0";
-            this.idofit.TextChanged += new System.EventHandler(this.idofit_TextChanged);
             this.idofit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.idofit_KeyPress);
             // 
             // paintbrushauto
