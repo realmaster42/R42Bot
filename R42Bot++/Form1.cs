@@ -2915,17 +2915,7 @@ namespace R42Bot
                 MessageBox.Show("No legend could be shown, message box progress has been cancelled.", "R42Bot++ v" + version + " System", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void welcomemsg_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void leftallmsg_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private void button5_Click(object sender, EventArgs e)
         {
             con.Send(worldKey + "f", 5);
@@ -3029,11 +3019,6 @@ namespace R42Bot
             }
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void button7_Click(object sender, EventArgs e)
         {
             if (button7.Text == "New choice...")
@@ -3118,11 +3103,6 @@ namespace R42Bot
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void tabPage2_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void noRespawn_CheckedChanged(object sender, EventArgs e)
@@ -3328,11 +3308,6 @@ namespace R42Bot
         private void textBox7_TextChanged(object sender, EventArgs e)
         {
             textBox7.Text = "https://trello.com/b/bs7b8Flx/r42bot";
-        }
-
-        private void freeadmin_CheckedChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void waterchoice1_CheckedChanged(object sender, EventArgs e)
@@ -3583,16 +3558,6 @@ namespace R42Bot
             }
         }
 
-        private void xBox_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void yBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void idBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             char ch = e.KeyChar;
@@ -3605,21 +3570,6 @@ namespace R42Bot
                     MessageBox.Show("BlockID should be a valid number.");
                 }
             }
-        }
-
-        private void fgCheck_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bgCheck_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void idofit_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void idofit_KeyPress(object sender, KeyPressEventArgs e)
@@ -3641,11 +3591,6 @@ namespace R42Bot
                     idofit.Clear();
                 }
             }
-        }
-
-        private void addText_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
