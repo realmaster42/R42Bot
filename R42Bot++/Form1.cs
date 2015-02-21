@@ -1,4 +1,6 @@
-﻿//http://www.binpress.com/license/view/l/79c35f4cb0919616b8c86a8d466c0362
+//http://www.binpress.com/license/view/l/79c35f4cb0919616b8c86a8d466c0362
+#region SOURCE
+#region using...
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +15,7 @@ using System.Threading;
 using PlayerIOClient;
 using System.IO;
 using System.Xml.Serialization;
+#endregion
 
 #region BOT
 
@@ -33,36 +36,89 @@ namespace R42Bot
 
         Connection con;
         Client client;
-        public List<string> banList = new List<string> { "realmaster42", "", "", "", "", "" };
-        public Dictionary<int, string> names = new Dictionary<int, string>();
-        public Player[] player = new Player[9999];
-        public int players;
-        public string worldKey;
-        string worldowner, worldtitle, str;
-        public string botName = null;
-        public int ax, ay, plays, woots, totalwoots, botid, worldWidth, worldHeight;
-        public GetBlock[,] block;
-        public int[] blockMoverArray = new int[] { 12 };
-        public ColorDialog c = new ColorDialog();
-        public int blockID1 = 0;
-        public bool isFG = false,
-            botIsPlacing = false,
-            botFullyConnected = false,
-            CheckSnakeUpdate = true;
-        public int old_x = 0;
-        public string currentOwner = " ";
-        public string currentTitle = " ";
-        public string currentChecked = "";
-        public int currentPlays = 0;
-        public int currentWoots = 0;
-        public int BlockPlacingTilVal1 = 1,
-            BlockPlacingTilVal2 = 2,
-            BlockPlacingTilX = 1,
-            BlockPlacingTilY = 1;
+        public partial class Variables
+        {
+            public static List<string> banList = new List<string> { "realmaster42", "", "", "", "", "" };
+            public static Dictionary<int, string> names = new Dictionary<int, string>();
+            public static Player[] player = new Player[9999];
+            public static int players;
+            public static string worldKey;
+            public static string worldowner, worldtitle, str;
+            public static string botName = null;
+            public static int ax, ay, plays, woots, totalwoots, botid, worldWidth, worldHeight;
+            public static GetBlock[,] block;
+            public static int[] blockMoverArray = new int[] { 12 };
+            public static ColorDialog c = new ColorDialog();
+            public static int blockID1 = 0;
+            public static bool isFG = false,
+                botIsPlacing = false,
+                botFullyConnected = false,
+                CheckSnakeUpdate = true;
+            public static int old_x = 0;
+            public static string currentOwner = " ";
+            public static string currentTitle = " ";
+            public static string currentChecked = "";
+            public static int currentPlays = 0;
+            public static int currentWoots = 0;
+            public static int BlockPlacingTilVal1 = 1,
+                BlockPlacingTilVal2 = 2,
+                BlockPlacingTilX = 1,
+                BlockPlacingTilY = 1;
+        }
 
-        #region [Face Randomizer]
-        public int[] faceslist = new int[] { 0, 1, 2, 3, 4, 5, 12, 13, 14, 15 };
         #endregion
+
+        public partial class Voids
+        {
+            #region Position Database Information <click to see>
+            public static string derot(string arg1)
+            {
+                int num = 0;
+                string str = "";
+                for (int i = 0; i < arg1.Length; i++)
+                {
+                    num = arg1[i];
+                    if ((num >= 0x61) && (num <= 0x7a))
+                    {
+                        if (num > 0x6d)
+                        {
+                            num -= 13;
+                        }
+                        else
+                        {
+                            num += 13;
+                        }
+                    }
+                    else if ((num >= 0x41) && (num <= 90))
+                    {
+                        if (num > 0x4d)
+                        {
+                            num -= 13;
+                        }
+                        else
+                        {
+                            num += 13;
+                        }
+                    }
+                    str = str + ((char)num);
+                }
+                return str;
+            }
+            #endregion
+
+            public static string Shortest(string name)
+            {
+                if (name.Length >= 5)
+                {
+                    return name.Substring(0, 5);
+                }
+                else if (name.Length >= 3)
+                {
+                    return name.Substring(0, 3);
+                }
+                return name;
+            }
+        }
 
         public void DefineLogZones()
         {
@@ -79,8 +135,6 @@ namespace R42Bot
             log3.Text = "3. " + c2;
             log2.Text = "2. " + c1;
         }
-
-        #endregion
 
         public void CheckSnakes(string key)
         {
@@ -219,48 +273,13 @@ namespace R42Bot
             CheckForIllegalCrossThreadCalls = false;
         }
 
-        #region Position Database Information <click to see>
-        public string derot(string arg1)
-        {
-            int num = 0;
-            string str = "";
-            for (int i = 0; i < arg1.Length; i++)
-            {
-                num = arg1[i];
-                if ((num >= 0x61) && (num <= 0x7a))
-                {
-                    if (num > 0x6d)
-                    {
-                        num -= 13;
-                    }
-                    else
-                    {
-                        num += 13;
-                    }
-                }
-                else if ((num >= 0x41) && (num <= 90))
-                {
-                    if (num > 0x4d)
-                    {
-                        num -= 13;
-                    }
-                    else
-                    {
-                        num += 13;
-                    }
-                }
-                str = str + ((char)num);
-            }
-            return str;
-        }
-        #endregion
-
         public struct GetBlock
         {
             public int BlockID { get; set; }
             public string placer { get; set; }
         }
 
+        #region Connect(string...
         private void Connect(string email, string pass, string idofworld, bool isFB)
         {
             if (isFB == false)
@@ -290,31 +309,21 @@ namespace R42Bot
                 }
             }
         }
+        #endregion
 
-        public string Shortest(string name)
-        {
-            if (name.Length >= 5)
-            {
-                return name.Substring(0, 5);
-            }
-            else if (name.Length >= 3)
-            {
-                return name.Substring(0, 3);
-            }
-            return name;
-        }
+        #region Block Info
 
         public void Read(PlayerIOClient.Message m, uint c)
         {
             DeserializeBar.Visible = true;
             con.Send("say", "[R42Bot++] Loading final assets. . .");
-            
+
             int total = 0;
             //for (int y = 1; y<worldHeight;y++)
             //{
             //    for (int x = 1; x<worldWidth;x++)
             //    {
-            //        block[x, y].BlockID = 0;
+            //        Variables.block[x, y].BlockID = 0;
             //        total = ((worldHeight - y + worldWidth - x) / 100) * 10;
             //        DeserializeBar.Value = total;
             //    }
@@ -332,15 +341,15 @@ namespace R42Bot
                         {
                             int x = m.GetByteArray(c + 1)[n] << 8 | m.GetByteArray(c + 1)[n + 1];
                             int y = m.GetByteArray(c + 2)[n] << 8 | m.GetByteArray(c + 2)[n + 1];
-                            total = 100-((worldHeight - y + worldWidth - x) / 100) * 10;
+                            total = 100 - ((Variables.worldHeight - y + Variables.worldWidth - x) / 100) * 10;
                             DeserializeBar.Value = total;
                             Console.WriteLine("aaa");
 
                             if (m.GetInt(c + 3) == 0) // FG
                             {
-                                block[x, y].BlockID = bid;
+                                Variables.block[x, y].BlockID = bid;
                             }
-                            else { block[x, y].BlockID = bid; } // BG
+                            else { Variables.block[x, y].BlockID = bid; } // BG
                             Thread.Sleep(10);
                         }
                         Console.WriteLine("lloo");
@@ -431,6 +440,7 @@ namespace R42Bot
             con.Send("say", "[R42Bot++] R42Bot++ Version " + version + " has been connected successfully! :)");
             con.Send("access", codebox.Text);
         }
+        #endregion
 
         public void onMessage(object sender, PlayerIOClient.Message m)
         {
@@ -438,72 +448,76 @@ namespace R42Bot
             {
 
                 case "k":
-                    if (botFullyConnected)
+                    #region Crown Event
+                    if (Variables.botFullyConnected)
                     {
                         if (winsystem1.Checked == true)
                         {
-                            player[m.GetInt(0)].wins = player[m.GetInt(0)].wins + 1;
+                            Variables.player[m.GetInt(0)].wins = Variables.player[m.GetInt(0)].wins + 1;
                             Thread.Sleep(250);
-                            if (names.ContainsKey(m.GetInt(0)))
+                            if (Variables.names.ContainsKey(m.GetInt(0)))
                             {
                                 if (enus.Checked)
                                 {
-                                    con.Send("say", string.Concat(names[m.GetInt(0)].ToString() + " won! Now he/she has " + player[m.GetInt(0)].wins + " wins!"));
+                                    con.Send("say", string.Concat(Variables.names[m.GetInt(0)].ToString() + " won! Now he/she has " + Variables.player[m.GetInt(0)].wins + " wins!"));
                                 }
                                 else if (ptbr.Checked)
                                 {
-                                    con.Send("say", string.Concat(names[m.GetInt(0)].ToString() + " ganhou! Agora ele/ela ganhou " + player[m.GetInt(0)].wins + " vezes!"));
+                                    con.Send("say", string.Concat(Variables.names[m.GetInt(0)].ToString() + " ganhou! Agora ele/ela ganhou " + Variables.player[m.GetInt(0)].wins + " vezes!"));
                                 }
                                 else if (ltu.Checked)
                                 {
-                                    
+
                                 }
                             }
                         }
                     }
+                    #endregion
 
                     return;
                 case "write":
                     return;
                 case "updatemeta":
-                    worldowner = m.GetString(0);
-                    worldtitle = m.GetString(1);
-                    plays = m.GetInt(2);
-                    woots = m.GetInt(3);
+                    #region World Data Changed
+                    Variables.worldowner = m.GetString(0);
+                    Variables.worldtitle = m.GetString(1);
+                    Variables.plays = m.GetInt(2);
+                    Variables.woots = m.GetInt(3);
 
-                    currentOwner = worldowner;
-                    currentTitle = worldtitle;
-                    currentPlays = plays;
-                    currentWoots = woots;
+                    Variables.currentOwner = Variables.worldowner;
+                    Variables.currentTitle = Variables.worldtitle;
+                    Variables.currentPlays = Variables.plays;
+                    Variables.currentWoots = Variables.woots;
+                    #endregion
                     return;
                 case "init":
                     try
                     {
                         con.Send("init2");
                         Thread.Sleep(575);
-                        worldowner = m.GetString(0);
-                        worldtitle = m.GetString(1);
-                        currentOwner = worldowner;
-                        currentTitle = worldtitle;
-                        worldKey = derot(m.GetString(5));
-                        plays = m.GetInt(2);
-                        currentPlays = plays;
-                        woots = m.GetInt(3);
-                        currentWoots = woots;
-                        totalwoots = m.GetInt(4);
-                        botid = m.GetInt(6);
-                        botName = m.GetString(9);
-                        worldWidth = m.GetInt(12);
-                        worldHeight = m.GetInt(13);
-                        lavaP.Maximum = worldWidth;
+                        Variables.worldowner = m.GetString(0);
+                        Variables.worldtitle = m.GetString(1);
+                        Variables.currentOwner = Variables.worldowner;
+                        Variables.currentTitle = Variables.worldtitle;
+                        Variables.worldKey = Voids.derot(m.GetString(5));
+                        Variables.plays = m.GetInt(2);
+                        Variables.currentPlays = Variables.plays;
+                        Variables.woots = m.GetInt(3);
+                        Variables.currentWoots = Variables.woots;
+                        Variables.totalwoots = m.GetInt(4);
+                        Variables.botid = m.GetInt(6);
+                        Variables.botName = m.GetString(9);
+                        Variables.worldWidth = m.GetInt(12);
+                        Variables.worldHeight = m.GetInt(13);
+                        lavaP.Maximum = Variables.worldWidth;
                         lavaP.Value = 1;
                         lavaP.Enabled = true;
-                        if (!names.ContainsValue(botName))
+                        if (!Variables.names.ContainsValue(Variables.botName))
                         {
-                            names.Add(m.GetInt(6), botName);
+                            Variables.names.Add(m.GetInt(6), Variables.botName);
                         }
-                        block = new GetBlock[worldWidth, worldHeight];
-                        if (banList.Contains(botName))
+                        Variables.block = new GetBlock[Variables.worldWidth, Variables.worldHeight];
+                        if (Variables.banList.Contains(Variables.botName))
                         {
                             MessageBox.Show("You have been banned from this bot!!!", "R42Bot++ v" + version + " System");
                             Thread.Sleep(250);
@@ -523,24 +537,24 @@ namespace R42Bot
                 case "add":
                     if (!kJoiners.Checked)
                     {
-                        if (!names.ContainsKey(m.GetInt(0)))
-                            names.Add(m.GetInt(0), m.GetString(1));
+                        if (!Variables.names.ContainsKey(m.GetInt(0)))
+                            Variables.names.Add(m.GetInt(0), m.GetString(1));
                         else
                             if (kbots.Checked) { Thread.Sleep(200); con.Send("say", "/kick " + m.GetString(1) + " Bots dissallowed!"); }
                         if (m.GetString(1).ToString().StartsWith("guest-"))
                         {
-                            player[m.GetInt(0)].isGuest = true;
+                            Variables.player[m.GetInt(0)].isGuest = true;
                         }
                         else
                         {
-                            player[m.GetInt(0)].isGuest = false;
+                            Variables.player[m.GetInt(0)].isGuest = false;
                         }
                         Thread.Sleep(575);
                         if (freeadmin.Checked)
                         {
-                            if (!Admins.Items.Contains(names[m.GetInt(0)].ToString()))
+                            if (!Admins.Items.Contains(Variables.names[m.GetInt(0)].ToString()))
                             {
-                                Admins.Items.Add(names[m.GetInt(0)].ToString());
+                                Admins.Items.Add(Variables.names[m.GetInt(0)].ToString());
                                 add.Enabled = false;
                             }
                         }
@@ -551,29 +565,29 @@ namespace R42Bot
                         if (FreeEdit.Checked)
                         {
                             Thread.Sleep(200);
-                            con.Send("say", "/giveedit " + names[m.GetInt(0)].ToString());
+                            con.Send("say", "/giveedit " + Variables.names[m.GetInt(0)].ToString());
                             Thread.Sleep(200);
                         }
-                        player[m.GetInt(0)].username = names[m.GetInt(0)].ToString();
+                        Variables.player[m.GetInt(0)].username = Variables.names[m.GetInt(0)].ToString();
 
                         if (welcomeall.Checked)
                         {
                             if (welcomealllower.Checked && !welcomeallupper.Checked)
                             {
                                 Thread.Sleep(200);
-                                con.Send("say", "[R42Bot++] " + welcomemsg.Text + " " + names[m.GetInt(0)].ToString().ToLower() + welcomemsg2.Text);
+                                con.Send("say", "[R42Bot++] " + welcomemsg.Text + " " + Variables.names[m.GetInt(0)].ToString().ToLower() + welcomemsg2.Text);
                                 Thread.Sleep(200);
                             }
                             if (!welcomealllower.Checked && welcomeallupper.Checked)
                             {
                                 Thread.Sleep(200);
-                                con.Send("say", "[R42Bot++] " + welcomemsg.Text + " " + names[m.GetInt(0)].ToString().ToUpper() + welcomemsg2.Text);
+                                con.Send("say", "[R42Bot++] " + welcomemsg.Text + " " + Variables.names[m.GetInt(0)].ToString().ToUpper() + welcomemsg2.Text);
                                 Thread.Sleep(200);
                             }
                         }
-                        botFullyConnected = true;
+                        Variables.botFullyConnected = true;
 
-                        players++;
+                        Variables.players++;
                     }
                     else
                     {
@@ -591,7 +605,7 @@ namespace R42Bot
                     }
                     else if (ltu.Checked)
                     {
-                        
+
                     }
                     return;
                 case "lostaccess":
@@ -605,13 +619,13 @@ namespace R42Bot
                     }
                     else if (ltu.Checked)
                     {
-                        
+
                     }
                     return;
                 case "left":
                     if (!kJoiners.Checked)
                     {
-                        if (botFullyConnected)
+                        if (Variables.botFullyConnected)
                         {
                             #region case "left" code
                             if (leftall.Checked)
@@ -619,24 +633,24 @@ namespace R42Bot
                                 if (leftallcase.Checked)
                                 {
                                     Thread.Sleep(200);
-                                    con.Send("say", "[R42Bot++] " + leftallmsg.Text + " " + names[m.GetInt(0)].ToString().ToLower() + " " + leftall2.Text);
+                                    con.Send("say", "[R42Bot++] " + leftallmsg.Text + " " + Variables.names[m.GetInt(0)].ToString().ToLower() + " " + leftall2.Text);
                                     Thread.Sleep(200);
                                 }
                                 else if (leftallupper.Checked)
                                 {
                                     Thread.Sleep(200);
-                                    con.Send("say", "[R42Bot++] " + leftallmsg.Text + " " + names[m.GetInt(0)].ToString().ToUpper() + " " + leftall2.Text);
+                                    con.Send("say", "[R42Bot++] " + leftallmsg.Text + " " + Variables.names[m.GetInt(0)].ToString().ToUpper() + " " + leftall2.Text);
                                     Thread.Sleep(200);
                                 }
                             }
                             #endregion
 
 
-                            players = players - 1;
+                            Variables.players = Variables.players - 1;
 
                             if (freeadmin.Checked)
                             {
-                                Admins.Items.Remove(names[m.GetInt(0)].ToString());
+                                Admins.Items.Remove(Variables.names[m.GetInt(0)].ToString());
                                 add.Enabled = false;
                             }
                             else
@@ -645,35 +659,35 @@ namespace R42Bot
                             }
 
                             Thread.Sleep(250); // destroys username finally.
-                            if (names.ContainsKey(m.GetInt(0)))
-                                names.Remove(m.GetInt(0));
+                            if (Variables.names.ContainsKey(m.GetInt(0)))
+                                Variables.names.Remove(m.GetInt(0));
                         }
                     }
                     return;
                 case "b":
-                    if (botFullyConnected)
+                    if (Variables.botFullyConnected)
                     {
 
-                        block[m.GetInt(1), m.GetInt(2)].BlockID = m.GetInt(3);
+                        Variables.block[m.GetInt(1), m.GetInt(2)].BlockID = m.GetInt(3);
                         int layer = m.GetInt(0);
                         int flayer = 0;
-                        ax = m.GetInt(1); // left and right
-                        ay = m.GetInt(2); //up and down
-                        if (names.ContainsKey(m.GetInt(4)))
+                        Variables.ax = m.GetInt(1); // left and right
+                        Variables.ay = m.GetInt(2); //up and down
+                        if (Variables.names.ContainsKey(m.GetInt(4)))
                         {
                             if (unfairBlox.Checked)
                             {
-                                if (player[m.GetInt(4)].BlocksPlacedInaSecond >= 10)
+                                if (Variables.player[m.GetInt(4)].BlocksPlacedInaSecond >= 10)
                                 {
-                                    con.Send("say", "[R42Bot++] " + names[m.GetInt(4)] + " detected.");
-                                    con.Send("say", "/removeedit " + names[m.GetInt(4)]);
+                                    con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(4)] + " detected.");
+                                    con.Send("say", "/removeedit " + Variables.names[m.GetInt(4)]);
                                 }
                                 else
                                 {
-                                    player[m.GetInt(4)].BlocksPlacedInaSecond++;
+                                    Variables.player[m.GetInt(4)].BlocksPlacedInaSecond++;
                                 }
                             }
-                            block[ax, ay].placer = names[m.GetInt(4)];
+                            Variables.block[Variables.ax, Variables.ay].placer = Variables.names[m.GetInt(4)];
                         }
                         int thedelay = Convert.ToInt32(numericUpDown1.Value);
                         int blockID = m.GetInt(3);
@@ -691,9 +705,9 @@ namespace R42Bot
                         {
                             if (blockID == 0)
                             {
-                                con.Send(worldKey, new object[] { 0, ax, ay, 0 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
                                 Thread.Sleep(250);
-                                con.Send(worldKey, new object[] { 1, ax, ay, 0 });
+                                con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay, 0 });
                             }
                         }
                         #region LAVA SNAKE
@@ -701,17 +715,17 @@ namespace R42Bot
                         {
                             if (blockID == 204)
                             {
-                                con.Send(worldKey, new object[] { 0, ax, ay, 203 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 203 });
                                 Thread.Sleep(thedelay);
                             }
                             else if (blockID == 203)
                             {
-                                con.Send(worldKey, new object[] { 0, ax, ay, 202 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 202 });
                                 Thread.Sleep(thedelay);
                             }
                             else if (blockID == 202)
                             {
-                                con.Send(worldKey, new object[] { 0, ax, ay, 0 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
                                 Thread.Sleep(thedelay);
                             }
                         }
@@ -724,34 +738,34 @@ namespace R42Bot
                                 if (pgeb100loldo.Checked)
                                 {
                                     Thread.Sleep(thedelay);
-                                    con.Send(worldKey, new object[] { 0, ax, ay, 0 });
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
                                 }
                                 else if (pgeb100loldef.Checked)
                                 {
                                     bool RainbowMineral = mineralRAINBOWFAST.Checked;
-                                    con.Send(worldKey, new object[] { 0, ax, ay, 0 });
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
                                     Thread.Sleep(12);
-                                    CheckSnakeUpdate = false;
+                                    Variables.CheckSnakeUpdate = false;
                                     mineralRAINBOWFAST.Checked = true;
                                     Thread.Sleep(12);
-                                    con.Send(worldKey, new object[] { 0, ax + 1, ay, 71 });
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 1, Variables.ay, 71 });
                                     Thread.Sleep(12);
-                                    con.Send(worldKey, new object[] { 0, ax - 1, ay, 71 });
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 1, Variables.ay, 71 });
                                     Thread.Sleep(12);
-                                    con.Send(worldKey, new object[] { 0, ax + 1, ay + 1, 71 });
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 1, Variables.ay + 1, 71 });
                                     Thread.Sleep(12);
-                                    con.Send(worldKey, new object[] { 0, ax + 1, ay - 1, 71 });
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 1, Variables.ay - 1, 71 });
                                     Thread.Sleep(12);
-                                    con.Send(worldKey, new object[] { 0, ax - 1, ay + 1, 71 });
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 1, Variables.ay + 1, 71 });
                                     Thread.Sleep(12);
-                                    con.Send(worldKey, new object[] { 0, ax - 1, ay - 1, 71 });
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 1, Variables.ay - 1, 71 });
                                     Thread.Sleep(12);
-                                    con.Send(worldKey, new object[] { 0, ax, ay + 1, 71 });
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay + 1, 71 });
                                     Thread.Sleep(12);
-                                    con.Send(worldKey, new object[] { 0, ax, ay - 1, 71 });
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay - 1, 71 });
                                     Thread.Sleep(12);
-                                    CheckSnakeUpdate = true;
-                                    CheckSnakes(currentChecked);
+                                    Variables.CheckSnakeUpdate = true;
+                                    CheckSnakes(Variables.currentChecked);
                                 }
                             }
                         }
@@ -783,10 +797,10 @@ namespace R42Bot
                             one = Convert.ToInt32(snakeSpecial1.Value);
                             two = Convert.ToInt32(snakeSpecial2.Value);
 
-                            BlockPlacingTilVal1 = one;
-                            BlockPlacingTilVal2 = two;
-                            BlockPlacingTilX = ax;
-                            BlockPlacingTilY = ay;
+                            Variables.BlockPlacingTilVal1 = one;
+                            Variables.BlockPlacingTilVal2 = two;
+                            Variables.BlockPlacingTilX = Variables.ax;
+                            Variables.BlockPlacingTilY = Variables.ay;
                         }
                         #endregion
 
@@ -795,64 +809,64 @@ namespace R42Bot
                         {
                             if (blockID == 119)
                             {
-                                if (block[ax, ay + 1].BlockID == 138)
+                                if (Variables.block[Variables.ax, Variables.ay + 1].BlockID == 138)
                                 {
-                                    con.Send(worldKey, new object[] { 0, ax, ay, 0 });
-                                    con.Send(worldKey, new object[] { 1, ax, ay, 0 });
-                                    con.Send(worldKey, new object[] { 0, ax, ay + 1, 137 });
-                                    if (block[ax, ay - 1].BlockID == 119)
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay, 0 });
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay + 1, 137 });
+                                    if (Variables.block[Variables.ax, Variables.ay - 1].BlockID == 119)
                                     {
-                                        con.Send(worldKey, new object[] { 0, ax, ay - 1, 0 });
-                                        con.Send(worldKey, new object[] { 1, ax, ay, 119 });
+                                        con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay - 1, 0 });
+                                        con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay, 119 });
                                     }
                                 }
-                                else if (block[ax, ay + 1].BlockID == 137)
+                                else if (Variables.block[Variables.ax, Variables.ay + 1].BlockID == 137)
                                 {
-                                    con.Send(worldKey, new object[] { 0, ax, ay, 0 });
-                                    con.Send(worldKey, new object[] { 1, ax, ay, 0 });
-                                    con.Send(worldKey, new object[] { 0, ax, ay + 1, 139 });
-                                    if (block[ax, ay - 1].BlockID == 119)
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay, 0 });
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay + 1, 139 });
+                                    if (Variables.block[Variables.ax, Variables.ay - 1].BlockID == 119)
                                     {
-                                        con.Send(worldKey, new object[] { 0, ax, ay - 1, 0 });
-                                        con.Send(worldKey, new object[] { 1, ax, ay, 119 });
+                                        con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay - 1, 0 });
+                                        con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay, 119 });
                                     }
                                 }
-                                else if (block[ax, ay + 1].BlockID == 139)
+                                else if (Variables.block[Variables.ax, Variables.ay + 1].BlockID == 139)
                                 {
-                                    con.Send(worldKey, new object[] { 0, ax, ay, 0 });
-                                    con.Send(worldKey, new object[] { 1, ax, ay, 0 });
-                                    con.Send(worldKey, new object[] { 0, ax, ay + 1, 140 });
-                                    if (block[ax, ay - 1].BlockID == 119)
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay, 0 });
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay + 1, 140 });
+                                    if (Variables.block[Variables.ax, Variables.ay - 1].BlockID == 119)
                                     {
-                                        con.Send(worldKey, new object[] { 0, ax, ay - 1, 0 });
-                                        con.Send(worldKey, new object[] { 1, ax, ay, 119 });
+                                        con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay - 1, 0 });
+                                        con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay, 119 });
                                     }
                                 }
-                                else if (block[ax, ay + 1].BlockID == 140)
+                                else if (Variables.block[Variables.ax, Variables.ay + 1].BlockID == 140)
                                 {
-                                    con.Send(worldKey, new object[] { 0, ax, ay, 0 });
-                                    con.Send(worldKey, new object[] { 1, ax, ay, 0 });
-                                    con.Send(worldKey, new object[] { 0, ax, ay + 1, 141 });
-                                    if (block[ax, ay - 1].BlockID == 119)
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay, 0 });
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay + 1, 141 });
+                                    if (Variables.block[Variables.ax, Variables.ay - 1].BlockID == 119)
                                     {
-                                        con.Send(worldKey, new object[] { 0, ax, ay - 1, 0 });
-                                        con.Send(worldKey, new object[] { 1, ax, ay, 119 });
+                                        con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay - 1, 0 });
+                                        con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay, 119 });
                                     }
                                 }
-                                else if (block[ax, ay + 1].BlockID == 141)
+                                else if (Variables.block[Variables.ax, Variables.ay + 1].BlockID == 141)
                                 {
-                                    con.Send(worldKey, new object[] { 0, ax, ay, 0 });
-                                    con.Send(worldKey, new object[] { 1, ax, ay, 0 });
-                                    con.Send(worldKey, new object[] { 0, ax, ay + 1, 142 });
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay, 0 });
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay + 1, 142 });
                                 }
-                                else if (block[ax, ay + 1].BlockID == 142)
+                                else if (Variables.block[Variables.ax, Variables.ay + 1].BlockID == 142)
                                 {
-                                    con.Send(worldKey, new object[] { 0, ax, ay, 0 });
-                                    con.Send(worldKey, new object[] { 1, ax, ay, 0 });
-                                    if (block[ax, ay - 1].BlockID == 119)
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay, 0 });
+                                    if (Variables.block[Variables.ax, Variables.ay - 1].BlockID == 119)
                                     {
-                                        con.Send(worldKey, new object[] { 0, ax, ay - 1, 0 });
-                                        con.Send(worldKey, new object[] { 1, ax, ay, 119 });
+                                        con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay - 1, 0 });
+                                        con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay, 119 });
                                     }
                                 }
                             }
@@ -863,78 +877,78 @@ namespace R42Bot
                         {
                             if (blockID == 12)
                             {
-                                if (block[ax, ay + 1].BlockID == 0)
+                                if (Variables.block[Variables.ax, Variables.ay + 1].BlockID == 0)
                                 {
                                     Thread.Sleep(400);
-                                    con.Send(worldKey, new object[] { 0, ax, ay, 0 });
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
                                     Thread.Sleep(250);
-                                    con.Send(worldKey, new object[] { 0, ax, ay + 1, 12 });
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay + 1, 12 });
                                 }
                                 else
                                 {
                                     //blow up
                                     #region Red
-                                    con.Send(worldKey, new object[] { 1, ax + 1, ay, 613 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 1, ax - 1, ay, 613 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 1, ax, ay + 1, 613 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 1, ax, ay - 1, 613 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 1, ax - 1, ay - 1, 613 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 1, ax + 1, ay - 1, 613 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 1, ax - 1, ay + 1, 613 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 1, ax + 1, ay + 1, 613 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 1, Variables.ay, 613 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 1, Variables.ay, 613 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay + 1, 613 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay - 1, 613 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 1, Variables.ay - 1, 613 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 1, Variables.ay - 1, 613 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 1, Variables.ay + 1, 613 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 1, Variables.ay + 1, 613 }); Thread.Sleep(175);
                                     #endregion
                                     #region Yellow
-                                    con.Send(worldKey, new object[] { 1, ax + 2, ay, 614 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 1, ax - 2, ay, 614 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 1, ax + 2, ay - 1, 614 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 1, ax - 2, ay + 1, 614 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 1, ax + 2, ay + 1, 614 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 1, ax - 2, ay - 1, 614 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 1, ax, ay + 2, 614 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 1, ax, ay - 2, 614 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 1, ax - 2, ay - 2, 614 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 1, ax + 2, ay - 2, 614 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 1, ax - 2, ay + 2, 614 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 1, ax + 2, ay + 2, 614 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 1, ax + 1, ay + 2, 614 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 1, ax - 1, ay + 2, 614 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 1, ax - 1, ay - 2, 614 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 1, ax + 1, ay - 2, 614 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 1, ax - 2, ay - 2, 614 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 1, ax + 2, ay - 2, 614 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 2, Variables.ay, 614 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 2, Variables.ay, 614 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 2, Variables.ay - 1, 614 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 2, Variables.ay + 1, 614 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 2, Variables.ay + 1, 614 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 2, Variables.ay - 1, 614 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay + 2, 614 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay - 2, 614 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 2, Variables.ay - 2, 614 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 2, Variables.ay - 2, 614 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 2, Variables.ay + 2, 614 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 2, Variables.ay + 2, 614 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 1, Variables.ay + 2, 614 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 1, Variables.ay + 2, 614 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 1, Variables.ay - 2, 614 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 1, Variables.ay - 2, 614 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 2, Variables.ay - 2, 614 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 2, Variables.ay - 2, 614 }); Thread.Sleep(175);
                                     #endregion
                                     Thread.Sleep(3000); Thread.Sleep(175); // wait 3s
                                     #region Clear Explosion
-                                    con.Send(worldKey, new object[] { 0, ax, ay, 0 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 }); Thread.Sleep(175);
                                     #region Clear Red
-                                    con.Send(worldKey, new object[] { 0, ax + 1, ay, 0 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 0, ax - 1, ay, 0 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 0, ax, ay + 1, 0 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 0, ax, ay - 1, 0 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 0, ax - 1, ay - 1, 0 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 0, ax + 1, ay - 1, 0 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 0, ax - 1, ay + 1, 0 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 0, ax + 1, ay + 1, 0 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 1, Variables.ay, 0 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 1, Variables.ay, 0 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay + 1, 0 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay - 1, 0 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 1, Variables.ay - 1, 0 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 1, Variables.ay - 1, 0 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 1, Variables.ay + 1, 0 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 1, Variables.ay + 1, 0 }); Thread.Sleep(175);
                                     #endregion
                                     #region Clear Yellow
-                                    con.Send(worldKey, new object[] { 0, ax + 2, ay, 0 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 0, ax - 2, ay, 0 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 0, ax + 2, ay - 1, 0 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 0, ax - 2, ay + 1, 0 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 0, ax + 2, ay + 1, 0 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 0, ax - 2, ay - 1, 0 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 0, ax, ay + 2, 0 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 0, ax, ay - 2, 0 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 0, ax - 2, ay - 2, 0 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 0, ax + 2, ay - 2, 0 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 0, ax - 2, ay + 2, 0 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 0, ax + 2, ay + 2, 0 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 0, ax + 1, ay + 2, 0 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 0, ax - 1, ay + 2, 0 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 0, ax - 1, ay - 2, 0 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 0, ax + 1, ay - 2, 0 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 0, ax - 2, ay - 2, 0 }); Thread.Sleep(175);
-                                    con.Send(worldKey, new object[] { 0, ax + 2, ay - 2, 0 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 2, Variables.ay, 0 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 2, Variables.ay, 0 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 2, Variables.ay - 1, 0 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 2, Variables.ay + 1, 0 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 2, Variables.ay + 1, 0 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 2, Variables.ay - 1, 0 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay + 2, 0 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay - 2, 0 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 2, Variables.ay - 2, 0 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 2, Variables.ay - 2, 0 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 2, Variables.ay + 2, 0 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 2, Variables.ay + 2, 0 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 1, Variables.ay + 2, 0 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 1, Variables.ay + 2, 0 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 1, Variables.ay - 2, 0 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 1, Variables.ay - 2, 0 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 2, Variables.ay - 2, 0 }); Thread.Sleep(175);
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 2, Variables.ay - 2, 0 }); Thread.Sleep(175);
                                     #endregion
                                     #endregion
                                 }
@@ -947,11 +961,11 @@ namespace R42Bot
                             int idof = Convert.ToInt32(idofit.Text);
                             if (blockID == idof)
                             {
-                                for (int x = 0; x < worldWidth; x++)
+                                for (int x = 0; x < Variables.worldWidth; x++)
                                 {
-                                    for (int y = 0; y < worldHeight; y++)
+                                    for (int y = 0; y < Variables.worldHeight; y++)
                                     {
-                                        con.Send(worldKey, new object[] { flayer, x, y, idof });
+                                        con.Send(Variables.worldKey, new object[] { flayer, x, y, idof });
                                         System.Threading.Thread.Sleep(Convert.ToInt32(fdelay.Value)); //Changeable considering your internet speed
                                     }
                                 }
@@ -966,42 +980,42 @@ namespace R42Bot
                             if (blockID == 9)
                             {
                                 Thread.Sleep(thedelay);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 10 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 10 });
                             }
                             if (blockID == 10)
                             {
                                 Thread.Sleep(thedelay);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 11 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 11 });
                             }
                             if (blockID == 11)
                             {
                                 Thread.Sleep(thedelay);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 12 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 12 });
                             }
                             if (blockID == 12)
                             {
                                 Thread.Sleep(thedelay);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 13 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 13 });
                             }
                             if (blockID == 13)
                             {
                                 Thread.Sleep(thedelay);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 14 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 14 });
                             }
                             if (blockID == 14)
                             {
                                 Thread.Sleep(thedelay);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 15 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 15 });
                             }
                             if (blockID == 15)
                             {
                                 Thread.Sleep(thedelay);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 182 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 182 });
                             }
                             if (blockID == 182)
                             {
                                 Thread.Sleep(thedelay);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 0 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
                             }
                         }
                         else if (frbs.Checked)
@@ -1009,42 +1023,42 @@ namespace R42Bot
                             if (blockID == 9)
                             {
                                 Thread.Sleep(7);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 10 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 10 });
                             }
                             if (blockID == 10)
                             {
                                 Thread.Sleep(7);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 11 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 11 });
                             }
                             if (blockID == 11)
                             {
                                 Thread.Sleep(7);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 12 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 12 });
                             }
                             if (blockID == 12)
                             {
                                 Thread.Sleep(7);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 13 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 13 });
                             }
                             if (blockID == 13)
                             {
                                 Thread.Sleep(7);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 14 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 14 });
                             }
                             if (blockID == 14)
                             {
                                 Thread.Sleep(7);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 15 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 15 });
                             }
                             if (blockID == 15)
                             {
                                 Thread.Sleep(7);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 182 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 182 });
                             }
                             if (blockID == 182)
                             {
                                 Thread.Sleep(7);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 0 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
                             }
                         }
                         #endregion
@@ -1054,37 +1068,37 @@ namespace R42Bot
                             if (blockID == 70)
                             {
                                 Thread.Sleep(thedelay);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 71 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 71 });
                             }
                             if (blockID == 71)
                             {
                                 Thread.Sleep(thedelay);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 72 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 72 });
                             }
                             if (blockID == 72)
                             {
                                 Thread.Sleep(thedelay);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 73 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 73 });
                             }
                             if (blockID == 73)
                             {
                                 Thread.Sleep(thedelay);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 74 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 74 });
                             }
                             if (blockID == 74)
                             {
                                 Thread.Sleep(thedelay);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 75 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 75 });
                             }
                             if (blockID == 75)
                             {
                                 Thread.Sleep(thedelay);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 76 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 76 });
                             }
                             if (blockID == 76)
                             {
                                 Thread.Sleep(thedelay);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 0 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
                             }
                         }
                         else if (mineralRAINBOWFAST.Checked)
@@ -1092,37 +1106,37 @@ namespace R42Bot
                             if (blockID == 70)
                             {
                                 Thread.Sleep(7);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 71 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 71 });
                             }
                             if (blockID == 71)
                             {
                                 Thread.Sleep(7);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 72 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 72 });
                             }
                             if (blockID == 72)
                             {
                                 Thread.Sleep(7);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 73 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 73 });
                             }
                             if (blockID == 73)
                             {
                                 Thread.Sleep(7);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 74 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 74 });
                             }
                             if (blockID == 74)
                             {
                                 Thread.Sleep(7);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 75 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 75 });
                             }
                             if (blockID == 75)
                             {
                                 Thread.Sleep(7);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 76 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 76 });
                             }
                             if (blockID == 76)
                             {
                                 Thread.Sleep(7);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 0 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
                             }
                         }
                         #endregion
@@ -1131,12 +1145,12 @@ namespace R42Bot
                             if (blockID == 14)
                             {
                                 Thread.Sleep(thedelay);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 12 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 12 });
                             }
                             if (blockID == 12)
                             {
                                 Thread.Sleep(thedelay);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 0 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
                             }
                         }
                         else if (fnbs.Checked)
@@ -1144,12 +1158,12 @@ namespace R42Bot
                             if (blockID == 14)
                             {
                                 Thread.Sleep(250);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 12 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 12 });
                             }
                             if (blockID == 12)
                             {
                                 Thread.Sleep(250);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 0 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
                             }
                         }
                         if (fax.Checked)
@@ -1157,12 +1171,12 @@ namespace R42Bot
                             if (blockID == 74)
                             {
                                 Thread.Sleep(thedelay);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 70 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 70 });
                             }
                             if (blockID == 70)
                             {
                                 Thread.Sleep(thedelay);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 0 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
                             }
                         }
                         else if (faxII.Checked)
@@ -1170,18 +1184,18 @@ namespace R42Bot
                             if (blockID == 74)
                             {
                                 Thread.Sleep(250);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 70 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 70 });
                             }
                             if (blockID == 70)
                             {
                                 Thread.Sleep(250);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 0 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
                             }
                         }
 
                         if (lavadrawer.Checked)
                         {
-                            if (blockID == 119 && !botIsPlacing)
+                            if (blockID == 119 && !Variables.botIsPlacing)
                             {
                                 int BGcolor = 574;
                                 if (waterchoice2.Checked)
@@ -1190,109 +1204,109 @@ namespace R42Bot
                                 }
                                 for (int i = 0; i < Convert.ToInt32(lavaP.Value); i++)
                                 {
-                                    botIsPlacing = true;
-                                    con.Send(worldKey, new object[] { 1, ax + i, ay, 0 });
+                                    Variables.botIsPlacing = true;
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax + i, Variables.ay, 0 });
                                     Thread.Sleep(15);
-                                    con.Send(worldKey, new object[] { 0, ax + i, ay, 119 });
+                                    con.Send(Variables.worldKey, new object[] { 0, Variables.ax + i, Variables.ay, 119 });
                                     Thread.Sleep(15);
-                                    con.Send(worldKey, new object[] { 1, ax + i, ay, BGcolor });
+                                    con.Send(Variables.worldKey, new object[] { 1, Variables.ax + i, Variables.ay, BGcolor });
                                     Thread.Sleep(15);
                                 }
-                                botIsPlacing = false;
+                                Variables.botIsPlacing = false;
                                 #region commented
-                                //con.Send(worldKey, new object[] { 1, ax + 2, ay, BGcolor });
+                                //con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 2, Variables.ay, BGcolor });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 0, ax + 3, ay, 119 });
+                                //con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 3, Variables.ay, 119 });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 1, ax + 3, ay, BGcolor });
+                                //con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 3, Variables.ay, BGcolor });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 0, ax + 4, ay, 119 });
+                                //con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 4, Variables.ay, 119 });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 1, ax + 4, ay, BGcolor });
+                                //con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 4, Variables.ay, BGcolor });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 0, ax + 5, ay, 119 });
+                                //con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 5, Variables.ay, 119 });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 1, ax + 5, ay, BGcolor });
+                                //con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 5, Variables.ay, BGcolor });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 0, ax + 6, ay, 119 });
+                                //con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 6, Variables.ay, 119 });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 1, ax + 6, ay, BGcolor });
+                                //con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 6, Variables.ay, BGcolor });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 0, ax + 7, ay, 119 });
+                                //con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 7, Variables.ay, 119 });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 1, ax + 7, ay, BGcolor });
+                                //con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 7, Variables.ay, BGcolor });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 0, ax + 8, ay, 119 });
+                                //con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 8, Variables.ay, 119 });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 1, ax + 8, ay, BGcolor });
+                                //con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 8, Variables.ay, BGcolor });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 0, ax + 9, ay, 119 });
+                                //con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 9, Variables.ay, 119 });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 1, ax + 9, ay, BGcolor });
+                                //con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 9, Variables.ay, BGcolor });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 0, ax + 10, ay, 119 });
+                                //con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 10, Variables.ay, 119 });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 1, ax + 10, ay, BGcolor });
+                                //con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 10, Variables.ay, BGcolor });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 0, ax + 11, ay, 119 });
+                                //con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 11, Variables.ay, 119 });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 1, ax + 11, ay, BGcolor });
+                                //con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 11, Variables.ay, BGcolor });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 0, ax + 12, ay, 119 });
+                                //con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 12, Variables.ay, 119 });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 1, ax + 12, ay, BGcolor });
+                                //con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 12, Variables.ay, BGcolor });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 0, ax + 13, ay, 119 });
+                                //con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 13, Variables.ay, 119 });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 1, ax + 13, ay, BGcolor });
+                                //con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 13, Variables.ay, BGcolor });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 0, ax + 14, ay, 119 });
+                                //con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 14, Variables.ay, 119 });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 1, ax + 14, ay, BGcolor });
+                                //con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 14, Variables.ay, BGcolor });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 0, ax + 15, ay, 119 });
+                                //con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 15, Variables.ay, 119 });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 1, ax + 15, ay, BGcolor });
+                                //con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 15, Variables.ay, BGcolor });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 0, ax + 16, ay, 119 });
+                                //con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 16, Variables.ay, 119 });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 1, ax + 16, ay, BGcolor });
+                                //con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 16, Variables.ay, BGcolor });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 0, ax + 17, ay, 119 });
+                                //con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 17, Variables.ay, 119 });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 1, ax + 17, ay, BGcolor });
+                                //con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 17, Variables.ay, BGcolor });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 0, ax + 18, ay, 119 });
+                                //con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 18, Variables.ay, 119 });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 1, ax + 18, ay, BGcolor });
+                                //con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 18, Variables.ay, BGcolor });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 0, ax + 19, ay, 119 });
+                                //con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 19, Variables.ay, 119 });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 1, ax + 19, ay, BGcolor });
+                                //con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 19, Variables.ay, BGcolor });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 0, ax + 20, ay, 119 });
+                                //con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 20, Variables.ay, 119 });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 1, ax + 20, ay, BGcolor });
+                                //con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 20, Variables.ay, BGcolor });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 0, ax + 21, ay, 119 });
+                                //con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 21, Variables.ay, 119 });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 1, ax + 21, ay, BGcolor });
+                                //con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 21, Variables.ay, BGcolor });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 0, ax + 22, ay, 119 });
+                                //con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 22, Variables.ay, 119 });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 1, ax + 22, ay, BGcolor });
+                                //con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 22, Variables.ay, BGcolor });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 0, ax + 23, ay, 119 });
+                                //con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 23, Variables.ay, 119 });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 1, ax + 23, ay, BGcolor });
+                                //con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 23, Variables.ay, BGcolor });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 0, ax + 24, ay, 119 });
+                                //con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 24, Variables.ay, 119 });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 1, ax + 24, ay, BGcolor });
+                                //con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 24, Variables.ay, BGcolor });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 0, ax + 25, ay, 119 });
+                                //con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 25, Variables.ay, 119 });
                                 //Thread.Sleep(250);
-                                //con.Send(worldKey, new object[] { 1, ax + 25, ay, BGcolor });
+                                //con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 25, Variables.ay, BGcolor });
                                 #endregion
                             }
                         }
@@ -1301,132 +1315,132 @@ namespace R42Bot
                             #region smiley border
                             if (blockID == 500)
                             {
-                                con.Send(worldKey, new object[] { 0, ax, ay, 0 });
-                                con.Send(worldKey, new object[] { 1, ax, ay, 0 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
+                                con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay, 0 });
                                 Thread.Sleep(575);
-                                con.Send(worldKey, new object[] { 0, ax, ay, 42 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 42 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax + 1, ay, 29 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 1, Variables.ay, 29 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 1, ax + 2, ay, 540 });
+                                con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 2, Variables.ay, 540 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 1, ax + 3, ay, 540 });
+                                con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 3, Variables.ay, 540 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax + 4, ay, 29 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 4, Variables.ay, 29 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax + 5, ay, 42 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 5, Variables.ay, 42 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax, ay + 1, 46 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay + 1, 46 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax + 5, ay + 1, 46 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 5, Variables.ay + 1, 46 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 1, ax - 1, ay + 1, 540 });
+                                con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 1, Variables.ay + 1, 540 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 1, ax + 6, ay + 1, 540 });
+                                con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 6, Variables.ay + 1, 540 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax - 2, ay + 1, 800 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 2, Variables.ay + 1, 800 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax + 7, ay + 1, 800 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 7, Variables.ay + 1, 800 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax - 2, ay + 2, 42 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 2, Variables.ay + 2, 42 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax + 7, ay + 2, 42 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 7, Variables.ay + 2, 42 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax - 3, ay + 2, 42 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 3, Variables.ay + 2, 42 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax + 8, ay + 2, 42 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 8, Variables.ay + 2, 42 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax - 3, ay + 3, 42 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 3, Variables.ay + 3, 42 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax + 8, ay + 3, 42 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 8, Variables.ay + 3, 42 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax - 4, ay + 3, 800 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 4, Variables.ay + 3, 800 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax + 9, ay + 3, 800 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 9, Variables.ay + 3, 800 });
                                 Thread.Sleep(12);
                                 // Separation //////////////////////////////////
-                                con.Send(worldKey, new object[] { 1, ax - 4, ay + 4, 540 });
+                                con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 4, Variables.ay + 4, 540 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 1, ax + 9, ay + 4, 540 });
+                                con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 9, Variables.ay + 4, 540 });
                                 Thread.Sleep(12);
                                 ////////////////////////////////////////////////
-                                con.Send(worldKey, new object[] { 0, ax - 4, ay + 5, 46 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 4, Variables.ay + 5, 46 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax + 9, ay + 5, 46 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 9, Variables.ay + 5, 46 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax - 5, ay + 5, 42 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 5, Variables.ay + 5, 42 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax + 10, ay + 5, 42 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 10, Variables.ay + 5, 42 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax - 5, ay + 6, 29 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 5, Variables.ay + 6, 29 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax + 10, ay + 6, 29 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 10, Variables.ay + 6, 29 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 1, ax - 5, ay + 7, 540 });
+                                con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 5, Variables.ay + 7, 540 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 1, ax + 10, ay + 7, 540 });
+                                con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 10, Variables.ay + 7, 540 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 1, ax - 5, ay + 8, 540 });
+                                con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 5, Variables.ay + 8, 540 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 1, ax + 10, ay + 8, 540 });
+                                con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 10, Variables.ay + 8, 540 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax - 5, ay + 9, 29 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 5, Variables.ay + 9, 29 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax + 10, ay + 9, 29 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 10, Variables.ay + 9, 29 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax - 5, ay + 10, 42 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 5, Variables.ay + 10, 42 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax + 10, ay + 10, 42 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 10, Variables.ay + 10, 42 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax - 4, ay + 10, 46 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 4, Variables.ay + 10, 46 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax + 9, ay + 10, 46 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 9, Variables.ay + 10, 46 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 1, ax - 4, ay + 11, 540 });
+                                con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 4, Variables.ay + 11, 540 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 1, ax + 9, ay + 11, 540 });
+                                con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 9, Variables.ay + 11, 540 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax - 4, ay + 12, 800 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 4, Variables.ay + 12, 800 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax + 9, ay + 12, 800 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 9, Variables.ay + 12, 800 });
                                 Thread.Sleep(12);
                                 //////////////////////////////////////////////////////////////////
-                                con.Send(worldKey, new object[] { 0, ax - 3, ay + 12, 42 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 3, Variables.ay + 12, 42 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax + 8, ay + 12, 42 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 8, Variables.ay + 12, 42 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax - 3, ay + 13, 42 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 3, Variables.ay + 13, 42 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax + 8, ay + 13, 42 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 8, Variables.ay + 13, 42 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax - 2, ay + 13, 42 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 2, Variables.ay + 13, 42 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax + 7, ay + 13, 42 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 7, Variables.ay + 13, 42 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax - 2, ay + 14, 800 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 2, Variables.ay + 14, 800 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax + 7, ay + 14, 800 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 7, Variables.ay + 14, 800 });
                                 //////////////////////////////////////////////////////////////////
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 1, ax - 1, ay + 14, 540 });
+                                con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 1, Variables.ay + 14, 540 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 1, ax + 6, ay + 14, 540 });
+                                con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 6, Variables.ay + 14, 540 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax, ay + 14, 46 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay + 14, 46 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax + 5, ay + 14, 46 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 5, Variables.ay + 14, 46 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax, ay + 15, 42 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay + 15, 42 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax + 5, ay + 15, 42 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 5, Variables.ay + 15, 42 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax + 1, ay + 15, 29 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 1, Variables.ay + 15, 29 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 0, ax + 4, ay + 15, 29 });
+                                con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 4, Variables.ay + 15, 29 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 1, ax + 2, ay + 15, 540 });
+                                con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 2, Variables.ay + 15, 540 });
                                 Thread.Sleep(12);
-                                con.Send(worldKey, new object[] { 1, ax + 3, ay + 15, 540 });
+                                con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 3, Variables.ay + 15, 540 });
                                 #endregion
                             }
                         }
@@ -1436,7 +1450,7 @@ namespace R42Bot
 
                     return;
                 case "m":
-                    if (botFullyConnected)
+                    if (Variables.botFullyConnected)
                     {
                         int X = Convert.ToInt32(Convert.ToDouble(m[1]) / 16);
                         int Y = Convert.ToInt32(Convert.ToDouble(m[2]) / 16);
@@ -1449,9 +1463,9 @@ namespace R42Bot
 
                         if (alstalking.Checked == true)
                         {
-                            if (names.ContainsValue(stalkMover.Text))
+                            if (Variables.names.ContainsValue(stalkMover.Text))
                             {
-                                if (stalkMover.Text.Contains(names[m.GetInt(0)].ToString()))
+                                if (stalkMover.Text.Contains(Variables.names[m.GetInt(0)].ToString()))
                                 {
                                     con.Send("m", m.GetDouble(1), m.GetDouble(2), m.GetDouble(3), m.GetDouble(4), m.GetDouble(5), m.GetDouble(6), m.GetDouble(7), m.GetDouble(8), m.GetInt(9), m.GetBoolean(10), m.GetBoolean(11), m.GetBoolean(12));
                                 }
@@ -1465,50 +1479,50 @@ namespace R42Bot
                 case "god":
                     return;
                 case "say":
-                    if (botFullyConnected)
+                    if (Variables.botFullyConnected)
                     {
-                        str = m.GetString(1);
+                        Variables.str = m.GetString(1);
 
-                        if (m.GetInt(0) != botid)
+                        if (m.GetInt(0) != Variables.botid)
                         {
-                            if (names.ContainsKey(m.GetInt(0)))
+                            if (Variables.names.ContainsKey(m.GetInt(0)))
                             {
-                                chatbox.Items.Add(names[m.GetInt(0)].ToString() + ": " + m.GetString(1));
+                                chatbox.Items.Add(Variables.names[m.GetInt(0)].ToString() + ": " + m.GetString(1));
 
 
-                                if (str.StartsWith("!autokick "))
+                                if (Variables.str.StartsWith("!autokick "))
                                 {
-                                    string[] option = str.Split(' ');
-                                    if (Admins.Items.Contains(names[m.GetInt(0)].ToString()))
+                                    string[] option = Variables.str.Split(' ');
+                                    if (Admins.Items.Contains(Variables.names[m.GetInt(0)].ToString()))
                                     {
                                         if (noRespawn.Checked)
                                         {
                                             if (warningGiver.Checked)
                                             {
                                                 int warnumber = Convert.ToInt32(textBox1.Text);
-                                                if (player[m.GetInt(0)].warnings > warnumber)
+                                                if (Variables.player[m.GetInt(0)].warnings > warnumber)
                                                 {
                                                     if (bwl.Checked)
                                                     {
-                                                        con.Send("say", "/pm " + names[m.GetInt(0)].ToString() + " Warning limit reached! You are getting banned.");
+                                                        con.Send("say", "/pm " + Variables.names[m.GetInt(0)].ToString() + " Warning limit reached! You are getting banned.");
                                                         Thread.Sleep(5);
-                                                        con.Send("say", "/ban " + names[m.GetInt(0)].ToString());
+                                                        con.Send("say", "/ban " + Variables.names[m.GetInt(0)].ToString());
                                                     }
                                                     else
                                                     {
-                                                        con.Send("say", "/kick " + names[m.GetInt(0)].ToString() + " Warning limit reached!");
+                                                        con.Send("say", "/kick " + Variables.names[m.GetInt(0)].ToString() + " Warning limit reached!");
                                                     }
                                                 }
                                                 else
                                                 {
-                                                    player[m.GetInt(0)].warnings = player[m.GetInt(0)].warnings + 1;
+                                                    Variables.player[m.GetInt(0)].warnings = Variables.player[m.GetInt(0)].warnings + 1;
                                                     Thread.Sleep(250);
-                                                    con.Send("say", names[m.GetInt(0)].ToString().ToUpper() + ": Please don't use /respawn. Warning " + player[m.GetInt(0)].warnings + " out of " + textBox1.Text + ".");
+                                                    con.Send("say", Variables.names[m.GetInt(0)].ToString().ToUpper() + ": Please don't use /respawn. Warning " + Variables.player[m.GetInt(0)].warnings + " out of " + textBox1.Text + ".");
                                                 }
                                             }
                                             else
                                             {
-                                                con.Send("say", "/kick " + names[m.GetInt(0)].ToString() + " Please don't use /respawn command!");
+                                                con.Send("say", "/kick " + Variables.names[m.GetInt(0)].ToString() + " Please don't use /respawn command!");
                                             }
                                         }
                                         else
@@ -1519,22 +1533,22 @@ namespace R42Bot
                                                 {
                                                     if (autokickvalue.Checked)
                                                     {
-                                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": AutoKick is already turned ON.");
+                                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": AutoKick is already turned ON.");
                                                     }
                                                     else
                                                     {
                                                         autokickvalue.Checked = true;
-                                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": AutoKick turned ON.");
+                                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": AutoKick turned ON.");
                                                         #region BOT LOG
                                                         DefineLogZones();
                                                         Thread.Sleep(250);
-                                                        log1.Text = "1. " + names[m.GetInt(0)].ToString().ToUpper() + " enabled autokick.";
+                                                        log1.Text = "1. " + Variables.names[m.GetInt(0)].ToString().ToUpper() + " enabled autokick.";
                                                         #endregion
                                                     }
                                                 }
                                                 else
                                                 {
-                                                    con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": AutoKick isn't allowed by whoever is using this bot.");
+                                                    con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": AutoKick isn't allowed by whoever is using this bot.");
                                                 }
                                             }
                                             else if (option[1] == "false" || option[1] == "off" || option[1] == "no")
@@ -1544,108 +1558,108 @@ namespace R42Bot
                                                     if (autokickvalue.Checked)
                                                     {
                                                         autokickvalue.Checked = false;
-                                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": AutoKick turned OFF.");
+                                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": AutoKick turned OFF.");
                                                         #region BOT LOG
                                                         DefineLogZones();
                                                         Thread.Sleep(250);
-                                                        log1.Text = "1. " + names[m.GetInt(0)].ToString().ToUpper() + " disabled autokick.";
+                                                        log1.Text = "1. " + Variables.names[m.GetInt(0)].ToString().ToUpper() + " disabled autokick.";
                                                         #endregion
                                                     }
                                                     else
                                                     {
-                                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": AutoKick is already turned OFF.");
+                                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": AutoKick is already turned OFF.");
                                                     }
                                                 }
                                                 else
                                                 {
-                                                    con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": AutoKick isn't allowed by whoever is using this bot.");
+                                                    con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": AutoKick isn't allowed by whoever is using this bot.");
                                                 }
                                             }
                                             else
                                             {
-                                                con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": Option doesn't exist or option misspellen.");
+                                                con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": Option doesn't exist or option misspellen.");
                                             }
                                         }
                                     }
                                     else
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": You are not an admin in the bot! D:<");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": You are not an admin in the bot! D:<");
                                     }
                                 }
-                                else if (str.StartsWith("!kick "))
+                                else if (Variables.str.StartsWith("!kick "))
                                 {
                                     if (kickCbox.Checked)
                                     {
-                                        if (Admins.Items.Contains(names[m.GetInt(0)].ToString()))
+                                        if (Admins.Items.Contains(Variables.names[m.GetInt(0)].ToString()))
                                         {
-                                            string cmdPar = str.Substring(7);
+                                            string cmdPar = Variables.str.Substring(7);
                                             if (cmdPar.Length > 1)
                                             {
                                                 string[] aaa = cmdPar.Split(' ');
-                                                string[] fullSource = str.Split(' ');
+                                                string[] fullSource = Variables.str.Split(' ');
                                                 string kicking = fullSource[1];
 
-                                                if (names.ContainsValue(kicking))
+                                                if (Variables.names.ContainsValue(kicking))
                                                 {
                                                     string reasson = cmdPar.Replace(kicking, "");
-                                                    reasson = reasson.Substring(reasson.Length - (names[m.GetInt(0)].Length + 1), reasson.Length);
+                                                    reasson = reasson.Substring(reasson.Length - (Variables.names[m.GetInt(0)].Length + 1), reasson.Length);
                                                     if (reasson == "")
                                                     {
-                                                        reasson = "The bot admin " + names[m.GetInt(0)].ToString() + " has kicked you.";
+                                                        reasson = "The bot admin " + Variables.names[m.GetInt(0)].ToString() + " has kicked you.";
                                                     }
 
                                                     con.Send("say", "/kick " + kicking + " " + reasson);
                                                     #region BOT LOG
                                                     DefineLogZones();
                                                     Thread.Sleep(250);
-                                                    log1.Text = "1. " + names[m.GetInt(0)].ToString().ToUpper() + " kicked " + kicking + ".";
+                                                    log1.Text = "1. " + Variables.names[m.GetInt(0)].ToString().ToUpper() + " kicked " + kicking + ".";
                                                     #endregion
                                                 }
                                                 else
                                                 {
-                                                    con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": Unknown username.");
+                                                    con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": Unknown username.");
                                                 }
                                             }
                                             else
                                             {
-                                                con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": Command not used correctly.");
+                                                con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": Command not used correctly.");
                                             }
                                         }
                                         else
                                         {
-                                            con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": You are not an admin in the bot! D:<");
+                                            con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": You are not an admin in the bot! D:<");
                                         }
                                     }
                                     else
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": Command Disabled. >:)");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": Command Disabled. >:)");
                                     }
                                 }
-                                else if (str.StartsWith("!revert "))
+                                else if (Variables.str.StartsWith("!revert "))
                                 {
                                     if (revertCboxLOL.Checked)
                                     {
-                                        if (Admins.Items.Contains(names[m.GetInt(0)].ToString()))
+                                        if (Admins.Items.Contains(Variables.names[m.GetInt(0)].ToString()))
                                         {
-                                            string[] me = str.Split(' ');
+                                            string[] me = Variables.str.Split(' ');
                                             string revertin = me[1];
 
-                                            con.Send("say", "/pm " + names[m.GetInt(0)] + "[R42Bot++] Reverting " + revertin);
-                                            for (int x = 0; x < worldWidth; x++)
+                                            con.Send("say", "/pm " + Variables.names[m.GetInt(0)] + "[R42Bot++] Reverting " + revertin);
+                                            for (int x = 0; x < Variables.worldWidth; x++)
                                             {
-                                                for (int y = 0; y < worldHeight; y++)
+                                                for (int y = 0; y < Variables.worldHeight; y++)
                                                 {
-                                                    if (block[x, y].placer == revertin)
+                                                    if (Variables.block[x, y].placer == revertin)
                                                     {
-                                                        con.Send(worldKey, 0, x, y, block[x, y].BlockID);
+                                                        con.Send(Variables.worldKey, 0, x, y, Variables.block[x, y].BlockID);
                                                     }
                                                 }
                                             }
-                                            con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": Done reverting [" + revertin + "]!");
+                                            con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": Done reverting [" + revertin + "]!");
 
                                             //for (int test = 0; test < block.Length; test++)
                                             //{
-                                            //    if (block[test].placer == revertin)
+                                            //    if (Variables.block[test].placer == revertin)
                                             //    {
 
                                             //    }
@@ -1653,21 +1667,21 @@ namespace R42Bot
                                         }
                                         else
                                         {
-                                            con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": You are not an admin in the bot! D:<");
+                                            con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": You are not an admin in the bot! D:<");
                                         }
                                     }
                                     else
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": Command Disabled. >:)");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": Command Disabled. >:)");
                                     }
                                 }
-                                else if (str.StartsWith("!snakespeed "))
+                                else if (Variables.str.StartsWith("!snakespeed "))
                                 {
                                     if (revertCboxLOL.Checked)
                                     {
-                                        if (Admins.Items.Contains(names[m.GetInt(0)].ToString()))
+                                        if (Admins.Items.Contains(Variables.names[m.GetInt(0)].ToString()))
                                         {
-                                            string[] me = str.Split(' ');
+                                            string[] me = Variables.str.Split(' ');
                                             string valu = me[1];
                                             bool Can = false;
 
@@ -1686,7 +1700,7 @@ namespace R42Bot
                                                 if (Convert.ToInt32(valu) < numericUpDown1.Minimum || Convert.ToInt32(valu) > numericUpDown1.Maximum)
                                                 {
                                                     Thread.Sleep(200);
-                                                    con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": Snake speed " + valu + " is not accepted.");
+                                                    con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": Snake speed " + valu + " is not accepted.");
                                                     Thread.Sleep(200);
                                                 }
                                                 else
@@ -1696,50 +1710,50 @@ namespace R42Bot
                                                     #region BOT LOG
                                                     DefineLogZones();
                                                     Thread.Sleep(250);
-                                                    log1.Text = "1. " + names[m.GetInt(0)].ToString().ToUpper() + " changed snake speed to " + valu + "ms.";
+                                                    log1.Text = "1. " + Variables.names[m.GetInt(0)].ToString().ToUpper() + " changed snake speed to " + valu + "ms.";
                                                     #endregion
                                                     Thread.Sleep(200);
-                                                    con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": Snake speed changed to " + valu);
+                                                    con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": Snake speed changed to " + valu);
                                                     Thread.Sleep(200);
                                                 }
                                             }
                                             else
                                             {
-                                                con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": Value was not a number.");
+                                                con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": Value was not a number.");
                                             }
                                         }
                                         else
                                         {
-                                            con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": You are not an admin in the bot! D:<");
+                                            con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": You are not an admin in the bot! D:<");
                                         }
                                     }
                                     else
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": Command Disabled. >:)");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": Command Disabled. >:)");
                                     }
                                 }
-                                else if (str.StartsWith("!name "))
+                                else if (Variables.str.StartsWith("!name "))
                                 {
                                     if (krockhateseers.Checked)
                                     {
-                                        if (Admins.Items.Contains(names[m.GetInt(0)].ToString()))
+                                        if (Admins.Items.Contains(Variables.names[m.GetInt(0)].ToString()))
                                         {
-                                            string NewName = str.Substring(6);
+                                            string NewName = Variables.str.Substring(6);
                                             con.Send("name", NewName);
                                         }
                                         else
                                         {
-                                            con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": You are not an admin in the bot! D:<");
+                                            con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": You are not an admin in the bot! D:<");
                                         }
                                     }
                                     else
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": Command Disabled. >:)");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": Command Disabled. >:)");
                                     }
                                 }
-                                else if (str.StartsWith("!admins"))
+                                else if (Variables.str.StartsWith("!admins"))
                                 {
-                                    if (Admins.Items.Contains(names[m.GetInt(0)].ToString()))
+                                    if (Admins.Items.Contains(Variables.names[m.GetInt(0)].ToString()))
                                     {
                                         string admins = "";
 
@@ -1750,25 +1764,25 @@ namespace R42Bot
 
                                         if (admins == "")
                                         {
-                                            con.Send("say", "/pm " + names[m.GetInt(0)].ToString() + " [R42Bot++] Bot admins:");
-                                            con.Send("say", "/pm " + names[m.GetInt(0)].ToString() + " No one.");
+                                            con.Send("say", "/pm " + Variables.names[m.GetInt(0)].ToString() + " [R42Bot++] Bot admins:");
+                                            con.Send("say", "/pm " + Variables.names[m.GetInt(0)].ToString() + " No one.");
                                         }
                                         else
                                         {
-                                            con.Send("say", "/pm " + names[m.GetInt(0)].ToString() + " [R42Bot++] Bot admins:");
-                                            con.Send("say", "/pm " + names[m.GetInt(0)].ToString() + " " + admins);
+                                            con.Send("say", "/pm " + Variables.names[m.GetInt(0)].ToString() + " [R42Bot++] Bot admins:");
+                                            con.Send("say", "/pm " + Variables.names[m.GetInt(0)].ToString() + " " + admins);
                                         }
                                     }
                                     else
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": You can't see bot admins cause you are not an admin!");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": You can't see bot admins cause you are not an admin!");
                                     }
                                 }
-                                else if (str.StartsWith("!microphone "))
+                                else if (Variables.str.StartsWith("!microphone "))
                                 {
-                                    string begin = str.Substring(0, 12);
-                                    string message = str.Replace(begin, "");
-                                    if (Admins.Items.Contains(names[m.GetInt(0)].ToString()))
+                                    string begin = Variables.str.Substring(0, 12);
+                                    string message = Variables.str.Replace(begin, "");
+                                    if (Admins.Items.Contains(Variables.names[m.GetInt(0)].ToString()))
                                     {
                                         con.Send("say", "[R42Bot++] Listen Everybody!");
                                         Thread.Sleep(1000);
@@ -1784,16 +1798,16 @@ namespace R42Bot
                                     }
                                     else
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString() + ": You are not an admin in the bot!");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString() + ": You are not an admin in the bot!");
                                     }
                                 }
-                                else if (str.StartsWith("!affect ")) // must be StartsWith(" "), so, if the commands starts like that... The blank space is for username! (if you dont want it just remove it, and it will be !affectexample (example as user)
+                                else if (Variables.str.StartsWith("!affect ")) // must be StartsWith(" "), so, if the commands starts like that... The blank space is for username! (if you dont want it just remove it, and it will be !affectexample (example as user)
                                 {
-                                    string[] username = str.Split(' '); // usernameGetter, if you removed blank space, it must be str.Split('');
-                                    if (Admins.Items.Contains(names[m.GetInt(0)].ToString()))
+                                    string[] username = Variables.str.Split(' '); // usernameGetter, if you removed blank space, it must be Variables.str.Split('');
+                                    if (Admins.Items.Contains(Variables.names[m.GetInt(0)].ToString()))
                                     {
                                         // If user that said this is an admin...
-                                        if (names.ContainsValue(username[1])) //username[1] is the string[] we made.
+                                        if (Variables.names.ContainsValue(username[1])) //username[1] is the string[] we made.
                                         {
                                             // the user will be affected.
                                             con.Send("say", "/giveedit " + username[1]);
@@ -1805,26 +1819,26 @@ namespace R42Bot
                                             con.Send("say", "/togglepotions on");
                                             Thread.Sleep(100);
                                             con.Send("say", "/respawn " + username[1]);
-                                            Console.WriteLine(username[1] + " has been affected by admin " + names[m.GetInt(0)].ToString() + "."); // Console.WriteLine writes something to Output, actually, you can make an listbox that tells everything admins did!
+                                            Console.WriteLine(username[1] + " has been affected by admin " + Variables.names[m.GetInt(0)].ToString() + "."); // Console.WriteLine writes something to Output, actually, you can make an listbox that tells everything admins did!
                                         }
                                         else
                                         {
-                                            con.Send("say", names[m.GetInt(0)].ToString() + ": You can't affect '" + username[1] + "' cause it isn't an valid username or this user isn't in this world.");
+                                            con.Send("say", Variables.names[m.GetInt(0)].ToString() + ": You can't affect '" + username[1] + "' cause it isn't an valid username or this user isn't in this world.");
                                         }
                                     }
                                     else
                                     {
-                                        con.Send("say", names[m.GetInt(0)].ToString() + ": You little troller! You can't affect people if you aren't an admin in the bot! >:O");
+                                        con.Send("say", Variables.names[m.GetInt(0)].ToString() + ": You little troller! You can't affect people if you aren't an admin in the bot! >:O");
                                     }
                                 }
-                                else if (str.StartsWith("!stalk "))
+                                else if (Variables.str.StartsWith("!stalk "))
                                 {
-                                    string[] userinuse = str.Split(' ');
-                                    if (Admins.Items.Contains(names[m.GetInt(0)].ToString()))
+                                    string[] userinuse = Variables.str.Split(' ');
+                                    if (Admins.Items.Contains(Variables.names[m.GetInt(0)].ToString()))
                                     {
                                         if (alstalking.Checked)
                                         {
-                                            if (names.ContainsValue(userinuse[1]))
+                                            if (Variables.names.ContainsValue(userinuse[1]))
                                             {
                                                 if (stalkMover.Text != userinuse[1])
                                                 {
@@ -1832,7 +1846,7 @@ namespace R42Bot
                                                     #region BOT LOG
                                                     DefineLogZones();
                                                     Thread.Sleep(250);
-                                                    log1.Text = "1. " + names[m.GetInt(0)].ToString().ToUpper() + " made bot stalk " + userinuse[1].ToUpper() + ".";
+                                                    log1.Text = "1. " + Variables.names[m.GetInt(0)].ToString().ToUpper() + " made bot stalk " + userinuse[1].ToUpper() + ".";
                                                     #endregion
                                                     Thread.Sleep(250);
                                                     stalkMover.Text = userinuse[1];
@@ -1841,11 +1855,11 @@ namespace R42Bot
                                                 {
                                                     if (pmresult.Checked)
                                                     {
-                                                        con.Send("say", "/pm " + names[m.GetInt(0)].ToString() + " [R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": " + userinuse[1] + " is already in the stalking list!");
+                                                        con.Send("say", "/pm " + Variables.names[m.GetInt(0)].ToString() + " [R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": " + userinuse[1] + " is already in the stalking list!");
                                                     }
                                                     else
                                                     {
-                                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": " + userinuse[1] + " is already in the stalking list!");
+                                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": " + userinuse[1] + " is already in the stalking list!");
                                                     }
                                                     // if is already in Stalking's List.
                                                 }
@@ -1855,39 +1869,39 @@ namespace R42Bot
 
                                                 if (pmresult.Checked)
                                                 {
-                                                    con.Send("say", "/pm " + names[m.GetInt(0)].ToString() + " [R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": " + userinuse[1] + " is not in this world!");
+                                                    con.Send("say", "/pm " + Variables.names[m.GetInt(0)].ToString() + " [R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": " + userinuse[1] + " is not in this world!");
                                                 }
                                                 else
                                                 {
-                                                    con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": " + userinuse[1] + " is not in this world!");
+                                                    con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": " + userinuse[1] + " is not in this world!");
                                                 }
                                                 // if not in world
                                             }
                                         }
                                         else
                                         {
-                                            con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": Stalking is disabled. Sorry!");
+                                            con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": Stalking is disabled. Sorry!");
                                         }
                                     }
                                     else
                                     {
                                         if (userinuse[1] == ".realwizard42." || userinuse[1] == ".REALWIZARD42.")
                                         {
-                                            con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": " + userinuse[1] + " is the bot and you can't make bot stalk people since you are not an admin in the bot!");
+                                            con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": " + userinuse[1] + " is the bot and you can't make bot stalk people since you are not an admin in the bot!");
                                         }
                                         else
                                         {
-                                            con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": " + userinuse[1] + " can't be stalked because you are not an admin!");
+                                            con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": " + userinuse[1] + " can't be stalked because you are not an admin!");
                                         }
                                         // if not an admin
                                     }
                                 }
-                                else if (str.StartsWith("!unstalk "))
+                                else if (Variables.str.StartsWith("!unstalk "))
                                 {
-                                    string[] userinuse = str.Split(' ');
-                                    if (Admins.Items.Contains(names[m.GetInt(0)].ToString()))
+                                    string[] userinuse = Variables.str.Split(' ');
+                                    if (Admins.Items.Contains(Variables.names[m.GetInt(0)].ToString()))
                                     {
-                                        if (names.ContainsValue(userinuse[1]))
+                                        if (Variables.names.ContainsValue(userinuse[1]))
                                         {
                                             if (stalkMover.Text == userinuse[1])
                                             {
@@ -1897,11 +1911,11 @@ namespace R42Bot
                                             {
                                                 if (pmresult.Checked)
                                                 {
-                                                    con.Send("say", "/pm " + names[m.GetInt(0)].ToString() + " [R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": " + userinuse[1] + " is not in the stalking list!");
+                                                    con.Send("say", "/pm " + Variables.names[m.GetInt(0)].ToString() + " [R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": " + userinuse[1] + " is not in the stalking list!");
                                                 }
                                                 else
                                                 {
-                                                    con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": " + userinuse[1] + " is not in the stalking list!");
+                                                    con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": " + userinuse[1] + " is not in the stalking list!");
                                                 }
                                                 // if isn't in Stalking's List.
                                             }
@@ -1910,87 +1924,87 @@ namespace R42Bot
                                         {
                                             if (pmresult.Checked)
                                             {
-                                                con.Send("say", "/pm " + names[m.GetInt(0)].ToString() + " [R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": " + userinuse[1] + " is not in this world!");
+                                                con.Send("say", "/pm " + Variables.names[m.GetInt(0)].ToString() + " [R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": " + userinuse[1] + " is not in this world!");
                                             }
                                             else
                                             {
-                                                con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": " + userinuse[1] + " is not in this world!");
+                                                con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": " + userinuse[1] + " is not in this world!");
                                             }
                                             // if not in world
                                         }
                                     }
                                     else
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": " + userinuse[1] + " can't be removed from stalking, because you aren't an admin!");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": " + userinuse[1] + " can't be removed from stalking, because you aren't an admin!");
                                         // if not an admin
                                     }
                                 }
-                                else if (str.StartsWith("!mywins"))
+                                else if (Variables.str.StartsWith("!mywins"))
                                 {
                                     if (winsystem1.Checked == true)
                                     {
                                         if (enus.Checked == true && ptbr.Checked == false)
                                         {
-                                            con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": You won " + player[m.GetInt(0)].wins + " times.");
+                                            con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": You won " + Variables.player[m.GetInt(0)].wins + " times.");
                                         }
                                         else if (ptbr.Checked == true && enus.Checked == false)
                                         {
-                                            con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": Voçê ganhou " + player[m.GetInt(0)].wins + " vezes.");
+                                            con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": Voçê ganhou " + Variables.player[m.GetInt(0)].wins + " vezes.");
                                         }
                                     }
                                     else
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": Wins System has been disabled by the user using this bot.");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": Wins System has been disabled by the user using this bot.");
                                     }
                                 }
-                                else if (str.StartsWith("!say "))
+                                else if (Variables.str.StartsWith("!say "))
                                 {
-                                    if (Admins.Items.Contains(names[m.GetInt(0)].ToString()))
+                                    if (Admins.Items.Contains(Variables.names[m.GetInt(0)].ToString()))
                                     {
-                                        string beginz = str.Substring(0, 5);
-                                        string endz = str.Replace(beginz, "");
+                                        string beginz = Variables.str.Substring(0, 5);
+                                        string endz = Variables.str.Replace(beginz, "");
                                         con.Send("say", "[R42Bot++] " + endz);
                                     }
                                     else
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": You are not an admin in the bot!");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": You are not an admin in the bot!");
                                     }
                                 }
-                                else if (str.StartsWith("!amiadmin"))
+                                else if (Variables.str.StartsWith("!amiadmin"))
                                 {
-                                    if (Admins.Items.Contains(names[m.GetInt(0)].ToString()))
+                                    if (Admins.Items.Contains(Variables.names[m.GetInt(0)].ToString()))
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": Yes, you are an admin in the bot.");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": Yes, you are an admin in the bot.");
                                     }
                                     else
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": No, you aren't an admin in the bot.");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": No, you aren't an admin in the bot.");
                                     }
                                 }
                                 #region is [player]...
-                                else if (str.StartsWith("!is "))
+                                else if (Variables.str.StartsWith("!is "))
                                 {
-                                    string[] userinuse = str.Split(' ');
-                                    if (str.StartsWith("!is " + userinuse[1] + " admin"))
+                                    string[] userinuse = Variables.str.Split(' ');
+                                    if (Variables.str.StartsWith("!is " + userinuse[1] + " admin"))
                                     {
                                         if (Admins.Items.Contains(userinuse[1]))
                                         {
-                                            con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": Yes, " + userinuse[1] + " is an admin in the bot.");
+                                            con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": Yes, " + userinuse[1] + " is an admin in the bot.");
                                         }
                                         else
                                         {
-                                            con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": No, " + userinuse[1] + " is not an admin in the bot.");
+                                            con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": No, " + userinuse[1] + " is not an admin in the bot.");
                                         }
                                     }
                                     else
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": Unknown question or misspellen question.");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": Unknown question or misspellen question.");
                                     }
                                 }
                                 #endregion
-                                else if (str.StartsWith("!botlog"))
+                                else if (Variables.str.StartsWith("!botlog"))
                                 {
-                                    if (Admins.Items.Contains(names[m.GetInt(0)].ToString()))
+                                    if (Admins.Items.Contains(Variables.names[m.GetInt(0)].ToString()))
                                     {
                                         con.Send("say", "===-===-===-===");
                                         Thread.Sleep(575);
@@ -2052,35 +2066,35 @@ namespace R42Bot
                                     }
                                     else
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": To view bot log you must be an admin in the bot!");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": To view bot log you must be an admin in the bot!");
                                     }
                                 }
 
                                 #region POLL COMMANDS
 
-                                else if (str.StartsWith("!vote "))
+                                else if (Variables.str.StartsWith("!vote "))
                                 {
-                                    if (votersList.Items.Contains(names[m.GetInt(0)].ToString()))
+                                    if (votersList.Items.Contains(Variables.names[m.GetInt(0)].ToString()))
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": You've already voted!");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": You've already voted!");
                                     }
                                     else if (pollname.Text == "")
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": No poll is currently in progress!");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": No poll is Variables.currently in progress!");
                                     }
                                     else
                                     {
-                                        if (names[m.GetInt(0)].ToString() == pollstartername.Text)
+                                        if (Variables.names[m.GetInt(0)].ToString() == pollstartername.Text)
                                         {
-                                            con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": You can't vote because you made the poll!");
+                                            con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": You can't vote because you made the poll!");
                                         }
                                         else
                                         {
-                                            string[] voted = str.Split(' ');
+                                            string[] voted = Variables.str.Split(' ');
                                             if (voted[1] == choice1.Text.ToLower() || voted[1] == choice1.Text)
                                             {
-                                                votersList.Items.Add(names[m.GetInt(0)].ToString());
-                                                con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": You voted " + choice1.Text + ".");
+                                                votersList.Items.Add(Variables.names[m.GetInt(0)].ToString());
+                                                con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": You voted " + choice1.Text + ".");
                                                 int votes1 = Convert.ToInt32(vot1.Text);
                                                 votes1 = votes1 + 1;
                                                 Thread.Sleep(250);
@@ -2089,8 +2103,8 @@ namespace R42Bot
                                             }
                                             else if (voted[1] == choice2.Text.ToLower() || voted[1] == choice2.Text)
                                             {
-                                                votersList.Items.Add(names[m.GetInt(0)].ToString());
-                                                con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": You voted " + choice2.Text + ".");
+                                                votersList.Items.Add(Variables.names[m.GetInt(0)].ToString());
+                                                con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": You voted " + choice2.Text + ".");
                                                 int votes2 = Convert.ToInt32(vot2.Text);
                                                 votes2 = votes2 + 1;
                                                 Thread.Sleep(250);
@@ -2099,10 +2113,10 @@ namespace R42Bot
                                             }
                                             else if (voted[1] == choice3.Text.ToLower() || voted[1] == choice3.Text)
                                             {
-                                                votersList.Items.Add(names[m.GetInt(0)].ToString());
+                                                votersList.Items.Add(Variables.names[m.GetInt(0)].ToString());
                                                 if (choice3.Visible == true)
                                                 {
-                                                    con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": You voted " + choice3.Text + ".");
+                                                    con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": You voted " + choice3.Text + ".");
                                                     int votes3 = Convert.ToInt32(vot3.Text);
                                                     votes3 = votes3 + 1;
                                                     Thread.Sleep(250);
@@ -2111,118 +2125,118 @@ namespace R42Bot
                                                 }
                                                 else
                                                 {
-                                                    con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": Tirth option has been removed by whoever is using this bot.");
+                                                    con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": Tirth option has been removed by whoever is using this bot.");
                                                 }
                                             }
                                             else
                                             {
-                                                con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": Unknown Option for voting polls.");
+                                                con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": Unknown Option for voting polls.");
                                             }
                                         }
                                     }
                                 }
-                                else if (str.StartsWith("!pc1 "))
+                                else if (Variables.str.StartsWith("!pc1 "))
                                 {
-                                    string[] choiced = str.Split(' ');
-                                    if (Admins.Items.Contains(names[m.GetInt(0)].ToString()))
+                                    string[] choiced = Variables.str.Split(' ');
+                                    if (Admins.Items.Contains(Variables.names[m.GetInt(0)].ToString()))
                                     {
                                         if (pollname.Text == "")
                                         {
                                             if (choice1.Text == choiced[1])
                                             {
-                                                con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": The first choice is the same as the new one!");
+                                                con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": The first choice is the same as the new one!");
                                             }
                                             else
                                             {
-                                                con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": Choice1 changed to " + choiced[1] + ".");
+                                                con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": Choice1 changed to " + choiced[1] + ".");
                                                 choice1.Text = choiced[1];
                                             }
                                         }
                                         else
                                         {
-                                            con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": There is an poll in progress!");
+                                            con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": There is an poll in progress!");
                                         }
                                     }
                                     else
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": You aren't an admin in the bot so you can't change the bot's poll choices!");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": You aren't an admin in the bot so you can't change the bot's poll choices!");
                                     }
                                 }
-                                else if (str.StartsWith("!pc2 "))
+                                else if (Variables.str.StartsWith("!pc2 "))
                                 {
-                                    string[] choiced = str.Split(' ');
-                                    if (Admins.Items.Contains(names[m.GetInt(0)].ToString()))
+                                    string[] choiced = Variables.str.Split(' ');
+                                    if (Admins.Items.Contains(Variables.names[m.GetInt(0)].ToString()))
                                     {
                                         if (pollname.Text == "")
                                         {
                                             if (choice2.Text == choiced[1])
                                             {
-                                                con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": The second choice is the same as the new one!");
+                                                con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": The second choice is the same as the new one!");
                                             }
                                             else
                                             {
-                                                con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": Choice2 changed to " + choiced[1] + ".");
+                                                con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": Choice2 changed to " + choiced[1] + ".");
                                                 choice2.Text = choiced[1];
                                             }
                                         }
                                         else
                                         {
-                                            con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": There is a poll in progress!");
+                                            con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": There is a poll in progress!");
                                         }
                                     }
                                     else
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": You aren't an admin in the bot so you can't change the bot's poll choices!");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": You aren't an admin in the bot so you can't change the bot's poll choices!");
                                     }
                                 }
-                                else if (str.StartsWith("!pc3 "))
+                                else if (Variables.str.StartsWith("!pc3 "))
                                 {
-                                    string[] choiced = str.Split(' ');
-                                    if (Admins.Items.Contains(names[m.GetInt(0)].ToString()))
+                                    string[] choiced = Variables.str.Split(' ');
+                                    if (Admins.Items.Contains(Variables.names[m.GetInt(0)].ToString()))
                                     {
                                         if (pollname.Text == "")
                                         {
                                             if (choice3.Text == choiced[1])
                                             {
-                                                con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": The tirth choice is the same as the new one!");
+                                                con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": The tirth choice is the same as the new one!");
                                             }
                                             else
                                             {
-                                                con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": Choice3 changed to " + choiced[1] + ".");
+                                                con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": Choice3 changed to " + choiced[1] + ".");
                                                 choice3.Text = choiced[1];
                                             }
                                         }
                                         else
                                         {
-                                            con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": There is a poll in progress!");
+                                            con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": There is a poll in progress!");
                                         }
                                     }
                                     else
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": You aren't an admin in the bot so you can't change the bot's poll choices!");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": You aren't an admin in the bot so you can't change the bot's poll choices!");
                                     }
                                 }
-                                else if (str.StartsWith("!endpoll"))
+                                else if (Variables.str.StartsWith("!endpoll"))
                                 {
-                                    if (Admins.Items.Contains(names[m.GetInt(0)].ToString()))
+                                    if (Admins.Items.Contains(Variables.names[m.GetInt(0)].ToString()))
                                     {
                                         if (pollname.Text == "")
                                         {
-                                            con.Send("say", "[R42Bot++] " + Shortest(names[m.GetInt(0)]).ToUpper() + ": There is no polls at progress.");
+                                            con.Send("say", "[R42Bot++] " + Voids.Shortest(Variables.names[m.GetInt(0)]).ToUpper() + ": There is no polls at progress.");
                                         }
                                         else
                                         {
                                             if (vot3.Visible == false)
                                             {
-                                                con.Send("say", "[R42Bot++] " + Shortest(names[m.GetInt(0)]).ToUpper() + ": Poll '" + pollname.Text + "' stoped.");
+                                                con.Send("say", "[R42Bot++] " + Voids.Shortest(Variables.names[m.GetInt(0)]).ToUpper() + ": Poll '" + pollname.Text + "' stoped.");
                                                 Thread.Sleep(575);
-                                                con.Send("say", "[R42Bot++] " + Shortest(names[m.GetInt(0)]).ToUpper() + ": Results: " + choice1.Text + " - " + vot1.Text + " & " + choice2.Text + " - " + vot2.Text);
+                                                con.Send("say", "[R42Bot++] " + Voids.Shortest(Variables.names[m.GetInt(0)]).ToUpper() + ": Results: " + choice1.Text + " - " + vot1.Text + " & " + choice2.Text + " - " + vot2.Text);
                                             }
                                             else
                                             {
-                                                con.Send("say", "[R42Bot++] " + Shortest(names[m.GetInt(0)]).ToUpper() + ": Poll '" + pollname.Text + "' stoped.");
+                                                con.Send("say", "[R42Bot++] " + Voids.Shortest(Variables.names[m.GetInt(0)]).ToUpper() + ": Poll '" + pollname.Text + "' stoped.");
                                                 Thread.Sleep(575);
-                                                con.Send("say", "[R42Bot++] " + Shortest(names[m.GetInt(0)]).ToUpper() + ": Results: " + choice1.Text + " - " + vot1.Text + " , " + choice2.Text + " - " + vot2.Text + " & " + choice3.Text + " - " + vot3.Text);
+                                                con.Send("say", "[R42Bot++] " + Voids.Shortest(Variables.names[m.GetInt(0)]).ToUpper() + ": Results: " + choice1.Text + " - " + vot1.Text + " , " + choice2.Text + " - " + vot2.Text + " & " + choice3.Text + " - " + vot3.Text);
                                             }
                                             Thread.Sleep(250);
                                             vot1.Text = "0";
@@ -2235,22 +2249,22 @@ namespace R42Bot
                                     }
                                     else
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": You aren't an admin in the bot so you can't end polls!");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": You aren't an admin in the bot so you can't end polls!");
                                     }
                                 }
-                                else if (str.StartsWith("!poll "))
+                                else if (Variables.str.StartsWith("!poll "))
                                 {
-                                    if (Admins.Items.Contains(names[m.GetInt(0)].ToString()))
+                                    if (Admins.Items.Contains(Variables.names[m.GetInt(0)].ToString()))
                                     {
                                         if (pollname.Text == "")
                                         {
                                             if (vot3.Visible == false)
                                             {
-                                                string beginz = str.Substring(0, 6);
-                                                string endz = str.Replace(beginz, "");
+                                                string beginz = Variables.str.Substring(0, 6);
+                                                string endz = Variables.str.Replace(beginz, "");
 
                                                 pollname.Text = endz;
-                                                pollstartername.Text = names[m.GetInt(0)].ToString();
+                                                pollstartername.Text = Variables.names[m.GetInt(0)].ToString();
                                                 Thread.Sleep(575);
                                                 con.Send("say", "[R42Bot++] Everyone! Answer the following poll.");
                                                 Thread.Sleep(575);
@@ -2260,11 +2274,11 @@ namespace R42Bot
                                             }
                                             else
                                             {
-                                                string beginz = str.Substring(0, 5);
-                                                string endz = str.Replace(beginz, "");
+                                                string beginz = Variables.str.Substring(0, 5);
+                                                string endz = Variables.str.Replace(beginz, "");
 
                                                 pollname.Text = endz;
-                                                pollstartername.Text = names[m.GetInt(0)].ToString();
+                                                pollstartername.Text = Variables.names[m.GetInt(0)].ToString();
                                                 Thread.Sleep(575);
                                                 con.Send("say", "[R42Bot++] Everyone! Answer the following poll.");
                                                 Thread.Sleep(575);
@@ -2276,27 +2290,27 @@ namespace R42Bot
                                         else
                                         {
                                             Thread.Sleep(575);
-                                            con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": There is already an poll in progress!");
+                                            con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": There is already an poll in progress!");
                                         }
                                     }
                                     else
                                     {
                                         Thread.Sleep(575);
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": You can't start polls cause you aren't an admin!");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": You can't start polls cause you aren't an admin!");
                                     }
                                 }
-                                else if (str.StartsWith("!pollhelp"))
+                                else if (Variables.str.StartsWith("!pollhelp"))
                                 {
-                                    con.Send("say", "[R42Bot++] " + Shortest(names[m.GetInt(0)]).ToUpper() + ": !vote [option], !poll [name], !endpoll,");
+                                    con.Send("say", "[R42Bot++] " + Voids.Shortest(Variables.names[m.GetInt(0)]).ToUpper() + ": !vote [option], !poll [name], !endpoll,");
                                     Thread.Sleep(575);
-                                    con.Send("say", "[R42Bot++] " + Shortest(names[m.GetInt(0)]).ToUpper() + ": !pc1 [choice1], !pc2 [choice2] and !pc3 [choice3].");
+                                    con.Send("say", "[R42Bot++] " + Voids.Shortest(Variables.names[m.GetInt(0)]).ToUpper() + ": !pc1 [choice1], !pc2 [choice2] and !pc3 [choice3].");
                                 }
                                 #endregion
-                                else if (str.StartsWith("!giveeditall"))
+                                else if (Variables.str.StartsWith("!giveeditall"))
                                 {
-                                    if (Admins.Items.Contains(names[m.GetInt(0)].ToString()))
+                                    if (Admins.Items.Contains(Variables.names[m.GetInt(0)].ToString()))
                                     {
-                                        foreach (Player s in player)
+                                        foreach (Player s in Variables.player)
                                         {
                                             con.Send("say", "/giveedit " + s.username);
                                             Thread.Sleep(200);
@@ -2304,14 +2318,14 @@ namespace R42Bot
                                     }
                                     else
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": You can't give everyone edit cause you are not an admin in the bot!");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": You can't give everyone edit cause you are not an admin in the bot!");
                                     }
                                 }
-                                else if (str.StartsWith("!removeditall"))
+                                else if (Variables.str.StartsWith("!removeditall"))
                                 {
-                                    if (Admins.Items.Contains(names[m.GetInt(0)].ToString()))
+                                    if (Admins.Items.Contains(Variables.names[m.GetInt(0)].ToString()))
                                     {
-                                        foreach (Player s in player)
+                                        foreach (Player s in Variables.player)
                                         {
                                             con.Send("say", "/removeedit " + s.username);
                                             Thread.Sleep(575);
@@ -2319,88 +2333,88 @@ namespace R42Bot
                                     }
                                     else
                                     {
-                                        con.Send("say", "[R42Bot++] " + Shortest(names[m.GetInt(0)]).ToUpper() + ": You can't remove everyone's edit cause you are not an admin in the bot!");
+                                        con.Send("say", "[R42Bot++] " + Voids.Shortest(Variables.names[m.GetInt(0)]).ToUpper() + ": You can't remove everyone's edit cause you are not an admin in the bot!");
                                     }
                                 }
-                                else if (str.StartsWith("!download"))
+                                else if (Variables.str.StartsWith("!download"))
                                 {
-                                    con.Send("say", "[R42Bot++] " + Shortest(names[m.GetInt(0)]).ToUpper() + ": http://realmaster42-projects.weebly.com/r42bot1.html");
+                                    con.Send("say", "[R42Bot++] " + Voids.Shortest(Variables.names[m.GetInt(0)]).ToUpper() + ": http://realmaster42-projects.weebly.com/r42bot1.html");
                                 }
 
 
-                                else if (str.StartsWith("!listhelp"))
+                                else if (Variables.str.StartsWith("!listhelp"))
                                 {
-                                    con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": !amiadmin, !botlog, !kick [player] [reasson], !save, !loadlevel, !clear, !evenhelp c:");
+                                    con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": !amiadmin, !botlog, !kick [player] [reasson], !save, !loadlevel, !clear, !evenhelp c:");
                                 }
-                                else if (str.StartsWith("!evenhelp"))
+                                else if (Variables.str.StartsWith("!evenhelp"))
                                 {
-                                    con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": !revert [player], !snakespeed [speed_in_ms]. HOORAY!");
+                                    con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": !revert [player], !snakespeed [speed_in_ms]. HOORAY!");
                                 }
-                                else if (str.StartsWith("!giveedithelp"))
+                                else if (Variables.str.StartsWith("!giveedithelp"))
                                 {
-                                    con.Send("say", "[R42Bot++] " + Shortest(names[m.GetInt(0)]).ToUpper() + ": !removeditall, !giveeditall");
+                                    con.Send("say", "[R42Bot++] " + Voids.Shortest(Variables.names[m.GetInt(0)]).ToUpper() + ": !removeditall, !giveeditall");
                                 }
-                                else if (str.StartsWith("!specialhelp"))
+                                else if (Variables.str.StartsWith("!specialhelp"))
                                 {
-                                    con.Send("say", "[R42Bot++] " + Shortest(names[m.GetInt(0)]).ToUpper() + ": !giveedithelp");
+                                    con.Send("say", "[R42Bot++] " + Voids.Shortest(Variables.names[m.GetInt(0)]).ToUpper() + ": !giveedithelp");
                                 }
-                                else if (str.StartsWith("!more"))
+                                else if (Variables.str.StartsWith("!more"))
                                 {
-                                    con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": !specialhelp, !listhelp, ");
+                                    con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": !specialhelp, !listhelp, ");
                                     Thread.Sleep(575);
-                                    con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": !say [msg], !affect [plr],");
+                                    con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": !say [msg], !affect [plr],");
                                     Thread.Sleep(575);
-                                    con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": !microphone [msg], !pollhelp, !is [plr] admin. c:");
+                                    con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": !microphone [msg], !pollhelp, !is [plr] admin. c:");
                                 }
 
                                 #region HELP COMMAND
-                                else if (str.StartsWith("!help")) // COMMANDYS COMMANDAS COMMANOS OMG
+                                else if (Variables.str.StartsWith("!help")) // COMMANDYS COMMANDAS COMMANOS OMG
                                 {
-                                    con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": !more, !chelp, !download, !mywins, !halp,");
+                                    con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": !more, !chelp, !download, !mywins, !halp,");
                                     Thread.Sleep(575);
-                                    con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": !version, !survival [plr], !creative [plr]. c:");
+                                    con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": !version, !survival [plr], !creative [plr]. c:");
                                 }
-                                else if (str.StartsWith("!halp"))
+                                else if (Variables.str.StartsWith("!halp"))
                                 {
-                                    con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": !stalk [plr], !unstalk [plr]");
+                                    con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": !stalk [plr], !unstalk [plr]");
                                 }
                                 #endregion
 
-                                else if (str.StartsWith("!chelp "))
+                                else if (Variables.str.StartsWith("!chelp "))
                                 {
-                                    string[] command = str.Split(' ');
+                                    string[] command = Variables.str.Split(' ');
                                     #region commands
                                     if (command[1] == "chelp")
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": !chelp [command]. Makes you know how to use the command and how it works.");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": !chelp [command]. Makes you know how to use the command and how it works.");
                                     }
                                     else if (command[1] == "help")
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": !help. Makes you know the commands available in the bot.");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": !help. Makes you know the commands available in the bot.");
                                     }
                                     else if (command[1] == "more")
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": !more. Makes you know more commands available in the bot.");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": !more. Makes you know more commands available in the bot.");
                                     }
                                     else if (command[1] == "mywins")
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": !mywins. Makes you know your own wins, doesn't work if it is disabled!");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": !mywins. Makes you know your own wins, doesn't work if it is disabled!");
                                     }
                                     else if (command[1] == "affect")
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": !affect [plr]. This command makes players sometimes get kicked or lag.");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": !affect [plr]. This command makes players sometimes get kicked or lag.");
                                     }
                                     else if (command[1] == "amiadmin")
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": !amiadmin. Checks and tells you if you are an admin in the bot or not.");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": !amiadmin. Checks and tells you if you are an admin in the bot or not.");
                                     }
                                     else if (command[1] == "is admin")
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": !is [plr] admin. Checkes and tells you if the player is an admin in the bot or not.");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": !is [plr] admin. Checkes and tells you if the player is an admin in the bot or not.");
                                     }
                                     else
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": Command Mispellen or Unknown command. CommandHelp couldn't recognize that command!");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": Command Mispellen or Unknown command. CommandHelp couldn't recognize that command!");
                                     }
                                     #endregion
 
@@ -2409,18 +2423,18 @@ namespace R42Bot
 
 
 
-                                else if (str.StartsWith("!version"))
+                                else if (Variables.str.StartsWith("!version"))
                                 {
-                                    con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": Bot version " + version);
+                                    con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": Bot version " + version);
                                 }
-                                else if (str.StartsWith("!creative "))
+                                else if (Variables.str.StartsWith("!creative "))
                                 {
-                                    string[] split = str.Split(' ');
-                                    if (Admins.Items.Contains(names[m.GetInt(0)].ToString()))
+                                    string[] split = Variables.str.Split(' ');
+                                    if (Admins.Items.Contains(Variables.names[m.GetInt(0)].ToString()))
                                     {
                                         if (scommand2.Checked)
                                         {
-                                            if (split[1] == "nikooos" && names.ContainsValue("nikooooooos"))
+                                            if (split[1] == "nikooos" && Variables.names.ContainsValue("nikooooooos"))
                                             {
                                                 con.Send("say", "/giveedit NIKOOOOOOOS");
                                                 Thread.Sleep(200);
@@ -2429,83 +2443,83 @@ namespace R42Bot
                                                 con.Send("say", "/pm NIKOOOOOOOS [R42Bott+] hey... you are now in creative mode.");
                                                 Thread.Sleep(200);
                                             }
-                                            else if (names.ContainsValue(split[1]))
+                                            else if (Variables.names.ContainsValue(split[1]))
                                             {
                                                 con.Send("say", "/giveedit " + split[1]);
                                                 Thread.Sleep(200);
-                                                con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": " + split[1].ToUpper() + " is now in creative mode.");
+                                                con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": " + split[1].ToUpper() + " is now in creative mode.");
                                                 Thread.Sleep(200);
                                                 con.Send("say", "/pm " + split[1] + " [R42Bot++] hey... you are now in creative mode!");
                                                 Thread.Sleep(200);
                                             }
                                             else
                                             {
-                                                con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": " + split[1] + " isn't in this world or isn't an valid username.");
+                                                con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": " + split[1] + " isn't in this world or isn't an valid username.");
                                             }
                                         }
                                         else
                                         {
-                                            con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": !creative [plr] command has been disabled by who is using this bot...");
+                                            con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": !creative [plr] command has been disabled by who is using this bot...");
                                         }
                                     }
                                     else
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": you are not an admin in the bot! D:<");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": you are not an admin in the bot! D:<");
                                     }
                                 }
-                                else if (str.StartsWith("!survival "))
+                                else if (Variables.str.StartsWith("!survival "))
                                 {
-                                    string[] split = str.Split(' ');
-                                    if (Admins.Items.Contains(names[m.GetInt(0)].ToString()))
+                                    string[] split = Variables.str.Split(' ');
+                                    if (Admins.Items.Contains(Variables.names[m.GetInt(0)].ToString()))
                                     {
                                         if (scommand.Checked)
                                         {
-                                            if (split[1] == "nikooooooos" && names.ContainsValue("nikooos"))
+                                            if (split[1] == "nikooooooos" && Variables.names.ContainsValue("nikooos"))
                                             {
                                                 con.Send("say", "/removeedit NIKOOOOOOOS");
                                                 con.Send("say", "[R42Bot++] NIKOOO(...)s is now in survival mode.");
                                                 con.Send("say", "/pm NIKOOOOOOOS [R42Bott+] hey... you are now in survival mode.");
                                             }
-                                            else if (names.ContainsValue(split[1]))
+                                            else if (Variables.names.ContainsValue(split[1]))
                                             {
                                                 con.Send("say", "/removeedit " + split[1]);
-                                                con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + " " + split[1].ToUpper() + " is now in survival mode.");
+                                                con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + " " + split[1].ToUpper() + " is now in survival mode.");
                                                 con.Send("say", "/pm " + split[1] + " [R42Bot++] hey... you are now in survival mode!");
                                             }
                                             else
                                             {
-                                                con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": " + split[1].ToUpper() + " isn't in this world or isn't an valid username.");
+                                                con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": " + split[1].ToUpper() + " isn't in this world or isn't an valid username.");
                                             }
                                         }
                                         else
                                         {
-                                            con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": !survival [plr] command has been disabled by who is using this bot...");
+                                            con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": !survival [plr] command has been disabled by who is using this bot...");
                                         }
                                     }
                                     else
                                     {
-                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": you are not an admin in the bot! D:<");
+                                        con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": you are not an admin in the bot! D:<");
                                     }
                                 }
 
 
                                 else
                                 {
-                                    if (str.StartsWith("!"))
+                                    if (Variables.str.StartsWith("!"))
                                     {
-                                        if (names[m.GetInt(0)].ToString() == botName)
+                                        if (Variables.names[m.GetInt(0)].ToString() == Variables.botName)
                                         {
                                             Console.WriteLine("Bot tried to spam. Nevermind that, bot >:O");
                                         }
                                         else
                                         {
-                                            if (str.StartsWith("$"))
+                                            if (Variables.str.StartsWith("$"))
                                             {
-                                                con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": Wrong Prefix.");
+                                                con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": Wrong Prefix.");
                                             }
                                             else
                                             {
-                                                con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToString().ToUpper() + ": Command misspelen or Unknown Command.");
+                                                con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": Command misspelen or Unknown Command.");
                                             }
                                         }
                                     }
@@ -2513,7 +2527,7 @@ namespace R42Bot
                             }
                             else
                             {
-                                names.Add(m.GetInt(0), null);
+                                Variables.names.Add(m.GetInt(0), null);
                             }
                         }
                     }
@@ -2522,6 +2536,21 @@ namespace R42Bot
 
             }
         }
+
+        public struct Player
+        {
+            public int x, y, userid;
+            public string username;
+            public bool isGuest;
+            public bool isGod, isAdmin, isFriend;
+
+            public int wins,
+                warnings,
+                BlocksPlacedInaSecond;
+
+        }
+
+        #region ...
 
         private void connector_Click(object sender, EventArgs e)
         {
@@ -2568,13 +2597,9 @@ namespace R42Bot
                     {
                         MessageBox.Show(error.Message);
                     }
-                    if (botName == null)
+                    if (Variables.botName != null)
                     {
-
-                    }
-                    else
-                    {
-                        Admins.Items.Add(botName.ToString());
+                        Admins.Items.Add(Variables.botName.ToString());
                     }
                     connector.Text = "Disconnect";
                 }
@@ -2582,92 +2607,16 @@ namespace R42Bot
             else if (connector.Text == "Disconnect")
             {
                 lavaP.Enabled = false;
-                botFullyConnected = false;
-                BlockPlacingTilVal1 = 1;
-                BlockPlacingTilVal2 = 2;
+                Variables.botFullyConnected = false;
+                Variables.BlockPlacingTilVal1 = 1;
+                Variables.BlockPlacingTilVal2 = 2;
                 con.Disconnect();
 
                 connector.Text = "Connect";
-                Admins.Items.Remove(botName);
+                Admins.Items.Remove(Variables.botName);
                 MessageBox.Show("Disconnected.");
             }
 
-        }
-
-        public struct Player
-        {
-            public int x, y, userid;
-            public string username;
-            public bool isGuest;
-            public bool isGod, isAdmin, isFriend;
-
-            public int wins,
-                warnings,
-                BlocksPlacedInaSecond;
-
-        }
-
-
-        public void Command(string command, string user)
-        {
-            if (user != null)
-            {
-                if (command.Contains("/"))
-                {
-                    con.Send("say", command + " " + user);
-                }
-                else
-                {
-                    con.Send("say", "/" + command + " " + user);
-                }
-            }
-            else
-            {
-                if (!"clear|save|woot|levelcomplete".Contains(command))
-                {
-                    if (command.Contains("/"))
-                    {
-                        con.Send("say", command);
-                    }
-                    else
-                    {
-                        con.Send("say", "/" + command);
-                    }
-                }
-                else
-                {
-                    switch (command)
-                    {
-                        case "clear":
-                            con.Send("clear");
-                            break;
-                        case "save":
-                            con.Send("save");
-                            break;
-                        case "like":
-                            con.Send("like");
-                            break;
-                        case "levelcomplete":
-                            con.Send("levelcomplete");
-                            break;
-                    }
-                }
-            }
-        }
-
-        public void KickUser(string username)
-        {
-            con.Send("say", "/kick " + username);
-        }
-
-        public void KillUser(string username)
-        {
-            con.Send("say", "/kill " + username);
-        }
-
-        public void BanUser(string username)
-        {
-            con.Send("say", "/ban " + username);
         }
 
         private void remove_Click(object sender, EventArgs e)
@@ -2684,19 +2633,14 @@ namespace R42Bot
                     MessageBox.Show("You cant remove realmaster, he made this bot!", "R42Bot v" + version + " System");
                     removeText.Clear();
                 }
-                else if (removeText.Text == "awzome")
+                else if (removeText.Text == Variables.botName)
                 {
-                    MessageBox.Show("You cant remove awzome, hes my best EE friend!", "R42Bot v" + version + " System");
-                    removeText.Clear();
-                }
-                else if (removeText.Text == botName)
-                {
-                    MessageBox.Show("You cant remove " + botName + ", it is the bot!", "R42Bot v" + version + " System");
+                    MessageBox.Show("You cant remove " + Variables.botName + ", it is the bot!", "R42Bot v" + version + " System");
                     removeText.Clear();
                 }
                 else if (removeText.Text == "legitturtle09")
                 {
-                    MessageBox.Show("You cant remove legitturtle09, he helped with this bot!", "R42Bot v" + version + " System");
+                    MessageBox.Show("You cant remove legitturtle09, he is a R42Bot++ developer!", "R42Bot v" + version + " System");
                     removeText.Clear();
                 }
                 else
@@ -2717,7 +2661,7 @@ namespace R42Bot
         {
             if (!Admins.Items.Contains(addText.Text))
             {
-                if (names.ContainsValue(addText.Text))
+                if (Variables.names.ContainsValue(addText.Text))
                 {
                     Admins.Items.Add(addText.Text);
                     Thread.Sleep(250);
@@ -2778,7 +2722,7 @@ namespace R42Bot
                 }
                 else
                 {
-                    currentColor.Text = c.Color.ToString();
+                    currentColor.Text = Variables.c.Color.ToString();
 
                     tabPage1.BackColor = info.Color1;
                     tabPage2.BackColor = info.Color1;
@@ -2872,7 +2816,7 @@ namespace R42Bot
             }
         }
 
-    private void ptbr_CheckedChanged(object sender, EventArgs e)
+        private void ptbr_CheckedChanged(object sender, EventArgs e)
         {
             if (ptbr.Checked == true)
             {
@@ -2928,10 +2872,20 @@ namespace R42Bot
                 MessageBox.Show("No legend could be shown, message box progress has been cancelled.", "R42Bot++ v" + version + " System", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
+
+        private void welcomemsg_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void leftallmsg_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void button5_Click(object sender, EventArgs e)
         {
-            con.Send(worldKey + "f", 5);
+            con.Send(Variables.worldKey + "f", 5);
         }
 
         private void lavadrawer_CheckedChanged(object sender, EventArgs e)
@@ -2944,7 +2898,7 @@ namespace R42Bot
 
         private void button6_Click(object sender, EventArgs e)
         {
-            con.Send(worldKey + "f", 0);
+            con.Send(Variables.worldKey + "f", 0);
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -2967,9 +2921,9 @@ namespace R42Bot
         {
             if (checkBox1.Checked)
             {
-                con.Send(worldKey + "f", 0);
+                con.Send(Variables.worldKey + "f", 0);
                 Thread.Sleep(500);
-                con.Send(worldKey + "f", 5);
+                con.Send(Variables.worldKey + "f", 5);
             }
         }
 
@@ -2977,7 +2931,7 @@ namespace R42Bot
         {
             if (autokickvalue.Checked)
             {
-                foreach (Player kicking in player)
+                foreach (Player kicking in Variables.player)
                 {
                     if (!Admins.Items.Contains(kicking.username))
                     {
@@ -3032,6 +2986,11 @@ namespace R42Bot
             }
         }
 
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void button7_Click(object sender, EventArgs e)
         {
             if (button7.Text == "New choice...")
@@ -3064,7 +3023,7 @@ namespace R42Bot
         private void button8_Click(object sender, EventArgs e)
         {
             Thread.Sleep(575);
-            if (names.ContainsValue(userpm.Text))
+            if (Variables.names.ContainsValue(userpm.Text))
             {
                 con.Send("say", userpm.Text + " " + textpm.Text);
             }
@@ -3082,9 +3041,9 @@ namespace R42Bot
 
         private void srandomizer_Click(object sender, EventArgs e)
         {
-            con.Send(worldKey + "f", faceslist[new Random().Next(0, faceslist.Length + 1)]);
+            con.Send(Variables.worldKey + "f", new Random().Next(0, 15));
         }
-        
+
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             string[] nums = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
@@ -3166,7 +3125,7 @@ namespace R42Bot
                 }
                 else
                 {
-                    info.Color1 = c.Color;
+                    info.Color1 = Variables.c.Color;
                 }
                 Class1.SaveData(info, "R42Bot++Customization.xml");
             }
@@ -3196,22 +3155,22 @@ namespace R42Bot
 
         private void button13_Click(object sender, EventArgs e)
         {
-            c.ShowDialog();
-            currentColor.Text = c.Color.ToString();
+            Variables.c.ShowDialog();
+            currentColor.Text = Variables.c.Color.ToString();
 
-            tabPage1.BackColor = c.Color;
-            tabPage2.BackColor = c.Color;
-            tabPage3.BackColor = c.Color;
-            Main.BackColor = c.Color;
-            pollTab.BackColor = c.Color;
-            autoPage.BackColor = c.Color;
-            NEWS.BackColor = c.Color;
-            LanguageOrSettings.BackColor = c.Color;
-            autobolder.BackColor = c.Color;
-            advancedEditor.BackColor = c.Color;
-            snakepage.BackColor = c.Color;
-            stalkmovementpage.BackColor = c.Color;
-            smileytabs.BackColor = c.Color;
+            tabPage1.BackColor = Variables.c.Color;
+            tabPage2.BackColor = Variables.c.Color;
+            tabPage3.BackColor = Variables.c.Color;
+            Main.BackColor = Variables.c.Color;
+            pollTab.BackColor = Variables.c.Color;
+            autoPage.BackColor = Variables.c.Color;
+            NEWS.BackColor = Variables.c.Color;
+            LanguageOrSettings.BackColor = Variables.c.Color;
+            autobolder.BackColor = Variables.c.Color;
+            advancedEditor.BackColor = Variables.c.Color;
+            snakepage.BackColor = Variables.c.Color;
+            stalkmovementpage.BackColor = Variables.c.Color;
+            smileytabs.BackColor = Variables.c.Color;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -3253,58 +3212,6 @@ namespace R42Bot
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void xBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            char ch = e.KeyChar;
-
-            if (!Char.IsDigit(ch))
-            {
-                if (e.KeyChar != 8)
-                {
-                    e.Handled = true;
-                    MessageBox.Show("X should be a valid number.");
-                }
-            }
-            else
-            {
-                if (connector.Text != "Connect")
-                {
-                    
-                }
-                else
-                {
-                    MessageBox.Show("You are not connected to any world!");
-                    e.Handled = true;
-                }
-            }
-        }
-
-        private void yBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            char ch = e.KeyChar;
-
-            if (!Char.IsDigit(ch))
-            {
-                if (e.KeyChar != 8)
-                {
-                    e.Handled = true;
-                    MessageBox.Show("Y should be a valid number.");
-                }
-            }
-            else
-            {
-                if (connector.Text != "Connect")
-                {
-                    
-                }
-                else
-                {
-                    MessageBox.Show("You are not connected to any world!");
-                    e.Handled = true;
-                }
             }
         }
 
@@ -3382,16 +3289,16 @@ namespace R42Bot
                 mineralRAINBOWFAST.Checked = false;
                 fax.Checked = false;
                 faxII.Checked = false;
-                if (CheckSnakeUpdate)
+                if (Variables.CheckSnakeUpdate)
                 {
-                    currentChecked = "mineralRAINBOW";
+                    Variables.currentChecked = "mineralRAINBOW";
                 }
             }
             else
             {
-                if (CheckSnakeUpdate)
+                if (Variables.CheckSnakeUpdate)
                 {
-                    currentChecked = "";
+                    Variables.currentChecked = "";
                 }
             }
         }
@@ -3403,16 +3310,16 @@ namespace R42Bot
                 mineralRAINBOW.Checked = false;
                 fax.Checked = false;
                 faxII.Checked = false;
-                if (CheckSnakeUpdate)
+                if (Variables.CheckSnakeUpdate)
                 {
-                    currentChecked = "mineralRAINBOWFAST";
+                    Variables.currentChecked = "mineralRAINBOWFAST";
                 }
             }
             else
             {
-                if (CheckSnakeUpdate)
+                if (Variables.CheckSnakeUpdate)
                 {
-                    currentChecked = "";
+                    Variables.currentChecked = "";
                 }
             }
         }
@@ -3424,16 +3331,16 @@ namespace R42Bot
                 mineralRAINBOWFAST.Checked = false;
                 faxII.Checked = false;
                 mineralRAINBOW.Checked = false;
-                if (CheckSnakeUpdate)
+                if (Variables.CheckSnakeUpdate)
                 {
-                    currentChecked = "fax";
+                    Variables.currentChecked = "fax";
                 }
             }
             else
             {
-                if (CheckSnakeUpdate)
+                if (Variables.CheckSnakeUpdate)
                 {
-                    currentChecked = "";
+                    Variables.currentChecked = "";
                 }
             }
         }
@@ -3457,7 +3364,7 @@ namespace R42Bot
                 Information info = new Information();
                 ListBox.ObjectCollection items = Admins.Items;
                 string[] Items1 = new string[] { };
-                for (int i=1;i<items.Count;i++)
+                for (int i = 1; i < items.Count; i++)
                 {
                     Items1[i] = items[i].ToString();
                 }
@@ -3488,18 +3395,18 @@ namespace R42Bot
             }
             else
             {
-                MessageBox.Show("Save File not found. (R42Bot++Admins.xml)", "R42Bot++ System v"+version, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Save File not found. (R42Bot++Admins.xml)", "R42Bot++ System v" + version, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-        
+
         private void TrollCatcherBlockDelete_Tick(object sender, EventArgs e)
         {
-            for (int i=1;i<names.Count;i++)
+            for (int i = 1; i < Variables.names.Count; i++)
             {
-                player[i].BlocksPlacedInaSecond = 0;
+                Variables.player[i].BlocksPlacedInaSecond = 0;
             }
         }
-        
+
         private void pgeb100loldef_CheckedChanged(object sender, EventArgs e)
         {
             if (pgeb100loldef.Checked)
@@ -3518,13 +3425,13 @@ namespace R42Bot
 
         private void BlockPlacer_Tick(object sender, EventArgs e)
         {
-            if (botFullyConnected)
+            if (Variables.botFullyConnected)
             {
                 int Delay = Convert.ToInt32(fdelay.Value);
-                for (int i = BlockPlacingTilVal1; i < BlockPlacingTilVal2; i++)
+                for (int i = Variables.BlockPlacingTilVal1; i < Variables.BlockPlacingTilVal2; i++)
                 {
-                    con.Send(worldKey, new object[] { 0, BlockPlacingTilX, BlockPlacingTilY, i });
-                    con.Send(worldKey, new object[] { 1, BlockPlacingTilX, BlockPlacingTilY, i });
+                    con.Send(Variables.worldKey, new object[] { 0, Variables.BlockPlacingTilX, Variables.BlockPlacingTilY, i });
+                    con.Send(Variables.worldKey, new object[] { 1, Variables.BlockPlacingTilX, Variables.BlockPlacingTilY, i });
                     Thread.Sleep(Delay);
                 }
             }
@@ -3553,16 +3460,16 @@ namespace R42Bot
                 mineralRAINBOWFAST.Checked = false;
                 fax.Checked = false;
                 mineralRAINBOW.Checked = false;
-                if (CheckSnakeUpdate)
+                if (Variables.CheckSnakeUpdate)
                 {
-                    currentChecked = "faxII";
+                    Variables.currentChecked = "faxII";
                 }
             }
             else
             {
-                if (CheckSnakeUpdate)
+                if (Variables.CheckSnakeUpdate)
                 {
-                    currentChecked = "";
+                    Variables.currentChecked = "";
                 }
             }
         }
@@ -3576,20 +3483,6 @@ namespace R42Bot
             else
             {
                 waterchoice1.Checked = true;
-            }
-        }
-
-        private void idBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            char ch = e.KeyChar;
-
-            if (!Char.IsDigit(ch))
-            {
-                if (e.KeyChar != 8)
-                {
-                    e.Handled = true;
-                    MessageBox.Show("BlockID should be a valid number.");
-                }
             }
         }
 
@@ -3629,7 +3522,9 @@ namespace R42Bot
                 fbTokenGet.Visible = false;
             }
         }
+        #endregion
     }
 }
 
+#endregion
 #endregion
