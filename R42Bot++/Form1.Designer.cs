@@ -1,4 +1,4 @@
-﻿namespace R42Bot
+namespace R42Bot
 {
     partial class Form1
     {
@@ -213,6 +213,8 @@
             this.autokick = new System.Windows.Forms.Timer(this.components);
             this.autoreset = new System.Windows.Forms.Timer(this.components);
             this.BlockPlacer = new System.Windows.Forms.Timer(this.components);
+            this.TrollCatcherBlockDelete = new System.Windows.Forms.Timer(this.components);
+            this.unfairBlox = new System.Windows.Forms.CheckBox();
             this.firstTabControler.SuspendLayout();
             this.Main.SuspendLayout();
             this.LanguageOrSettings.SuspendLayout();
@@ -339,7 +341,6 @@
             this.scommand.TabIndex = 10;
             this.scommand.Text = "!survival [player]";
             this.scommand.UseVisualStyleBackColor = true;
-            this.scommand.CheckedChanged += new System.EventHandler(this.scommand_CheckedChanged);
             // 
             // firstTabControler
             // 
@@ -363,6 +364,7 @@
             // 
             // Main
             // 
+            this.Main.Controls.Add(this.unfairBlox);
             this.Main.Controls.Add(this.button2);
             this.Main.Controls.Add(this.button1);
             this.Main.Controls.Add(this.DeserializeBar);
@@ -766,7 +768,6 @@
             this.label9.Size = new System.Drawing.Size(100, 13);
             this.label9.TabIndex = 10;
             this.label9.Text = "text after username.";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // leftallmsg
             // 
@@ -2243,6 +2244,22 @@
             this.BlockPlacer.Interval = 10;
             this.BlockPlacer.Tick += new System.EventHandler(this.BlockPlacer_Tick);
             // 
+            // TrollCatcherBlockDelete
+            // 
+            this.TrollCatcherBlockDelete.Enabled = true;
+            this.TrollCatcherBlockDelete.Interval = 1000;
+            this.TrollCatcherBlockDelete.Tick += new System.EventHandler(this.TrollCatcherBlockDelete_Tick);
+            // 
+            // unfairBlox
+            // 
+            this.unfairBlox.AutoSize = true;
+            this.unfairBlox.Location = new System.Drawing.Point(231, 213);
+            this.unfairBlox.Name = "unfairBlox";
+            this.unfairBlox.Size = new System.Drawing.Size(91, 17);
+            this.unfairBlox.TabIndex = 51;
+            this.unfairBlox.Text = "Troll Catching";
+            this.unfairBlox.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2478,6 +2495,8 @@
         private System.Windows.Forms.ProgressBar DeserializeBar;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Timer TrollCatcherBlockDelete;
+        private System.Windows.Forms.CheckBox unfairBlox;
     }
 }
 
