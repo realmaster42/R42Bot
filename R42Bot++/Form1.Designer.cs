@@ -587,7 +587,6 @@ namespace R42Bot
             this.freeadmin.TabIndex = 36;
             this.freeadmin.Text = "Free Admin";
             this.freeadmin.UseVisualStyleBackColor = true;
-            this.freeadmin.CheckedChanged += new System.EventHandler(this.freeadmin_CheckedChanged);
             // 
             // saytext
             // 
