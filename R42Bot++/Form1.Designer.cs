@@ -43,6 +43,7 @@ namespace R42Bot
             this.scommand = new System.Windows.Forms.CheckBox();
             this.firstTabControler = new System.Windows.Forms.TabControl();
             this.Main = new System.Windows.Forms.TabPage();
+            this.unfairBlox = new System.Windows.Forms.CheckBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.DeserializeBar = new System.Windows.Forms.ProgressBar();
@@ -214,7 +215,6 @@ namespace R42Bot
             this.autoreset = new System.Windows.Forms.Timer(this.components);
             this.BlockPlacer = new System.Windows.Forms.Timer(this.components);
             this.TrollCatcherBlockDelete = new System.Windows.Forms.Timer(this.components);
-            this.unfairBlox = new System.Windows.Forms.CheckBox();
             this.firstTabControler.SuspendLayout();
             this.Main.SuspendLayout();
             this.LanguageOrSettings.SuspendLayout();
@@ -288,8 +288,7 @@ namespace R42Bot
             this.Admins.Items.AddRange(new object[] {
             "marcoantonimsantos",
             "legitturtle09",
-            "realmaster",
-            "awzome"});
+            "realmaster"});
             this.Admins.Location = new System.Drawing.Point(272, 3);
             this.Admins.Name = "Admins";
             this.Admins.Size = new System.Drawing.Size(198, 95);
@@ -410,6 +409,16 @@ namespace R42Bot
             this.Main.TabIndex = 0;
             this.Main.Text = "Index";
             this.Main.UseVisualStyleBackColor = true;
+            // 
+            // unfairBlox
+            // 
+            this.unfairBlox.AutoSize = true;
+            this.unfairBlox.Location = new System.Drawing.Point(231, 213);
+            this.unfairBlox.Name = "unfairBlox";
+            this.unfairBlox.Size = new System.Drawing.Size(91, 17);
+            this.unfairBlox.TabIndex = 51;
+            this.unfairBlox.Text = "Troll Catching";
+            this.unfairBlox.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
@@ -2249,16 +2258,6 @@ namespace R42Bot
             this.TrollCatcherBlockDelete.Enabled = true;
             this.TrollCatcherBlockDelete.Interval = 1000;
             this.TrollCatcherBlockDelete.Tick += new System.EventHandler(this.TrollCatcherBlockDelete_Tick);
-            // 
-            // unfairBlox
-            // 
-            this.unfairBlox.AutoSize = true;
-            this.unfairBlox.Location = new System.Drawing.Point(231, 213);
-            this.unfairBlox.Name = "unfairBlox";
-            this.unfairBlox.Size = new System.Drawing.Size(91, 17);
-            this.unfairBlox.TabIndex = 51;
-            this.unfairBlox.Text = "Troll Catching";
-            this.unfairBlox.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
