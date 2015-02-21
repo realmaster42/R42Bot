@@ -1864,7 +1864,6 @@ namespace R42Bot
             this.tabPage2.TabIndex = 0;
             this.tabPage2.Text = "Command Restrictions";
             this.tabPage2.UseVisualStyleBackColor = true;
-            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
             // label2
             // 
