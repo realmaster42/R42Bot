@@ -661,6 +661,18 @@ namespace R42Bot
                         ay = m.GetInt(2); //up and down
                         if (names.ContainsKey(m.GetInt(4)))
                         {
+                            if (unfairBlox.Checked)
+                            {
+                                if (player[m.GetInt(4)].BlocksPlacedInaSecond >= 10)
+                                {
+                                    con.Send("say", "[R42Bot++] " + names[m.GetInt(4)] + " detected.");
+                                    con.Send("say", "/removeedit " + names[m.GetInt(4)]);
+                                }
+                                else
+                                {
+                                    player[m.GetInt(4)].BlocksPlacedInaSecond++;
+                                }
+                            }
                             block[ax, ay].placer = names[m.GetInt(4)];
                         }
                         int thedelay = Convert.ToInt32(numericUpDown1.Value);
@@ -2590,7 +2602,8 @@ namespace R42Bot
             public bool isGod, isAdmin, isFriend;
 
             public int wins,
-                warnings;
+                warnings,
+                BlocksPlacedInaSecond;
 
         }
 
@@ -3478,7 +3491,15 @@ namespace R42Bot
                 MessageBox.Show("Save File not found. (R42Bot++Admins.xml)", "R42Bot++ System v"+version, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
+        
+        private void TrollCatcherBlockDelete_Tick(object sender, EventArgs e)
+        {
+            for (int i=1;i<names.Count;i++)
+            {
+                player[i].BlocksPlacedInaSecond = 0;
+            }
+        }
+        
         private void pgeb100loldef_CheckedChanged(object sender, EventArgs e)
         {
             if (pgeb100loldef.Checked)
