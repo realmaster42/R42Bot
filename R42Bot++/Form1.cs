@@ -285,85 +285,23 @@ namespace R42Bot
             {
 
                 case "k":
-                    #region Crown Event
-                    if (Variables.botFullyConnected)
-                    {
-                        if (winsystem1.Checked == true)
-                        {
-                            Variables.player[m.GetInt(0)].wins = Variables.player[m.GetInt(0)].wins + 1;
-                            Thread.Sleep(250);
-                            if (Variables.names.ContainsKey(m.GetInt(0)))
-                            {
-                                if (enus.Checked)
-                                {
-                                    Variables.con.Send("say", string.Concat(Variables.names[m.GetInt(0)].ToString() + " won! Now he/she has " + Variables.player[m.GetInt(0)].wins + " wins!"));
-                                }
-                                else if (ptbr.Checked)
-                                {
-                                    Variables.con.Send("say", string.Concat(Variables.names[m.GetInt(0)].ToString() + " ganhou! Agora ele/ela ganhou " + Variables.player[m.GetInt(0)].wins + " vezes!"));
-                                }
-                                else if (ltu.Checked)
-                                {
-
-                                }
-                            }
-                        }
-                    }
-                    #endregion
-
+                    Calls.Crown.Setup(m);
                     return;
                 case "write":
                     return;
                 case "updatemeta":
-                    #region World Data Changed
-                    Variables.worldowner = m.GetString(0);
-                    Variables.worldtitle = m.GetString(1);
-                    Variables.plays = m.GetInt(2);
-                    Variables.woots = m.GetInt(3);
-
-                    Variables.currentOwner = Variables.worldowner;
-                    Variables.currentTitle = Variables.worldtitle;
-                    Variables.currentPlays = Variables.plays;
-                    Variables.currentWoots = Variables.woots;
-                    #endregion
+                    Calls.UpdateMeta.Setup(m);
                     return;
                 case "init":
                     try
                     {
-                        Variables.con.Send("init2");
+                        Calls.Init.Init2();
                         Thread.Sleep(575);
-                        Variables.worldowner = m.GetString(0);
-                        Variables.worldtitle = m.GetString(1);
-                        Variables.currentOwner = Variables.worldowner;
-                        Variables.currentTitle = Variables.worldtitle;
-                        Variables.worldKey = Voids.derot(m.GetString(5));
-                        Variables.plays = m.GetInt(2);
-                        Variables.currentPlays = Variables.plays;
-                        Variables.woots = m.GetInt(3);
-                        Variables.currentWoots = Variables.woots;
-                        Variables.totalwoots = m.GetInt(4);
-                        Variables.botid = m.GetInt(6);
-                        Variables.botName = m.GetString(9);
-                        Variables.worldWidth = m.GetInt(12);
-                        Variables.worldHeight = m.GetInt(13);
+                        Calls.Init.Setup(m);
                         lavaP.Maximum = Variables.worldWidth;
                         lavaP.Value = 1;
                         lavaP.Enabled = true;
-                        if (!Variables.names.ContainsValue(Variables.botName))
-                        {
-                            Variables.names.Add(m.GetInt(6), Variables.botName);
-                        }
-                        Variables.block = new GetBlock[Variables.worldWidth, Variables.worldHeight];
-                        if (Variables.banList.Contains(Variables.botName))
-                        {
-                            MessageBox.Show("You have been banned from this bot!!!", "R42Bot++ v" + Version.version + " System");
-                            Thread.Sleep(250);
-                            MessageBox.Show("YES = WAH, NO = NUUUUU!", "R42Bot++ v" + Version.version + " System", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                            Variables.con.Send("say", "[R42Bot++] Goodbye, the user using me is banned! :D");
-                            MessageBox.Show("Suprise, banned!");
-                            Variables.con.Disconnect();
-                            Application.Exit();
-                        }
+
                         Read(m, 21);//18);
                     }
                     catch (PlayerIOError Error)
@@ -372,63 +310,19 @@ namespace R42Bot
                     }
                     return;
                 case "add":
-                    if (!kJoiners.Checked)
+                    Calls.PlayersInGame.New.Setup(m);
+                    Thread.Sleep(575);
+                    if (freeadmin.Checked)
                     {
-                        if (!Variables.names.ContainsKey(m.GetInt(0)))
-                            Variables.names.Add(m.GetInt(0), m.GetString(1));
-                        else
-                            if (kbots.Checked) { Thread.Sleep(200); Variables.con.Send("say", "/kick " + m.GetString(1) + " Bots dissallowed!"); }
-                        if (m.GetString(1).ToString().StartsWith("guest-"))
+                        add.Enabled = false;
+                        if (!Admins.Items.Contains(Variables.names[m.GetInt(0)].ToString()))
                         {
-                            Variables.player[m.GetInt(0)].isGuest = true;
+                            Admins.Items.Add(Variables.names[m.GetInt(0)].ToString());
                         }
-                        else
-                        {
-                            Variables.player[m.GetInt(0)].isGuest = false;
-                        }
-                        Thread.Sleep(575);
-                        if (freeadmin.Checked)
-                        {
-                            if (!Admins.Items.Contains(Variables.names[m.GetInt(0)].ToString()))
-                            {
-                                Admins.Items.Add(Variables.names[m.GetInt(0)].ToString());
-                                add.Enabled = false;
-                            }
-                        }
-                        else
-                        {
-                            add.Enabled = true;
-                        }
-                        if (FreeEdit.Checked)
-                        {
-                            Thread.Sleep(200);
-                            Variables.con.Send("say", "/giveedit " + Variables.names[m.GetInt(0)].ToString());
-                            Thread.Sleep(200);
-                        }
-                        Variables.player[m.GetInt(0)].username = Variables.names[m.GetInt(0)].ToString();
-
-                        if (welcomeall.Checked)
-                        {
-                            if (welcomealllower.Checked && !welcomeallupper.Checked)
-                            {
-                                Thread.Sleep(200);
-                                Variables.con.Send("say", "[R42Bot++] " + welcomemsg.Text + " " + Variables.names[m.GetInt(0)].ToString().ToLower() + welcomemsg2.Text);
-                                Thread.Sleep(200);
-                            }
-                            if (!welcomealllower.Checked && welcomeallupper.Checked)
-                            {
-                                Thread.Sleep(200);
-                                Variables.con.Send("say", "[R42Bot++] " + welcomemsg.Text + " " + Variables.names[m.GetInt(0)].ToString().ToUpper() + welcomemsg2.Text);
-                                Thread.Sleep(200);
-                            }
-                        }
-                        Variables.botFullyConnected = true;
-
-                        Variables.players++;
                     }
                     else
                     {
-                        Variables.con.Send("say", "/kick " + m.GetString(1) + " [R42Bot++] Joining disabled.");
+                        add.Enabled = true;
                     }
                     return;
                 case "access":
@@ -464,27 +358,7 @@ namespace R42Bot
                     {
                         if (Variables.botFullyConnected)
                         {
-                            #region case "left" code
-                            if (leftall.Checked)
-                            {
-                                if (leftallcase.Checked)
-                                {
-                                    Thread.Sleep(200);
-                                    Variables.con.Send("say", "[R42Bot++] " + leftallmsg.Text + " " + Variables.names[m.GetInt(0)].ToString().ToLower() + " " + leftall2.Text);
-                                    Thread.Sleep(200);
-                                }
-                                else if (leftallupper.Checked)
-                                {
-                                    Thread.Sleep(200);
-                                    Variables.con.Send("say", "[R42Bot++] " + leftallmsg.Text + " " + Variables.names[m.GetInt(0)].ToString().ToUpper() + " " + leftall2.Text);
-                                    Thread.Sleep(200);
-                                }
-                            }
-                            #endregion
-
-
-                            Variables.players = Variables.players - 1;
-
+                            Calls.PlayersInGame.Leave.Setup(m);
                             if (freeadmin.Checked)
                             {
                                 Admins.Items.Remove(Variables.names[m.GetInt(0)].ToString());
@@ -496,8 +370,7 @@ namespace R42Bot
                             }
 
                             Thread.Sleep(250); // destroys username finally.
-                            if (Variables.names.ContainsKey(m.GetInt(0)))
-                                Variables.names.Remove(m.GetInt(0));
+                            Calls.PlayersInGame.Leave.Fix(m);
                         }
                     }
                     return;
@@ -2540,7 +2413,6 @@ namespace R42Bot
                     autobolder.BackColor = Color.White;
                     advancedEditor.BackColor = Color.White;
                     snakepage.BackColor = Color.White;
-                    stalkmovementpage.BackColor = Color.White;
                     smileytabs.BackColor = Color.White;
                     tabPage6.BackColor = Color.White;
                 }
@@ -2559,7 +2431,6 @@ namespace R42Bot
                     autobolder.BackColor = info.Color1;
                     advancedEditor.BackColor = info.Color1;
                     snakepage.BackColor = info.Color1;
-                    stalkmovementpage.BackColor = info.Color1;
                     smileytabs.BackColor = info.Color1;
                 }
                 #endregion
@@ -2629,6 +2500,9 @@ namespace R42Bot
             if (enus.Checked == true)
             {
                 MessageBox.Show("Language is now EU/US!", "R42Bot++ v" + Version.version + " System");
+                CallsSettings.Language.USA = true;
+                CallsSettings.Language.PT = false;
+                CallsSettings.Language.LTU = false;
                 ltu.Checked = false;
                 ptbr.Checked = false;
                 Translate();
@@ -2645,6 +2519,9 @@ namespace R42Bot
             if (ptbr.Checked == true)
             {
                 MessageBox.Show("A Linguagem é PT/BR agora.", "R42Bot++ v" + Version.version + " System");
+                CallsSettings.Language.USA = false;
+                CallsSettings.Language.PT = true;
+                CallsSettings.Language.LTU = false;
                 ltu.Checked = false;
                 enus.Checked = false;
                 Translate();
@@ -2666,14 +2543,7 @@ namespace R42Bot
 
         private void winsystem1_CheckedChanged(object sender, EventArgs e)
         {
-            if (winsystem1.Checked == true)
-            {
-                MessageBox.Show("Now, whenever someone touches a crown, it declares a win.", "R42Bot++ v" + Version.version + " System");
-            }
-            else if (winsystem1.Checked == false)
-            {
-                MessageBox.Show("Wins System OFF.", "R42Bot++ v" + Version.version + " System");
-            }
+            CallsSettings.WinSystem = true;
         }
 
         private void clearstalkering_Click(object sender, EventArgs e)
@@ -2699,12 +2569,12 @@ namespace R42Bot
 
         private void welcomemsg_TextChanged(object sender, EventArgs e)
         {
-
+            CallsSettings.Welcome_Text = welcomemsg.Text;
         }
 
         private void leftallmsg_TextChanged(object sender, EventArgs e)
         {
-
+            CallsSettings.Goodbye_Text = leftallmsg.Text;
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -2973,7 +2843,6 @@ namespace R42Bot
             autobolder.BackColor = Color.White;
             advancedEditor.BackColor = Color.White;
             snakepage.BackColor = Color.White;
-            stalkmovementpage.BackColor = Color.White;
             smileytabs.BackColor = Color.White;
         }
 
@@ -2993,7 +2862,6 @@ namespace R42Bot
             autobolder.BackColor = c.Color;
             advancedEditor.BackColor = c.Color;
             snakepage.BackColor = c.Color;
-            stalkmovementpage.BackColor = c.Color;
             smileytabs.BackColor = c.Color;
         }
 
@@ -3266,6 +3134,9 @@ namespace R42Bot
             if (ltu.Checked == true)
             {
                 MessageBox.Show("Kalba dabar yra LTU/LT", "R42Bot++ v" + Version.version + " sistema");
+                CallsSettings.Language.USA = false;
+                CallsSettings.Language.PT = false;
+                CallsSettings.Language.LTU = true;
                 enus.Checked = false;
                 ptbr.Checked = false;
                 Translate();
@@ -3347,6 +3218,100 @@ namespace R42Bot
             }
         }
         #endregion
+
+        private void kJoiners_CheckedChanged(object sender, EventArgs e)
+        {
+            if (kJoiners.Checked)
+            {
+                CallsSettings.AllowJoiners = false;
+            }
+            else
+            {
+                CallsSettings.AllowJoiners = true;
+            }
+        }
+
+        private void leftallupper_CheckedChanged(object sender, EventArgs e)
+        {
+            if (leftallupper.Checked)
+            {
+                leftallcase.Checked = false;
+                CallsSettings.Goodbye_Upper = true;
+            }
+        }
+
+        private void leftallcase_CheckedChanged(object sender, EventArgs e)
+        {
+            if (leftallcase.Checked)
+            {
+                leftallupper.Checked = false;
+                CallsSettings.Goodbye_Upper = false;
+            }
+        }
+
+        private void welcomeall_CheckedChanged(object sender, EventArgs e)
+        {
+            if (welcomeall.Checked)
+            {
+                CallsSettings.Welcome = true;
+            }
+            else
+            {
+                CallsSettings.Welcome = false;
+            }
+        }
+
+        private void welcomealllower_CheckedChanged(object sender, EventArgs e)
+        {
+            if (welcomealllower.Checked)
+            {
+                welcomeallupper.Checked = false;
+                CallsSettings.Welcome_Upper = false;
+            }
+        }
+
+        private void welcomeallupper_CheckedChanged(object sender, EventArgs e)
+        {
+            if (welcomeallupper.Checked)
+            {
+                welcomealllower.Checked = false;
+                CallsSettings.Welcome_Upper = true;
+            }
+        }
+
+        private void kbots_CheckedChanged(object sender, EventArgs e)
+        {
+            if (kbots.Checked)
+            {
+                CallsSettings.KickBots = true;
+            }
+            else
+            {
+                CallsSettings.KickBots = false;
+            }
+        }
+
+        private void welcomemsg2_TextChanged(object sender, EventArgs e)
+        {
+            CallsSettings.Welcome_Text_2 = welcomemsg2.Text;
+        }
+
+        private void leftall2_TextChanged(object sender, EventArgs e)
+        {
+            CallsSettings.Goodbye_Text_2 = leftall2.Text;
+        }
+
+        private void leftall_CheckedChanged(object sender, EventArgs e)
+        {
+            if (leftall.Checked)
+            {
+                CallsSettings.Goodbye = true;
+            }
+            else
+            {
+                CallsSettings.Goodbye = false;
+            }
+        }
     }
 }
 
