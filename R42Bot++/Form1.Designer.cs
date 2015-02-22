@@ -769,6 +769,7 @@ namespace R42Bot
             this.leftall2.Size = new System.Drawing.Size(231, 20);
             this.leftall2.TabIndex = 11;
             this.leftall2.Text = "left US behind...";
+            this.leftall2.TextChanged += new System.EventHandler(this.leftall2_TextChanged);
             // 
             // label9
             // 
@@ -823,6 +824,7 @@ namespace R42Bot
             this.welcomemsg2.Size = new System.Drawing.Size(234, 20);
             this.welcomemsg2.TabIndex = 4;
             this.welcomemsg2.Text = "!";
+            this.welcomemsg2.TextChanged += new System.EventHandler(this.welcomemsg2_TextChanged);
             // 
             // welcomemsg
             // 
