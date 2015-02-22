@@ -113,15 +113,12 @@ namespace R42Bot
             this.tntallowd = new System.Windows.Forms.CheckBox();
             this.lavadrawer = new System.Windows.Forms.CheckBox();
             this.autobuild1 = new System.Windows.Forms.CheckBox();
-            this.stalkmovementpage = new System.Windows.Forms.TabPage();
             this.button14 = new System.Windows.Forms.Button();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.alstalking = new System.Windows.Forms.CheckBox();
             this.stalkMover = new System.Windows.Forms.TextBox();
             this.pmresult = new System.Windows.Forms.CheckBox();
             this.clearstalkering = new System.Windows.Forms.Button();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
             this.smileytabs = new System.Windows.Forms.TabPage();
             this.srandomizer = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -223,7 +220,6 @@ namespace R42Bot
             this.autobolder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lavaP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fdelay)).BeginInit();
-            this.stalkmovementpage.SuspendLayout();
             this.smileytabs.SuspendLayout();
             this.snakepage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.snakeSpecial2)).BeginInit();
@@ -347,23 +343,28 @@ namespace R42Bot
             this.firstTabControler.Controls.Add(this.NEWS);
             this.firstTabControler.Controls.Add(this.advancedEditor);
             this.firstTabControler.Controls.Add(this.autobolder);
-            this.firstTabControler.Controls.Add(this.stalkmovementpage);
             this.firstTabControler.Controls.Add(this.smileytabs);
             this.firstTabControler.Controls.Add(this.snakepage);
             this.firstTabControler.Controls.Add(this.autoPage);
             this.firstTabControler.Controls.Add(this.pollTab);
             this.firstTabControler.Controls.Add(this.tabPage6);
             this.firstTabControler.Controls.Add(this.tabPage1);
-            this.firstTabControler.Location = new System.Drawing.Point(-3, 0);
+            this.firstTabControler.Location = new System.Drawing.Point(-3, -1);
             this.firstTabControler.Name = "firstTabControler";
             this.firstTabControler.SelectedIndex = 0;
-            this.firstTabControler.Size = new System.Drawing.Size(819, 361);
+            this.firstTabControler.Size = new System.Drawing.Size(819, 362);
             this.firstTabControler.TabIndex = 12;
             // 
             // Main
             // 
+            this.Main.Controls.Add(this.button14);
+            this.Main.Controls.Add(this.textBox5);
             this.Main.Controls.Add(this.unfairBlox);
+            this.Main.Controls.Add(this.stalkMover);
             this.Main.Controls.Add(this.button2);
+            this.Main.Controls.Add(this.pmresult);
+            this.Main.Controls.Add(this.clearstalkering);
+            this.Main.Controls.Add(this.alstalking);
             this.Main.Controls.Add(this.button1);
             this.Main.Controls.Add(this.DeserializeBar);
             this.Main.Controls.Add(this.kJoiners);
@@ -404,7 +405,7 @@ namespace R42Bot
             this.Main.Location = new System.Drawing.Point(4, 22);
             this.Main.Name = "Main";
             this.Main.Padding = new System.Windows.Forms.Padding(3);
-            this.Main.Size = new System.Drawing.Size(811, 335);
+            this.Main.Size = new System.Drawing.Size(811, 336);
             this.Main.TabIndex = 0;
             this.Main.Text = "Index";
             this.Main.UseVisualStyleBackColor = true;
@@ -412,7 +413,7 @@ namespace R42Bot
             // unfairBlox
             // 
             this.unfairBlox.AutoSize = true;
-            this.unfairBlox.Location = new System.Drawing.Point(231, 213);
+            this.unfairBlox.Location = new System.Drawing.Point(569, 284);
             this.unfairBlox.Name = "unfairBlox";
             this.unfairBlox.Size = new System.Drawing.Size(91, 17);
             this.unfairBlox.TabIndex = 51;
@@ -456,23 +457,25 @@ namespace R42Bot
             this.kJoiners.TabIndex = 47;
             this.kJoiners.Text = "Kick Joiners";
             this.kJoiners.UseVisualStyleBackColor = true;
+            this.kJoiners.CheckedChanged += new System.EventHandler(this.kJoiners_CheckedChanged);
             // 
             // kbots
             // 
             this.kbots.AutoSize = true;
-            this.kbots.Location = new System.Drawing.Point(126, 283);
+            this.kbots.Location = new System.Drawing.Point(112, 57);
             this.kbots.Name = "kbots";
-            this.kbots.Size = new System.Drawing.Size(69, 17);
+            this.kbots.Size = new System.Drawing.Size(71, 17);
             this.kbots.TabIndex = 46;
-            this.kbots.Text = "kick bots";
+            this.kbots.Text = "Kick Bots";
             this.kbots.UseVisualStyleBackColor = true;
+            this.kbots.CheckedChanged += new System.EventHandler(this.kbots_CheckedChanged);
             // 
             // revertCboxLOL
             // 
             this.revertCboxLOL.AutoSize = true;
             this.revertCboxLOL.Checked = true;
             this.revertCboxLOL.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.revertCboxLOL.Location = new System.Drawing.Point(126, 260);
+            this.revertCboxLOL.Location = new System.Drawing.Point(126, 167);
             this.revertCboxLOL.Name = "revertCboxLOL";
             this.revertCboxLOL.Size = new System.Drawing.Size(93, 17);
             this.revertCboxLOL.TabIndex = 45;
@@ -482,7 +485,7 @@ namespace R42Bot
             // FreeEdit
             // 
             this.FreeEdit.AutoSize = true;
-            this.FreeEdit.Location = new System.Drawing.Point(6, 305);
+            this.FreeEdit.Location = new System.Drawing.Point(569, 260);
             this.FreeEdit.Name = "FreeEdit";
             this.FreeEdit.Size = new System.Drawing.Size(68, 17);
             this.FreeEdit.TabIndex = 44;
@@ -492,7 +495,7 @@ namespace R42Bot
             // banCbox
             // 
             this.banCbox.AutoSize = true;
-            this.banCbox.Location = new System.Drawing.Point(126, 237);
+            this.banCbox.Location = new System.Drawing.Point(126, 144);
             this.banCbox.Name = "banCbox";
             this.banCbox.Size = new System.Drawing.Size(84, 17);
             this.banCbox.TabIndex = 43;
@@ -504,7 +507,7 @@ namespace R42Bot
             this.kickCbox.AutoSize = true;
             this.kickCbox.Checked = true;
             this.kickCbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.kickCbox.Location = new System.Drawing.Point(126, 213);
+            this.kickCbox.Location = new System.Drawing.Point(6, 309);
             this.kickCbox.Name = "kickCbox";
             this.kickCbox.Size = new System.Drawing.Size(86, 17);
             this.kickCbox.TabIndex = 42;
@@ -514,7 +517,7 @@ namespace R42Bot
             // clearCbox
             // 
             this.clearCbox.AutoSize = true;
-            this.clearCbox.Location = new System.Drawing.Point(126, 189);
+            this.clearCbox.Location = new System.Drawing.Point(6, 283);
             this.clearCbox.Name = "clearCbox";
             this.clearCbox.Size = new System.Drawing.Size(52, 17);
             this.clearCbox.TabIndex = 41;
@@ -526,7 +529,7 @@ namespace R42Bot
             this.loadlevelCbox.AutoSize = true;
             this.loadlevelCbox.Checked = true;
             this.loadlevelCbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.loadlevelCbox.Location = new System.Drawing.Point(126, 166);
+            this.loadlevelCbox.Location = new System.Drawing.Point(6, 260);
             this.loadlevelCbox.Name = "loadlevelCbox";
             this.loadlevelCbox.Size = new System.Drawing.Size(71, 17);
             this.loadlevelCbox.TabIndex = 40;
@@ -536,7 +539,7 @@ namespace R42Bot
             // saveCbox
             // 
             this.saveCbox.AutoSize = true;
-            this.saveCbox.Location = new System.Drawing.Point(126, 143);
+            this.saveCbox.Location = new System.Drawing.Point(6, 237);
             this.saveCbox.Name = "saveCbox";
             this.saveCbox.Size = new System.Drawing.Size(52, 17);
             this.saveCbox.TabIndex = 39;
@@ -580,7 +583,7 @@ namespace R42Bot
             // freeadmin
             // 
             this.freeadmin.AutoSize = true;
-            this.freeadmin.Location = new System.Drawing.Point(6, 280);
+            this.freeadmin.Location = new System.Drawing.Point(569, 237);
             this.freeadmin.Name = "freeadmin";
             this.freeadmin.Size = new System.Drawing.Size(79, 17);
             this.freeadmin.TabIndex = 36;
@@ -642,7 +645,7 @@ namespace R42Bot
             // 
             this.autokickvalue.AutoSize = true;
             this.autokickvalue.Enabled = false;
-            this.autokickvalue.Location = new System.Drawing.Point(6, 257);
+            this.autokickvalue.Location = new System.Drawing.Point(569, 213);
             this.autokickvalue.Name = "autokickvalue";
             this.autokickvalue.Size = new System.Drawing.Size(91, 17);
             this.autokickvalue.TabIndex = 21;
@@ -662,7 +665,7 @@ namespace R42Bot
             // winsystem1
             // 
             this.winsystem1.AutoSize = true;
-            this.winsystem1.Location = new System.Drawing.Point(6, 235);
+            this.winsystem1.Location = new System.Drawing.Point(569, 189);
             this.winsystem1.Name = "winsystem1";
             this.winsystem1.Size = new System.Drawing.Size(102, 17);
             this.winsystem1.TabIndex = 13;
@@ -710,7 +713,7 @@ namespace R42Bot
             this.LanguageOrSettings.Location = new System.Drawing.Point(4, 22);
             this.LanguageOrSettings.Name = "LanguageOrSettings";
             this.LanguageOrSettings.Padding = new System.Windows.Forms.Padding(3);
-            this.LanguageOrSettings.Size = new System.Drawing.Size(811, 335);
+            this.LanguageOrSettings.Size = new System.Drawing.Size(811, 336);
             this.LanguageOrSettings.TabIndex = 1;
             this.LanguageOrSettings.Text = "Options";
             this.LanguageOrSettings.UseVisualStyleBackColor = true;
@@ -850,6 +853,7 @@ namespace R42Bot
             this.welcomeall.TabIndex = 0;
             this.welcomeall.Text = "Welcome everyone who comes to the world";
             this.welcomeall.UseVisualStyleBackColor = true;
+            this.welcomeall.CheckedChanged += new System.EventHandler(this.welcomeall_CheckedChanged);
             // 
             // NEWS
             // 
@@ -859,7 +863,7 @@ namespace R42Bot
             this.NEWS.Controls.Add(this.label48);
             this.NEWS.Location = new System.Drawing.Point(4, 22);
             this.NEWS.Name = "NEWS";
-            this.NEWS.Size = new System.Drawing.Size(811, 335);
+            this.NEWS.Size = new System.Drawing.Size(811, 336);
             this.NEWS.TabIndex = 2;
             this.NEWS.Text = "News";
             // 
@@ -906,7 +910,7 @@ namespace R42Bot
             this.advancedEditor.Controls.Add(this.label10);
             this.advancedEditor.Location = new System.Drawing.Point(4, 22);
             this.advancedEditor.Name = "advancedEditor";
-            this.advancedEditor.Size = new System.Drawing.Size(811, 335);
+            this.advancedEditor.Size = new System.Drawing.Size(811, 336);
             this.advancedEditor.TabIndex = 4;
             this.advancedEditor.Text = "Advanced Options";
             this.advancedEditor.UseVisualStyleBackColor = true;
@@ -922,6 +926,7 @@ namespace R42Bot
             this.welcomeallupper.TabIndex = 6;
             this.welcomeallupper.Text = "caps";
             this.welcomeallupper.UseVisualStyleBackColor = true;
+            this.welcomeallupper.CheckedChanged += new System.EventHandler(this.welcomeallupper_CheckedChanged);
             // 
             // welcomealllower
             // 
@@ -932,6 +937,7 @@ namespace R42Bot
             this.welcomealllower.TabIndex = 5;
             this.welcomealllower.Text = "non-caps";
             this.welcomealllower.UseVisualStyleBackColor = true;
+            this.welcomealllower.CheckedChanged += new System.EventHandler(this.welcomealllower_CheckedChanged);
             // 
             // label12
             // 
@@ -953,6 +959,7 @@ namespace R42Bot
             this.leftallupper.TabIndex = 3;
             this.leftallupper.Text = "caps";
             this.leftallupper.UseVisualStyleBackColor = true;
+            this.leftallupper.CheckedChanged += new System.EventHandler(this.leftallupper_CheckedChanged);
             // 
             // leftallcase
             // 
@@ -963,6 +970,7 @@ namespace R42Bot
             this.leftallcase.TabIndex = 2;
             this.leftallcase.Text = "non-caps";
             this.leftallcase.UseVisualStyleBackColor = true;
+            this.leftallcase.CheckedChanged += new System.EventHandler(this.leftallcase_CheckedChanged);
             // 
             // label11
             // 
@@ -1000,7 +1008,7 @@ namespace R42Bot
             this.autobolder.Controls.Add(this.autobuild1);
             this.autobolder.Location = new System.Drawing.Point(4, 22);
             this.autobolder.Name = "autobolder";
-            this.autobolder.Size = new System.Drawing.Size(811, 335);
+            this.autobolder.Size = new System.Drawing.Size(811, 336);
             this.autobolder.TabIndex = 5;
             this.autobolder.Text = "AutoBuilder";
             this.autobolder.UseVisualStyleBackColor = true;
@@ -1164,26 +1172,9 @@ namespace R42Bot
             this.autobuild1.UseVisualStyleBackColor = true;
             this.autobuild1.CheckedChanged += new System.EventHandler(this.autobuild1_CheckedChanged);
             // 
-            // stalkmovementpage
-            // 
-            this.stalkmovementpage.Controls.Add(this.button14);
-            this.stalkmovementpage.Controls.Add(this.textBox5);
-            this.stalkmovementpage.Controls.Add(this.alstalking);
-            this.stalkmovementpage.Controls.Add(this.stalkMover);
-            this.stalkmovementpage.Controls.Add(this.pmresult);
-            this.stalkmovementpage.Controls.Add(this.clearstalkering);
-            this.stalkmovementpage.Controls.Add(this.label20);
-            this.stalkmovementpage.Controls.Add(this.label19);
-            this.stalkmovementpage.Location = new System.Drawing.Point(4, 22);
-            this.stalkmovementpage.Name = "stalkmovementpage";
-            this.stalkmovementpage.Size = new System.Drawing.Size(811, 335);
-            this.stalkmovementpage.TabIndex = 8;
-            this.stalkmovementpage.Text = "StalkMovement";
-            this.stalkmovementpage.UseVisualStyleBackColor = true;
-            // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(213, 81);
+            this.button14.Location = new System.Drawing.Point(401, 262);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(150, 23);
             this.button14.TabIndex = 8;
@@ -1193,7 +1184,7 @@ namespace R42Bot
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(11, 0);
+            this.textBox5.Location = new System.Drawing.Point(541, 233);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(10, 20);
             this.textBox5.TabIndex = 7;
@@ -1203,7 +1194,7 @@ namespace R42Bot
             // alstalking
             // 
             this.alstalking.AutoSize = true;
-            this.alstalking.Location = new System.Drawing.Point(112, 85);
+            this.alstalking.Location = new System.Drawing.Point(240, 235);
             this.alstalking.Name = "alstalking";
             this.alstalking.Size = new System.Drawing.Size(95, 17);
             this.alstalking.TabIndex = 6;
@@ -1213,15 +1204,15 @@ namespace R42Bot
             // 
             // stalkMover
             // 
-            this.stalkMover.Location = new System.Drawing.Point(129, 59);
+            this.stalkMover.Location = new System.Drawing.Point(240, 264);
             this.stalkMover.Name = "stalkMover";
-            this.stalkMover.Size = new System.Drawing.Size(141, 20);
+            this.stalkMover.Size = new System.Drawing.Size(155, 20);
             this.stalkMover.TabIndex = 5;
             // 
             // pmresult
             // 
             this.pmresult.AutoSize = true;
-            this.pmresult.Location = new System.Drawing.Point(7, 87);
+            this.pmresult.Location = new System.Drawing.Point(353, 236);
             this.pmresult.Name = "pmresult";
             this.pmresult.Size = new System.Drawing.Size(70, 17);
             this.pmresult.TabIndex = 4;
@@ -1230,31 +1221,13 @@ namespace R42Bot
             // 
             // clearstalkering
             // 
-            this.clearstalkering.Location = new System.Drawing.Point(7, 57);
+            this.clearstalkering.Location = new System.Drawing.Point(436, 233);
             this.clearstalkering.Name = "clearstalkering";
             this.clearstalkering.Size = new System.Drawing.Size(115, 23);
             this.clearstalkering.TabIndex = 3;
-            this.clearstalkering.Text = "ClearStalkingOne";
+            this.clearstalkering.Text = "Stop Stalking";
             this.clearstalkering.UseVisualStyleBackColor = true;
             this.clearstalkering.Click += new System.EventHandler(this.clearstalkering_Click);
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(23, 30);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(81, 13);
-            this.label20.TabIndex = 2;
-            this.label20.Text = "!unstalk [player]";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(35, 3);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(69, 13);
-            this.label19.TabIndex = 1;
-            this.label19.Text = "!stalk [player]";
             // 
             // smileytabs
             // 
@@ -1264,7 +1237,7 @@ namespace R42Bot
             this.smileytabs.Controls.Add(this.button5);
             this.smileytabs.Location = new System.Drawing.Point(4, 22);
             this.smileytabs.Name = "smileytabs";
-            this.smileytabs.Size = new System.Drawing.Size(811, 335);
+            this.smileytabs.Size = new System.Drawing.Size(811, 336);
             this.smileytabs.TabIndex = 9;
             this.smileytabs.Text = "Smiley Changer";
             this.smileytabs.UseVisualStyleBackColor = true;
@@ -1328,7 +1301,7 @@ namespace R42Bot
             this.snakepage.Controls.Add(this.rbs);
             this.snakepage.Location = new System.Drawing.Point(4, 22);
             this.snakepage.Name = "snakepage";
-            this.snakepage.Size = new System.Drawing.Size(811, 335);
+            this.snakepage.Size = new System.Drawing.Size(811, 336);
             this.snakepage.TabIndex = 10;
             this.snakepage.Text = "Snakes";
             this.snakepage.UseVisualStyleBackColor = true;
@@ -1525,7 +1498,7 @@ namespace R42Bot
             this.autoPage.Controls.Add(this.autoresetcheckbox);
             this.autoPage.Location = new System.Drawing.Point(4, 22);
             this.autoPage.Name = "autoPage";
-            this.autoPage.Size = new System.Drawing.Size(811, 335);
+            this.autoPage.Size = new System.Drawing.Size(811, 336);
             this.autoPage.TabIndex = 11;
             this.autoPage.Text = "Auto...";
             this.autoPage.UseVisualStyleBackColor = true;
@@ -1603,7 +1576,7 @@ namespace R42Bot
             this.pollTab.Controls.Add(this.pollname);
             this.pollTab.Location = new System.Drawing.Point(4, 22);
             this.pollTab.Name = "pollTab";
-            this.pollTab.Size = new System.Drawing.Size(811, 335);
+            this.pollTab.Size = new System.Drawing.Size(811, 336);
             this.pollTab.TabIndex = 12;
             this.pollTab.Text = "Polls";
             this.pollTab.UseVisualStyleBackColor = true;
@@ -1776,7 +1749,7 @@ namespace R42Bot
             this.tabPage6.Controls.Add(this.pgeb100lol);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(811, 335);
+            this.tabPage6.Size = new System.Drawing.Size(811, 336);
             this.tabPage6.TabIndex = 14;
             this.tabPage6.Text = "Custom User Ideas";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -1820,7 +1793,7 @@ namespace R42Bot
             this.tabPage1.Controls.Add(this.tabControl1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(811, 335);
+            this.tabPage1.Size = new System.Drawing.Size(811, 336);
             this.tabPage1.TabIndex = 13;
             this.tabPage1.Text = "More";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -2097,7 +2070,7 @@ namespace R42Bot
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Size = new System.Drawing.Size(803, 313);
             this.tabPage4.TabIndex = 2;
-            this.tabPage4.Text = "Bot System";
+            this.tabPage4.Text = "Bot Log";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // log5
@@ -2277,8 +2250,6 @@ namespace R42Bot
             this.autobolder.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lavaP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fdelay)).EndInit();
-            this.stalkmovementpage.ResumeLayout(false);
-            this.stalkmovementpage.PerformLayout();
             this.smileytabs.ResumeLayout(false);
             this.smileytabs.PerformLayout();
             this.snakepage.ResumeLayout(false);
@@ -2347,10 +2318,7 @@ namespace R42Bot
         private System.Windows.Forms.TabPage autobolder;
         private System.Windows.Forms.CheckBox autobuild1;
         private System.Windows.Forms.CheckBox winsystem1;
-        private System.Windows.Forms.TabPage stalkmovementpage;
         private System.Windows.Forms.Button clearstalkering;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label19;
         private System.Windows.Forms.CheckBox pmresult;
         private System.Windows.Forms.TextBox stalkMover;
         private System.Windows.Forms.CheckBox alstalking;
@@ -2435,7 +2403,6 @@ namespace R42Bot
         private System.Windows.Forms.TextBox log4;
         private System.Windows.Forms.TextBox log3;
         private System.Windows.Forms.TextBox log2;
-        private System.Windows.Forms.TextBox log1;
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.Label label43;
         private System.Windows.Forms.Label label42;
@@ -2492,6 +2459,7 @@ namespace R42Bot
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Timer TrollCatcherBlockDelete;
         private System.Windows.Forms.CheckBox unfairBlox;
+        public System.Windows.Forms.TextBox log1;
     }
 }
 
