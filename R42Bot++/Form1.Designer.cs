@@ -807,6 +807,7 @@ namespace R42Bot
             this.leftall.TabIndex = 6;
             this.leftall.Text = "Tell something when anybody leaves the world";
             this.leftall.UseVisualStyleBackColor = true;
+            this.leftall.CheckedChanged += new System.EventHandler(this.leftall_CheckedChanged);
             // 
             // label6
             // 
