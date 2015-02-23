@@ -1,14 +1,12 @@
 # R42Bot++
-A 3rd party application(bot) for a famous game called Everybody Edits.
 
-This bot, R42Bot++, was originally made by realmaster42(RM42,now RM(realmaster42)) in the old Everybody Edits 2 remaked allowed to run by the EE
-admins while there was no update.
-After first update on EE, EE2 was imediatelly shutdown and this bot too.
+R42Bot++, a bot made for Everybody Edits, was originally made by realmaster42 (RM42) for the old Everybody Edits 2.
 
-Today, the new R42Bot++ team keeps working on converting to EE and make excellent updates!
+After first update on Everybody Edits (EE), EE2 was immediately shutdown, and consequently this bot too.
 
-Here is the team:
--realmaster(marcoantonimsantos),
+However, this bot will continue to recieve updates because of the new team!
+
+The team:
+-realmaster (marcoantonimsantos)
+
 -legitturtle09
-
-~realmaster
