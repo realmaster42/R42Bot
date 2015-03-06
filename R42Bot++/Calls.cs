@@ -12,7 +12,7 @@ namespace R42Bot
     public partial class CallsSettings
     {
         public static bool WinSystem = false;
-        public static bool AllowJoiners = false,
+        public static bool AllowJoiners = true,
             KickBots = false;
         public static bool Welcome_Upper = true,
             Welcome = true;
