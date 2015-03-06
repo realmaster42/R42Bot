@@ -12,9 +12,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
 using System.Threading;
-using PlayerIOClient;
 using System.IO;
 using System.Xml.Serialization;
+using PlayerIOClient;
+using IOSnake_Source;
 #endregion
 
 #region BOT
@@ -301,6 +302,7 @@ namespace R42Bot
                         lavaP.Maximum = Variables.worldWidth;
                         lavaP.Value = 1;
                         lavaP.Enabled = true;
+                        IOSnake.Connection.Define(Variables.con, codebox.Text); //Prototype IOSnake Add-In v-0.0.1 Initial Release Script Version 1
 
                         Read(m, 21);//18);
                     }
