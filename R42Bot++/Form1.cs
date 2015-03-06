@@ -218,63 +218,56 @@ namespace R42Bot
         {
             DeserializeBar.Visible = true;
             Variables.con.Send("say", "[R42Bot++] Loading final assets. . .");
-
-            int total = 0;
-            //for (int y = 1; y<worldHeight;y++)
+            //int total = 0;
+            
+            //for (int x = 0; x < Variables.worldHeight; x++)
             //{
-            //    for (int x = 1; x<worldWidth;x++)
+            //    for (int y = 0; y < Variables.worldWidth; y++)
             //    {
-            //        Variables.block[x, y].BlockID = 0;
-            //        total = ((worldHeight - y + worldWidth - x) / 100) * 10;
-            //        DeserializeBar.Value = total;
+            //        if (c < m.Count && !(m[c].ToString().StartsWith("PW") || m[c].ToString().StartsWith("BW")))
+            //        {
+            //            if (m[c].ToString() != "we")
+            //            {
+            //                //Variables.block[x, y].BlockID = m.GetInt(c);
+            //                int bid = m.GetInt(c);
+            //                for (int n = 0; n < m.GetByteArray(c + 2).Length; n += 2)
+            //                {
+            //                    int X = m.GetByteArray(c + 2)[n] << 8 | m.GetByteArray(c + 2)[n + 1];
+            //                    int Y = m.GetByteArray(c + 3)[n] << 8 | m.GetByteArray(c + 3)[n + 1];
+            //                    total = 100 - ((Variables.worldHeight - Y + Variables.worldWidth - X) / 100) * 10;
+            //                    DeserializeBar.Value = total;
+            //                    Variables.block[X, Y].BlockID = bid;
+            //                }
+            //            }
+            //        }
             //    }
             //}
-            Thread.Sleep(575);
+            //int total = 0;
+            //Thread.Sleep(575);
             while (c < m.Count && !(m[c].ToString().StartsWith("PW") || m[c].ToString().StartsWith("BW")))
             {
                 if (m[c].ToString() != "we")
                 {
-                    try
+                    int bid = m.GetInt(c);
+                    for (int n = 0; n < m.GetByteArray(c + 2).Length; n += 2)
                     {
-                        //MessageBox.Show(m.Count.ToString());
-                        int bid = m.GetInt(c);
-                        for (int n = 0; n < m.GetByteArray(c + 2).Length; n += 2)
-                        {
-                            int x = m.GetByteArray(c + 1)[n] << 8 | m.GetByteArray(c + 1)[n + 1];
-                            int y = m.GetByteArray(c + 2)[n] << 8 | m.GetByteArray(c + 2)[n + 1];
-                            total = 100 - ((Variables.worldHeight - y + Variables.worldWidth - x) / 100) * 10;
-                            DeserializeBar.Value = total;
-                            Console.WriteLine("aaa");
-
-                            if (m.GetInt(c + 3) == 0) // FG
-                            {
-                                Variables.block[x, y].BlockID = bid;
-                            }
-                            else { Variables.block[x, y].BlockID = bid; } // BG
-                            Thread.Sleep(10);
-                        }
-                        Console.WriteLine("lloo");
-                        if (bid == 43 || bid == 77 || bid == 83 || bid == 1000 || bid == 165 || bid == 361 || bid >= 375 && bid <= 380 || bid == 385)
-                        { c += 4; }
-                        else if (bid == 242 || bid == 381)
-                        { c += 6; }
-                        else
-                        { c += 3; }
-                        Console.WriteLine("yay");
+                        int x = m.GetByteArray(c + 2)[n] << 8 | m.GetByteArray(c + 2)[n + 1];
+                        int y = m.GetByteArray(c + 3)[n] << 8 | m.GetByteArray(c + 3)[n + 1];
+                        //total = 100 - ((Variables.worldHeight - y + Variables.worldWidth - x) / 100) * 10;
+                        //DeserializeBar.Value = total;
+                        Variables.block[x, y].BlockID = bid;
                     }
-                    catch (Exception exc)
-                    {
-                        Console.WriteLine(exc.Message.ToString());
-                    }
+                    c += 4;
                 }
                 else
                 {
                     break;
                 }
             }
+
             DeserializeBar.Value = 0;
             DeserializeBar.Visible = false;
-            
+
             Variables.con.Send("say", "[R42Bot++] R42Bot++ Version " + Version.version + " has been connected successfully! :)");
             Variables.con.Send("access", codebox.Text);
         }
@@ -304,7 +297,7 @@ namespace R42Bot
                         lavaP.Enabled = true;
                         IOSnake.Connection.Define(Variables.con, codebox.Text); //Prototype IOSnake Add-In v-0.0.1 Initial Release Script Version 1
 
-                        Read(m, 21);//18);
+                        Read(m, 20);//18);
                     }
                     catch (PlayerIOError Error)
                     {
@@ -3225,11 +3218,11 @@ namespace R42Bot
         {
             if (kJoiners.Checked)
             {
-                CallsSettings.AllowJoiners = false;
+                CallsSettings.AllowJoiners = true;
             }
             else
             {
-                CallsSettings.AllowJoiners = true;
+                CallsSettings.AllowJoiners = false;
             }
         }
 
