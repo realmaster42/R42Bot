@@ -1,4 +1,4 @@
-//http://www.binpress.com/license/view/l/79c35f4cb0919616b8c86a8d466c0362
+﻿//http://www.binpress.com/license/view/l/79c35f4cb0919616b8c86a8d466c0362
 #region SOURCE
 #region using...
 using System;
@@ -15,6 +15,7 @@ using System.Threading;
 using System.IO;
 using System.Xml.Serialization;
 using PlayerIOClient;
+using Fluid;
 using IOSnake_Source;
 #endregion
 
@@ -26,6 +27,7 @@ namespace R42Bot
     public partial class Form1 : Form
     {
         public static ColorDialog c = new ColorDialog();
+        public static FluidClient SDKClient;
 
         public void DefineLogZones()
         {
@@ -190,6 +192,9 @@ namespace R42Bot
                     Variables.client = PlayerIO.QuickConnect.SimpleConnect("everybody-edits-su9rn58o40itdbnw69plyw", email, pass);
                     Variables.con = Variables.client.Multiplayer.JoinRoom(idofworld, null);
                     Variables.con.OnMessage += new MessageReceivedEventHandler(onMessage);
+                    SDKClient = new FluidClient(new Fluid.Auth.SimpleAuth(email, pass));
+                    SDKClient.Config.AuthRoom = idofworld;
+                    SDKClient.Config.GameID = "everybody-edits-su9rn58o40itdbnw69plyw";
                 }
                 catch (PlayerIOError error)
                 {
@@ -203,6 +208,9 @@ namespace R42Bot
                     Variables.client = PlayerIO.QuickConnect.FacebookOAuthConnect("everybody-edits-su9rn58o40itdbnw69plyw", email, "");
                     Variables.con = Variables.client.Multiplayer.JoinRoom(idofworld, null);
                     Variables.con.OnMessage += new MessageReceivedEventHandler(onMessage);
+                    SDKClient = new FluidClient(new Fluid.Auth.FacebookAuth(email));
+                    SDKClient.Config.AuthRoom = idofworld;
+                    SDKClient.Config.GameID = "everybody-edits-su9rn58o40itdbnw69plyw";
                 }
                 catch (PlayerIOError error)
                 {
@@ -219,7 +227,7 @@ namespace R42Bot
             DeserializeBar.Visible = true;
             Variables.con.Send("say", "[R42Bot++] Loading final assets. . .");
             //int total = 0;
-            
+
             //for (int x = 0; x < Variables.worldHeight; x++)
             //{
             //    for (int y = 0; y < Variables.worldWidth; y++)
@@ -244,10 +252,12 @@ namespace R42Bot
             //}
             //int total = 0;
             //Thread.Sleep(575);
+
             while (c < m.Count && !(m[c].ToString().StartsWith("PW") || m[c].ToString().StartsWith("BW")))
             {
                 if (m[c].ToString() != "we")
                 {
+                    uint DPlus = 4;
                     int bid = m.GetInt(c);
                     for (int n = 0; n < m.GetByteArray(c + 2).Length; n += 2)
                     {
@@ -255,9 +265,12 @@ namespace R42Bot
                         int y = m.GetByteArray(c + 3)[n] << 8 | m.GetByteArray(c + 3)[n + 1];
                         //total = 100 - ((Variables.worldHeight - y + Variables.worldWidth - x) / 100) * 10;
                         //DeserializeBar.Value = total;
+                        if (BlockUtils.CoinDoor(Variables.block[x, y])) { Variables.block[x, y].CoinValue = m.GetInt(c + 4); }
                         Variables.block[x, y].BlockID = bid;
                     }
-                    c += 4;
+                    if (bid == 43 || bid == 77 || bid == 83 || bid == 214 || bid == 213 || bid == 1000 || bid == 165 || bid == 361 || bid >= 374 && bid <= 380 || bid == 385) { DPlus = 5; }
+                    else if (bid == 242 || bid == 381) { DPlus = 7; }
+                    c += DPlus;
                 }
                 else
                 {
@@ -292,12 +305,16 @@ namespace R42Bot
                         Calls.Init.Init2();
                         Thread.Sleep(575);
                         Calls.Init.Setup(m);
+                        CallsSettings.Welcome_Text = welcomemsg.Text;
+                        CallsSettings.Welcome_Text_2 = welcomemsg2.Text;
+                        CallsSettings.Goodbye_Text = leftallmsg.Text;
+                        CallsSettings.Goodbye_Text_2 = leftall2.Text;
                         lavaP.Maximum = Variables.worldWidth;
                         lavaP.Value = 1;
                         lavaP.Enabled = true;
                         IOSnake.Connection.Define(Variables.con, codebox.Text); //Prototype IOSnake Add-In v-0.0.1 Initial Release Script Version 1
 
-                        Read(m, 20);//18);
+                        //Read(m, 20);//18);
                     }
                     catch (PlayerIOError Error)
                     {
@@ -372,7 +389,6 @@ namespace R42Bot
                 case "b":
                     if (Variables.botFullyConnected)
                     {
-
                         Variables.block[m.GetInt(1), m.GetInt(2)].BlockID = m.GetInt(3);
                         int layer = m.GetInt(0);
                         int flayer = 0;
@@ -1172,7 +1188,7 @@ namespace R42Bot
                             {
                                 if (stalkMover.Text.Contains(Variables.names[m.GetInt(0)].ToString()))
                                 {
-                                    Variables.con.Send("m", m.GetDouble(1), m.GetDouble(2), m.GetDouble(3), m.GetDouble(4), m.GetDouble(5), m.GetDouble(6), m.GetDouble(7), m.GetDouble(8), m.GetInt(9), m.GetBoolean(10), m.GetBoolean(11), m.GetBoolean(12));
+                                    Variables.con.Send("m", m.GetInt(0), m.GetDouble(1), m.GetDouble(2), m.GetDouble(3), m.GetDouble(4), m.GetDouble(5), m.GetDouble(6), m.GetDouble(7), m.GetDouble(8), m.GetInt(9), m.GetBoolean(10), m.GetBoolean(11));
                                 }
                             }
                         }
@@ -3305,6 +3321,18 @@ namespace R42Bot
             else
             {
                 CallsSettings.Goodbye = false;
+            }
+        }
+
+        private void autoresetcheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (autoresetcheckbox.Checked)
+            {
+                autoreset.Enabled = true;
+            }
+            else
+            {
+                autoreset.Enabled = false;
             }
         }
     }

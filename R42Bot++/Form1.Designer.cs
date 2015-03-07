@@ -1,4 +1,4 @@
-namespace R42Bot
+﻿namespace R42Bot
 {
     partial class Form1
     {
@@ -43,8 +43,14 @@ namespace R42Bot
             this.scommand = new System.Windows.Forms.CheckBox();
             this.firstTabControler = new System.Windows.Forms.TabControl();
             this.Main = new System.Windows.Forms.TabPage();
+            this.button14 = new System.Windows.Forms.Button();
+            this.textBox5 = new System.Windows.Forms.TextBox();
             this.unfairBlox = new System.Windows.Forms.CheckBox();
+            this.stalkMover = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.pmresult = new System.Windows.Forms.CheckBox();
+            this.clearstalkering = new System.Windows.Forms.Button();
+            this.alstalking = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
             this.DeserializeBar = new System.Windows.Forms.ProgressBar();
             this.kJoiners = new System.Windows.Forms.CheckBox();
@@ -113,12 +119,6 @@ namespace R42Bot
             this.tntallowd = new System.Windows.Forms.CheckBox();
             this.lavadrawer = new System.Windows.Forms.CheckBox();
             this.autobuild1 = new System.Windows.Forms.CheckBox();
-            this.button14 = new System.Windows.Forms.Button();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.alstalking = new System.Windows.Forms.CheckBox();
-            this.stalkMover = new System.Windows.Forms.TextBox();
-            this.pmresult = new System.Windows.Forms.CheckBox();
-            this.clearstalkering = new System.Windows.Forms.Button();
             this.smileytabs = new System.Windows.Forms.TabPage();
             this.srandomizer = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -410,6 +410,25 @@ namespace R42Bot
             this.Main.Text = "Index";
             this.Main.UseVisualStyleBackColor = true;
             // 
+            // button14
+            // 
+            this.button14.Location = new System.Drawing.Point(401, 262);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(150, 23);
+            this.button14.TabIndex = 8;
+            this.button14.Text = "Save \'allow stalking\' data";
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(541, 233);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(10, 20);
+            this.textBox5.TabIndex = 7;
+            this.textBox5.Text = "r0";
+            this.textBox5.Visible = false;
+            // 
             // unfairBlox
             // 
             this.unfairBlox.AutoSize = true;
@@ -420,6 +439,13 @@ namespace R42Bot
             this.unfairBlox.Text = "Troll Catching";
             this.unfairBlox.UseVisualStyleBackColor = true;
             // 
+            // stalkMover
+            // 
+            this.stalkMover.Location = new System.Drawing.Point(240, 264);
+            this.stalkMover.Name = "stalkMover";
+            this.stalkMover.Size = new System.Drawing.Size(155, 20);
+            this.stalkMover.TabIndex = 5;
+            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(385, 166);
@@ -429,6 +455,37 @@ namespace R42Bot
             this.button2.Text = "Load Admins";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // pmresult
+            // 
+            this.pmresult.AutoSize = true;
+            this.pmresult.Location = new System.Drawing.Point(353, 236);
+            this.pmresult.Name = "pmresult";
+            this.pmresult.Size = new System.Drawing.Size(70, 17);
+            this.pmresult.TabIndex = 4;
+            this.pmresult.Text = "PM result";
+            this.pmresult.UseVisualStyleBackColor = true;
+            // 
+            // clearstalkering
+            // 
+            this.clearstalkering.Location = new System.Drawing.Point(436, 233);
+            this.clearstalkering.Name = "clearstalkering";
+            this.clearstalkering.Size = new System.Drawing.Size(115, 23);
+            this.clearstalkering.TabIndex = 3;
+            this.clearstalkering.Text = "Stop Stalking";
+            this.clearstalkering.UseVisualStyleBackColor = true;
+            this.clearstalkering.Click += new System.EventHandler(this.clearstalkering_Click);
+            // 
+            // alstalking
+            // 
+            this.alstalking.AutoSize = true;
+            this.alstalking.Location = new System.Drawing.Point(240, 235);
+            this.alstalking.Name = "alstalking";
+            this.alstalking.Size = new System.Drawing.Size(95, 17);
+            this.alstalking.TabIndex = 6;
+            this.alstalking.Text = "Allow Stalking.";
+            this.alstalking.UseVisualStyleBackColor = true;
+            this.alstalking.CheckedChanged += new System.EventHandler(this.alstalking_CheckedChanged);
             // 
             // button1
             // 
@@ -1175,63 +1232,6 @@ namespace R42Bot
             this.autobuild1.UseVisualStyleBackColor = true;
             this.autobuild1.CheckedChanged += new System.EventHandler(this.autobuild1_CheckedChanged);
             // 
-            // button14
-            // 
-            this.button14.Location = new System.Drawing.Point(401, 262);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(150, 23);
-            this.button14.TabIndex = 8;
-            this.button14.Text = "Save \'allow stalking\' data";
-            this.button14.UseVisualStyleBackColor = true;
-            this.button14.Click += new System.EventHandler(this.button14_Click);
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(541, 233);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(10, 20);
-            this.textBox5.TabIndex = 7;
-            this.textBox5.Text = "r0";
-            this.textBox5.Visible = false;
-            // 
-            // alstalking
-            // 
-            this.alstalking.AutoSize = true;
-            this.alstalking.Location = new System.Drawing.Point(240, 235);
-            this.alstalking.Name = "alstalking";
-            this.alstalking.Size = new System.Drawing.Size(95, 17);
-            this.alstalking.TabIndex = 6;
-            this.alstalking.Text = "Allow Stalking.";
-            this.alstalking.UseVisualStyleBackColor = true;
-            this.alstalking.CheckedChanged += new System.EventHandler(this.alstalking_CheckedChanged);
-            // 
-            // stalkMover
-            // 
-            this.stalkMover.Location = new System.Drawing.Point(240, 264);
-            this.stalkMover.Name = "stalkMover";
-            this.stalkMover.Size = new System.Drawing.Size(155, 20);
-            this.stalkMover.TabIndex = 5;
-            // 
-            // pmresult
-            // 
-            this.pmresult.AutoSize = true;
-            this.pmresult.Location = new System.Drawing.Point(353, 236);
-            this.pmresult.Name = "pmresult";
-            this.pmresult.Size = new System.Drawing.Size(70, 17);
-            this.pmresult.TabIndex = 4;
-            this.pmresult.Text = "PM result";
-            this.pmresult.UseVisualStyleBackColor = true;
-            // 
-            // clearstalkering
-            // 
-            this.clearstalkering.Location = new System.Drawing.Point(436, 233);
-            this.clearstalkering.Name = "clearstalkering";
-            this.clearstalkering.Size = new System.Drawing.Size(115, 23);
-            this.clearstalkering.TabIndex = 3;
-            this.clearstalkering.Text = "Stop Stalking";
-            this.clearstalkering.UseVisualStyleBackColor = true;
-            this.clearstalkering.Click += new System.EventHandler(this.clearstalkering_Click);
-            // 
             // smileytabs
             // 
             this.smileytabs.Controls.Add(this.srandomizer);
@@ -1556,6 +1556,7 @@ namespace R42Bot
             this.autoresetcheckbox.TabIndex = 0;
             this.autoresetcheckbox.Text = "Auto-Reset";
             this.autoresetcheckbox.UseVisualStyleBackColor = true;
+            this.autoresetcheckbox.CheckedChanged += new System.EventHandler(this.autoresetcheckbox_CheckedChanged);
             // 
             // pollTab
             // 
@@ -2216,7 +2217,6 @@ namespace R42Bot
             // 
             // autoreset
             // 
-            this.autoreset.Enabled = true;
             this.autoreset.Tick += new System.EventHandler(this.autoreset_Tick);
             // 
             // BlockPlacer
