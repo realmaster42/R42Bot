@@ -1,4 +1,4 @@
-﻿//http://www.binpress.com/license/view/l/79c35f4cb0919616b8c86a8d466c0362
+//http://www.binpress.com/license/view/l/79c35f4cb0919616b8c86a8d466c0362
 #region SOURCE
 #region using...
 using System;
@@ -312,7 +312,7 @@ namespace R42Bot
                         lavaP.Maximum = Variables.worldWidth;
                         lavaP.Value = 1;
                         lavaP.Enabled = true;
-                        IOSnake.Connection.Define(Variables.con, codebox.Text); //Prototype IOSnake Add-In v-0.0.1 Initial Release Script Version 1
+                        IOSnakeClient.Connection.Define(Variables.con, codebox.Text); //Prototype IOSnake Add-In v-0.0.1 Initial Release Script Version 2
 
                         //Read(m, 20);//18);
                     }
