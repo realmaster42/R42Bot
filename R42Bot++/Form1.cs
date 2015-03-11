@@ -312,7 +312,7 @@ namespace R42Bot
                         lavaP.Maximum = Variables.worldWidth;
                         lavaP.Value = 1;
                         lavaP.Enabled = true;
-                        IOSnakeClient.Connection.Define(Variables.con, codebox.Text); //Prototype IOSnake Add-In v-0.0.1 Initial Release Script Version 2
+                        IOSnakeClient.Connection.DefineConnection.Define(Variables.con, codebox.Text); //Prototype IOSnake Add-In v-0.0.1 Initial Release Script Version 2
 
                         //Read(m, 20);//18);
                     }
