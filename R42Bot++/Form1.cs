@@ -16,7 +16,7 @@ using System.IO;
 using System.Xml.Serialization;
 using PlayerIOClient;
 using Fluid;
-using IOSnake_Source;
+using IOSnake;
 #endregion
 
 #region BOT
