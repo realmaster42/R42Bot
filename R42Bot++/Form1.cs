@@ -398,10 +398,14 @@ namespace R42Bot
                         {
                             if (unfairBlox.Checked)
                             {
-                                if (Variables.player[m.GetInt(4)].BlocksPlacedInaSecond >= 10)
+                                if ((Variables.player[m.GetInt(4)].BlocksPlacedInaSecond >= 10 && Variables.names[m.GetInt(4)] != Variables.botName) && !Admins.Items.Contains(Variables.names[m.GetInt(4)]))
                                 {
-                                    Variables.con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(4)] + " detected.");
-                                    Variables.con.Send("say", "/removeedit " + Variables.names[m.GetInt(4)]);
+                                    Variables.con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(4)].ToUpper() + " detected.");
+                                    if (!Variables.player[m.GetInt(4)].AlreadyReedit)
+                                    {
+                                        Variables.con.Send("say", "/removeedit " + Variables.names[m.GetInt(4)]);
+                                        Variables.player[m.GetInt(4)].AlreadyReedit = true;
+                                    }
                                 }
                                 else
                                 {
@@ -1325,10 +1329,10 @@ namespace R42Bot
                                                 string[] fullSource = Variables.str.Split(' ');
                                                 string kicking = fullSource[1];
 
-                                                if (Variables.names.ContainsValue(kicking))
+                                                if (Variables.names.ContainsValue(kicking.ToLower()) || Variables.names.ContainsValue(kicking.ToUpper()))
                                                 {
-                                                    string reasson = cmdPar.Replace(kicking, "");
-                                                    reasson = reasson.Substring(reasson.Length - (Variables.names[m.GetInt(0)].Length + 1), reasson.Length);
+                                                    string sample = cmdPar.Replace("!kick ", "");
+                                                    string reasson = sample.Substring((kicking.Length + 1) + 1);
                                                     if (reasson == "")
                                                     {
                                                         reasson = "The bot admin " + Variables.names[m.GetInt(0)].ToString() + " has kicked you.";
@@ -3116,6 +3120,7 @@ namespace R42Bot
                     for (int i = 1; i < Variables.names.Count; i++)
                     {
                         Variables.player[i].BlocksPlacedInaSecond = 0;
+                        Variables.player[i].AlreadyReedit = false;
                         Thread.Sleep(150);
                     }
                 }
