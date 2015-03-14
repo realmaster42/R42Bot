@@ -13,6 +13,7 @@ namespace R42Bot
         public string username;
         public bool isGuest;
         public bool isGod, isAdmin, isFriend;
+        public bool AlreadyReedit;
 
         public int wins,
             warnings,
