@@ -716,6 +716,11 @@ namespace R42Bot
                             if (blockID == 12)
                             {
                                 Thread.Sleep(thedelay);
+                                Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 1018 });
+                            }
+                            if (blockID == 1018)
+                            {
+                                Thread.Sleep(thedelay);
                                 Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 13 });
                             }
                             if (blockID == 13)
@@ -1188,7 +1193,7 @@ namespace R42Bot
                             {
                                 if (stalkMover.Text.Contains(Variables.names[m.GetInt(0)].ToString()))
                                 {
-                                    Variables.con.Send("m", m.GetInt(0), m.GetDouble(1), m.GetDouble(2), m.GetDouble(3), m.GetDouble(4), m.GetDouble(5), m.GetDouble(6), m.GetDouble(7), m.GetDouble(8), m.GetInt(9), m.GetBoolean(10), m.GetBoolean(11));
+                                    Variables.con.Send("m", m.GetDouble(1), m.GetDouble(2), m.GetDouble(3), m.GetDouble(4), m.GetDouble(5), m.GetDouble(6), m.GetDouble(7), m.GetDouble(8), m.GetInt(9), m.GetBoolean(10), m.GetBoolean(11));
                                 }
                             }
                         }
@@ -3104,9 +3109,16 @@ namespace R42Bot
 
         private void TrollCatcherBlockDelete_Tick(object sender, EventArgs e)
         {
-            for (int i = 1; i < Variables.names.Count; i++)
+            if (Variables.botFullyConnected)
             {
-                Variables.player[i].BlocksPlacedInaSecond = 0;
+                if (unfairBlox.Checked)
+                {
+                    for (int i = 1; i < Variables.names.Count; i++)
+                    {
+                        Variables.player[i].BlocksPlacedInaSecond = 0;
+                        Thread.Sleep(150);
+                    }
+                }
             }
         }
 
@@ -3130,12 +3142,15 @@ namespace R42Bot
         {
             if (Variables.botFullyConnected)
             {
-                int Delay = Convert.ToInt32(fdelay.Value);
-                for (int i = Variables.BlockPlacingTilVal1; i < Variables.BlockPlacingTilVal2; i++)
+                if (allowSnakeSpecial.Checked)
                 {
-                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.BlockPlacingTilX, Variables.BlockPlacingTilY, i });
-                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.BlockPlacingTilX, Variables.BlockPlacingTilY, i });
-                    Thread.Sleep(Delay);
+                    int Delay = Convert.ToInt32(fdelay.Value);
+                    for (int i = Variables.BlockPlacingTilVal1; i < Variables.BlockPlacingTilVal2; i++)
+                    {
+                        Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.BlockPlacingTilX, Variables.BlockPlacingTilY, i });
+                        Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.BlockPlacingTilX, Variables.BlockPlacingTilY, i });
+                        Thread.Sleep(Delay);
+                    }
                 }
             }
         }
