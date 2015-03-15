@@ -1,4 +1,4 @@
-//http://www.binpress.com/license/view/l/79c35f4cb0919616b8c86a8d466c0362
+﻿//http://www.binpress.com/license/view/l/79c35f4cb0919616b8c86a8d466c0362
 #region SOURCE
 #region using...
 using System;
@@ -293,6 +293,12 @@ namespace R42Bot
 
                 case "k":
                     Calls.Crown.Setup(m);
+                    return;
+                case "ks":
+                    if (givegodwithtrophycbox.Checked)
+                    {
+                        Variables.con.Send("say", "/godon " + Variables.names[m.GetInt(0)]);
+                    }
                     return;
                 case "write":
                     return;
@@ -2319,6 +2325,8 @@ namespace R42Bot
                         Admins.Items.Add(Variables.botName.ToString());
                     }
                     connector.Text = "Disconnect";
+                    button8.Enabled = true;
+                    button9.Enabled = true;
                 }
             }
             else if (connector.Text == "Disconnect")
@@ -2330,6 +2338,8 @@ namespace R42Bot
                 Variables.con.Disconnect();
 
                 connector.Text = "Connect";
+                button8.Enabled = false;
+                button9.Enabled = false;
                 Admins.Items.Remove(Variables.botName);
                 MessageBox.Show("Disconnected.");
             }
