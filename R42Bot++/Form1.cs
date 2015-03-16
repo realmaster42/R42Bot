@@ -318,6 +318,8 @@ namespace R42Bot
                         lavaP.Maximum = Variables.worldWidth;
                         lavaP.Value = 1;
                         lavaP.Enabled = true;
+                        boxHeightNUD.Maximum = Variables.worldHeight - 1;
+                        boxWidthNUD.Maximum = Variables.worldWidth - 1;
                         IOSnakeClient.Connection.DefineConnection.Define(Variables.con, codebox.Text); //Prototype IOSnake Add-In v-0.0.1 Initial Release Script Version 2
 
                         //Read(m, 20);//18);
@@ -404,7 +406,7 @@ namespace R42Bot
                         {
                             if (unfairBlox.Checked)
                             {
-                                if ((Variables.player[m.GetInt(4)].BlocksPlacedInaSecond >= 10 && Variables.names[m.GetInt(4)] != Variables.botName) && !Admins.Items.Contains(Variables.names[m.GetInt(4)]))
+                                if ((Variables.player[m.GetInt(4)].BlocksPlacedInaSecond >= 15 && Variables.names[m.GetInt(4)] != Variables.botName) && !Admins.Items.Contains(Variables.names[m.GetInt(4)]))
                                 {
                                     Variables.con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(4)].ToUpper() + " detected.");
                                     if (!Variables.player[m.GetInt(4)].AlreadyReedit)
@@ -501,6 +503,37 @@ namespace R42Bot
                             }
                         }
                         #endregion
+
+                        if (boxPlaceCBOX.Checked)
+                        {
+                            if (blockID == 182 && !Variables.botIsPlacing)
+                            {
+                                int Wid = Convert.ToInt32(boxWidthNUD.Value);
+                                int Hei = Convert.ToInt32(boxHeightNUD.Value);
+                                Variables.botIsPlacing = true;
+                                for (int i = 0; i < Wid; i++)
+                                {
+                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax + i, Variables.ay, 9 });
+                                    Thread.Sleep(15);
+                                }
+                                for (int o = 0; o < Wid; o++)
+                                {
+                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax + o, Variables.ay + Hei, 9 });
+                                    Thread.Sleep(15);
+                                }
+                                for (int p = 0; p < Hei; p++)
+                                {
+                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay + p, 9 });
+                                    Thread.Sleep(15);
+                                }
+                                for (int a = 0; a < Hei + 1; a++)
+                                {
+                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax + Wid, Variables.ay + a, 9 });
+                                    Thread.Sleep(15);
+                                }
+                                Variables.botIsPlacing = false;
+                            }
+                        }
 
                         #region SPECIAL SNAKE
                         if (allowSnakeSpecial.Checked)
@@ -1181,7 +1214,6 @@ namespace R42Bot
                             }
                         }
                         #endregion
-
                     }
 
                     return;
@@ -1337,19 +1369,29 @@ namespace R42Bot
 
                                                 if (Variables.names.ContainsValue(kicking.ToLower()) || Variables.names.ContainsValue(kicking.ToUpper()))
                                                 {
-                                                    string sample = cmdPar.Replace("!kick ", "");
-                                                    string reasson = sample.Substring((kicking.Length + 1) + 1);
-                                                    if (reasson == "")
+                                                    if (!Admins.Items.Contains(kicking.ToLower()) && !Admins.Items.Contains(kicking.ToUpper()))
                                                     {
-                                                        reasson = "The bot admin " + Variables.names[m.GetInt(0)].ToString() + " has kicked you.";
-                                                    }
+                                                        string sample = cmdPar.Replace("!kick ", "");
+                                                        string reasson = "";
 
-                                                    Variables.con.Send("say", "/kick " + kicking + " " + reasson);
-                                                    #region BOT LOG
-                                                    DefineLogZones();
-                                                    Thread.Sleep(250);
-                                                    log1.Text = "1. " + Variables.names[m.GetInt(0)].ToString().ToUpper() + " kicked " + kicking + ".";
-                                                    #endregion
+                                                        reasson = sample.Substring(((kicking.Length - 1) + 1) + 1);
+
+                                                        if (reasson == "" || reasson == " ")
+                                                        {
+                                                            reasson = "The bot admin " + Variables.names[m.GetInt(0)].ToString() + " has kicked you.";
+                                                        }
+
+                                                        Variables.con.Send("say", "/kick " + kicking + " " + reasson);
+                                                        #region BOT LOG
+                                                        DefineLogZones();
+                                                        Thread.Sleep(250);
+                                                        log1.Text = "1. " + Variables.names[m.GetInt(0)].ToString().ToUpper() + " kicked " + kicking + ".";
+                                                        #endregion
+                                                    }
+                                                    else
+                                                    {
+                                                        Variables.con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": You can't kick admins.");
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -2049,7 +2091,7 @@ namespace R42Bot
                                         foreach (Player s in Variables.player)
                                         {
                                             Variables.con.Send("say", "/giveedit " + s.username);
-                                            Thread.Sleep(200);
+                                            Thread.Sleep(400);
                                         }
                                     }
                                     else
@@ -2064,12 +2106,29 @@ namespace R42Bot
                                         foreach (Player s in Variables.player)
                                         {
                                             Variables.con.Send("say", "/removeedit " + s.username);
-                                            Thread.Sleep(575);
+                                            Thread.Sleep(400);
                                         }
                                     }
                                     else
                                     {
                                         Variables.con.Send("say", "[R42Bot++] " + Voids.Shortest(Variables.names[m.GetInt(0)]).ToUpper() + ": You can't remove everyone's edit cause you are not an admin in the bot!");
+                                    }
+                                }
+                                else if (Variables.str.StartsWith("!loadlevel"))
+                                {
+                                    if (Admins.Items.Contains(Variables.names[m.GetInt(0)]))
+                                    {
+                                        Variables.con.Send("say", "/loadlevel");
+                                        Variables.con.Send("say", "[R42Bot++] " + Voids.Shortest(Variables.names[m.GetInt(0)]).ToUpper() + ": level loaded.");
+                                        #region BOT LOG
+                                        DefineLogZones();
+                                        Thread.Sleep(250);
+                                        log1.Text = "1. " + Variables.names[m.GetInt(0)].ToString().ToUpper() + " loaded the level.";
+                                        #endregion
+                                    }
+                                    else
+                                    {
+                                        Variables.con.Send("say", "[R42Bot++] " + Variables.names[m.GetInt(0)].ToString().ToUpper() + ": you are not an admin in the bot! D:<");
                                     }
                                 }
                                 else if (Variables.str.StartsWith("!download"))
@@ -2335,6 +2394,7 @@ namespace R42Bot
                 Variables.botFullyConnected = false;
                 Variables.BlockPlacingTilVal1 = 1;
                 Variables.BlockPlacingTilVal2 = 2;
+                Variables.botIsPlacing = false;
                 Variables.con.Disconnect();
 
                 connector.Text = "Connect";

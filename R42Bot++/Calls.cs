@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -99,9 +99,9 @@ namespace R42Bot
                         }
                         if (CallsSettings.FreeEdit)
                         {
-                            Thread.Sleep(200);
+                            Thread.Sleep(400);
                             Variables.con.Send("say", "/giveedit " + Variables.names[m.GetInt(0)].ToString());
-                            Thread.Sleep(200);
+                            Thread.Sleep(400);
                         }
                         Variables.player[m.GetInt(0)].username = Variables.names[m.GetInt(0)].ToString();
 

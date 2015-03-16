@@ -43,6 +43,7 @@
             this.scommand = new System.Windows.Forms.CheckBox();
             this.firstTabControler = new System.Windows.Forms.TabControl();
             this.Main = new System.Windows.Forms.TabPage();
+            this.givegodwithtrophycbox = new System.Windows.Forms.CheckBox();
             this.button14 = new System.Windows.Forms.Button();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.unfairBlox = new System.Windows.Forms.CheckBox();
@@ -212,6 +213,12 @@
             this.autoreset = new System.Windows.Forms.Timer(this.components);
             this.BlockPlacer = new System.Windows.Forms.Timer(this.components);
             this.TrollCatcherBlockDelete = new System.Windows.Forms.Timer(this.components);
+            this.boxPlaceCBOX = new System.Windows.Forms.CheckBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.boxHeightNUD = new System.Windows.Forms.NumericUpDown();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.boxWidthNUD = new System.Windows.Forms.NumericUpDown();
             this.firstTabControler.SuspendLayout();
             this.Main.SuspendLayout();
             this.LanguageOrSettings.SuspendLayout();
@@ -234,6 +241,8 @@
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.boxHeightNUD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.boxWidthNUD)).BeginInit();
             this.SuspendLayout();
             // 
             // email
@@ -357,6 +366,7 @@
             // 
             // Main
             // 
+            this.Main.Controls.Add(this.givegodwithtrophycbox);
             this.Main.Controls.Add(this.button14);
             this.Main.Controls.Add(this.textBox5);
             this.Main.Controls.Add(this.unfairBlox);
@@ -409,6 +419,16 @@
             this.Main.TabIndex = 0;
             this.Main.Text = "Index";
             this.Main.UseVisualStyleBackColor = true;
+            // 
+            // givegodwithtrophycbox
+            // 
+            this.givegodwithtrophycbox.AutoSize = true;
+            this.givegodwithtrophycbox.Location = new System.Drawing.Point(126, 190);
+            this.givegodwithtrophycbox.Name = "givegodwithtrophycbox";
+            this.givegodwithtrophycbox.Size = new System.Drawing.Size(97, 17);
+            this.givegodwithtrophycbox.TabIndex = 52;
+            this.givegodwithtrophycbox.Text = "GOD on trophy";
+            this.givegodwithtrophycbox.UseVisualStyleBackColor = true;
             // 
             // button14
             // 
@@ -499,9 +519,9 @@
             // 
             // DeserializeBar
             // 
-            this.DeserializeBar.Location = new System.Drawing.Point(205, 189);
+            this.DeserializeBar.Location = new System.Drawing.Point(227, 189);
             this.DeserializeBar.Name = "DeserializeBar";
-            this.DeserializeBar.Size = new System.Drawing.Size(267, 23);
+            this.DeserializeBar.Size = new System.Drawing.Size(245, 23);
             this.DeserializeBar.TabIndex = 48;
             this.DeserializeBar.Visible = false;
             // 
@@ -656,6 +676,7 @@
             // 
             // button9
             // 
+            this.button9.Enabled = false;
             this.button9.Location = new System.Drawing.Point(476, 157);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(75, 23);
@@ -690,6 +711,7 @@
             // 
             // button8
             // 
+            this.button8.Enabled = false;
             this.button8.Location = new System.Drawing.Point(476, 306);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(86, 23);
@@ -1052,6 +1074,11 @@
             // 
             // autobolder
             // 
+            this.autobolder.Controls.Add(this.boxWidthNUD);
+            this.autobolder.Controls.Add(this.boxHeightNUD);
+            this.autobolder.Controls.Add(this.label15);
+            this.autobolder.Controls.Add(this.label14);
+            this.autobolder.Controls.Add(this.boxPlaceCBOX);
             this.autobolder.Controls.Add(this.BGdelbox);
             this.autobolder.Controls.Add(this.wetsandCbox);
             this.autobolder.Controls.Add(this.panel2);
@@ -1066,6 +1093,7 @@
             this.autobolder.Controls.Add(this.tntallowd);
             this.autobolder.Controls.Add(this.lavadrawer);
             this.autobolder.Controls.Add(this.autobuild1);
+            this.autobolder.Controls.Add(this.menuStrip1);
             this.autobolder.Location = new System.Drawing.Point(4, 22);
             this.autobolder.Name = "autobolder";
             this.autobolder.Size = new System.Drawing.Size(811, 336);
@@ -2231,12 +2259,83 @@
             this.TrollCatcherBlockDelete.Interval = 1000;
             this.TrollCatcherBlockDelete.Tick += new System.EventHandler(this.TrollCatcherBlockDelete_Tick);
             // 
+            // boxPlaceCBOX
+            // 
+            this.boxPlaceCBOX.AutoSize = true;
+            this.boxPlaceCBOX.Location = new System.Drawing.Point(4, 207);
+            this.boxPlaceCBOX.Name = "boxPlaceCBOX";
+            this.boxPlaceCBOX.Size = new System.Drawing.Size(44, 17);
+            this.boxPlaceCBOX.TabIndex = 17;
+            this.boxPlaceCBOX.Text = "Box";
+            this.boxPlaceCBOX.UseVisualStyleBackColor = true;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(54, 208);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(41, 13);
+            this.label14.TabIndex = 18;
+            this.label14.Text = "Height:";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(139, 209);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(38, 13);
+            this.label15.TabIndex = 19;
+            this.label15.Text = "Width:";
+            // 
+            // boxHeightNUD
+            // 
+            this.boxHeightNUD.Location = new System.Drawing.Point(97, 206);
+            this.boxHeightNUD.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.boxHeightNUD.Name = "boxHeightNUD";
+            this.boxHeightNUD.Size = new System.Drawing.Size(39, 20);
+            this.boxHeightNUD.TabIndex = 20;
+            this.boxHeightNUD.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(811, 24);
+            this.menuStrip1.TabIndex = 21;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // boxWidthNUD
+            // 
+            this.boxWidthNUD.Location = new System.Drawing.Point(174, 206);
+            this.boxWidthNUD.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.boxWidthNUD.Name = "boxWidthNUD";
+            this.boxWidthNUD.Size = new System.Drawing.Size(39, 20);
+            this.boxWidthNUD.TabIndex = 22;
+            this.boxWidthNUD.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(815, 361);
             this.Controls.Add(this.firstTabControler);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "R42Bot++ v";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -2275,6 +2374,8 @@
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.boxHeightNUD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.boxWidthNUD)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2463,6 +2564,13 @@
         private System.Windows.Forms.Timer TrollCatcherBlockDelete;
         private System.Windows.Forms.CheckBox unfairBlox;
         public System.Windows.Forms.TextBox log1;
+        private System.Windows.Forms.CheckBox givegodwithtrophycbox;
+        private System.Windows.Forms.NumericUpDown boxWidthNUD;
+        private System.Windows.Forms.NumericUpDown boxHeightNUD;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.CheckBox boxPlaceCBOX;
+        private System.Windows.Forms.MenuStrip menuStrip1;
     }
 }
 
