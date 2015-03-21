@@ -197,6 +197,10 @@ namespace R42Bot
                     Variables.con.Disconnect();
                     Application.Exit();
                 }
+                else
+                {
+                    Variables.con.Send("say", "[R42Bot++] R42Bot++ Version " + Version.version + " has been connected successfully! :)");
+                }
             }
         }
     }

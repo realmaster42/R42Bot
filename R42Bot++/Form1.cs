@@ -219,72 +219,6 @@ namespace R42Bot
             }
         }
         #endregion
-
-        #region Block Info
-
-        public void Read(PlayerIOClient.Message m, uint c)
-        {
-            DeserializeBar.Visible = true;
-            Variables.con.Send("say", "[R42Bot++] Loading final assets. . .");
-            //int total = 0;
-
-            //for (int x = 0; x < Variables.worldHeight; x++)
-            //{
-            //    for (int y = 0; y < Variables.worldWidth; y++)
-            //    {
-            //        if (c < m.Count && !(m[c].ToString().StartsWith("PW") || m[c].ToString().StartsWith("BW")))
-            //        {
-            //            if (m[c].ToString() != "we")
-            //            {
-            //                //Variables.block[x, y].BlockID = m.GetInt(c);
-            //                int bid = m.GetInt(c);
-            //                for (int n = 0; n < m.GetByteArray(c + 2).Length; n += 2)
-            //                {
-            //                    int X = m.GetByteArray(c + 2)[n] << 8 | m.GetByteArray(c + 2)[n + 1];
-            //                    int Y = m.GetByteArray(c + 3)[n] << 8 | m.GetByteArray(c + 3)[n + 1];
-            //                    total = 100 - ((Variables.worldHeight - Y + Variables.worldWidth - X) / 100) * 10;
-            //                    DeserializeBar.Value = total;
-            //                    Variables.block[X, Y].BlockID = bid;
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
-            //int total = 0;
-            //Thread.Sleep(575);
-
-            while (c < m.Count && !(m[c].ToString().StartsWith("PW") || m[c].ToString().StartsWith("BW")))
-            {
-                if (m[c].ToString() != "we")
-                {
-                    uint DPlus = 4;
-                    int bid = m.GetInt(c);
-                    for (int n = 0; n < m.GetByteArray(c + 2).Length; n += 2)
-                    {
-                        int x = m.GetByteArray(c + 2)[n] << 8 | m.GetByteArray(c + 2)[n + 1];
-                        int y = m.GetByteArray(c + 3)[n] << 8 | m.GetByteArray(c + 3)[n + 1];
-                        //total = 100 - ((Variables.worldHeight - y + Variables.worldWidth - x) / 100) * 10;
-                        //DeserializeBar.Value = total;
-                        if (BlockUtils.CoinDoor(Variables.block[x, y])) { Variables.block[x, y].CoinValue = m.GetInt(c + 4); }
-                        Variables.block[x, y].BlockID = bid;
-                    }
-                    if (bid == 43 || bid == 77 || bid == 83 || bid == 214 || bid == 213 || bid == 1000 || bid == 165 || bid == 361 || bid >= 374 && bid <= 380 || bid == 385) { DPlus = 5; }
-                    else if (bid == 242 || bid == 381) { DPlus = 7; }
-                    c += DPlus;
-                }
-                else
-                {
-                    break;
-                }
-            }
-
-            DeserializeBar.Value = 0;
-            DeserializeBar.Visible = false;
-
-            Variables.con.Send("say", "[R42Bot++] R42Bot++ Version " + Version.version + " has been connected successfully! :)");
-            Variables.con.Send("access", codebox.Text);
-        }
-        #endregion
         
         public void onMessage(object sender, PlayerIOClient.Message m)
         {
@@ -320,6 +254,15 @@ namespace R42Bot
                         lavaP.Enabled = true;
                         boxHeightNUD.Maximum = Variables.worldHeight - 1;
                         boxWidthNUD.Maximum = Variables.worldWidth - 1;
+                        Variables.blockIDs = new uint[2, m.GetInt(12), m.GetInt(13)];
+                        var chunks = InitParse.Parse(m);
+                        foreach (var chunk in chunks)
+                        {
+                            foreach (var pos in chunk.Locations)
+                            {
+                                Variables.blockIDs[chunk.Layer, pos.X, pos.Y] = chunk.Type;
+                            }
+                        }
                         IOSnakeClient.Connection.DefineConnection.Define(Variables.con, codebox.Text); //Prototype IOSnake Add-In v-0.0.1 Initial Release Script Version 2
 
                         //Read(m, 20);//18);
@@ -397,7 +340,8 @@ namespace R42Bot
                 case "b":
                     if (Variables.botFullyConnected)
                     {
-                        Variables.block[m.GetInt(1), m.GetInt(2)].BlockID = m.GetInt(3);
+                        Variables.blockIDs[m.GetInt(0), m.GetInt(1), m.GetInt(2)] = Convert.ToUInt32(m.GetInt(3));
+                        Variables.blockPLACERs[m.GetInt(0), m.GetInt(1), m.GetInt(2)] = Variables.names[m.GetInt(4)];
                         int layer = m.GetInt(0);
                         int flayer = 0;
                         Variables.ax = m.GetInt(1); // left and right
@@ -420,7 +364,7 @@ namespace R42Bot
                                     Variables.player[m.GetInt(4)].BlocksPlacedInaSecond++;
                                 }
                             }
-                            Variables.block[Variables.ax, Variables.ay].placer = Variables.names[m.GetInt(4)];
+                            Variables.blockPLACERs[layer, Variables.ax, Variables.ay] = Variables.names[m.GetInt(4)];
                         }
                         int thedelay = Convert.ToInt32(numericUpDown1.Value);
                         int blockID = m.GetInt(3);
@@ -573,61 +517,61 @@ namespace R42Bot
                         {
                             if (blockID == 119)
                             {
-                                if (Variables.block[Variables.ax, Variables.ay + 1].BlockID == 138)
+                                if (Variables.blockIDs[layer, Variables.ax, Variables.ay + 1] == 138)
                                 {
                                     Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
                                     Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay, 0 });
                                     Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay + 1, 137 });
-                                    if (Variables.block[Variables.ax, Variables.ay - 1].BlockID == 119)
+                                    if (Variables.blockIDs[layer, Variables.ax, Variables.ay - 1] == 119)
                                     {
                                         Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay - 1, 0 });
                                         Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay, 119 });
                                     }
                                 }
-                                else if (Variables.block[Variables.ax, Variables.ay + 1].BlockID == 137)
+                                else if (Variables.blockIDs[layer, Variables.ax, Variables.ay + 1] == 137)
                                 {
                                     Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
                                     Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay, 0 });
                                     Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay + 1, 139 });
-                                    if (Variables.block[Variables.ax, Variables.ay - 1].BlockID == 119)
+                                    if (Variables.blockIDs[layer, Variables.ax, Variables.ay - 1] == 119)
                                     {
                                         Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay - 1, 0 });
                                         Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay, 119 });
                                     }
                                 }
-                                else if (Variables.block[Variables.ax, Variables.ay + 1].BlockID == 139)
+                                else if (Variables.blockIDs[layer, Variables.ax, Variables.ay + 1] == 139)
                                 {
                                     Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
                                     Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay, 0 });
                                     Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay + 1, 140 });
-                                    if (Variables.block[Variables.ax, Variables.ay - 1].BlockID == 119)
+                                    if (Variables.blockIDs[layer, Variables.ax, Variables.ay - 1] == 119)
                                     {
                                         Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay - 1, 0 });
                                         Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay, 119 });
                                     }
                                 }
-                                else if (Variables.block[Variables.ax, Variables.ay + 1].BlockID == 140)
+                                else if (Variables.blockIDs[layer, Variables.ax, Variables.ay + 1] == 140)
                                 {
                                     Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
                                     Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay, 0 });
                                     Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay + 1, 141 });
-                                    if (Variables.block[Variables.ax, Variables.ay - 1].BlockID == 119)
+                                    if (Variables.blockIDs[layer, Variables.ax, Variables.ay - 1] == 119)
                                     {
                                         Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay - 1, 0 });
                                         Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay, 119 });
                                     }
                                 }
-                                else if (Variables.block[Variables.ax, Variables.ay + 1].BlockID == 141)
+                                else if (Variables.blockIDs[layer, Variables.ax, Variables.ay + 1] == 141)
                                 {
                                     Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
                                     Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay, 0 });
                                     Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay + 1, 142 });
                                 }
-                                else if (Variables.block[Variables.ax, Variables.ay + 1].BlockID == 142)
+                                else if (Variables.blockIDs[layer, Variables.ax, Variables.ay + 1] == 142)
                                 {
                                     Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
                                     Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay, 0 });
-                                    if (Variables.block[Variables.ax, Variables.ay - 1].BlockID == 119)
+                                    if (Variables.blockIDs[layer, Variables.ax, Variables.ay - 1] == 119)
                                     {
                                         Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay - 1, 0 });
                                         Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay, 119 });
@@ -641,7 +585,7 @@ namespace R42Bot
                         {
                             if (blockID == 12)
                             {
-                                if (Variables.block[Variables.ax, Variables.ay + 1].BlockID == 0)
+                                if (Variables.blockIDs[layer, Variables.ax, Variables.ay + 1] == 0)
                                 {
                                     Thread.Sleep(400);
                                     Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
@@ -1427,9 +1371,9 @@ namespace R42Bot
                                             {
                                                 for (int y = 0; y < Variables.worldHeight; y++)
                                                 {
-                                                    if (Variables.block[x, y].placer == revertin)
+                                                    if (Variables.blockPLACERs[0, x, y] == revertin)
                                                     {
-                                                        Variables.con.Send(Variables.worldKey, 0, x, y, Variables.block[x, y].BlockID);
+                                                        Variables.con.Send(Variables.worldKey, 0, x, y, Variables.blockPLACERs[0, x, y]);
                                                     }
                                                 }
                                             }
@@ -1437,7 +1381,7 @@ namespace R42Bot
 
                                             //for (int test = 0; test < block.Length; test++)
                                             //{
-                                            //    if (Variables.block[test].placer == revertin)
+                                            //    if (Variables.blockIDs[layer, test].placer == revertin)
                                             //    {
 
                                             //    }
@@ -2568,7 +2512,9 @@ namespace R42Bot
             #endregion
             #endregion
 
-            this.Text = this.Text + Version.version;
+            Variables.BuildVersion = R42Bot.Properties.Settings.Default.Build;
+
+            this.Text = this.Text + Version.version + " BUILD " + R42Bot.Properties.Settings.Default.Build.ToString();
             Version.UpToDate = "Your R42Bot++ version (" + Version.version + ") is up-to-date.";
             Version.OutOfDate = "Your R42Bot++ version (" + Version.version + ") is outdated! Newest version is " + Version.upgradedVersion + " ! ";
             //Checks or it needs to run the downloader
