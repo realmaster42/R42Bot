@@ -106,6 +106,11 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.autobolder = new System.Windows.Forms.TabPage();
+            this.boxWidthNUD = new System.Windows.Forms.NumericUpDown();
+            this.boxHeightNUD = new System.Windows.Forms.NumericUpDown();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.boxPlaceCBOX = new System.Windows.Forms.CheckBox();
             this.BGdelbox = new System.Windows.Forms.CheckBox();
             this.wetsandCbox = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -120,6 +125,7 @@
             this.tntallowd = new System.Windows.Forms.CheckBox();
             this.lavadrawer = new System.Windows.Forms.CheckBox();
             this.autobuild1 = new System.Windows.Forms.CheckBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.smileytabs = new System.Windows.Forms.TabPage();
             this.srandomizer = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -213,18 +219,14 @@
             this.autoreset = new System.Windows.Forms.Timer(this.components);
             this.BlockPlacer = new System.Windows.Forms.Timer(this.components);
             this.TrollCatcherBlockDelete = new System.Windows.Forms.Timer(this.components);
-            this.boxPlaceCBOX = new System.Windows.Forms.CheckBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.boxHeightNUD = new System.Windows.Forms.NumericUpDown();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.boxWidthNUD = new System.Windows.Forms.NumericUpDown();
             this.firstTabControler.SuspendLayout();
             this.Main.SuspendLayout();
             this.LanguageOrSettings.SuspendLayout();
             this.NEWS.SuspendLayout();
             this.advancedEditor.SuspendLayout();
             this.autobolder.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.boxWidthNUD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.boxHeightNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lavaP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fdelay)).BeginInit();
             this.smileytabs.SuspendLayout();
@@ -241,8 +243,6 @@
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.boxHeightNUD)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.boxWidthNUD)).BeginInit();
             this.SuspendLayout();
             // 
             // email
@@ -290,10 +290,6 @@
             // Admins
             // 
             this.Admins.FormattingEnabled = true;
-            this.Admins.Items.AddRange(new object[] {
-            "marcoantonimsantos",
-            "legitturtle09",
-            "realmaster"});
             this.Admins.Location = new System.Drawing.Point(272, 3);
             this.Admins.Name = "Admins";
             this.Admins.Size = new System.Drawing.Size(198, 95);
@@ -1101,6 +1097,68 @@
             this.autobolder.Text = "AutoBuilder";
             this.autobolder.UseVisualStyleBackColor = true;
             // 
+            // boxWidthNUD
+            // 
+            this.boxWidthNUD.Location = new System.Drawing.Point(174, 206);
+            this.boxWidthNUD.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.boxWidthNUD.Name = "boxWidthNUD";
+            this.boxWidthNUD.Size = new System.Drawing.Size(39, 20);
+            this.boxWidthNUD.TabIndex = 22;
+            this.boxWidthNUD.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // boxHeightNUD
+            // 
+            this.boxHeightNUD.Location = new System.Drawing.Point(97, 206);
+            this.boxHeightNUD.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.boxHeightNUD.Name = "boxHeightNUD";
+            this.boxHeightNUD.Size = new System.Drawing.Size(39, 20);
+            this.boxHeightNUD.TabIndex = 20;
+            this.boxHeightNUD.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(139, 209);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(38, 13);
+            this.label15.TabIndex = 19;
+            this.label15.Text = "Width:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(54, 208);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(41, 13);
+            this.label14.TabIndex = 18;
+            this.label14.Text = "Height:";
+            // 
+            // boxPlaceCBOX
+            // 
+            this.boxPlaceCBOX.AutoSize = true;
+            this.boxPlaceCBOX.Location = new System.Drawing.Point(4, 207);
+            this.boxPlaceCBOX.Name = "boxPlaceCBOX";
+            this.boxPlaceCBOX.Size = new System.Drawing.Size(44, 17);
+            this.boxPlaceCBOX.TabIndex = 17;
+            this.boxPlaceCBOX.Text = "Box";
+            this.boxPlaceCBOX.UseVisualStyleBackColor = true;
+            // 
             // BGdelbox
             // 
             this.BGdelbox.AutoSize = true;
@@ -1259,6 +1317,14 @@
             this.autobuild1.Text = "Smiley Border";
             this.autobuild1.UseVisualStyleBackColor = true;
             this.autobuild1.CheckedChanged += new System.EventHandler(this.autobuild1_CheckedChanged);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(811, 24);
+            this.menuStrip1.TabIndex = 21;
+            this.menuStrip1.Text = "menuStrip1";
             // 
             // smileytabs
             // 
@@ -2259,76 +2325,6 @@
             this.TrollCatcherBlockDelete.Interval = 1000;
             this.TrollCatcherBlockDelete.Tick += new System.EventHandler(this.TrollCatcherBlockDelete_Tick);
             // 
-            // boxPlaceCBOX
-            // 
-            this.boxPlaceCBOX.AutoSize = true;
-            this.boxPlaceCBOX.Location = new System.Drawing.Point(4, 207);
-            this.boxPlaceCBOX.Name = "boxPlaceCBOX";
-            this.boxPlaceCBOX.Size = new System.Drawing.Size(44, 17);
-            this.boxPlaceCBOX.TabIndex = 17;
-            this.boxPlaceCBOX.Text = "Box";
-            this.boxPlaceCBOX.UseVisualStyleBackColor = true;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(54, 208);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(41, 13);
-            this.label14.TabIndex = 18;
-            this.label14.Text = "Height:";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(139, 209);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(38, 13);
-            this.label15.TabIndex = 19;
-            this.label15.Text = "Width:";
-            // 
-            // boxHeightNUD
-            // 
-            this.boxHeightNUD.Location = new System.Drawing.Point(97, 206);
-            this.boxHeightNUD.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.boxHeightNUD.Name = "boxHeightNUD";
-            this.boxHeightNUD.Size = new System.Drawing.Size(39, 20);
-            this.boxHeightNUD.TabIndex = 20;
-            this.boxHeightNUD.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(811, 24);
-            this.menuStrip1.TabIndex = 21;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // boxWidthNUD
-            // 
-            this.boxWidthNUD.Location = new System.Drawing.Point(174, 206);
-            this.boxWidthNUD.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.boxWidthNUD.Name = "boxWidthNUD";
-            this.boxWidthNUD.Size = new System.Drawing.Size(39, 20);
-            this.boxWidthNUD.TabIndex = 22;
-            this.boxWidthNUD.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2350,6 +2346,8 @@
             this.advancedEditor.PerformLayout();
             this.autobolder.ResumeLayout(false);
             this.autobolder.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.boxWidthNUD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.boxHeightNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lavaP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fdelay)).EndInit();
             this.smileytabs.ResumeLayout(false);
@@ -2374,8 +2372,6 @@
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.boxHeightNUD)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.boxWidthNUD)).EndInit();
             this.ResumeLayout(false);
 
         }
