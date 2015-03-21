@@ -255,6 +255,7 @@ namespace R42Bot
                         boxHeightNUD.Maximum = Variables.worldHeight - 1;
                         boxWidthNUD.Maximum = Variables.worldWidth - 1;
                         Variables.blockIDs = new uint[2, m.GetInt(12), m.GetInt(13)];
+                        Variables.blockPLACERs = new string[2, m.GetInt(12), m.GetInt(13)];
                         var chunks = InitParse.Parse(m);
                         foreach (var chunk in chunks)
                         {
@@ -341,7 +342,6 @@ namespace R42Bot
                     if (Variables.botFullyConnected)
                     {
                         Variables.blockIDs[m.GetInt(0), m.GetInt(1), m.GetInt(2)] = Convert.ToUInt32(m.GetInt(3));
-                        Variables.blockPLACERs[m.GetInt(0), m.GetInt(1), m.GetInt(2)] = Variables.names[m.GetInt(4)];
                         int layer = m.GetInt(0);
                         int flayer = 0;
                         Variables.ax = m.GetInt(1); // left and right
@@ -365,6 +365,10 @@ namespace R42Bot
                                 }
                             }
                             Variables.blockPLACERs[layer, Variables.ax, Variables.ay] = Variables.names[m.GetInt(4)];
+                        }
+                        else
+                        {
+                            Variables.blockPLACERs[layer, Variables.ax, Variables.ay] = "* SYSTEM";
                         }
                         int thedelay = Convert.ToInt32(numericUpDown1.Value);
                         int blockID = m.GetInt(3);
@@ -627,36 +631,36 @@ namespace R42Bot
                                     #endregion
                                     Thread.Sleep(3000); Thread.Sleep(175); // wait 3s
                                     #region Clear Explosion
-                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 }); Thread.Sleep(175);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay, 0 }); Thread.Sleep(175);
                                     #region Clear Red
-                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 1, Variables.ay, 0 }); Thread.Sleep(175);
-                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 1, Variables.ay, 0 }); Thread.Sleep(175);
-                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay + 1, 0 }); Thread.Sleep(175);
-                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay - 1, 0 }); Thread.Sleep(175);
-                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 1, Variables.ay - 1, 0 }); Thread.Sleep(175);
-                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 1, Variables.ay - 1, 0 }); Thread.Sleep(175);
-                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 1, Variables.ay + 1, 0 }); Thread.Sleep(175);
-                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 1, Variables.ay + 1, 0 }); Thread.Sleep(175);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 1, Variables.ay, 0 }); Thread.Sleep(175);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 1, Variables.ay, 0 }); Thread.Sleep(175);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay + 1, 0 }); Thread.Sleep(175);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay - 1, 0 }); Thread.Sleep(175);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 1, Variables.ay - 1, 0 }); Thread.Sleep(175);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 1, Variables.ay - 1, 0 }); Thread.Sleep(175);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 1, Variables.ay + 1, 0 }); Thread.Sleep(175);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 1, Variables.ay + 1, 0 }); Thread.Sleep(175);
                                     #endregion
                                     #region Clear Yellow
-                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 2, Variables.ay, 0 }); Thread.Sleep(175);
-                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 2, Variables.ay, 0 }); Thread.Sleep(175);
-                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 2, Variables.ay - 1, 0 }); Thread.Sleep(175);
-                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 2, Variables.ay + 1, 0 }); Thread.Sleep(175);
-                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 2, Variables.ay + 1, 0 }); Thread.Sleep(175);
-                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 2, Variables.ay - 1, 0 }); Thread.Sleep(175);
-                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay + 2, 0 }); Thread.Sleep(175);
-                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay - 2, 0 }); Thread.Sleep(175);
-                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 2, Variables.ay - 2, 0 }); Thread.Sleep(175);
-                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 2, Variables.ay - 2, 0 }); Thread.Sleep(175);
-                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 2, Variables.ay + 2, 0 }); Thread.Sleep(175);
-                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 2, Variables.ay + 2, 0 }); Thread.Sleep(175);
-                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 1, Variables.ay + 2, 0 }); Thread.Sleep(175);
-                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 1, Variables.ay + 2, 0 }); Thread.Sleep(175);
-                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 1, Variables.ay - 2, 0 }); Thread.Sleep(175);
-                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 1, Variables.ay - 2, 0 }); Thread.Sleep(175);
-                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 2, Variables.ay - 2, 0 }); Thread.Sleep(175);
-                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 2, Variables.ay - 2, 0 }); Thread.Sleep(175);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 2, Variables.ay, 0 }); Thread.Sleep(175);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 2, Variables.ay, 0 }); Thread.Sleep(175);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 2, Variables.ay - 1, 0 }); Thread.Sleep(175);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 2, Variables.ay + 1, 0 }); Thread.Sleep(175);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 2, Variables.ay + 1, 0 }); Thread.Sleep(175);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 2, Variables.ay - 1, 0 }); Thread.Sleep(175);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay + 2, 0 }); Thread.Sleep(175);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax, Variables.ay - 2, 0 }); Thread.Sleep(175);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 2, Variables.ay - 2, 0 }); Thread.Sleep(175);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 2, Variables.ay - 2, 0 }); Thread.Sleep(175);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 2, Variables.ay + 2, 0 }); Thread.Sleep(175);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 2, Variables.ay + 2, 0 }); Thread.Sleep(175);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 1, Variables.ay + 2, 0 }); Thread.Sleep(175);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 1, Variables.ay + 2, 0 }); Thread.Sleep(175);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 1, Variables.ay - 2, 0 }); Thread.Sleep(175);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 1, Variables.ay - 2, 0 }); Thread.Sleep(175);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax - 2, Variables.ay - 2, 0 }); Thread.Sleep(175);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.ax + 2, Variables.ay - 2, 0 }); Thread.Sleep(175);
                                     #endregion
                                     #endregion
                                 }

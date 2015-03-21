@@ -22,8 +22,10 @@ namespace R42Bot
         public static string worldowner, worldtitle, str;
         public static string botName = null;
         public static int ax, ay, plays, woots, totalwoots, botid, worldWidth, worldHeight;
+
         public static uint[,,] blockIDs;
         public static string[,,] blockPLACERs;
+
         public static GetBlock[,] block;
         public static int[] blockMoverArray = new int[] { 12 };
         public static int blockID1 = 0;
