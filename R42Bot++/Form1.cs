@@ -2358,31 +2358,8 @@ namespace R42Bot
         {
             if (Admins.Items.Contains(removeText.Text))
             {
-                if (removeText.Text == "marcoantonimsantos")
-                {
-                    MessageBox.Show("You cant remove marcoantonimsantos, he made this bot!", "R42Bot v" + Version.version + " System");
-                    removeText.Clear();
-                }
-                else if (removeText.Text == "realmaster")
-                {
-                    MessageBox.Show("You cant remove realmaster, he made this bot!", "R42Bot v" + Version.version + " System");
-                    removeText.Clear();
-                }
-                else if (removeText.Text == Variables.botName)
-                {
-                    MessageBox.Show("You cant remove " + Variables.botName + ", it is the bot!", "R42Bot v" + Version.version + " System");
-                    removeText.Clear();
-                }
-                else if (removeText.Text == "legitturtle09")
-                {
-                    MessageBox.Show("You cant remove legitturtle09, he is a R42Bot++ developer!", "R42Bot v" + Version.version + " System");
-                    removeText.Clear();
-                }
-                else
-                {
-                    Admins.Items.Remove(removeText.Text);
-                    removeText.Clear();
-                }
+                Admins.Items.Remove(removeText.Text);
+                removeText.Clear();
             }
             else
             {
@@ -2410,7 +2387,7 @@ namespace R42Bot
             }
             else
             {
-                MessageBox.Show(addText.Text + " is already in the list...");
+                MessageBox.Show(addText.Text + " is already on the list...");
                 addText.Clear();
             }
         }
