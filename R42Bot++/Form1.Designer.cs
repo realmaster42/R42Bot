@@ -53,7 +53,6 @@
             this.clearstalkering = new System.Windows.Forms.Button();
             this.alstalking = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.DeserializeBar = new System.Windows.Forms.ProgressBar();
             this.kJoiners = new System.Windows.Forms.CheckBox();
             this.kbots = new System.Windows.Forms.CheckBox();
             this.revertCboxLOL = new System.Windows.Forms.CheckBox();
@@ -372,7 +371,6 @@
             this.Main.Controls.Add(this.clearstalkering);
             this.Main.Controls.Add(this.alstalking);
             this.Main.Controls.Add(this.button1);
-            this.Main.Controls.Add(this.DeserializeBar);
             this.Main.Controls.Add(this.kJoiners);
             this.Main.Controls.Add(this.kbots);
             this.Main.Controls.Add(this.revertCboxLOL);
@@ -512,14 +510,6 @@
             this.button1.Text = "Save Admins";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // DeserializeBar
-            // 
-            this.DeserializeBar.Location = new System.Drawing.Point(227, 189);
-            this.DeserializeBar.Name = "DeserializeBar";
-            this.DeserializeBar.Size = new System.Drawing.Size(245, 23);
-            this.DeserializeBar.TabIndex = 48;
-            this.DeserializeBar.Visible = false;
             // 
             // kJoiners
             // 
@@ -1736,7 +1726,6 @@
             this.votersList.Name = "votersList";
             this.votersList.Size = new System.Drawing.Size(391, 264);
             this.votersList.TabIndex = 12;
-            this.votersList.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // pollstartername
             // 
@@ -2554,7 +2543,6 @@
         private System.Windows.Forms.NumericUpDown snakeSpecial1;
         private System.Windows.Forms.Timer BlockPlacer;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ProgressBar DeserializeBar;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Timer TrollCatcherBlockDelete;

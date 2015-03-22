@@ -2495,14 +2495,31 @@ namespace R42Bot
 
             Variables.BuildVersion = R42Bot.Properties.Settings.Default.Build;
 
-            this.Text = this.Text + Version.version + " BUILD " + R42Bot.Properties.Settings.Default.Build.ToString();
+            if (enus.Checked == true)
+            {
+                this.Text = this.Text + Version.version + " BUILD " + R42Bot.Properties.Settings.Default.Build.ToString();
+            }
+            else if (ptbr.Checked == true)
+            {
+                this.Text = this.Text + Version.version + " CONSTRUÇÃO " + R42Bot.Properties.Settings.Default.Build.ToString();
+            }
+            else if (ltu.Checked == true)
+            {
+                this.Text = this.Text + Version.version + " LTU_BUILD " + R42Bot.Properties.Settings.Default.Build.ToString();
+            }
             Version.UpToDate = "Your R42Bot++ version (" + Version.version + ") is up-to-date.";
             Version.OutOfDate = "Your R42Bot++ version (" + Version.version + ") is outdated! Newest version is " + Version.upgradedVersion + " ! ";
-            //Checks or it needs to run the downloader
+            Version.OutOfDateBuild = "Your R42Bot++ build (" + R42Bot.Properties.Settings.Default.Build.ToString() + ") is outdated! Newest build is " + Version.upgradedBuild + " ! ";
+
             if (new System.Net.WebClient().DownloadString(Version.versionlink) != Version.version)
             {
                 Version.upgradedVersion = new System.Net.WebClient().DownloadString(Version.versionlink);
                 label48.Text = Version.OutOfDate;
+            }
+            else if (new System.Net.WebClient().DownloadString(Version.buildlink) != R42Bot.Properties.Settings.Default.Build.ToString())
+            {
+                Version.upgradedBuild = new System.Net.WebClient().DownloadString(Version.buildlink);
+                label48.Text = Version.OutOfDateBuild;
             }
             else
             {
@@ -2697,11 +2714,6 @@ namespace R42Bot
             }
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void button7_Click(object sender, EventArgs e)
         {
             if (button7.Text == "New choice...")
@@ -2790,38 +2802,17 @@ namespace R42Bot
 
         private void noRespawn_CheckedChanged(object sender, EventArgs e)
         {
-            if (noRespawn.Checked)
-            {
-                textBox2.Text = "r1";
-            }
-            else
-            {
-                textBox2.Text = "r0";
-            }
+            textBox2.Text = (noRespawn.Checked) ? "r1" : "r0";
         }
 
         private void warningGiver_CheckedChanged(object sender, EventArgs e)
         {
-            if (warningGiver.Checked)
-            {
-                textBox3.Text = "r1";
-            }
-            else
-            {
-                textBox3.Text = "r0";
-            }
+            textBox3.Text = (warningGiver.Checked) ? "r1" : "r0";
         }
 
         private void bwl_CheckedChanged(object sender, EventArgs e)
         {
-            if (bwl.Checked)
-            {
-                textBox4.Text = "r1";
-            }
-            else
-            {
-                textBox4.Text = "r0";
-            }
+            textBox4.Text = (bwl.Checked) ? "r1" : "r0";
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -2892,14 +2883,7 @@ namespace R42Bot
 
         private void alstalking_CheckedChanged(object sender, EventArgs e)
         {
-            if (alstalking.Checked)
-            {
-                textBox5.Text = "r1";
-            }
-            else
-            {
-                textBox5.Text = "r0";
-            }
+            textBox5.Text = (alstalking.Checked) ? "r1" : "r0";
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -2908,14 +2892,7 @@ namespace R42Bot
             {
                 // /respawn
                 Information info = new Information();
-                if (textBox5.Text == "r0")
-                {
-                    info.Data5 = "r0";
-                }
-                else
-                {
-                    info.Data5 = "r1";
-                }
+                info.Data5 = (textBox5.Text == "r0") ? "r0" : "r1";
                 Class1.SaveData(info, "StalkInfo.xml");
             }
             catch (Exception ex)
@@ -2941,14 +2918,7 @@ namespace R42Bot
 
         private void waterchoice1_CheckedChanged(object sender, EventArgs e)
         {
-            if (waterchoice1.Checked)
-            {
-                waterchoice2.Checked = false;
-            }
-            else
-            {
-                waterchoice2.Checked = true;
-            }
+            waterchoice2.Checked = (waterchoice1.Checked) ? false : true;
         }
 
         private void rbs_CheckedChanged(object sender, EventArgs e)
@@ -3056,14 +3026,7 @@ namespace R42Bot
 
         private void allowSnakeSpecial_CheckedChanged(object sender, EventArgs e)
         {
-            if (allowSnakeSpecial.Checked)
-            {
-                BlockPlacer.Enabled = true;
-            }
-            else
-            {
-                BlockPlacer.Enabled = false;
-            }
+            BlockPlacer.Enabled = (allowSnakeSpecial.Checked) ? true : false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -3149,8 +3112,14 @@ namespace R42Bot
                     int Delay = Convert.ToInt32(fdelay.Value);
                     for (int i = Variables.BlockPlacingTilVal1; i < Variables.BlockPlacingTilVal2; i++)
                     {
-                        Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.BlockPlacingTilX, Variables.BlockPlacingTilY, i });
-                        Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.BlockPlacingTilX, Variables.BlockPlacingTilY, i });
+                        if (i > 1000 || i < 500)
+                        {
+                            Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.BlockPlacingTilX, Variables.BlockPlacingTilY, i });
+                        }
+                        else
+                        {
+                            Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.BlockPlacingTilX, Variables.BlockPlacingTilY, i });
+                        }
                         Thread.Sleep(Delay);
                     }
                 }
@@ -3199,14 +3168,7 @@ namespace R42Bot
 
         private void waterchoice2_CheckedChanged(object sender, EventArgs e)
         {
-            if (waterchoice2.Checked)
-            {
-                waterchoice1.Checked = false;
-            }
-            else
-            {
-                waterchoice1.Checked = true;
-            }
+            waterchoice1.Checked = (waterchoice2.Checked) ? false : true;
         }
 
         private void idofit_KeyPress(object sender, KeyPressEventArgs e)
@@ -3249,6 +3211,7 @@ namespace R42Bot
 
         private void kJoiners_CheckedChanged(object sender, EventArgs e)
         {
+            CallsSettings.AllowJoiners = (kJoiners.Checked) ? true : false;
             if (kJoiners.Checked)
             {
                 CallsSettings.AllowJoiners = true;
@@ -3279,14 +3242,7 @@ namespace R42Bot
 
         private void welcomeall_CheckedChanged(object sender, EventArgs e)
         {
-            if (welcomeall.Checked)
-            {
-                CallsSettings.Welcome = true;
-            }
-            else
-            {
-                CallsSettings.Welcome = false;
-            }
+            CallsSettings.Welcome = (welcomeall.Checked) ? true : false;
         }
 
         private void welcomealllower_CheckedChanged(object sender, EventArgs e)
@@ -3309,14 +3265,7 @@ namespace R42Bot
 
         private void kbots_CheckedChanged(object sender, EventArgs e)
         {
-            if (kbots.Checked)
-            {
-                CallsSettings.KickBots = true;
-            }
-            else
-            {
-                CallsSettings.KickBots = false;
-            }
+            CallsSettings.KickBots = (kbots.Checked) ? true : false;
         }
 
         private void welcomemsg2_TextChanged(object sender, EventArgs e)
@@ -3331,26 +3280,12 @@ namespace R42Bot
 
         private void leftall_CheckedChanged(object sender, EventArgs e)
         {
-            if (leftall.Checked)
-            {
-                CallsSettings.Goodbye = true;
-            }
-            else
-            {
-                CallsSettings.Goodbye = false;
-            }
+            CallsSettings.Goodbye = (leftall.Checked) ? true : false;
         }
 
         private void autoresetcheckbox_CheckedChanged(object sender, EventArgs e)
         {
-            if (autoresetcheckbox.Checked)
-            {
-                autoreset.Enabled = true;
-            }
-            else
-            {
-                autoreset.Enabled = false;
-            }
+            autoreset.Enabled = (autoresetcheckbox.Checked) ? true : false;
         }
     }
 }
