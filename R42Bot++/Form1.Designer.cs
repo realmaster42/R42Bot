@@ -218,6 +218,7 @@
             this.autoreset = new System.Windows.Forms.Timer(this.components);
             this.BlockPlacer = new System.Windows.Forms.Timer(this.components);
             this.TrollCatcherBlockDelete = new System.Windows.Forms.Timer(this.components);
+            this.textBox8 = new System.Windows.Forms.TextBox();
             this.firstTabControler.SuspendLayout();
             this.Main.SuspendLayout();
             this.LanguageOrSettings.SuspendLayout();
@@ -926,6 +927,7 @@
             // NEWS
             // 
             this.NEWS.BackColor = System.Drawing.Color.Beige;
+            this.NEWS.Controls.Add(this.textBox8);
             this.NEWS.Controls.Add(this.textBox7);
             this.NEWS.Controls.Add(this.textBox6);
             this.NEWS.Controls.Add(this.label48);
@@ -2314,6 +2316,16 @@
             this.TrollCatcherBlockDelete.Interval = 1000;
             this.TrollCatcherBlockDelete.Tick += new System.EventHandler(this.TrollCatcherBlockDelete_Tick);
             // 
+            // textBox8
+            // 
+            this.textBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.textBox8.Location = new System.Drawing.Point(127, 239);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(468, 35);
+            this.textBox8.TabIndex = 7;
+            this.textBox8.Text = "https://github.com/realmaster42/R42Bot";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2555,6 +2567,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.CheckBox boxPlaceCBOX;
         private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.TextBox textBox8;
     }
 }
 

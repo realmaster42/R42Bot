@@ -2273,6 +2273,20 @@ namespace R42Bot
                                 Variables.names.Add(m.GetInt(0), null);
                             }
                         }
+                        else
+                        {
+                            chatbox.Items.Add("[R42Bot++]: " + m.GetString(1).Replace("[R42Bot++]",""));
+                        }
+                        if (chatbox.Items.Count >= 12)
+                        {
+                            string one = chatbox.Items[10].ToString();
+                            string two = chatbox.Items[11].ToString();
+                            string three = chatbox.Items[12].ToString();
+                            chatbox.Items.Clear();
+                            chatbox.Items.Add(one);
+                            chatbox.Items.Add(two);
+                            chatbox.Items.Add(three);
+                        }
                     }
 
                     return;
@@ -2464,36 +2478,16 @@ namespace R42Bot
             Thread.Sleep(250);
             #region restriction commands
             #region /respawn
-            if (textBox2.Text == "r0")
-            {
-                noRespawn.Checked = false;
-            }
-            else
-            {
-                noRespawn.Checked = true;
-            }
+            noRespawn.Checked = (textBox2.Text == "r0") ? false : true;
 
-            if (textBox3.Text == "r0")
-            {
-                warningGiver.Checked = false;
-            }
-            else
-            {
-                warningGiver.Checked = true;
-            }
+            warningGiver.Checked = (textBox3.Text == "r0") ? false : true;
 
-            if (textBox4.Text == "r0")
-            {
-                bwl.Checked = false;
-            }
-            else
-            {
-                bwl.Checked = true;
-            }
+            bwl.Checked = (textBox4.Text == "r0") ? false : true;
             #endregion
             #endregion
 
             Variables.BuildVersion = R42Bot.Properties.Settings.Default.Build;
+            Version.upgradedBuild = new System.Net.WebClient().DownloadString(Version.buildlink);
 
             if (enus.Checked == true)
             {
@@ -2509,14 +2503,14 @@ namespace R42Bot
             }
             Version.UpToDate = "Your R42Bot++ version (" + Version.version + ") is up-to-date.";
             Version.OutOfDate = "Your R42Bot++ version (" + Version.version + ") is outdated! Newest version is " + Version.upgradedVersion + " ! ";
-            Version.OutOfDateBuild = "Your R42Bot++ build (" + R42Bot.Properties.Settings.Default.Build.ToString() + ") is outdated! Newest build is " + Version.upgradedBuild + " ! ";
+            Version.OutOfDateBuild = "Your R42Bot++ build (" + Variables.BuildVersion.ToString() + ") is outdated! Newest build is " + Version.upgradedBuild + " ! ";
 
             if (new System.Net.WebClient().DownloadString(Version.versionlink) != Version.version)
             {
                 Version.upgradedVersion = new System.Net.WebClient().DownloadString(Version.versionlink);
                 label48.Text = Version.OutOfDate;
             }
-            else if (new System.Net.WebClient().DownloadString(Version.buildlink) != R42Bot.Properties.Settings.Default.Build.ToString())
+            else if (new System.Net.WebClient().DownloadString(Version.buildlink) != Variables.BuildVersion.ToString())
             {
                 Version.upgradedBuild = new System.Net.WebClient().DownloadString(Version.buildlink);
                 label48.Text = Version.OutOfDateBuild;
@@ -2749,6 +2743,7 @@ namespace R42Bot
             if (Variables.names.ContainsValue(userpm.Text))
             {
                 Variables.con.Send("say", userpm.Text + " " + textpm.Text);
+                chatbox.Items.Add("*TO " + userpm.Text + ": " + textpm.Text);
             }
             else
             {
@@ -2760,6 +2755,7 @@ namespace R42Bot
         {
             Thread.Sleep(575);
             Variables.con.Send("say", "[R42Bot++] " + saytext.Text);
+            chatbox.Items.Add(">" + saytext.Text);
         }
 
         private void srandomizer_Click(object sender, EventArgs e)
