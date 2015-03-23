@@ -93,6 +93,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.welcomeall = new System.Windows.Forms.CheckBox();
             this.NEWS = new System.Windows.Forms.TabPage();
+            this.textBox8 = new System.Windows.Forms.TextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label48 = new System.Windows.Forms.Label();
@@ -105,6 +106,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.autobolder = new System.Windows.Forms.TabPage();
+            this.grbutton = new System.Windows.Forms.Button();
             this.boxWidthNUD = new System.Windows.Forms.NumericUpDown();
             this.boxHeightNUD = new System.Windows.Forms.NumericUpDown();
             this.label15 = new System.Windows.Forms.Label();
@@ -124,7 +126,6 @@
             this.tntallowd = new System.Windows.Forms.CheckBox();
             this.lavadrawer = new System.Windows.Forms.CheckBox();
             this.autobuild1 = new System.Windows.Forms.CheckBox();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.smileytabs = new System.Windows.Forms.TabPage();
             this.srandomizer = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -218,7 +219,7 @@
             this.autoreset = new System.Windows.Forms.Timer(this.components);
             this.BlockPlacer = new System.Windows.Forms.Timer(this.components);
             this.TrollCatcherBlockDelete = new System.Windows.Forms.Timer(this.components);
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.Gen_RB = new System.Windows.Forms.Timer(this.components);
             this.firstTabControler.SuspendLayout();
             this.Main.SuspendLayout();
             this.LanguageOrSettings.SuspendLayout();
@@ -555,6 +556,7 @@
             this.FreeEdit.TabIndex = 44;
             this.FreeEdit.Text = "Free Edit";
             this.FreeEdit.UseVisualStyleBackColor = true;
+            this.FreeEdit.CheckedChanged += new System.EventHandler(this.FreeEdit_CheckedChanged);
             // 
             // banCbox
             // 
@@ -937,6 +939,16 @@
             this.NEWS.TabIndex = 2;
             this.NEWS.Text = "News";
             // 
+            // textBox8
+            // 
+            this.textBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.textBox8.Location = new System.Drawing.Point(127, 239);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(468, 35);
+            this.textBox8.TabIndex = 7;
+            this.textBox8.Text = "https://github.com/realmaster42/R42Bot";
+            // 
             // textBox7
             // 
             this.textBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1062,6 +1074,7 @@
             // 
             // autobolder
             // 
+            this.autobolder.Controls.Add(this.grbutton);
             this.autobolder.Controls.Add(this.boxWidthNUD);
             this.autobolder.Controls.Add(this.boxHeightNUD);
             this.autobolder.Controls.Add(this.label15);
@@ -1081,7 +1094,6 @@
             this.autobolder.Controls.Add(this.tntallowd);
             this.autobolder.Controls.Add(this.lavadrawer);
             this.autobolder.Controls.Add(this.autobuild1);
-            this.autobolder.Controls.Add(this.menuStrip1);
             this.autobolder.Location = new System.Drawing.Point(4, 22);
             this.autobolder.Name = "autobolder";
             this.autobolder.Size = new System.Drawing.Size(811, 336);
@@ -1089,9 +1101,20 @@
             this.autobolder.Text = "AutoBuilder";
             this.autobolder.UseVisualStyleBackColor = true;
             // 
+            // grbutton
+            // 
+            this.grbutton.Enabled = false;
+            this.grbutton.Location = new System.Drawing.Point(257, 16);
+            this.grbutton.Name = "grbutton";
+            this.grbutton.Size = new System.Drawing.Size(143, 23);
+            this.grbutton.TabIndex = 23;
+            this.grbutton.Text = "Generate Random Bricks";
+            this.grbutton.UseVisualStyleBackColor = true;
+            this.grbutton.Click += new System.EventHandler(this.grbutton_Click);
+            // 
             // boxWidthNUD
             // 
-            this.boxWidthNUD.Location = new System.Drawing.Point(174, 206);
+            this.boxWidthNUD.Location = new System.Drawing.Point(190, 206);
             this.boxWidthNUD.Minimum = new decimal(new int[] {
             1,
             0,
@@ -1108,7 +1131,7 @@
             // 
             // boxHeightNUD
             // 
-            this.boxHeightNUD.Location = new System.Drawing.Point(97, 206);
+            this.boxHeightNUD.Location = new System.Drawing.Point(101, 206);
             this.boxHeightNUD.Minimum = new decimal(new int[] {
             1,
             0,
@@ -1126,7 +1149,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(139, 209);
+            this.label15.Location = new System.Drawing.Point(146, 208);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(38, 13);
             this.label15.TabIndex = 19;
@@ -1310,14 +1333,6 @@
             this.autobuild1.UseVisualStyleBackColor = true;
             this.autobuild1.CheckedChanged += new System.EventHandler(this.autobuild1_CheckedChanged);
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(811, 24);
-            this.menuStrip1.TabIndex = 21;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
             // smileytabs
             // 
             this.smileytabs.Controls.Add(this.srandomizer);
@@ -1398,7 +1413,7 @@
             // allowSnakeSpecial
             // 
             this.allowSnakeSpecial.AutoSize = true;
-            this.allowSnakeSpecial.Location = new System.Drawing.Point(641, 19);
+            this.allowSnakeSpecial.Location = new System.Drawing.Point(751, 19);
             this.allowSnakeSpecial.Name = "allowSnakeSpecial";
             this.allowSnakeSpecial.Size = new System.Drawing.Size(51, 17);
             this.allowSnakeSpecial.TabIndex = 13;
@@ -1409,7 +1424,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(534, 19);
+            this.label5.Location = new System.Drawing.Point(633, 20);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(16, 13);
             this.label5.TabIndex = 12;
@@ -1417,14 +1432,14 @@
             // 
             // snakeSpecial2
             // 
-            this.snakeSpecial2.Location = new System.Drawing.Point(577, 14);
+            this.snakeSpecial2.Location = new System.Drawing.Point(687, 15);
             this.snakeSpecial2.Maximum = new decimal(new int[] {
-            1004,
+            1026,
             0,
             0,
             0});
             this.snakeSpecial2.Minimum = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
@@ -1432,14 +1447,14 @@
             this.snakeSpecial2.Size = new System.Drawing.Size(58, 20);
             this.snakeSpecial2.TabIndex = 11;
             this.snakeSpecial2.Value = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
             // 
             // snakeSpecial1
             // 
-            this.snakeSpecial1.Location = new System.Drawing.Point(443, 15);
+            this.snakeSpecial1.Location = new System.Drawing.Point(548, 16);
             this.snakeSpecial1.Maximum = new decimal(new int[] {
             1004,
             0,
@@ -1731,6 +1746,7 @@
             // 
             // pollstartername
             // 
+            this.pollstartername.Enabled = false;
             this.pollstartername.Location = new System.Drawing.Point(420, 49);
             this.pollstartername.Name = "pollstartername";
             this.pollstartername.Size = new System.Drawing.Size(382, 20);
@@ -1826,6 +1842,7 @@
             // 
             // pollname
             // 
+            this.pollname.Enabled = false;
             this.pollname.Location = new System.Drawing.Point(73, 16);
             this.pollname.Name = "pollname";
             this.pollname.Size = new System.Drawing.Size(729, 20);
@@ -2316,15 +2333,10 @@
             this.TrollCatcherBlockDelete.Interval = 1000;
             this.TrollCatcherBlockDelete.Tick += new System.EventHandler(this.TrollCatcherBlockDelete_Tick);
             // 
-            // textBox8
+            // Gen_RB
             // 
-            this.textBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.textBox8.Location = new System.Drawing.Point(127, 239);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(468, 35);
-            this.textBox8.TabIndex = 7;
-            this.textBox8.Text = "https://github.com/realmaster42/R42Bot";
+            this.Gen_RB.Interval = 15;
+            this.Gen_RB.Tick += new System.EventHandler(this.Gen_RB_Tick);
             // 
             // Form1
             // 
@@ -2332,7 +2344,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(815, 361);
             this.Controls.Add(this.firstTabControler);
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "R42Bot++ v";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -2566,8 +2577,9 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.CheckBox boxPlaceCBOX;
-        private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.Button grbutton;
+        private System.Windows.Forms.Timer Gen_RB;
     }
 }
 

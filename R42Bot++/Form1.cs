@@ -2281,11 +2281,20 @@ namespace R42Bot
                         {
                             string one = chatbox.Items[10].ToString();
                             string two = chatbox.Items[11].ToString();
-                            string three = chatbox.Items[12].ToString();
-                            chatbox.Items.Clear();
-                            chatbox.Items.Add(one);
-                            chatbox.Items.Add(two);
-                            chatbox.Items.Add(three);
+                            if (chatbox.Items.Count >= 13)
+                            {
+                                string three = chatbox.Items[12].ToString();
+                                chatbox.Items.Clear();
+                                chatbox.Items.Add(one);
+                                chatbox.Items.Add(two);
+                                chatbox.Items.Add(three);
+                            }
+                            else
+                            {
+                                chatbox.Items.Clear();
+                                chatbox.Items.Add(one);
+                                chatbox.Items.Add(two);
+                            }
                         }
                     }
 
@@ -2348,6 +2357,7 @@ namespace R42Bot
                     connector.Text = "Disconnect";
                     button8.Enabled = true;
                     button9.Enabled = true;
+                    grbutton.Enabled = true;
                 }
             }
             else if (connector.Text == "Disconnect")
@@ -2362,6 +2372,7 @@ namespace R42Bot
                 connector.Text = "Connect";
                 button8.Enabled = false;
                 button9.Enabled = false;
+                grbutton.Enabled = false;
                 Admins.Items.Remove(Variables.botName);
                 MessageBox.Show("Disconnected.");
             }
@@ -2732,7 +2743,9 @@ namespace R42Bot
                 label29.Visible = false;
                 choice3.Visible = false;
                 vot3.Visible = false;
-                Thread.Sleep(250);
+                
+                //
+
                 button7.Text = "New choice...";
             }
         }
@@ -3116,6 +3129,12 @@ namespace R42Bot
                         {
                             Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.BlockPlacingTilX, Variables.BlockPlacingTilY, i });
                         }
+                        if (i == Variables.BlockPlacingTilVal2)
+                        {
+                            Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.BlockPlacingTilX, Variables.BlockPlacingTilY, 0 });
+                            Variables.con.Send(Variables.worldKey, new object[] { 1, Variables.BlockPlacingTilX, Variables.BlockPlacingTilY, 0 });
+                            break;
+                        }
                         Thread.Sleep(Delay);
                     }
                 }
@@ -3282,6 +3301,138 @@ namespace R42Bot
         private void autoresetcheckbox_CheckedChanged(object sender, EventArgs e)
         {
             autoreset.Enabled = (autoresetcheckbox.Checked) ? true : false;
+        }
+
+        private void FreeEdit_CheckedChanged(object sender, EventArgs e)
+        {
+            CallsSettings.FreeEdit = (FreeEdit.Checked) ? true : false;
+        }
+
+        private void grbutton_Click(object sender, EventArgs e)
+        {
+            if (grbutton.Text == "Generate Random Bricks")
+            {
+                Gen_RB.Enabled = true;
+                Gen_RB.Start();
+                grbutton.Text = "Stop Generating";
+            }
+            else
+            {
+                Gen_RB.Stop();
+                Gen_RB.Enabled = false;
+                grbutton.Text = "Generate Random Bricks";
+            }
+        }
+
+        private void Gen_RB_Tick(object sender, EventArgs e)
+        {
+            for (int x=1;x<Variables.worldHeight;x++)
+            {
+                for (int y = 1; y < Variables.worldWidth; y++)
+                {
+                    int Bid = new Random().Next(0, 1026); //BlockID
+                    int FG = (Bid < 500 || Bid > 1000) ? 0 : 1;
+                    bool rotate = false; int rotateID = 0;
+                    bool id = false; int targetID = 0; int portalID = 0;
+                    bool switchid = false; int switchD = 0;
+                    bool worldid = false; string worldID = "PW";
+                    bool sign = false; string message = "abcdefgh";
+                    bool value = false; int valueID = 0; // value < 100
+
+                    #region Define...
+                    if (Bid == 361 || Bid == 242 || Bid == 381 || (Bid > 1000 && Bid < 1005))
+                    {
+                        rotate = true; rotateID = new Random().Next(1, 4) - 1;
+                    }
+                    if (Bid == 242 || Bid == 381)
+                    {
+                        id = true;
+                        targetID = new Random().Next(1, 99); portalID = new Random().Next(1, 99);
+                    }
+                    if (Bid == 374)
+                    {
+                        worldid = true; worldID = idofworld.Text;
+                    }
+                    if (Bid == 113 || Bid == 185 || Bid == 184)
+                    {
+                        switchid = true; switchD = new Random().Next(1, 99);
+                    }
+                    if (Bid == 165 || Bid == 214 || Bid == 43 || Bid == 213 || Bid == 1011 || Bid == 1012)
+                    {
+                        value = true; valueID = new Random().Next(1, 99);
+                    }
+                    if (Bid == 385)
+                    {
+                        List<string> alphabet = new List<string> { "abc", "abcd", "abcde", "abcdef", "abcdefg", "abcdefgh" };
+                        sign = true; message = alphabet[new Random().Next(1, alphabet.Count)];
+                    }
+                    #endregion
+                    //SPECIALS:
+                    #region SPECIALS
+                    /*
+                        Deadly:
+                        361 (Rotatable)
+
+                        Portals:
+                        242,381 (Rotatable, ID, Target)
+                        374 (WorldID)
+
+                        Switches:
+                        113,185,184 (ID)
+
+                        Coins:
+                        165,214,43,213 (Coins)
+
+                        Deaths:
+                        1012,1011 (Deaths)
+
+                        Sign:
+                        385 (Message)
+
+                        One-Way:
+                        1001,1002,1003,1004 (Rotatable)
+                    */
+                    #endregion
+
+                    #region Placing
+                    if (rotate == false && id == false && switchid == false && worldid == false && sign == false && value == false)
+                    {
+                        Variables.con.Send(Variables.worldKey, new object[] { FG, x, y, Bid });
+                    }
+                    else
+                    {
+                        if (rotate == true && id == false)
+                        {
+                            Variables.con.Send(Variables.worldKey, new object[] { FG, x, y, Bid, rotateID });
+                        }
+                        else if (rotate == true && id == true)
+                        {
+                            Variables.con.Send(Variables.worldKey, new object[] { FG, x, y, Bid, rotateID, portalID, targetID });
+                        }
+                        if (worldid)
+                        {
+                            Variables.con.Send(Variables.worldKey, new object[] { FG, x, y, Bid, worldID });
+                        }
+                        if (switchid)
+                        {
+                            Variables.con.Send(Variables.worldKey, new object[] { FG, x, y, Bid, switchD });
+                        }
+                        if (value)
+                        {
+                            Variables.con.Send(Variables.worldKey, new object[] { FG, x, y, Bid, valueID });
+                        }
+                        if (sign)
+                        {
+                            Variables.con.Send(Variables.worldKey, new object[] { FG, x, y, Bid, message });
+                        }
+                    }
+                    #endregion
+                    Thread.Sleep(15);
+                }
+            }
+            grbutton.Text = "Generate Random Bricks";
+            Gen_RB.Stop();
+            Gen_RB.Enabled = false;
         }
     }
 }
