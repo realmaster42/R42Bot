@@ -14,6 +14,8 @@ namespace R42Bot
         public static Client client;
         public static int BuildVersion;
 
+        public static string CurrentLang = "enUS";
+
         public static List<string> banList = new List<string> { "realmaster42", "", "", "", "", "" };
         public static Dictionary<int, string> names = new Dictionary<int, string>();
         public static Player[] player = new Player[9999];

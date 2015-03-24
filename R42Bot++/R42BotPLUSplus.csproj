@@ -97,6 +97,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="InitParse.cs" />
+    <Compile Include="Lang.cs" />
     <Compile Include="Structs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

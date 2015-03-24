@@ -1,0 +1,123 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace R42Bot
+{
+    public partial class Lang
+    {
+        public partial class En
+        {
+            //by realmaster(marcoantonimsantos)
+            public static readonly List<string> Organizate = new List<string>
+            {
+                "Language is now EU/US!",
+                "Welcome everyone who comes to the world.",
+                "Welcome to this world, ", // remember to keep the space
+                "Tell something when anybody leaves the world.",
+                "Ow... ", // remember to keep the space
+                " left US behind...", // remember to keep the space
+                "world ID",
+                "Add",
+                "Remove",
+                "non-caps",
+                "caps",
+                "non-caps",
+                "caps",
+                "code",
+                "hmm... the bot needs admin to work the best.",
+                "Welcome Message",
+                "text after username.",
+                "Message",
+                "text after username.",
+                "Language:",
+                "leaving username:",
+                "welcoming username:",
+                "Only choose one option for leaving and welcoming msg. (of username)",
+                "to",
+                "WINS SYTEM",
+                "Kick Joiners",
+                "Kick Bots",
+                "Free Admin",
+                "Free Edit",
+                "Smiley Border",
+                "Water Placer",
+                "Filling",
+                "Wet Sand",
+                "Background Delete",
+                "PM result",
+                "Allow Stalking.",
+                "auto-change ':)' -> ':('",
+                "Rainbow Basic Snake",
+                "Fast Rainbow Basic Snake",
+                "Normal Basic Snake",
+                "Fast Normal Basic Snake",
+                "Rainbow Mineral Snake",
+                "Fast Rainbow Mineral Snake",
+                "Normal Mineral Snake",
+                "Fast Normal Mineral Snake",
+                "Auto-Reset",
+                "Auto reset Message",
+                "Pink Glass Explode",
+                "Delete Only",
+                "Default",
+                "Lava Snake",
+                "Allow",
+                "customize",
+                "Default",
+                "Background Color:",
+                "current:",
+                "connect",
+                "Disconnect",
+                "Say!",
+                "Block ID:",
+                "clearStalkingOne",
+                "Save 'allow stalking' data",
+                "Randomize!",
+                "Auto-Reset Time (in ms)",
+                "current poll:",
+                "Poll Starter:",
+                "choice 1:",
+                "choice 2:",
+                "choice 3:",
+                "Votes:",
+                "BotLog",
+                "[R42Bot++] R42Bot++ Version (V) has been connected successfully! :)",
+                "you have been banned from this bot!!!",
+                "[R42Bot++] Goodbye, the user using me is banned! :D",
+                "[R42Bot++] Joining disabled.",
+                "[R42Bot++] Got Edit.",
+                "[R42Bot++] Lost Edit.",
+                "Disconnected.",
+                "System",
+                "Email, Password and WorldID must be fillen up!",
+                "TokenID and WorldID must be fillen up!",
+                "Index",
+                "Options",
+                "News",
+                "Advanced Options",
+                "AutoBuilder",
+                "StalkMovement",
+                "Smiley Changer",
+                "Snakes",
+                "Auto...",
+                "Polls",
+                "custom User Ideas",
+                "More",
+                "command Restrictions",
+                "customize...",
+                "Bot System",
+                "Ban List",
+                "your R42Bot++ version (V) is outdated! Newest version is [V] ! ",
+                "your R42Bot++ build (B) is outdated! Newest build is [B] ! ",
+                "your R42Bot++ version (V) is up-to-date.",
+                "[R42Bot++] World reseted. Reseting marked for every (X) ms!",
+                "[R42Bot++] Autokick enabled.",
+                "...S M I L E Y  C H A N G E R  C H O O S E  C H A N G E D...",
+                "command not enabled."
+            };
+        }
+    }
+}

@@ -83,57 +83,54 @@ namespace R42Bot
             {
                 public static void Setup(PlayerIOClient.Message m)
                 {
-                    if (CallsSettings.AllowJoiners)
+                    ThreadPool.QueueUserWorkItem(delegate
                     {
-                        if (!Variables.names.ContainsKey(m.GetInt(0)))
-                            Variables.names.Add(m.GetInt(0), m.GetString(1));
-                        else
-                            if (CallsSettings.KickBots) { Thread.Sleep(200); Variables.con.Send("say", "/kick " + m.GetString(1) + " Bots dissallowed!"); }
-                        if (m.GetString(1).ToString().StartsWith("guest-"))
+                        if (CallsSettings.AllowJoiners)
                         {
-                            Variables.player[m.GetInt(0)].isGuest = true;
-                        }
-                        else
-                        {
-                            Variables.player[m.GetInt(0)].isGuest = false;
-                        }
-                        if (CallsSettings.FreeEdit)
-                        {
-                            if (Variables.names[m.GetInt(0)] != Variables.botName)
+                            if (!Variables.names.ContainsKey(m.GetInt(0)))
+                                Variables.names.Add(m.GetInt(0), m.GetString(1));
+                            else
+                                if (CallsSettings.KickBots) { Thread.Sleep(200); Variables.con.Send("say", "/kick " + m.GetString(1) + " Bots dissallowed!"); }else { Variables.player[m.GetInt(0)].isBot = true; }
+                            Variables.player[m.GetInt(0)].isGuest = (m.GetString(1).ToString().StartsWith("guest-")) ? true : false;
+                            Variables.player[m.GetInt(0)].isBot = (m.GetString(1).ToString().Contains("bot")) ? true : false;
+                            if (CallsSettings.FreeEdit)
                             {
-                                Thread.Sleep(400);
-                                Variables.con.Send("say", "/giveedit " + Variables.names[m.GetInt(0)].ToString());
-                                Thread.Sleep(400);
-                            }
-                        }
-                        Variables.player[m.GetInt(0)].username = Variables.names[m.GetInt(0)].ToString();
-
-                        if (CallsSettings.Welcome)
-                        {
-                            if (Variables.names[m.GetInt(0)] != Variables.botName)
-                            {
-                                if (!CallsSettings.Welcome_Upper)
+                                if (Variables.names[m.GetInt(0)] != Variables.botName)
                                 {
-                                    Thread.Sleep(200);
-                                    Variables.con.Send("say", "[R42Bot++] " + CallsSettings.Welcome_Text + " " + Variables.names[m.GetInt(0)].ToString().ToLower() + CallsSettings.Welcome_Text_2);
-                                    Thread.Sleep(200);
-                                }
-                                else
-                                {
-                                    Thread.Sleep(200);
-                                    Variables.con.Send("say", "[R42Bot++] " + CallsSettings.Welcome_Text + " " + Variables.names[m.GetInt(0)].ToString().ToUpper() + CallsSettings.Welcome_Text_2);
-                                    Thread.Sleep(200);
+                                    Thread.Sleep(400);
+                                    Variables.con.Send("say", "/giveedit " + Variables.names[m.GetInt(0)].ToString());
+                                    Thread.Sleep(400);
                                 }
                             }
-                        }
-                        Variables.botFullyConnected = true;
+                            Variables.player[m.GetInt(0)].username = Variables.names[m.GetInt(0)].ToString();
 
-                        Variables.players++;
-                    }
-                    else
-                    {
-                        Variables.con.Send("say", "/kick " + m.GetString(1) + " [R42Bot++] Joining disabled.");
-                    }
+                            if (CallsSettings.Welcome)
+                            {
+                                if (Variables.names[m.GetInt(0)] != Variables.botName)
+                                {
+                                    if (!CallsSettings.Welcome_Upper)
+                                    {
+                                        Thread.Sleep(200);
+                                        Variables.con.Send("say", "[R42Bot++] " + CallsSettings.Welcome_Text + " " + Variables.names[m.GetInt(0)].ToString().ToLower() + CallsSettings.Welcome_Text_2);
+                                        Thread.Sleep(200);
+                                    }
+                                    else
+                                    {
+                                        Thread.Sleep(200);
+                                        Variables.con.Send("say", "[R42Bot++] " + CallsSettings.Welcome_Text + " " + Variables.names[m.GetInt(0)].ToString().ToUpper() + CallsSettings.Welcome_Text_2);
+                                        Thread.Sleep(200);
+                                    }
+                                }
+                            }
+                            Variables.botFullyConnected = true;
+
+                            Variables.players++;
+                        }
+                        else
+                        {
+                            Variables.con.Send("say", "/kick " + m.GetString(1) + " [R42Bot++] Joining disabled.");
+                        }
+                    });
                 }
             }
 
@@ -141,30 +138,36 @@ namespace R42Bot
             {
                 public static void Fix(PlayerIOClient.Message m)
                 {
-                    if (Variables.names.ContainsKey(m.GetInt(0)))
-                        Variables.names.Remove(m.GetInt(0));
+                    ThreadPool.QueueUserWorkItem(delegate
+                    {
+                        if (Variables.names.ContainsKey(m.GetInt(0)))
+                            Variables.names.Remove(m.GetInt(0));
+                    });
                 }
                 public static void Setup(PlayerIOClient.Message m)
                 {
-                    if (CallsSettings.Goodbye)
+                    ThreadPool.QueueUserWorkItem(delegate
                     {
-                        if (Variables.names[m.GetInt(0)] != Variables.botName)
+                        if (CallsSettings.Goodbye)
                         {
-                            if (!CallsSettings.Goodbye_Upper)
+                            if (Variables.names[m.GetInt(0)] != Variables.botName)
                             {
-                                Thread.Sleep(200);
-                                Variables.con.Send("say", "[R42Bot++] " + CallsSettings.Goodbye_Text + " " + Variables.names[m.GetInt(0)].ToString().ToLower() + " " + CallsSettings.Goodbye_Text_2);
-                                Thread.Sleep(200);
-                            }
-                            else
-                            {
-                                Thread.Sleep(200);
-                                Variables.con.Send("say", "[R42Bot++] " + CallsSettings.Goodbye_Text + " " + Variables.names[m.GetInt(0)].ToString().ToUpper() + " " + CallsSettings.Goodbye_Text_2);
-                                Thread.Sleep(200);
+                                if (!CallsSettings.Goodbye_Upper)
+                                {
+                                    Thread.Sleep(200);
+                                    Variables.con.Send("say", "[R42Bot++] " + CallsSettings.Goodbye_Text + " " + Variables.names[m.GetInt(0)].ToString().ToLower() + " " + CallsSettings.Goodbye_Text_2);
+                                    Thread.Sleep(200);
+                                }
+                                else
+                                {
+                                    Thread.Sleep(200);
+                                    Variables.con.Send("say", "[R42Bot++] " + CallsSettings.Goodbye_Text + " " + Variables.names[m.GetInt(0)].ToString().ToUpper() + " " + CallsSettings.Goodbye_Text_2);
+                                    Thread.Sleep(200);
+                                }
                             }
                         }
-                    }
-                    Variables.players = Variables.players - 1;
+                        Variables.players = Variables.players - 1;
+                    });
                 }
             }
         }

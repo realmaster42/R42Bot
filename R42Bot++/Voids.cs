@@ -57,5 +57,22 @@ namespace R42Bot
             }
             return name;
         }
+
+        public static string GetLangFile(string LangType, int FileId)
+        {
+            if (LangType == "enUS")
+            {
+                return Lang.En.Organizate[FileId - 1];
+            }
+            else if (LangType == "ptbr")
+            {
+                return Lang.En.Organizate[FileId - 1];
+            }
+            else if (LangType == "ltu")
+            {
+                return Lang.En.Organizate[FileId - 1];
+            }
+            return "<LangError>";
+        }
     }
 }
