@@ -78,6 +78,7 @@
             this.scommand2 = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.LanguageOrSettings = new System.Windows.Forms.TabPage();
+            this.label16 = new System.Windows.Forms.Label();
             this.saveLang = new System.Windows.Forms.Button();
             this.dutchCBOX = new System.Windows.Forms.CheckBox();
             this.ltu = new System.Windows.Forms.CheckBox();
@@ -173,9 +174,30 @@
             this.label21 = new System.Windows.Forms.Label();
             this.pollname = new System.Windows.Forms.TextBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.pgebc = new System.Windows.Forms.CheckBox();
             this.pgeb100loldef = new System.Windows.Forms.RadioButton();
             this.pgeb100loldo = new System.Windows.Forms.RadioButton();
             this.pgeb100lol = new System.Windows.Forms.CheckBox();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.UnBanButton = new System.Windows.Forms.Button();
+            this.BanButton = new System.Windows.Forms.Button();
+            this.unbanTxtBox = new System.Windows.Forms.TextBox();
+            this.banTxtBox = new System.Windows.Forms.TextBox();
+            this.banList = new System.Windows.Forms.ListBox();
+            this.label41 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.log5 = new System.Windows.Forms.TextBox();
+            this.log4 = new System.Windows.Forms.TextBox();
+            this.log3 = new System.Windows.Forms.TextBox();
+            this.log2 = new System.Windows.Forms.TextBox();
+            this.log1 = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -201,21 +223,6 @@
             this.label37 = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
             this.button11 = new System.Windows.Forms.Button();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.log5 = new System.Windows.Forms.TextBox();
-            this.log4 = new System.Windows.Forms.TextBox();
-            this.log3 = new System.Windows.Forms.TextBox();
-            this.log2 = new System.Windows.Forms.TextBox();
-            this.log1 = new System.Windows.Forms.TextBox();
-            this.label44 = new System.Windows.Forms.Label();
-            this.label43 = new System.Windows.Forms.Label();
-            this.label42 = new System.Windows.Forms.Label();
-            this.label41 = new System.Windows.Forms.Label();
-            this.label40 = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.autochangerface = new System.Windows.Forms.Timer(this.components);
             this.autokick = new System.Windows.Forms.Timer(this.components);
             this.autoreset = new System.Windows.Forms.Timer(this.components);
@@ -242,11 +249,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.autoresetime)).BeginInit();
             this.pollTab.SuspendLayout();
             this.tabPage6.SuspendLayout();
+            this.tabPage7.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // email
@@ -357,6 +364,7 @@
             this.firstTabControler.Controls.Add(this.autoPage);
             this.firstTabControler.Controls.Add(this.pollTab);
             this.firstTabControler.Controls.Add(this.tabPage6);
+            this.firstTabControler.Controls.Add(this.tabPage7);
             this.firstTabControler.Controls.Add(this.tabPage1);
             this.firstTabControler.Location = new System.Drawing.Point(-3, -1);
             this.firstTabControler.Name = "firstTabControler";
@@ -767,6 +775,7 @@
             // 
             // LanguageOrSettings
             // 
+            this.LanguageOrSettings.Controls.Add(this.label16);
             this.LanguageOrSettings.Controls.Add(this.saveLang);
             this.LanguageOrSettings.Controls.Add(this.dutchCBOX);
             this.LanguageOrSettings.Controls.Add(this.ltu);
@@ -790,6 +799,15 @@
             this.LanguageOrSettings.TabIndex = 1;
             this.LanguageOrSettings.Text = "Options";
             this.LanguageOrSettings.UseVisualStyleBackColor = true;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(263, 310);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(180, 13);
+            this.label16.TabIndex = 18;
+            this.label16.Text = "Credits: 100lol, LTU; 912468, Dutch ";
             // 
             // saveLang
             // 
@@ -1876,6 +1894,7 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.pgebc);
             this.tabPage6.Controls.Add(this.pgeb100loldef);
             this.tabPage6.Controls.Add(this.pgeb100loldo);
             this.tabPage6.Controls.Add(this.pgeb100lol);
@@ -1885,6 +1904,16 @@
             this.tabPage6.TabIndex = 14;
             this.tabPage6.Text = "Custom User Ideas";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // pgebc
+            // 
+            this.pgebc.AutoSize = true;
+            this.pgebc.Location = new System.Drawing.Point(3, 27);
+            this.pgebc.Name = "pgebc";
+            this.pgebc.Size = new System.Drawing.Size(197, 17);
+            this.pgebc.TabIndex = 3;
+            this.pgebc.Text = "Purple Glass Explode (Bomb Cluster)";
+            this.pgebc.UseVisualStyleBackColor = true;
             // 
             // pgeb100loldef
             // 
@@ -1920,6 +1949,196 @@
             this.pgeb100lol.Text = "Pink Glass Explode";
             this.pgeb100lol.UseVisualStyleBackColor = true;
             // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.UnBanButton);
+            this.tabPage7.Controls.Add(this.BanButton);
+            this.tabPage7.Controls.Add(this.unbanTxtBox);
+            this.tabPage7.Controls.Add(this.banTxtBox);
+            this.tabPage7.Controls.Add(this.banList);
+            this.tabPage7.Controls.Add(this.label41);
+            this.tabPage7.Controls.Add(this.label40);
+            this.tabPage7.Controls.Add(this.label39);
+            this.tabPage7.Controls.Add(this.label38);
+            this.tabPage7.Controls.Add(this.label20);
+            this.tabPage7.Controls.Add(this.log5);
+            this.tabPage7.Controls.Add(this.log4);
+            this.tabPage7.Controls.Add(this.log3);
+            this.tabPage7.Controls.Add(this.log2);
+            this.tabPage7.Controls.Add(this.log1);
+            this.tabPage7.Controls.Add(this.label19);
+            this.tabPage7.Controls.Add(this.label18);
+            this.tabPage7.Controls.Add(this.label17);
+            this.tabPage7.Controls.Add(this.label3);
+            this.tabPage7.Location = new System.Drawing.Point(4, 22);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Size = new System.Drawing.Size(811, 336);
+            this.tabPage7.TabIndex = 15;
+            this.tabPage7.Text = "Lists";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // UnBanButton
+            // 
+            this.UnBanButton.Location = new System.Drawing.Point(286, 147);
+            this.UnBanButton.Name = "UnBanButton";
+            this.UnBanButton.Size = new System.Drawing.Size(75, 23);
+            this.UnBanButton.TabIndex = 18;
+            this.UnBanButton.Text = "UnBan";
+            this.UnBanButton.UseVisualStyleBackColor = true;
+            this.UnBanButton.Click += new System.EventHandler(this.UnBanButton_Click);
+            // 
+            // BanButton
+            // 
+            this.BanButton.Location = new System.Drawing.Point(286, 121);
+            this.BanButton.Name = "BanButton";
+            this.BanButton.Size = new System.Drawing.Size(75, 23);
+            this.BanButton.TabIndex = 17;
+            this.BanButton.Text = "Ban";
+            this.BanButton.UseVisualStyleBackColor = true;
+            // 
+            // unbanTxtBox
+            // 
+            this.unbanTxtBox.Location = new System.Drawing.Point(159, 151);
+            this.unbanTxtBox.Name = "unbanTxtBox";
+            this.unbanTxtBox.Size = new System.Drawing.Size(121, 20);
+            this.unbanTxtBox.TabIndex = 16;
+            // 
+            // banTxtBox
+            // 
+            this.banTxtBox.Location = new System.Drawing.Point(159, 124);
+            this.banTxtBox.Name = "banTxtBox";
+            this.banTxtBox.Size = new System.Drawing.Size(120, 20);
+            this.banTxtBox.TabIndex = 15;
+            // 
+            // banList
+            // 
+            this.banList.FormattingEnabled = true;
+            this.banList.Location = new System.Drawing.Point(159, 29);
+            this.banList.Name = "banList";
+            this.banList.Size = new System.Drawing.Size(202, 82);
+            this.banList.TabIndex = 14;
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(234, 13);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(45, 13);
+            this.label41.TabIndex = 13;
+            this.label41.Text = "Ban List";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(11, 157);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(16, 13);
+            this.label40.TabIndex = 12;
+            this.label40.Text = "5.";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(11, 127);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(16, 13);
+            this.label39.TabIndex = 11;
+            this.label39.Text = "4.";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(11, 101);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(16, 13);
+            this.label38.TabIndex = 10;
+            this.label38.Text = "3.";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(11, 75);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(16, 13);
+            this.label20.TabIndex = 9;
+            this.label20.Text = "2.";
+            // 
+            // log5
+            // 
+            this.log5.Enabled = false;
+            this.log5.Location = new System.Drawing.Point(33, 150);
+            this.log5.Name = "log5";
+            this.log5.Size = new System.Drawing.Size(111, 20);
+            this.log5.TabIndex = 8;
+            // 
+            // log4
+            // 
+            this.log4.Enabled = false;
+            this.log4.Location = new System.Drawing.Point(33, 124);
+            this.log4.Name = "log4";
+            this.log4.Size = new System.Drawing.Size(111, 20);
+            this.log4.TabIndex = 7;
+            // 
+            // log3
+            // 
+            this.log3.Enabled = false;
+            this.log3.Location = new System.Drawing.Point(33, 98);
+            this.log3.Name = "log3";
+            this.log3.Size = new System.Drawing.Size(111, 20);
+            this.log3.TabIndex = 6;
+            // 
+            // log2
+            // 
+            this.log2.Enabled = false;
+            this.log2.Location = new System.Drawing.Point(33, 72);
+            this.log2.Name = "log2";
+            this.log2.Size = new System.Drawing.Size(111, 20);
+            this.log2.TabIndex = 5;
+            // 
+            // log1
+            // 
+            this.log1.Enabled = false;
+            this.log1.Location = new System.Drawing.Point(33, 46);
+            this.log1.Name = "log1";
+            this.log1.Size = new System.Drawing.Size(111, 20);
+            this.log1.TabIndex = 4;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(11, 49);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(16, 13);
+            this.label19.TabIndex = 3;
+            this.label19.Text = "1.";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(11, 26);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(133, 13);
+            this.label18.TabIndex = 2;
+            this.label18.Text = "=====================";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(55, 13);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(44, 13);
+            this.label17.TabIndex = 1;
+            this.label17.Text = "Bot Log";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(11, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(133, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "=====================";
+            // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.tabControl1);
@@ -1934,8 +2153,6 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -2183,154 +2400,6 @@
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.log5);
-            this.tabPage4.Controls.Add(this.log4);
-            this.tabPage4.Controls.Add(this.log3);
-            this.tabPage4.Controls.Add(this.log2);
-            this.tabPage4.Controls.Add(this.log1);
-            this.tabPage4.Controls.Add(this.label44);
-            this.tabPage4.Controls.Add(this.label43);
-            this.tabPage4.Controls.Add(this.label42);
-            this.tabPage4.Controls.Add(this.label41);
-            this.tabPage4.Controls.Add(this.label40);
-            this.tabPage4.Controls.Add(this.label39);
-            this.tabPage4.Controls.Add(this.label38);
-            this.tabPage4.Controls.Add(this.label3);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(803, 313);
-            this.tabPage4.TabIndex = 2;
-            this.tabPage4.Text = "Bot Log";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // log5
-            // 
-            this.log5.Enabled = false;
-            this.log5.Location = new System.Drawing.Point(24, 146);
-            this.log5.Name = "log5";
-            this.log5.Size = new System.Drawing.Size(100, 20);
-            this.log5.TabIndex = 12;
-            this.log5.Text = "5. Empty";
-            // 
-            // log4
-            // 
-            this.log4.Enabled = false;
-            this.log4.Location = new System.Drawing.Point(24, 120);
-            this.log4.Name = "log4";
-            this.log4.Size = new System.Drawing.Size(100, 20);
-            this.log4.TabIndex = 11;
-            this.log4.Text = "4. Empty";
-            // 
-            // log3
-            // 
-            this.log3.Enabled = false;
-            this.log3.Location = new System.Drawing.Point(24, 94);
-            this.log3.Name = "log3";
-            this.log3.Size = new System.Drawing.Size(100, 20);
-            this.log3.TabIndex = 10;
-            this.log3.Text = "3. Empty";
-            // 
-            // log2
-            // 
-            this.log2.Enabled = false;
-            this.log2.Location = new System.Drawing.Point(24, 68);
-            this.log2.Name = "log2";
-            this.log2.Size = new System.Drawing.Size(100, 20);
-            this.log2.TabIndex = 9;
-            this.log2.Text = "2. Empty";
-            // 
-            // log1
-            // 
-            this.log1.Enabled = false;
-            this.log1.Location = new System.Drawing.Point(24, 44);
-            this.log1.Name = "log1";
-            this.log1.Size = new System.Drawing.Size(100, 20);
-            this.log1.TabIndex = 8;
-            this.log1.Text = "1. Empty";
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(3, 146);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(16, 13);
-            this.label44.TabIndex = 7;
-            this.label44.Text = "5.";
-            // 
-            // label43
-            // 
-            this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(3, 123);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(16, 13);
-            this.label43.TabIndex = 6;
-            this.label43.Text = "4.";
-            // 
-            // label42
-            // 
-            this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(2, 97);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(16, 13);
-            this.label42.TabIndex = 5;
-            this.label42.Text = "3.";
-            // 
-            // label41
-            // 
-            this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(2, 71);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(16, 13);
-            this.label41.TabIndex = 4;
-            this.label41.Text = "2.";
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(3, 47);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(16, 13);
-            this.label40.TabIndex = 3;
-            this.label40.Text = "1.";
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(8, 30);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(121, 13);
-            this.label39.TabIndex = 2;
-            this.label39.Text = "===================";
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(49, 17);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(41, 13);
-            this.label38.TabIndex = 1;
-            this.label38.Text = "BotLog";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 4);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(121, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "===================";
-            // 
-            // tabPage5
-            // 
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(803, 313);
-            this.tabPage5.TabIndex = 3;
-            this.tabPage5.Text = "Ban List";
-            this.tabPage5.UseVisualStyleBackColor = true;
-            // 
             // autochangerface
             // 
             this.autochangerface.Enabled = true;
@@ -2409,14 +2478,14 @@
             this.pollTab.PerformLayout();
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
+            this.tabPage7.ResumeLayout(false);
+            this.tabPage7.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2543,19 +2612,6 @@
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.TextBox log5;
-        private System.Windows.Forms.TextBox log4;
-        private System.Windows.Forms.TextBox log3;
-        private System.Windows.Forms.TextBox log2;
-        private System.Windows.Forms.Label label44;
-        private System.Windows.Forms.Label label43;
-        private System.Windows.Forms.Label label42;
-        private System.Windows.Forms.Label label41;
-        private System.Windows.Forms.Label label40;
-        private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.Label label38;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.NumericUpDown fdelay;
@@ -2571,7 +2627,6 @@
         private System.Windows.Forms.CheckBox saveCbox;
         private System.Windows.Forms.CheckBox banCbox;
         private System.Windows.Forms.CheckBox kickCbox;
-        private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.CheckBox FreeEdit;
         private System.Windows.Forms.CheckBox revertCboxLOL;
         private System.Windows.Forms.CheckBox faxII;
@@ -2603,7 +2658,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Timer TrollCatcherBlockDelete;
         private System.Windows.Forms.CheckBox unfairBlox;
-        public System.Windows.Forms.TextBox log1;
         private System.Windows.Forms.CheckBox givegodwithtrophycbox;
         private System.Windows.Forms.NumericUpDown boxWidthNUD;
         private System.Windows.Forms.NumericUpDown boxHeightNUD;
@@ -2616,6 +2670,28 @@
         private System.Windows.Forms.CheckBox dutchCBOX;
         private System.Windows.Forms.Timer AutoFixBot;
         private System.Windows.Forms.Button saveLang;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.CheckBox pgebc;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox log5;
+        private System.Windows.Forms.TextBox log4;
+        private System.Windows.Forms.TextBox log3;
+        private System.Windows.Forms.TextBox log2;
+        private System.Windows.Forms.TextBox log1;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.TextBox unbanTxtBox;
+        private System.Windows.Forms.TextBox banTxtBox;
+        private System.Windows.Forms.ListBox banList;
+        private System.Windows.Forms.Button UnBanButton;
+        private System.Windows.Forms.Button BanButton;
     }
 }
 

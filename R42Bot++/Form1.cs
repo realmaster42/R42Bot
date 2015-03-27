@@ -42,6 +42,17 @@ namespace R42Bot
             log2.Text = "2. " + c1;
         }
 
+        public void CheckGlassExplode(string key)
+        {
+            if (key == "EXPLODE")
+            {
+                pgeb100loldef.Checked = true;
+            }
+            else
+            {
+                pgeb100loldo.Checked = true;
+            }
+        }
         public void CheckSnakes(string key)
         {
             if (key == "mineralRAINBOW")
@@ -60,117 +71,6 @@ namespace R42Bot
             {
                 faxII.Checked = true;
             }
-        }
-
-        public void Translate()
-        {
-            #region language-changer
-            if (enus.Checked)
-            {
-                welcomeall.Text = "Welcome everyone who comes to the world.";
-                welcomemsg.Text = "Welcome to this world, ";
-                leftall.Text = "Tell something when anybody leaves the world.";
-                leftallmsg.Text = "Ow... ";
-                leftall2.Text = " left US behind...";
-                idofworld.Text = "world ID";
-                add.Text = "Add";
-                remove.Text = "Remove";
-                leftallcase.Text = "non-caps";
-                leftallupper.Text = "caps";
-                welcomealllower.Text = "non-caps";
-                welcomeallupper.Text = "caps";
-                codebox.Text = "Code";
-                //texts
-                label1.Text = "hmm... the bot needs admin to work the best.";
-                label4.Text = "Welcome Message";
-                label6.Text = "text after username.";
-                label7.Text = "Message";
-                label9.Text = "text after username.";
-                label13.Text = "Language:";
-                label11.Text = "leaving username:";
-                label12.Text = "welcoming username:";
-                label10.Text = "Only choose one option for leaving and welcoming msg. (of username)";
-                winsystem1.Text = "WINS SYSTEM";
-                Main.Text = "Index";
-                LanguageOrSettings.Text = "Options";
-                NEWS.Text = "News";
-                advancedEditor.Text = "Advanced Options";
-                autobolder.Text = "AutoBuilder";
-                autobuild1.Text = "Smiley Border";
-            }
-            else if (ptbr.Checked)
-            {
-                welcomeall.Text = "Dizer bem vindo a quem entrar no mundo.";
-                welcomemsg.Text = "Bem vindo, ";
-                leftall.Text = "Dizer algo quando alguém sai do mundo.";
-                leftallmsg.Text = "Ó, que pena... ";
-                leftall2.Text = " deixou-nos para trás...";
-                idofworld.Text = "ID do mundo";
-                add.Text = "Adicionar";
-                remove.Text = "Remover";
-                leftallcase.Text = "letra pequena";
-                leftallupper.Text = "letra grande";
-                welcomealllower.Text = "letra pequena";
-                welcomeallupper.Text = "letra grande";
-                codebox.Text = "Código";
-                winsystem1.Text = "Sistema De Ganhos";
-                //texts
-                label1.Text = "hmm... o bot precisa de admin para funcionar melhor.";
-                label4.Text = "Mensagem 'Bem Vindo'";
-                label6.Text = "texto seguindo do nome.";
-                label7.Text = "Mensagem 'Adeus'";
-                label9.Text = "texto seguindo do nome.";
-                label13.Text = "Linguagem:";
-                label11.Text = "nome ao sair:";
-                label12.Text = "nome ao entrar:";
-                label10.Text = "Apenas escolha uma opção (letra pequena ou grande).";
-                Main.Text = "Casa";
-                LanguageOrSettings.Text = "Opções";
-                NEWS.Text = "Novo";
-                advancedEditor.Text = "Opções Avançadas";
-                autobolder.Text = "Auto-Construtor";
-                autobuild1.Text = "Smiley 10%";
-            }
-            else if (ltu.Checked)
-            {
-                welcomeall.Text = "visiems labas kurie atejo i si pasauli";
-                welcomemsg.Text = "Sveikas atvikes i si pasauli, ";
-                leftall.Text = "Pasakik kazka kai kazas iseina is pasaulio";
-                leftallmsg.Text = "Au... ";
-                leftall2.Text = " Paliko mus...";
-                idofworld.Text = "pasaulio ID";
-                add.Text = "prideti";
-                remove.Text = "atimti";
-                leftallcase.Text = "ne didziosios";
-                leftallupper.Text = "didziosios";
-                welcomealllower.Text = "ne didziosios";
-                welcomeallupper.Text = "didziosios";
-                codebox.Text = "Kodas";
-
-                label1.Text = "hmm... botui reikia admino kad veiktu geriausiai";
-                label4.Text = "Sveikinimo zinute";
-                label6.Text = "tekstas to vardo";
-                label7.Text = "zinute";
-                label9.Text = "tekstas po vardo.";
-                label13.Text = "kalba:";
-                label11.Text = "iseinantis vardas:";
-                label12.Text = "sveikinantis vardas:";
-                label10.Text = "Tiktai pasiring viena pasirinkima isejimo ir atejimo zinutei (naudotojui)";
-                label5.Text = "->";
-
-                winsystem1.Text = "laimejimo sistema";
-                kJoiners.Text = "ispirti atvikelius";
-                kbots.Text = "ispirti botus";
-                freeadmin.Text = "nemokamas adminas";
-                FreeEdit.Text = "nemokamas redaugavimas";
-                autobuild1.Text = "veido krastines";
-                lavadrawer.Text = "vandens padejejas";
-                paintbrushauto.Text = "pripilditi";
-                wetsandCbox.Text = "slapias smelis";
-                BGdelbox.Text = "panaikinti tapetus";
-                pmresult.Text = "PM rezultatas";
-            }
-            #endregion
         }
 
         public Form1()
@@ -416,6 +316,38 @@ namespace R42Bot
                                     Variables.CheckSnakeUpdate = true;
                                     CheckSnakes(Variables.currentChecked);
                                 }
+                            }
+                        }
+                        #endregion
+                        #region purple glass explosion
+                        if (pgebc.Checked)
+                        {
+                            if (blockID == 52)
+                            {
+                                    bool ExplodePink = pgeb100loldo.Checked;
+                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
+                                    Thread.Sleep(12);
+                                    Variables.CheckGlassExplodeUpdate = false;
+                                    pgeb100loldo.Checked = true;
+                                    Thread.Sleep(12);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 1, Variables.ay, 53 });
+                                    Thread.Sleep(12);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 1, Variables.ay, 53 });
+                                    Thread.Sleep(12);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 1, Variables.ay + 1, 53 });
+                                    Thread.Sleep(12);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax + 1, Variables.ay - 1, 53 });
+                                    Thread.Sleep(12);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 1, Variables.ay + 1, 53 });
+                                    Thread.Sleep(12);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax - 1, Variables.ay - 1, 53 });
+                                    Thread.Sleep(12);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay + 1, 53 });
+                                    Thread.Sleep(12);
+                                    Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay - 1, 53 });
+                                    Thread.Sleep(12);
+                                    Variables.CheckGlassExplodeUpdate = true;
+                                    CheckGlassExplode(Variables.currentCheckedDorE);
                             }
                         }
                         #endregion
@@ -3068,6 +3000,10 @@ namespace R42Bot
             if (pgeb100loldef.Checked)
             {
                 pgeb100loldo.Checked = false;
+                if (Variables.CheckGlassExplodeUpdate)
+                {
+                    Variables.currentCheckedDorE = "EXPLODE";
+                }
             }
         }
 
@@ -3076,6 +3012,10 @@ namespace R42Bot
             if (pgeb100loldo.Checked)
             {
                 pgeb100loldef.Checked = false;
+                if (Variables.CheckGlassExplodeUpdate)
+                {
+                    Variables.currentCheckedDorE = "DELETE";
+                }
             }
         }
 
@@ -3477,6 +3417,19 @@ namespace R42Bot
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void UnBanButton_Click(object sender, EventArgs e)
+        {
+            if (banList.Items.Contains(unbanTxtBox))
+            {
+
+            }
+            else
+            {
+                unbanTxtBox.Clear();
+                MessageBox.Show("User not banned.", "R42Bot++ System");
             }
         }
     }
