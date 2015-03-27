@@ -12,6 +12,7 @@ namespace R42Bot
         private string data2;
         private string data3;
         private string data4;
+        private string Language;
         private string[] admins;
 
         private Color color1;
@@ -46,6 +47,12 @@ namespace R42Bot
         {
             get { return data5; }
             set { data5 = value; }
+        }
+
+        public string language
+        {
+            get { return Language; }
+            set { Language = value; }
         }
 
         public Color Color1

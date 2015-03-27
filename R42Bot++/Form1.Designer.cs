@@ -78,6 +78,8 @@
             this.scommand2 = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.LanguageOrSettings = new System.Windows.Forms.TabPage();
+            this.saveLang = new System.Windows.Forms.Button();
+            this.dutchCBOX = new System.Windows.Forms.CheckBox();
             this.ltu = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
             this.enus = new System.Windows.Forms.CheckBox();
@@ -220,6 +222,7 @@
             this.BlockPlacer = new System.Windows.Forms.Timer(this.components);
             this.TrollCatcherBlockDelete = new System.Windows.Forms.Timer(this.components);
             this.Gen_RB = new System.Windows.Forms.Timer(this.components);
+            this.AutoFixBot = new System.Windows.Forms.Timer(this.components);
             this.firstTabControler.SuspendLayout();
             this.Main.SuspendLayout();
             this.LanguageOrSettings.SuspendLayout();
@@ -764,6 +767,8 @@
             // 
             // LanguageOrSettings
             // 
+            this.LanguageOrSettings.Controls.Add(this.saveLang);
+            this.LanguageOrSettings.Controls.Add(this.dutchCBOX);
             this.LanguageOrSettings.Controls.Add(this.ltu);
             this.LanguageOrSettings.Controls.Add(this.label13);
             this.LanguageOrSettings.Controls.Add(this.enus);
@@ -785,6 +790,27 @@
             this.LanguageOrSettings.TabIndex = 1;
             this.LanguageOrSettings.Text = "Options";
             this.LanguageOrSettings.UseVisualStyleBackColor = true;
+            // 
+            // saveLang
+            // 
+            this.saveLang.Location = new System.Drawing.Point(159, 287);
+            this.saveLang.Name = "saveLang";
+            this.saveLang.Size = new System.Drawing.Size(75, 23);
+            this.saveLang.TabIndex = 17;
+            this.saveLang.Text = "Save";
+            this.saveLang.UseVisualStyleBackColor = true;
+            this.saveLang.Click += new System.EventHandler(this.saveLang_Click);
+            // 
+            // dutchCBOX
+            // 
+            this.dutchCBOX.AutoSize = true;
+            this.dutchCBOX.Location = new System.Drawing.Point(78, 310);
+            this.dutchCBOX.Name = "dutchCBOX";
+            this.dutchCBOX.Size = new System.Drawing.Size(55, 17);
+            this.dutchCBOX.TabIndex = 16;
+            this.dutchCBOX.Text = "Dutch";
+            this.dutchCBOX.UseVisualStyleBackColor = true;
+            this.dutchCBOX.CheckedChanged += new System.EventHandler(this.dutchCBOX_CheckedChanged);
             // 
             // ltu
             // 
@@ -824,9 +850,9 @@
             this.ptbr.AutoSize = true;
             this.ptbr.Location = new System.Drawing.Point(13, 310);
             this.ptbr.Name = "ptbr";
-            this.ptbr.Size = new System.Drawing.Size(60, 17);
+            this.ptbr.Size = new System.Drawing.Size(40, 17);
             this.ptbr.TabIndex = 12;
-            this.ptbr.Text = "PT/BR";
+            this.ptbr.Text = "PT";
             this.ptbr.UseVisualStyleBackColor = true;
             this.ptbr.CheckedChanged += new System.EventHandler(this.ptbr_CheckedChanged);
             // 
@@ -2338,14 +2364,21 @@
             this.Gen_RB.Interval = 15;
             this.Gen_RB.Tick += new System.EventHandler(this.Gen_RB_Tick);
             // 
+            // AutoFixBot
+            // 
+            this.AutoFixBot.Enabled = true;
+            this.AutoFixBot.Tick += new System.EventHandler(this.AutoFixBot_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(815, 361);
             this.Controls.Add(this.firstTabControler);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "R42Bot++ v";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.firstTabControler.ResumeLayout(false);
             this.Main.ResumeLayout(false);
@@ -2580,6 +2613,9 @@
         private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.Button grbutton;
         private System.Windows.Forms.Timer Gen_RB;
+        private System.Windows.Forms.CheckBox dutchCBOX;
+        private System.Windows.Forms.Timer AutoFixBot;
+        private System.Windows.Forms.Button saveLang;
     }
 }
 

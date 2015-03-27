@@ -23,13 +23,6 @@ namespace R42Bot
             Welcome_Text_2 = "";
         public static string Goodbye_Text = "",
             Goodbye_Text_2 = "";
-
-        public partial class Language
-        {
-            public static bool USA = true;
-            public static bool PT = false;
-            public static bool LTU = false;
-        }
     }
     public partial class Calls
     {
@@ -60,18 +53,7 @@ namespace R42Bot
                         Thread.Sleep(250);
                         if (Variables.names.ContainsKey(m.GetInt(0)))
                         {
-                            if (CallsSettings.Language.USA)
-                            {
-                                Variables.con.Send("say", string.Concat(Variables.names[m.GetInt(0)].ToString() + " won! Now he/she has " + Variables.player[m.GetInt(0)].wins + " wins!"));
-                            }
-                            else if (CallsSettings.Language.PT)
-                            {
-                                Variables.con.Send("say", string.Concat(Variables.names[m.GetInt(0)].ToString() + " ganhou! Agora ele/ela ganhou " + Variables.player[m.GetInt(0)].wins + " vezes!"));
-                            }
-                            else if (CallsSettings.Language.LTU)
-                            {
-
-                            }
+                            Variables.con.Send("say", string.Concat(Variables.names[m.GetInt(0)].ToString() + Voids.GetLangFile(Variables.CurrentLang, 103).Replace("(W)", Variables.player[m.GetInt(0)].wins.ToString())));
                         }
                     }
                 }
@@ -111,13 +93,13 @@ namespace R42Bot
                                     if (!CallsSettings.Welcome_Upper)
                                     {
                                         Thread.Sleep(200);
-                                        Variables.con.Send("say", "[R42Bot++] " + CallsSettings.Welcome_Text + " " + Variables.names[m.GetInt(0)].ToString().ToLower() + CallsSettings.Welcome_Text_2);
+                                        Variables.con.Send("say", "[R42Bot++] " + Voids.GetLangFile(Variables.CurrentLang, 3) + " " + Variables.names[m.GetInt(0)].ToString().ToLower() + CallsSettings.Welcome_Text_2);
                                         Thread.Sleep(200);
                                     }
                                     else
                                     {
                                         Thread.Sleep(200);
-                                        Variables.con.Send("say", "[R42Bot++] " + CallsSettings.Welcome_Text + " " + Variables.names[m.GetInt(0)].ToString().ToUpper() + CallsSettings.Welcome_Text_2);
+                                        Variables.con.Send("say", "[R42Bot++] " + Voids.GetLangFile(Variables.CurrentLang, 3) + " " + Variables.names[m.GetInt(0)].ToString().ToUpper() + CallsSettings.Welcome_Text_2);
                                         Thread.Sleep(200);
                                     }
                                 }
@@ -155,13 +137,13 @@ namespace R42Bot
                                 if (!CallsSettings.Goodbye_Upper)
                                 {
                                     Thread.Sleep(200);
-                                    Variables.con.Send("say", "[R42Bot++] " + CallsSettings.Goodbye_Text + " " + Variables.names[m.GetInt(0)].ToString().ToLower() + " " + CallsSettings.Goodbye_Text_2);
+                                    Variables.con.Send("say", "[R42Bot++] " + Voids.GetLangFile(Variables.CurrentLang, 5) + " " + Variables.names[m.GetInt(0)].ToString().ToLower() + " " + Voids.GetLangFile(Variables.CurrentLang, 6));
                                     Thread.Sleep(200);
                                 }
                                 else
                                 {
                                     Thread.Sleep(200);
-                                    Variables.con.Send("say", "[R42Bot++] " + CallsSettings.Goodbye_Text + " " + Variables.names[m.GetInt(0)].ToString().ToUpper() + " " + CallsSettings.Goodbye_Text_2);
+                                    Variables.con.Send("say", "[R42Bot++] " + Voids.GetLangFile(Variables.CurrentLang, 5) + " " + Variables.names[m.GetInt(0)].ToString().ToUpper() + " " + Voids.GetLangFile(Variables.CurrentLang, 6));
                                     Thread.Sleep(200);
                                 }
                             }
@@ -201,7 +183,7 @@ namespace R42Bot
                 Variables.block = new GetBlock[Variables.worldWidth, Variables.worldHeight];
                 if (Variables.banList.Contains(Variables.botName))
                 {
-                    MessageBox.Show("You have been banned from this bot!!!", "R42Bot++ v" + Version.version + " System");
+                    MessageBox.Show(Voids.GetLangFile(Variables.CurrentLang, 71), "R42Bot++ v" + Version.version + " System");
                     Thread.Sleep(250);
                     MessageBox.Show("YES = WAH, NO = NUUUUU!", "R42Bot++ v" + Version.version + " System", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     Variables.con.Send("say", "[R42Bot++] Goodbye, the user using me is banned! :D");
@@ -211,7 +193,7 @@ namespace R42Bot
                 }
                 else
                 {
-                    Variables.con.Send("say", "[R42Bot++] R42Bot++ Version " + Version.version + " has been connected successfully! :)");
+                    Variables.con.Send("say", Voids.GetLangFile(Variables.CurrentLang, 70));
                     Thread.Sleep(200);
                 }
             }

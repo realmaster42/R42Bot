@@ -66,11 +66,15 @@ namespace R42Bot
             }
             else if (LangType == "ptbr")
             {
-                return Lang.En.Organizate[FileId - 1];
+                return Lang.PT.Organizate[FileId - 1];
             }
             else if (LangType == "ltu")
             {
                 return Lang.En.Organizate[FileId - 1];
+            }
+            else if (LangType == "dutch")
+            {
+                return Lang.Dutch.Organizate[FileId - 1];
             }
             return "<LangError>";
         }

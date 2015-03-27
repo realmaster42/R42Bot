@@ -15,8 +15,6 @@ using System.Threading;
 using System.IO;
 using System.Xml.Serialization;
 using PlayerIOClient;
-using Fluid;
-using IOSnake;
 #endregion
 
 #region BOT
@@ -27,7 +25,6 @@ namespace R42Bot
     public partial class Form1 : Form
     {
         public static ColorDialog c = new ColorDialog();
-        public static FluidClient SDKClient;
 
         public void DefineLogZones()
         {
@@ -192,9 +189,6 @@ namespace R42Bot
                     Variables.client = PlayerIO.QuickConnect.SimpleConnect("everybody-edits-su9rn58o40itdbnw69plyw", email, pass);
                     Variables.con = Variables.client.Multiplayer.JoinRoom(idofworld, null);
                     Variables.con.OnMessage += new MessageReceivedEventHandler(onMessage);
-                    SDKClient = new FluidClient(new Fluid.Auth.SimpleAuth(email, pass));
-                    SDKClient.Config.AuthRoom = idofworld;
-                    SDKClient.Config.GameID = "everybody-edits-su9rn58o40itdbnw69plyw";
                 }
                 catch (PlayerIOError error)
                 {
@@ -208,9 +202,6 @@ namespace R42Bot
                     Variables.client = PlayerIO.QuickConnect.FacebookOAuthConnect("everybody-edits-su9rn58o40itdbnw69plyw", email, "");
                     Variables.con = Variables.client.Multiplayer.JoinRoom(idofworld, null);
                     Variables.con.OnMessage += new MessageReceivedEventHandler(onMessage);
-                    SDKClient = new FluidClient(new Fluid.Auth.FacebookAuth(email));
-                    SDKClient.Config.AuthRoom = idofworld;
-                    SDKClient.Config.GameID = "everybody-edits-su9rn58o40itdbnw69plyw";
                 }
                 catch (PlayerIOError error)
                 {
@@ -264,7 +255,6 @@ namespace R42Bot
                                 Variables.blockIDs[chunk.Layer, pos.X, pos.Y] = chunk.Type;
                             }
                         }
-                        IOSnakeClient.Connection.DefineConnection.Define(Variables.con, codebox.Text); //Prototype IOSnake Add-In v-0.0.1 Initial Release Script Version 2
 
                         //Read(m, 20);//18);
                     }
@@ -290,32 +280,10 @@ namespace R42Bot
                     }
                     return;
                 case "access":
-                    if (enus.Checked)
-                    {
-                        Variables.con.Send("say", "[R42Bot++] Got Edit.");
-                    }
-                    else if (ptbr.Checked)
-                    {
-                        Variables.con.Send("say", "[R42Bot++] Código recebido.");
-                    }
-                    else if (ltu.Checked)
-                    {
-
-                    }
+                    Variables.con.Send("say", Voids.GetLangFile(Variables.CurrentLang, 74));
                     return;
                 case "lostaccess":
-                    if (enus.Checked)
-                    {
-                        Variables.con.Send("say", "[R42Bot++] Lost Edit.");
-                    }
-                    else if (ptbr.Checked)
-                    {
-                        Variables.con.Send("say", "[R42Bot++] Código perdido.");
-                    }
-                    else if (ltu.Checked)
-                    {
-
-                    }
+                    Variables.con.Send("say", Voids.GetLangFile(Variables.CurrentLang, 75));
                     return;
                 case "left":
                     if (!kJoiners.Checked)
@@ -1284,7 +1252,7 @@ namespace R42Bot
                                                         #region BOT LOG
                                                         DefineLogZones();
                                                         Thread.Sleep(250);
-                                                        log1.Text = "1. " + Variables.names[m.GetInt(0)].ToUpper() + " " + Voids.GetLangFile(Variables.CurrentLang, 104);
+                                                        log1.Text = "1. " + Variables.names[m.GetInt(0)].ToUpper() + " " + Voids.GetLangFile(Variables.CurrentLang, 102);
                                                         #endregion
                                                     }
                                                     else
@@ -1409,6 +1377,11 @@ namespace R42Bot
                                             });
                                             Thread.Sleep(250);
                                             Variables.con.Send("say", "/pm " + Variables.names[m.GetInt(0)] + "  Done reverting [" + revertin + "]!");
+                                            #region BOT LOG
+                                            DefineLogZones();
+                                            Thread.Sleep(250);
+                                            log1.Text = "1. " + Variables.names[m.GetInt(0)].ToUpper() + " reverted " + Voids.Shortest(revertin).ToUpper() + "'s work.";
+                                            #endregion
 
                                             //for (int test = 0; test < block.Length; test++)
                                             //{
@@ -1501,7 +1474,7 @@ namespace R42Bot
                                     }
                                     else
                                     {
-                                        Variables.con.Send("say", "/pm " + Variables.names[m.GetInt(0)] + " " + Voids.GetLangFile(Variables.CurrentLang, 104));
+                                        Variables.con.Send("say", "/pm " + Variables.names[m.GetInt(0)] + " " + Voids.GetLangFile(Variables.CurrentLang, 102));
                                     }
                                 }
                                 else if (Variables.str.StartsWith("!admins"))
@@ -1633,7 +1606,7 @@ namespace R42Bot
                                         }
                                         else
                                         {
-                                            Variables.con.Send("say", "/pm " + Variables.names[m.GetInt(0)] + " " + Voids.GetLangFile(Variables.CurrentLang, 104));
+                                            Variables.con.Send("say", "/pm " + Variables.names[m.GetInt(0)] + " " + Voids.GetLangFile(Variables.CurrentLang, 102));
                                         }
                                     }
                                     else
@@ -1707,7 +1680,7 @@ namespace R42Bot
                                     }
                                     else
                                     {
-                                        Variables.con.Send("say", "/pm " + Variables.names[m.GetInt(0)] + " " + Voids.GetLangFile(Variables.CurrentLang, 104));
+                                        Variables.con.Send("say", "/pm " + Variables.names[m.GetInt(0)] + " " + Voids.GetLangFile(Variables.CurrentLang, 102));
                                     }
                                 }
                                 else if (Variables.str.StartsWith("!say "))
@@ -2230,7 +2203,7 @@ namespace R42Bot
                                         }
                                         else
                                         {
-                                            Variables.con.Send("say", "/pm " + Variables.names[m.GetInt(0)] + " " + Voids.GetLangFile(Variables.CurrentLang, 104));
+                                            Variables.con.Send("say", "/pm " + Variables.names[m.GetInt(0)] + " " + Voids.GetLangFile(Variables.CurrentLang, 102));
                                         }
                                     }
                                     else
@@ -2264,7 +2237,7 @@ namespace R42Bot
                                         }
                                         else
                                         {
-                                            Variables.con.Send("say", "/pm " + Variables.names[m.GetInt(0)] + " " + Voids.GetLangFile(Variables.CurrentLang, 104));
+                                            Variables.con.Send("say", "/pm " + Variables.names[m.GetInt(0)] + " " + Voids.GetLangFile(Variables.CurrentLang, 102));
                                         }
                                     }
                                     else
@@ -2519,6 +2492,29 @@ namespace R42Bot
                 textBox1.Text = info.Data3;
                 textBox4.Text = info.Data4;
             }
+
+            if (File.Exists("R42Bot++LanguageFile.xml"))
+            {
+                XmlSerializer xs = new XmlSerializer(typeof(Information));
+                FileStream read = new FileStream("R42Bot++LanguageFile.xml", FileMode.Open, FileAccess.Read, FileShare.Read);
+                Information info = (Information)xs.Deserialize(read);
+                if (info.language == "enUS")
+                {
+                    enus.Checked = true;
+                }
+                else if (info.language == "ptbr")
+                {
+                    ptbr.Checked = true;
+                }
+                else if (info.language == "ltu")
+                {
+                    ltu.Checked = true;
+                }
+                else if (info.language == "dutch")
+                {
+                    dutchCBOX.Checked = true;
+                }
+            }
             Thread.Sleep(250);
             #region restriction commands
             #region /respawn
@@ -2532,39 +2528,6 @@ namespace R42Bot
 
             Variables.BuildVersion = R42Bot.Properties.Settings.Default.Build;
             Version.upgradedBuild = new System.Net.WebClient().DownloadString(Version.buildlink);
-
-            if (enus.Checked == true)
-            {
-                this.Text = this.Text + Version.version + " BUILD " + R42Bot.Properties.Settings.Default.Build.ToString();
-            }
-            else if (ptbr.Checked == true)
-            {
-                this.Text = this.Text + Version.version + " CONSTRUÇÃO " + R42Bot.Properties.Settings.Default.Build.ToString();
-            }
-            else if (ltu.Checked == true)
-            {
-                this.Text = this.Text + Version.version + " LTU_BUILD " + R42Bot.Properties.Settings.Default.Build.ToString();
-            }
-            Version.UpToDate = Voids.GetLangFile(Variables.CurrentLang, 100).Replace("(V)", Version.version);
-            Version.OutOfDate = Voids.GetLangFile(Variables.CurrentLang, 98).Replace("(V)", Version.version).Replace("[V]", new System.Net.WebClient().DownloadString(Version.versionlink));
-            Version.OutOfDateBuild = Voids.GetLangFile(Variables.CurrentLang, 99).Replace("(B)", Variables.BuildVersion.ToString()).Replace("[B]", new System.Net.WebClient().DownloadString(Version.buildlink));
-
-            if (new System.Net.WebClient().DownloadString(Version.versionlink) != Version.version)
-            {
-                Version.upgradedVersion = new System.Net.WebClient().DownloadString(Version.versionlink);
-                label48.Text = Version.OutOfDate;
-            }
-            else if (new System.Net.WebClient().DownloadString(Version.buildlink) != Variables.BuildVersion.ToString())
-            {
-                Version.upgradedBuild = new System.Net.WebClient().DownloadString(Version.buildlink);
-                label48.Text = Version.OutOfDateBuild;
-            }
-            else
-            {
-                label48.Visible = true;
-                label48.ForeColor = Color.DarkOliveGreen;
-                label48.Text = Version.UpToDate;
-            }
         }
 
         private void enus_CheckedChanged(object sender, EventArgs e)
@@ -2572,18 +2535,16 @@ namespace R42Bot
             if (enus.Checked == true)
             {
                 MessageBox.Show("Language is now EU/US!", "R42Bot++ v" + Version.version + " System");
-                CallsSettings.Language.USA = true;
-                CallsSettings.Language.PT = false;
-                CallsSettings.Language.LTU = false;
                 Variables.CurrentLang = "enUS";
                 ltu.Checked = false;
                 ptbr.Checked = false;
-                Translate();
+                dutchCBOX.Checked = false;
+                //Translate();
             }
-            else if (!ptbr.Checked && !ltu.Checked)
+            else if (!ptbr.Checked && !ltu.Checked && !dutchCBOX.Checked)
             {
                 enus.Checked = true;
-                Translate();
+                //Translate();
             }
         }
 
@@ -2591,19 +2552,17 @@ namespace R42Bot
         {
             if (ptbr.Checked == true)
             {
-                MessageBox.Show("A Linguagem é PT/BR agora.", "R42Bot++ v" + Version.version + " System");
-                CallsSettings.Language.USA = false;
-                CallsSettings.Language.PT = true;
-                CallsSettings.Language.LTU = false;
+                MessageBox.Show("A Linguagem é agora português.", "R42Bot++ v" + Version.version + " System");
                 Variables.CurrentLang = "ptbr";
                 ltu.Checked = false;
                 enus.Checked = false;
-                Translate();
+                dutchCBOX.Checked = false;
+                //Translate();
             }
-            else if (!enus.Checked && !ltu.Checked)
+            else if (!enus.Checked && !ltu.Checked && !dutchCBOX.Checked)
             {
                 enus.Checked = true;
-                Translate();
+                //Translate();
             }
         }
 
@@ -2671,18 +2630,7 @@ namespace R42Bot
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (enus.Checked)
-            {
-                Console.WriteLine("...S M I L E Y  C H A N G E R  C H O O S E  C H A N G E D...");
-            }
-            else if (ptbr.Checked)
-            {
-                Console.WriteLine("...E S C O L H A  D O  M U D A D O R  D E  S M I L E Y S  M U D A D A...");
-            }
-            else if (ltu.Checked)
-            {
-                Console.WriteLine("...S M A I L U  K E I T E J O  P A S I R I N K T I S  P A K E I S T A...");
-            }
+            Console.WriteLine(Voids.GetLangFile(Variables.CurrentLang, 102));
         }
 
         private void autochangerface_Tick(object sender, EventArgs e)
@@ -2706,18 +2654,7 @@ namespace R42Bot
                 {
                     if (!Admins.Items.Contains(kicking.username))
                     {
-                        if (enus.Checked)
-                        {
-                            Variables.con.Send("say", "/kick " + kicking.username + " [R42Bot++] Autokick enabled.");
-                        }
-                        else if (ptbr.Checked)
-                        {
-                            Variables.con.Send("say", "/kick " + kicking.username + " [R42Bot++] Tirar do mapa automaticamente ativado.");
-                        }
-                        else if (ltu.Checked)
-                        {
-                            Variables.con.Send("say", "/kick " + kicking.username + " [R42Bot++] auto-Ispirimas ijungtas");
-                        }
+                        Variables.con.Send("say", "/kick " + kicking.username + " " + Voids.GetLangFile(Variables.CurrentLang, 101));
                         Thread.Sleep(200);
                     }
                 }
@@ -2733,18 +2670,7 @@ namespace R42Bot
                 Variables.con.Send("say", "/reset");
                 if (autoresetmsg.Checked)
                 {
-                    if (enus.Checked)
-                    {
-                        Variables.con.Send("say", "[R42Bot++] World reseted. Reseting marked for every " + msdelay + " ms!");
-                    }
-                    else if (ptbr.Checked)
-                    {
-                        Variables.con.Send("say", "[R42Bot++] Mundo resetado. «Reseting» marcado para cada " + msdelay + " ms!");
-                    }
-                    else if (ltu.Checked)
-                    {
-                        Variables.con.Send("say", "[R42Bot++] pasaulis restartoutas, nustatyta kiekvienai " + msdelay + " milisekundziu!");
-                    }
+                    Variables.con.Send("say", Voids.GetLangFile(Variables.CurrentLang, 100));
                 }
             }
         }
@@ -3190,18 +3116,16 @@ namespace R42Bot
             if (ltu.Checked == true)
             {
                 MessageBox.Show("Kalba dabar yra LTU/LT", "R42Bot++ v" + Version.version + " sistema");
-                CallsSettings.Language.USA = false;
-                CallsSettings.Language.PT = false;
-                CallsSettings.Language.LTU = true;
                 Variables.CurrentLang = "ltu";
                 enus.Checked = false;
                 ptbr.Checked = false;
-                Translate();
+                dutchCBOX.Checked = false;
+                //Translate();
             }
-            else if (!ptbr.Checked && !enus.Checked)
+            else if (!ptbr.Checked && !enus.Checked && !dutchCBOX.Checked)
             {
                 enus.Checked = true;
-                Translate();
+                //Translate();
             }
         }
 
@@ -3482,6 +3406,78 @@ namespace R42Bot
                 Gen_RB.Stop();
                 Gen_RB.Enabled = false;
             });
+        }
+
+        private void dutchCBOX_CheckedChanged(object sender, EventArgs e)
+        {
+            if (dutchCBOX.Checked == true)
+            {
+                MessageBox.Show("Je taal is nu Nederlands.", "R42Bot++ v" + Version.version + Voids.GetLangFile("dutch", 96));
+                Variables.CurrentLang = "dutch";
+                enus.Checked = false;
+                ptbr.Checked = false;
+                ltu.Checked = false;
+                //Translate();
+            }
+            else if (!ptbr.Checked && !enus.Checked && !ltu.Checked)
+            {
+                enus.Checked = true;
+                //Translate();
+            }
+        }
+
+        private void AutoFixBot_Tick(object sender, EventArgs e)
+        {
+            ThreadPool.QueueUserWorkItem(delegate
+            {
+                this.Text = "R42Bot++ v" + Version.version + " " + Voids.GetLangFile(Variables.CurrentLang, 99) + " " + R42Bot.Properties.Settings.Default.Build.ToString();
+                Version.UpToDate = Voids.GetLangFile(Variables.CurrentLang, 98).Replace("(V)", Version.version);
+                Version.OutOfDate = Voids.GetLangFile(Variables.CurrentLang, 96).Replace("(V)", Version.version).Replace("[V]", new System.Net.WebClient().DownloadString(Version.versionlink));
+                Version.OutOfDateBuild = Voids.GetLangFile(Variables.CurrentLang, 97).Replace("(B)", Variables.BuildVersion.ToString()).Replace("[B]", new System.Net.WebClient().DownloadString(Version.buildlink));
+
+                if (new System.Net.WebClient().DownloadString(Version.versionlink) != Version.version)
+                {
+                    Version.upgradedVersion = new System.Net.WebClient().DownloadString(Version.versionlink);
+                    label48.Text = Version.OutOfDate;
+                }
+                else if (new System.Net.WebClient().DownloadString(Version.buildlink) != Variables.BuildVersion.ToString())
+                {
+                    Version.upgradedBuild = new System.Net.WebClient().DownloadString(Version.buildlink);
+                    label48.Text = Version.OutOfDateBuild;
+                }
+                else
+                {
+                    label48.Visible = true;
+                    label48.ForeColor = Color.DarkOliveGreen;
+                    label48.Text = Version.UpToDate;
+                }
+                Thread.Sleep(100);
+            });
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            AutoFixBot.Stop();
+            AutoFixBot.Enabled = false;
+            Gen_RB.Stop();
+            Gen_RB.Enabled = false;
+            BlockPlacer.Stop();
+            BlockPlacer.Enabled = false;
+        }
+
+        private void saveLang_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // /respawn
+                Information info = new Information();
+                info.language = Variables.CurrentLang;
+                Class1.SaveData(info, "R42Bot++LanguageFile.xml");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
