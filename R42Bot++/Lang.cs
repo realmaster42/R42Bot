@@ -330,7 +330,7 @@ namespace R42Bot
 
                 "commando niet ingeschakeld.",
 
-                "error" // remember to keep the space
+                " won! Hij/Zij heeft nu (W) keer gewonnen!" // remember to keep the space
             };
         }
         public partial class PT

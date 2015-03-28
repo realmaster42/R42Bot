@@ -22,3 +22,4 @@ C:\Users\MarcoAntonio\Documents\Visual Studio 2015\Projects\WindowsFormsApplicat
 C:\Users\MarcoAntonio\Documents\Visual Studio 2015\Projects\WindowsFormsApplication12\WindowsFormsApplication12\bin\Debug\PcapDotNet.Base.xml
 C:\Users\MarcoAntonio\Documents\Visual Studio 2015\Projects\WindowsFormsApplication12\WindowsFormsApplication12\bin\Debug\PcapDotNet.Packets.pdb
 C:\Users\MarcoAntonio\Documents\Visual Studio 2015\Projects\WindowsFormsApplication12\WindowsFormsApplication12\bin\Debug\PcapDotNet.Packets.xml
+C:\Users\MarcoAntonio\Documents\Visual Studio 2015\Projects\WindowsFormsApplication12\WindowsFormsApplication12\obj\Debug\R42BotPLUSplus.csprojResolveAssemblyReference.cache

@@ -1995,6 +1995,7 @@
             this.BanButton.TabIndex = 17;
             this.BanButton.Text = "Ban";
             this.BanButton.UseVisualStyleBackColor = true;
+            this.BanButton.Click += new System.EventHandler(this.BanButton_Click);
             // 
             // unbanTxtBox
             // 

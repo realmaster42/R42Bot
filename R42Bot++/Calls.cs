@@ -23,6 +23,7 @@ namespace R42Bot
             Welcome_Text_2 = "";
         public static string Goodbye_Text = "",
             Goodbye_Text_2 = "";
+        public static List<string> Bans = new List<string> { };
     }
     public partial class Calls
     {
@@ -69,26 +70,30 @@ namespace R42Bot
                     {
                         if (CallsSettings.AllowJoiners)
                         {
+                            Variables.player[m.GetInt(0)].isBot = (m.GetString(1).ToString().Contains("bot")) ? true : false;
                             if (!Variables.names.ContainsKey(m.GetInt(0)))
                                 Variables.names.Add(m.GetInt(0), m.GetString(1));
                             else
                                 if (CallsSettings.KickBots) { Thread.Sleep(200); Variables.con.Send("say", "/kick " + m.GetString(1) + " Bots dissallowed!"); }else { Variables.player[m.GetInt(0)].isBot = true; }
                             Variables.player[m.GetInt(0)].isGuest = (m.GetString(1).ToString().StartsWith("guest-")) ? true : false;
-                            Variables.player[m.GetInt(0)].isBot = (m.GetString(1).ToString().Contains("bot")) ? true : false;
                             if (CallsSettings.FreeEdit)
                             {
                                 if (Variables.names[m.GetInt(0)] != Variables.botName)
                                 {
-                                    Thread.Sleep(400);
+                                    Thread.Sleep(355);
                                     Variables.con.Send("say", "/giveedit " + Variables.names[m.GetInt(0)].ToString());
-                                    Thread.Sleep(400);
+                                    Thread.Sleep(355);
                                 }
+                            }
+                            if (CallsSettings.Bans.Contains(Variables.names[m.GetInt(0)]))
+                            {
+                                Variables.con.Send("say", "/kick " + Variables.names[m.GetInt(0)] + " [R42Bot++] You have been banned by world owner.");
                             }
                             Variables.player[m.GetInt(0)].username = Variables.names[m.GetInt(0)].ToString();
 
                             if (CallsSettings.Welcome)
                             {
-                                if (Variables.names[m.GetInt(0)] != Variables.botName)
+                                if (Variables.names[m.GetInt(0)] != Variables.botName && !CallsSettings.Bans.Contains(Variables.names[m.GetInt(0)]))
                                 {
                                     if (!CallsSettings.Welcome_Upper)
                                     {
@@ -132,7 +137,7 @@ namespace R42Bot
                     {
                         if (CallsSettings.Goodbye)
                         {
-                            if (Variables.names[m.GetInt(0)] != Variables.botName)
+                            if (Variables.names[m.GetInt(0)] != Variables.botName && !CallsSettings.Bans.Contains(Variables.names[m.GetInt(0)]))
                             {
                                 if (!CallsSettings.Goodbye_Upper)
                                 {

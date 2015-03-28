@@ -322,7 +322,7 @@ namespace R42Bot
                         #region purple glass explosion
                         if (pgebc.Checked)
                         {
-                            if (blockID == 52)
+                            if (blockID == 53)
                             {
                                     bool ExplodePink = pgeb100loldo.Checked;
                                     Variables.con.Send(Variables.worldKey, new object[] { 0, Variables.ax, Variables.ay, 0 });
@@ -3422,14 +3422,30 @@ namespace R42Bot
 
         private void UnBanButton_Click(object sender, EventArgs e)
         {
-            if (banList.Items.Contains(unbanTxtBox))
+            if (banList.Items.Contains(unbanTxtBox.Text))
             {
-
+                banList.Items.Remove(unbanTxtBox.Text);
+                CallsSettings.Bans.Remove(unbanTxtBox.Text);
             }
             else
             {
                 unbanTxtBox.Clear();
                 MessageBox.Show("User not banned.", "R42Bot++ System");
+            }
+        }
+
+        private void BanButton_Click(object sender, EventArgs e)
+        {
+            if (!banList.Items.Contains(banTxtBox.Text))
+            {
+                banList.Items.Add(banTxtBox.Text);
+                CallsSettings.Bans.Add(banTxtBox.Text);
+                banTxtBox.Clear();
+            }
+            else
+            {
+                banTxtBox.Clear();
+                MessageBox.Show("User already banned.", "R42Bot++ System");
             }
         }
     }
