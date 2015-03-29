@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace R42Bot.Properties {
+namespace WindowsFormsApplication2.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -20,18 +20,6 @@ namespace R42Bot.Properties {
         public static Settings Default {
             get {
                 return defaultInstance;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("46")]
-        public int Build {
-            get {
-                return ((int)(this["Build"]));
-            }
-            set {
-                this["Build"] = value;
             }
         }
     }
