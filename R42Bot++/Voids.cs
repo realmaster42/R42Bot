@@ -70,7 +70,7 @@ namespace R42Bot
             }
             else if (LangType == "ltu")
             {
-                return Lang.En.Organizate[FileId - 1];
+                return Lang.LTU.Organizate[FileId - 1];
             }
             else if (LangType == "dutch")
             {

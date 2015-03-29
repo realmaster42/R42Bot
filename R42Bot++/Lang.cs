@@ -545,6 +545,255 @@ namespace R42Bot
                 " ganhou! Agora ele(a) tem (W) vitórias!" // remember to keep the space
                 };
         }
+        public partial class LTU
+        {
+            public static readonly List<string> Organizate = new List<string>
+            {
+
+
+                //Translated by 100lol
+
+
+                "Dabar tavo kalba yra EU/US!",
+
+    "Sveiki visi kurie atejo i si pasauli",
+
+    "sveikas atvikes(-ikusi) i si pasauli, ", // remember to keep the space
+
+                "pasakik kaska kai kaskas iseina is pasaulio.",
+
+    "Au... ", // remember to keep the space
+
+                " Paliko mus atgalios...", // remember to keep the space
+
+                "pasaulio ID",
+
+    "Prideti",
+
+    "Atimti",
+
+    "ne-caps",
+
+    "caps",
+
+    "ne-caps",
+
+    "caps",
+
+    "kodas",
+
+
+                //Bot application texts
+
+
+                "hmm... botui reikia admino kad veiktu geriausiai.",
+
+    "pasveikinimo zinute",
+
+    "zinute",
+
+    "tekstas to vardo.",
+
+    "kalba:",
+
+    "isejimo naudotojas:",
+
+    "pasveikinimo naudotojas:",
+
+    "Tiktai pasirink viena veiksma isejimo ir atvikimo zinutem. (of username)",
+
+    ">",
+
+
+                //Checkboxes
+
+
+                "laimejimo SYSTEMA",
+
+    "ispirti atvikelius",
+
+    "ispirti botus",
+
+    "Nemokamas Admin",
+
+    "nemokamas Edit",
+
+    "Smailo Borderis",
+
+    "vandens dejejas",
+
+    "pildoma",
+
+    "slapias smelis",
+
+    "valpaperio istrinimas",
+
+    "PM rezultatas",
+
+    "Leisti sniukstinejima.",
+
+    "auto-pakeisti ':)' -> ':('",
+
+    "Vaivorikstine paprasta gyvate",
+
+    "Greita Vaivorikstine paprasta gyvate",
+
+    "normali paprasta gyvate",
+
+    "greita normali paprasta gyvate",
+
+    "vaivorykstiniu mineralu gyvate",
+
+    "Greita vaivorykstiniu mineralu gyvate",
+
+    "Normali mineralu gyvate",
+
+    "Greita normali mineralu gyvate",
+
+    "Auto-restartuoti",
+
+    "Auto restartavimo zinute",
+
+    "Ruzavo stiklo susprogimas",
+
+    "istrinti tiktai",
+
+    "orginalus",
+
+    "Lavos gyvate",
+
+    "leisti",
+
+
+                //Buttons & Labels
+
+
+                "kustumazuoti",
+
+    "orginalus",
+
+    "valpaperio spalva:",
+
+    "dabartinis:",
+
+    "atsijungti",
+
+    "sakyti!",
+
+    "Bloko ID:",
+
+    "Pasalintisniukstinejantivienas",
+
+    "issaugoti 'leisti sniukstineti' data",
+
+    "ismarginti!",
+
+    "Auto-Restartavimo laikas (milisekundemis)",
+
+    "Dabartinis poll'as:",
+
+    "Poll'o Starteris:",
+
+    "pasirinkimas 1:",
+
+    "pasirinkimas 2:",
+
+    "pasirinkimas 3:",
+
+    "balsai:",
+
+    "BotoLogas",
+
+
+                //Connection
+
+
+                "[R42Bot++] R42Bot++ versija (V) buvo prijungta sekmingai! :)",
+
+    "tu esi istremtas is sio pasaulio!!!",
+
+    "[R42Bot++] Iki, naudotojau kuris naudoja mane yra istremtas! :D",
+
+    "[R42Bot++] atvikimas uzdraustas.",
+
+    "[R42Bot++] Gavo redaugavimo teises.",
+
+    "[R42Bot++] Prarado redaugavimo teises.",
+
+    "prisijungti",
+
+    "atsijungta.",
+
+    "Sistema",
+
+    "Emailas, slaptazodis ir pasaulio ID turi buti uzpilditi!",
+
+    "zetono ID ir pasaulio ID turi buti uzpilditi!",
+
+
+
+                //Tabs
+
+
+                "Indeksas",
+
+    "pasirinkimas",
+
+    "Naujienos",
+
+    "patirusiuju pasirinkimai",
+
+    "AutoStatytojas",
+
+    "sniustinejimoJudejimas",
+
+    "Smailu keiteliotojas",
+
+    "gyvates",
+
+    "Auto...",
+
+    "poll'ai",
+
+    "naudotoju idejos",
+
+    "daugiau",
+
+    "komandu limitai",
+
+    "redauguoti...",
+
+    "boto sistema",
+
+    "istremtuju sarasas",
+
+
+                //News Tab
+
+
+                "Tavo R42Bot++ versija (V) yra per senas! naujausia versija yra [V] ! ",
+
+    "Tavo R42Bot++ statinys (B) yra per senas! naujausia versija yra [B] ! ",
+
+    "Tavo R42Bot++ versija (V) ir yra iki pagalinimo.",
+
+    "statyti",
+
+
+                //Special
+
+
+                "[R42Bot++] Pasaulis restartuotas. restartavimas pazimetas kiekvienom (X) milisekundem!",
+
+    "[R42Bot++] Autoispirimas leidziamas.",
+
+    "...s m a i l u   k e i t e l i o t o j o   p a s i r i n k i m a s   p a k e i s t a s...",
+
+    "komanda neleidziama.",
+
+    " leimejimas! dabar ji/jis turi (W) laimejimu!" // remember to keep the space
+            };
+        }
     }
 }
 

@@ -183,7 +183,7 @@
             this.BanButton = new System.Windows.Forms.Button();
             this.unbanTxtBox = new System.Windows.Forms.TextBox();
             this.banTxtBox = new System.Windows.Forms.TextBox();
-            this.banList = new System.Windows.Forms.ListBox();
+            this.bansList = new System.Windows.Forms.ListBox();
             this.label41 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
             this.label39 = new System.Windows.Forms.Label();
@@ -1955,7 +1955,7 @@
             this.tabPage7.Controls.Add(this.BanButton);
             this.tabPage7.Controls.Add(this.unbanTxtBox);
             this.tabPage7.Controls.Add(this.banTxtBox);
-            this.tabPage7.Controls.Add(this.banList);
+            this.tabPage7.Controls.Add(this.bansList);
             this.tabPage7.Controls.Add(this.label41);
             this.tabPage7.Controls.Add(this.label40);
             this.tabPage7.Controls.Add(this.label39);
@@ -2011,13 +2011,13 @@
             this.banTxtBox.Size = new System.Drawing.Size(120, 20);
             this.banTxtBox.TabIndex = 15;
             // 
-            // banList
+            // bansList
             // 
-            this.banList.FormattingEnabled = true;
-            this.banList.Location = new System.Drawing.Point(159, 29);
-            this.banList.Name = "banList";
-            this.banList.Size = new System.Drawing.Size(202, 82);
-            this.banList.TabIndex = 14;
+            this.bansList.FormattingEnabled = true;
+            this.bansList.Location = new System.Drawing.Point(159, 29);
+            this.bansList.Name = "banList";
+            this.bansList.Size = new System.Drawing.Size(202, 82);
+            this.bansList.TabIndex = 14;
             // 
             // label41
             // 
@@ -2445,7 +2445,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(815, 361);
             this.Controls.Add(this.firstTabControler);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "R42Bot++ v";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -2690,7 +2689,7 @@
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.TextBox unbanTxtBox;
         private System.Windows.Forms.TextBox banTxtBox;
-        private System.Windows.Forms.ListBox banList;
+        private System.Windows.Forms.ListBox bansList;
         private System.Windows.Forms.Button UnBanButton;
         private System.Windows.Forms.Button BanButton;
     }
