@@ -24,7 +24,7 @@ namespace R42Bot
 
     public partial class Form1 : Form
     {
-        public static string nBuild = "84";
+        public static string nBuild = "85";
         public static ColorDialog c = new ColorDialog();
 
         public static Connection con;
@@ -2567,9 +2567,9 @@ namespace R42Bot
         {
             if (File.Exists("StalkInfo.xml"))
             {
-                XmlSerializer xs = new XmlSerializer(typeof(Information));
-                FileStream read = new FileStream("StalkInfo.xml", FileMode.Open, FileAccess.Read, FileShare.Read);
-                Information info = (Information)xs.Deserialize(read);
+                var xs = new XmlSerializer(typeof(Information));
+                var read = new FileStream("StalkInfo.xml", FileMode.Open, FileAccess.Read, FileShare.Read);
+                var info = (Information)xs.Deserialize(read);
                 if (info.Data5 == "r0")
                 {
                     alstalking.Checked = false;
@@ -2581,9 +2581,9 @@ namespace R42Bot
             }
             if (File.Exists("R42Bot++Customization.xml"))
             {
-                XmlSerializer xs = new XmlSerializer(typeof(Information));
-                FileStream read = new FileStream("R42Bot++Customization.xml", FileMode.Open, FileAccess.Read, FileShare.Read);
-                Information info = (Information)xs.Deserialize(read);
+                var xs = new XmlSerializer(typeof(Information));
+                var read = new FileStream("R42Bot++Customization.xml", FileMode.Open, FileAccess.Read, FileShare.Read);
+                var info = (Information)xs.Deserialize(read);
                 #region Color Changer
                 if (info.Color1 == Color.White)
                 {
@@ -2624,9 +2624,9 @@ namespace R42Bot
 
             if (File.Exists("R42Bot++SavedData.xml"))
             {
-                XmlSerializer xs = new XmlSerializer(typeof(Information));
-                FileStream read = new FileStream("R42Bot++SavedData.xml", FileMode.Open, FileAccess.Read, FileShare.Read);
-                Information info = (Information)xs.Deserialize(read);
+                var xs = new XmlSerializer(typeof(Information));
+                var read = new FileStream("R42Bot++SavedData.xml", FileMode.Open, FileAccess.Read, FileShare.Read);
+                var info = (Information)xs.Deserialize(read);
                 textBox2.Text = info.Data1;
                 textBox3.Text = info.Data2;
                 textBox1.Text = info.Data3;
@@ -2635,9 +2635,9 @@ namespace R42Bot
 
             if (File.Exists("R42Bot++LanguageFile.xml"))
             {
-                XmlSerializer xs = new XmlSerializer(typeof(Information));
-                FileStream read = new FileStream("R42Bot++LanguageFile.xml", FileMode.Open, FileAccess.Read, FileShare.Read);
-                Information info = (Information)xs.Deserialize(read);
+                var xs = new XmlSerializer(typeof(Information));
+                var read = new FileStream("R42Bot++LanguageFile.xml", FileMode.Open, FileAccess.Read, FileShare.Read);
+                var info = (Information)xs.Deserialize(read);
                 if (info.language == "enUS")
                 {
                     enus.Checked = true;
@@ -2900,7 +2900,7 @@ namespace R42Bot
             try
             {
                 // /respawn
-                Information info = new Information();
+                var info = new Information();
                 info.Data1 = textBox2.Text;
                 info.Data2 = textBox3.Text;
                 info.Data3 = textBox1.Text;
@@ -2933,7 +2933,7 @@ namespace R42Bot
             try
             {
                 // /respawn
-                Information info = new Information();
+                var info = new Information();
                 if (currentColor.Text == "Default")
                 {
                     info.Color1 = Color.White;
@@ -3004,7 +3004,7 @@ namespace R42Bot
             try
             {
                 // /respawn
-                Information info = new Information();
+                var info = new Information();
                 info.Data5 = (textBox5.Text == "r0") ? "r0" : "r1";
                 Class1.SaveData(info, "StalkInfo.xml");
             }
@@ -3146,7 +3146,7 @@ namespace R42Bot
         {
             try
             {
-                Information info = new Information();
+                var info = new Information();
                 ListBox.ObjectCollection items = Admins.Items;
                 string[] Items1 = new string[] { };
                 for (int i = 1; i < items.Count; i++)
@@ -3166,9 +3166,9 @@ namespace R42Bot
         {
             if (File.Exists("R42Bot++Admins.xml"))
             {
-                XmlSerializer xs = new XmlSerializer(typeof(Information));
-                FileStream read = new FileStream("R42Bot++Admins.xml", FileMode.Open, FileAccess.Read, FileShare.Read);
-                Information info = (Information)xs.Deserialize(read);
+                var xs = new XmlSerializer(typeof(Information));
+                var read = new FileStream("R42Bot++Admins.xml", FileMode.Open, FileAccess.Read, FileShare.Read);
+                var info = (Information)xs.Deserialize(read);
 
                 for (int i = 1; i < info.Admins.Length; i++)
                 {
@@ -3628,7 +3628,7 @@ namespace R42Bot
             try
             {
                 // /respawn
-                Information info = new Information();
+                var info = new Information();
                 info.language = CurrentLang;
                 Class1.SaveData(info, "R42Bot++LanguageFile.xml");
             }
