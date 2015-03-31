@@ -24,7 +24,7 @@ namespace R42Bot
 
     public partial class Form1 : Form
     {
-        public static string nBuild = "85";
+        public static string nBuild = "86";
         public static ColorDialog c = new ColorDialog();
 
         public static Connection con;
@@ -45,7 +45,6 @@ namespace R42Bot
         public static uint[,,] blockIDs;
         public static string[,,] blockPLACERs;
 
-        public static GetBlock[,] block;
         public static int[] blockMoverArray = new int[] { 12 };
         public static bool isFG = false,
             botIsPlacing = false,
@@ -253,8 +252,6 @@ namespace R42Bot
                         {
                             names.Add(m.GetInt(6), botName);
                         }
-
-                        block = new GetBlock[worldWidth, worldHeight];
                         if (banList.Contains(botName))
                         {
                             MessageBox.Show(Voids.GetLangFile(CurrentLang, 71), "R42Bot++ v" + Version.version + " System");
