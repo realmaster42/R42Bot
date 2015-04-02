@@ -24,7 +24,7 @@ namespace R42Bot
 
     public partial class Form1 : Form
     {
-        public static string nBuild = "86";
+        public static string nBuild = "87";
         public static ColorDialog c = new ColorDialog();
 
         public static Connection con;
@@ -1294,7 +1294,7 @@ namespace R42Bot
                             {
                                 if (stalkMover.Text.Contains(names[m.GetInt(0)]))
                                 {
-                                    con.Send("m", m.GetDouble(1), m.GetDouble(2), m.GetDouble(3), m.GetDouble(4), m.GetDouble(5), m.GetDouble(6), m.GetDouble(7), m.GetDouble(8), m.GetInt(9), m.GetBoolean(10), m.GetBoolean(11));
+                                    con.Send("m", m.GetDouble(1), m.GetDouble(2), m.GetDouble(3), m.GetDouble(4), m.GetDouble(5), m.GetDouble(6), m.GetDouble(7), m.GetDouble(8), m.GetInt(9), m.GetBoolean(10));
                                 }
                             }
                         }
