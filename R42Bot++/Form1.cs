@@ -24,7 +24,7 @@ namespace R42Bot
 
     public partial class Form1 : Form
     {
-        public static string nBuild = "87";
+        public static string nBuild = "93";
         public static ColorDialog c = new ColorDialog();
 
         public static Connection con;
@@ -297,6 +297,7 @@ namespace R42Bot
                 case "add":
                     if (CallsSettings.AllowJoiners)
                     {
+                        player[m.GetInt(0)].userid = m.GetInt(0);
                         player[m.GetInt(0)].isBot = (m.GetString(1).ToString().Contains("bot")) ? true : false;
                         if (!names.ContainsKey(m.GetInt(0)))
                             names.Add(m.GetInt(0), m.GetString(1));
@@ -305,33 +306,33 @@ namespace R42Bot
                         player[m.GetInt(0)].isGuest = (m.GetString(1).ToString().StartsWith("guest-")) ? true : false;
                         if (CallsSettings.FreeEdit)
                         {
-                            if (names[m.GetInt(0)] != botName)
+                            if (m.GetString(1) != botName)
                             {
                                 Thread.Sleep(355);
                                 con.Send("say", "/giveedit " + names[m.GetInt(0)].ToString());
                                 Thread.Sleep(355);
                             }
                         }
-                        if (CallsSettings.Bans.Contains(names[m.GetInt(0)]))
+                        if (CallsSettings.Bans.Contains(m.GetString(1)))
                         {
-                            con.Send("say", "/kick " + names[m.GetInt(0)] + " [R42Bot++] You have been banned by world owner.");
+                            con.Send("say", "/kick " + m.GetString(1) + " [R42Bot++] You have been banned by world owner.");
                         }
-                        player[m.GetInt(0)].username = names[m.GetInt(0)].ToString();
+                        player[m.GetInt(0)].username = m.GetString(1).ToString();
 
                         if (CallsSettings.Welcome)
                         {
-                            if (names[m.GetInt(0)] != botName && !CallsSettings.Bans.Contains(names[m.GetInt(0)]))
+                            if (m.GetString(1) != botName && !CallsSettings.Bans.Contains(m.GetString(1)))
                             {
                                 if (!CallsSettings.Welcome_Upper)
                                 {
                                     Thread.Sleep(200);
-                                    con.Send("say", "[R42Bot++] " + Voids.GetLangFile(CurrentLang, 3) + " " + names[m.GetInt(0)].ToString().ToLower() + CallsSettings.Welcome_Text_2);
+                                    con.Send("say", "/pm " + m.GetString(1) + " [R42Bot++] " + CallsSettings.Welcome_Text + " " + names[m.GetInt(0)].ToString().ToLower() + CallsSettings.Welcome_Text_2);
                                     Thread.Sleep(200);
                                 }
                                 else
                                 {
                                     Thread.Sleep(200);
-                                    con.Send("say", "[R42Bot++] " + Voids.GetLangFile(CurrentLang, 3) + " " + names[m.GetInt(0)].ToString().ToUpper() + CallsSettings.Welcome_Text_2);
+                                    con.Send("say", "/pm " + m.GetString(1) + " [R42Bot++] " + CallsSettings.Welcome_Text + " " + names[m.GetInt(0)].ToString().ToUpper() + CallsSettings.Welcome_Text_2);
                                     Thread.Sleep(200);
                                 }
                             }
@@ -347,9 +348,9 @@ namespace R42Bot
                     if (freeadmin.Checked)
                     {
                         add.Enabled = false;
-                        if (!Admins.Items.Contains(names[m.GetInt(0)]))
+                        if (!Admins.Items.Contains(m.GetString(1)))
                         {
-                            Admins.Items.Add(names[m.GetInt(0)]);
+                            Admins.Items.Add(m.GetString(1));
                         }
                     }
                     else
@@ -375,13 +376,13 @@ namespace R42Bot
                                     if (!CallsSettings.Goodbye_Upper)
                                     {
                                         Thread.Sleep(200);
-                                        con.Send("say", "[R42Bot++] " + Voids.GetLangFile(CurrentLang, 5) + " " + names[m.GetInt(0)].ToString().ToLower() + " " + Voids.GetLangFile(CurrentLang, 6));
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " [R42Bot++] " + CallsSettings.Goodbye_Text + " " + names[m.GetInt(0)].ToString().ToLower() + " " + CallsSettings.Goodbye_Text_2);
                                         Thread.Sleep(200);
                                     }
                                     else
                                     {
                                         Thread.Sleep(200);
-                                        con.Send("say", "[R42Bot++] " + Voids.GetLangFile(CurrentLang, 5) + " " + names[m.GetInt(0)].ToString().ToUpper() + " " + Voids.GetLangFile(CurrentLang, 6));
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " [R42Bot++] " + CallsSettings.Goodbye_Text + " " + names[m.GetInt(0)].ToString().ToUpper() + " " + CallsSettings.Goodbye_Text_2);
                                         Thread.Sleep(200);
                                     }
                                 }
@@ -1288,6 +1289,34 @@ namespace R42Bot
                         int xp = m1 + m5;
                         int yp = m2 + m6;
 
+                        if (m.GetInt(7) == 1 && m.GetInt(8) == 0) // right
+                        {
+                            if (blockEffectsLBOX.Items.Contains(blockIDs[0, X + 1, Y]))
+                            {
+                                con.Send("touch", player[m.GetInt(0)].userid, blockEffectsLBOX.Items[blockEffectsLBOX.Items.IndexOf(blockIDs[0, X + 1, Y]) + 1]);
+                            }
+                        }
+                        else if (m.GetInt(7) == -1 && m.GetInt(8) == 0) // left
+                        {
+                            if (blockEffectsLBOX.Items.Contains(blockIDs[0, X - 1, Y]))
+                            {
+                                con.Send("touch", player[m.GetInt(0)].userid, blockEffectsLBOX.Items[blockEffectsLBOX.Items.IndexOf(blockIDs[0, X - 1, Y]) + 1]);
+                            }
+                        }
+                        else if (m.GetInt(7) == 0 && m.GetInt(8) == 1) // down
+                        {
+                            if (blockEffectsLBOX.Items.Contains(blockIDs[0, X, Y + 1]))
+                            {
+                                con.Send("touch", player[m.GetInt(0)].userid, blockEffectsLBOX.Items[blockEffectsLBOX.Items.IndexOf(blockIDs[0, X, Y + 1]) + 1]);
+                            }
+                        }
+                        else if (m.GetInt(7) == 0 && m.GetInt(8) == -1) // up
+                        {
+                            if (blockEffectsLBOX.Items.Contains(blockIDs[0, X, Y - 1]))
+                            {
+                                con.Send("touch", player[m.GetInt(0)].userid, blockEffectsLBOX.Items[blockEffectsLBOX.Items.IndexOf(blockIDs[0, X, Y - 1]) + 1]);
+                            }
+                        }
                         if (alstalking.Checked == true)
                         {
                             if (names.ContainsValue(stalkMover.Text))
@@ -1317,7 +1346,50 @@ namespace R42Bot
                                 chatbox.Items.Add(names[m.GetInt(0)] + ": " + m.GetString(1));
 
 
-                                if (str.StartsWith("!autokick "))
+                                if (str.StartsWith("!ch "))
+                                {
+                                    string userInput = str.Substring(4);
+
+                                    if (cleverbotCBOX.Checked)
+                                    {
+                                        if (Voids.CleverBot.IsWelcoming(userInput) && !Voids.CleverBot.IsInsulting(userInput))
+                                        {
+                                            con.Send("say", "[RClever42] " + names[m.GetInt(0)].ToUpper() + ": Hi to you too!");
+                                        }
+                                        else if (Voids.CleverBot.IsWelcoming(userInput) && Voids.CleverBot.IsInsulting(userInput))
+                                        {
+                                            con.Send("say", "[RClever42] " + names[m.GetInt(0)].ToUpper() + ": Stop insulting humans!");
+                                        }
+                                        else if (!Voids.CleverBot.IsWelcoming(userInput) && Voids.CleverBot.IsInsulting(userInput))
+                                        {
+                                            con.Send("say", "[RClever42] " + names[m.GetInt(0)].ToUpper() + ": Insulting a human as '" + userInput + "' isn't a nice thing to do.");
+                                        }
+                                        else if (Voids.CleverBot.IsWelcoming(userInput) && Voids.CleverBot.IsInsultingBot(userInput))
+                                        {
+                                            con.Send("say", "[RClever42] " + names[m.GetInt(0)].ToUpper() + ": Don't insult me, c'mon.");
+                                        }
+                                        else if (!Voids.CleverBot.IsWelcoming(userInput) && Voids.CleverBot.IsInsultingBot(userInput))
+                                        {
+                                            con.Send("say", "[RClever42] " + names[m.GetInt(0)].ToUpper() + ": You deserve a life.");
+                                        }
+                                        else if (Voids.CleverBot.HasMath(userInput))
+                                        {
+                                            if (Voids.CleverBot.Operation(userInput)=="notMath")
+                                            {
+                                                con.Send("say", "[RClever42] " + names[m.GetInt(0)].ToUpper() + ": That isn't math! You see, even machines know more.");
+                                            }
+                                            else
+                                            {
+                                                con.Send("say", "[RClever42] " + names[m.GetInt(0)].ToUpper() + ": That gives " + Voids.CleverBot.Operation(userInput) + "!");
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 103));
+                                    }
+                                }
+                                else if (str.StartsWith("!autokick "))
                                 {
                                     string[] option = str.Split(' ');
                                     if (Admins.Items.Contains(names[m.GetInt(0)]))
@@ -1469,7 +1541,7 @@ namespace R42Bot
                                     }
                                     else
                                     {
-                                        con.Send("say", "/pm " + names[m.GetInt(0)] + "  Command Disabled. >:)");
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 103));
                                     }
                                 }
                                 else if (str.StartsWith("!revert "))
@@ -1535,7 +1607,7 @@ namespace R42Bot
                                     }
                                     else
                                     {
-                                        con.Send("say", "/pm " + names[m.GetInt(0)] + "  Command Disabled. >:)");
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 103));
                                     }
                                 }
                                 else if (str.StartsWith("!snakespeed "))
@@ -1592,7 +1664,7 @@ namespace R42Bot
                                     }
                                     else
                                     {
-                                        con.Send("say", "/pm " + names[m.GetInt(0)] + "  Command Disabled. >:)");
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 103));
                                     }
                                 }
                                 else if (str.StartsWith("!name "))
@@ -2224,7 +2296,8 @@ namespace R42Bot
 
                                 else if (str.StartsWith("!listhelp"))
                                 {
-                                    con.Send("say", "/pm " + names[m.GetInt(0)] + "  !amiadmin, !botlog, !kick [player] [reasson], !save, !loadlevel, !clear, !evenhelp c:");
+                                    con.Send("say", "/pm " + names[m.GetInt(0)] + "  !amiadmin, !botlog, !kick [player] [reasson],");
+                                    con.Send("say", "/pm " + names[m.GetInt(0)] + "  !save, !loadlevel, !clear, !ch [msg], !evenhelp c:");
                                 }
                                 else if (str.StartsWith("!evenhelp"))
                                 {
@@ -3295,6 +3368,51 @@ namespace R42Bot
             }
         }
 
+        private void addBlockEffectButton_Click(object sender, EventArgs e)
+        {
+            if (Convert.ToInt32(textBox10.Text) > 0 && Convert.ToInt32(textBox10.Text) < 14)
+            {
+                if (Convert.ToInt32(textBox9.Text) >= 0 && Convert.ToInt32(textBox10.Text) < 1027)
+                {
+                    blockEffectsLBOX.Items.Add(textBox9.Text);
+                    blockEffectsLBOX.Items.Add(textBox10.Text);
+                }
+            }
+        }
+
+        private void textBox9_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBox10_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBox11_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void removeBlockEffectButton_Click(object sender, EventArgs e)
+        {
+            if (blockEffectsLBOX.Items.Contains(textBox11.Text))
+            {
+                blockEffectsLBOX.Items.RemoveAt(blockEffectsLBOX.Items.IndexOf(textBox11.Text)+1);
+                blockEffectsLBOX.Items.Remove(textBox11.Text);
+            }
+        }
+
         private void waterchoice2_CheckedChanged(object sender, EventArgs e)
         {
             waterchoice1.Checked = (waterchoice2.Checked) ? false : true;
@@ -3579,6 +3697,11 @@ namespace R42Bot
                 {
                     try
                     {
+                        welcomemsg.Text = Voids.GetLangFile(CurrentLang, 3);
+                        welcomemsg2.Text = "!";
+                        leftallmsg.Text = Voids.GetLangFile(CurrentLang, 5);
+                        leftall2.Text = Voids.GetLangFile(CurrentLang, 6);
+
                         this.Text = "R42Bot++ v" + Version.version + " " + Voids.GetLangFile(CurrentLang, 99) + " " + System.Configuration.ConfigurationManager.AppSettings["Build"];
                         Version.UpToDate = Voids.GetLangFile(CurrentLang, 98).Replace("(V)", Version.version);
                         Version.OutOfDate = Voids.GetLangFile(CurrentLang, 96).Replace("(V)", Version.version).Replace("[V]", new System.Net.WebClient().DownloadString(Version.versionlink));
