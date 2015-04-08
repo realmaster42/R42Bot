@@ -24,7 +24,7 @@ namespace R42Bot
 
     public partial class Form1 : Form
     {
-        public static string nBuild = "93";
+        public static string nBuild = "103";
         public static ColorDialog c = new ColorDialog();
 
         public static Connection con;
@@ -205,7 +205,7 @@ namespace R42Bot
                             Thread.Sleep(250);
                             if (names.ContainsKey(m.GetInt(0)))
                             {
-                                con.Send("say", string.Concat(names[m.GetInt(0)].ToString() + Voids.GetLangFile(CurrentLang, 103).Replace("(W)", player[m.GetInt(0)].wins.ToString())));
+                                con.Send("say", string.Concat(names[m.GetInt(0)].ToString() + Voids.GetLangFile(CurrentLang, 101).Replace("(W)", player[m.GetInt(0)].wins.ToString())));
                             }
                         }
                     }
@@ -254,7 +254,7 @@ namespace R42Bot
                         }
                         if (banList.Contains(botName))
                         {
-                            MessageBox.Show(Voids.GetLangFile(CurrentLang, 71), "R42Bot++ v" + Version.version + " System");
+                            MessageBox.Show(Voids.GetLangFile(CurrentLang, 69), "R42Bot++ v" + Version.version + " System");
                             Thread.Sleep(250);
                             con.Send("say", "[R42Bot++] Goodbye, the user using me is banned! :D");
                             con.Disconnect();
@@ -262,7 +262,7 @@ namespace R42Bot
                         }
                         else
                         {
-                            con.Send("say", Voids.GetLangFile(CurrentLang, 70).Replace("(V)", Version.version));
+                            con.Send("say", Voids.GetLangFile(CurrentLang, 68).Replace("(V)", Version.version));
                             Thread.Sleep(200);
                         }
                         botFullyConnected = true;
@@ -359,10 +359,10 @@ namespace R42Bot
                     }
                     return;
                 case "access":
-                    con.Send("say", Voids.GetLangFile(CurrentLang, 74));
+                    con.Send("say", Voids.GetLangFile(CurrentLang, 72));
                     return;
                 case "lostaccess":
-                    con.Send("say", Voids.GetLangFile(CurrentLang, 75));
+                    con.Send("say", Voids.GetLangFile(CurrentLang, 73));
                     return;
                 case "left":
                     if (!kJoiners.Checked)
@@ -1293,30 +1293,35 @@ namespace R42Bot
                         {
                             if (blockEffectsLBOX.Items.Contains(blockIDs[0, X + 1, Y]))
                             {
-                                con.Send("touch", player[m.GetInt(0)].userid, blockEffectsLBOX.Items[blockEffectsLBOX.Items.IndexOf(blockIDs[0, X + 1, Y]) + 1]);
+                                con.Send(worldKey + "p", blockEffectsLBOX.Items[blockEffectsLBOX.Items.IndexOf(blockIDs[0, X + 1, Y]) + 1].ToString().Substring(0,1));
+                                con.Send("touch", player[m.GetInt(0)].userid, blockEffectsLBOX.Items[blockEffectsLBOX.Items.IndexOf(blockIDs[0, X + 1, Y]) + 1].ToString().Substring(0, 1));
                             }
                         }
                         else if (m.GetInt(7) == -1 && m.GetInt(8) == 0) // left
                         {
                             if (blockEffectsLBOX.Items.Contains(blockIDs[0, X - 1, Y]))
                             {
-                                con.Send("touch", player[m.GetInt(0)].userid, blockEffectsLBOX.Items[blockEffectsLBOX.Items.IndexOf(blockIDs[0, X - 1, Y]) + 1]);
+                                con.Send(worldKey + "p", blockEffectsLBOX.Items[blockEffectsLBOX.Items.IndexOf(blockIDs[0, X + 1, Y]) + 1].ToString().Substring(0, 1));
+                                con.Send("touch", player[m.GetInt(0)].userid, blockEffectsLBOX.Items[blockEffectsLBOX.Items.IndexOf(blockIDs[0, X + 1, Y]) + 1].ToString().Substring(0, 1));
                             }
                         }
                         else if (m.GetInt(7) == 0 && m.GetInt(8) == 1) // down
                         {
                             if (blockEffectsLBOX.Items.Contains(blockIDs[0, X, Y + 1]))
                             {
-                                con.Send("touch", player[m.GetInt(0)].userid, blockEffectsLBOX.Items[blockEffectsLBOX.Items.IndexOf(blockIDs[0, X, Y + 1]) + 1]);
+                                con.Send(worldKey + "p", blockEffectsLBOX.Items[blockEffectsLBOX.Items.IndexOf(blockIDs[0, X, Y + 1]) + 1].ToString().Substring(0, 1));
+                                con.Send("touch", player[m.GetInt(0)].userid, blockEffectsLBOX.Items[blockEffectsLBOX.Items.IndexOf(blockIDs[0, X, Y + 1]) + 1].ToString().Substring(0, 1));
                             }
                         }
                         else if (m.GetInt(7) == 0 && m.GetInt(8) == -1) // up
                         {
                             if (blockEffectsLBOX.Items.Contains(blockIDs[0, X, Y - 1]))
                             {
-                                con.Send("touch", player[m.GetInt(0)].userid, blockEffectsLBOX.Items[blockEffectsLBOX.Items.IndexOf(blockIDs[0, X, Y - 1]) + 1]);
+                                con.Send(worldKey + "p", blockEffectsLBOX.Items[blockEffectsLBOX.Items.IndexOf(blockIDs[0, X, Y - 1]) + 1].ToString().Substring(0, 1));
+                                con.Send("touch", player[m.GetInt(0)].userid, blockEffectsLBOX.Items[blockEffectsLBOX.Items.IndexOf(blockIDs[0, X, Y - 1]) + 1].ToString().Substring(0, 1));
                             }
                         }
+
                         if (alstalking.Checked == true)
                         {
                             if (names.ContainsValue(stalkMover.Text))
@@ -1386,7 +1391,7 @@ namespace R42Bot
                                     }
                                     else
                                     {
-                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 103));
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 101));
                                     }
                                 }
                                 else if (str.StartsWith("!autokick "))
@@ -1461,7 +1466,7 @@ namespace R42Bot
                                                         #region BOT LOG
                                                         DefineLogZones();
                                                         Thread.Sleep(250);
-                                                        log1.Text = "1. " + names[m.GetInt(0)].ToUpper() + " " + Voids.GetLangFile(CurrentLang, 102);
+                                                        log1.Text = "1. " + names[m.GetInt(0)].ToUpper() + " " + Voids.GetLangFile(CurrentLang, 100);
                                                         #endregion
                                                     }
                                                     else
@@ -1541,7 +1546,7 @@ namespace R42Bot
                                     }
                                     else
                                     {
-                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 103));
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 101));
                                     }
                                 }
                                 else if (str.StartsWith("!revert "))
@@ -1607,7 +1612,7 @@ namespace R42Bot
                                     }
                                     else
                                     {
-                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 103));
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 101));
                                     }
                                 }
                                 else if (str.StartsWith("!snakespeed "))
@@ -1664,7 +1669,7 @@ namespace R42Bot
                                     }
                                     else
                                     {
-                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 103));
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 101));
                                     }
                                 }
                                 else if (str.StartsWith("!name "))
@@ -1683,7 +1688,7 @@ namespace R42Bot
                                     }
                                     else
                                     {
-                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 102));
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 100));
                                     }
                                 }
                                 else if (str.StartsWith("!admins"))
@@ -1815,7 +1820,7 @@ namespace R42Bot
                                         }
                                         else
                                         {
-                                            con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 102));
+                                            con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 100));
                                         }
                                     }
                                     else
@@ -1889,7 +1894,7 @@ namespace R42Bot
                                     }
                                     else
                                     {
-                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 102));
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 100));
                                     }
                                 }
                                 else if (str.StartsWith("!say "))
@@ -2413,7 +2418,7 @@ namespace R42Bot
                                         }
                                         else
                                         {
-                                            con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 102));
+                                            con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 100));
                                         }
                                     }
                                     else
@@ -2447,7 +2452,7 @@ namespace R42Bot
                                         }
                                         else
                                         {
-                                            con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 102));
+                                            con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 100));
                                         }
                                     }
                                     else
@@ -2762,7 +2767,7 @@ namespace R42Bot
         {
             if (ptbr.Checked == true)
             {
-                MessageBox.Show("A Linguagem é agora português.", "R42Bot++ v" + Version.version + " System");
+                MessageBox.Show("A Linguagem é agora português.", "Sistema R42Bot++ v" + Version.version);
                 CurrentLang = "ptbr";
                 ltu.Checked = false;
                 enus.Checked = false;
@@ -2796,20 +2801,6 @@ namespace R42Bot
             stalkMover.Text = "";
         }
 
-        private void telllemgend_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Some Message Boxes will appear. Do you wanna see them?", "R42Bot++ v" + Version.version + " System", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == System.Windows.Forms.DialogResult.Yes)
-            {
-                MessageBox.Show("*WorldData, Tells about WorldData system in the bot.", "R42Bot++ v" + Version.version + " System");
-                MessageBox.Show("*R42Bot++ System, System of this bot.", "R42Bot++ v" + Version.version + " System");
-                MessageBox.Show("Nothing, Default texts appearing.", "R42Bot++ v" + Version.version + " System");
-            }
-            else
-            {
-                MessageBox.Show("No legend could be shown, message box progress has been cancelled.", "R42Bot++ v" + Version.version + " System", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private void welcomemsg_TextChanged(object sender, EventArgs e)
         {
             CallsSettings.Welcome_Text = welcomemsg.Text;
@@ -2840,7 +2831,7 @@ namespace R42Bot
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            Console.WriteLine(Voids.GetLangFile(CurrentLang, 102));
+            Console.WriteLine(Voids.GetLangFile(CurrentLang, 100));
         }
 
         private void autochangerface_Tick(object sender, EventArgs e)
@@ -2864,7 +2855,7 @@ namespace R42Bot
                 {
                     if (!Admins.Items.Contains(kicking.username))
                     {
-                        con.Send("say", "/kick " + kicking.username + " " + Voids.GetLangFile(CurrentLang, 101));
+                        con.Send("say", "/kick " + kicking.username + " " + Voids.GetLangFile(CurrentLang, 99));
                         Thread.Sleep(200);
                     }
                 }
@@ -2880,7 +2871,7 @@ namespace R42Bot
                 con.Send("say", "/reset");
                 if (autoresetmsg.Checked)
                 {
-                    con.Send("say", Voids.GetLangFile(CurrentLang, 100));
+                    con.Send("say", Voids.GetLangFile(CurrentLang, 98));
                 }
             }
         }
@@ -3370,13 +3361,13 @@ namespace R42Bot
 
         private void addBlockEffectButton_Click(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(textBox10.Text) > 0 && Convert.ToInt32(textBox10.Text) < 14)
+            if (Convert.ToInt32(textBox9.Text) >= 0 && Convert.ToInt32(textBox9.Text) < 1027)
             {
-                if (Convert.ToInt32(textBox9.Text) >= 0 && Convert.ToInt32(textBox10.Text) < 1027)
-                {
-                    blockEffectsLBOX.Items.Add(textBox9.Text);
-                    blockEffectsLBOX.Items.Add(textBox10.Text);
-                }
+                int id = 0;
+                blockEffectsLBOX.Items.Add(textBox9.Text);
+                if (blockeffectslboxupdown.Text == "zombie") { id =9; } else { id =6; }
+
+                blockEffectsLBOX.Items.Add(id.ToString() + " - " + blockeffectslboxupdown.Text);
             }
         }
 
@@ -3675,7 +3666,7 @@ namespace R42Bot
         {
             if (dutchCBOX.Checked == true)
             {
-                MessageBox.Show("Je taal is nu Nederlands.", "R42Bot++ v" + Version.version + Voids.GetLangFile("dutch", 96));
+                MessageBox.Show("Je taal is nu Nederlands.", "R42Bot++ v" + Version.version + Voids.GetLangFile("dutch", 92));
                 CurrentLang = "dutch";
                 enus.Checked = false;
                 ptbr.Checked = false;
@@ -3691,37 +3682,45 @@ namespace R42Bot
 
         private void AutoFixBot_Tick(object sender, EventArgs e)
         {
-            if (!this.Text.Contains(Voids.GetLangFile(CurrentLang, 99)))
+            if (!this.Text.Contains(Voids.GetLangFile(CurrentLang, 97)))
             {
                 ThreadPool.QueueUserWorkItem(delegate
                 {
                     try
                     {
-                        welcomemsg.Text = Voids.GetLangFile(CurrentLang, 3);
-                        welcomemsg2.Text = "!";
-                        leftallmsg.Text = Voids.GetLangFile(CurrentLang, 5);
-                        leftall2.Text = Voids.GetLangFile(CurrentLang, 6);
-
-                        this.Text = "R42Bot++ v" + Version.version + " " + Voids.GetLangFile(CurrentLang, 99) + " " + System.Configuration.ConfigurationManager.AppSettings["Build"];
-                        Version.UpToDate = Voids.GetLangFile(CurrentLang, 98).Replace("(V)", Version.version);
-                        Version.OutOfDate = Voids.GetLangFile(CurrentLang, 96).Replace("(V)", Version.version).Replace("[V]", new System.Net.WebClient().DownloadString(Version.versionlink));
-                        Version.OutOfDateBuild = Voids.GetLangFile(CurrentLang, 97).Replace("(B)", BuildVersion.ToString()).Replace("[B]", new System.Net.WebClient().DownloadString(Version.buildlink));
-
-                        if (new System.Net.WebClient().DownloadString(Version.versionlink) != Version.version)
+                        if (!Version.versionLoaded)
                         {
                             Version.upgradedVersion = new System.Net.WebClient().DownloadString(Version.versionlink);
-                            label48.Text = Version.OutOfDate;
-                        }
-                        else if (new System.Net.WebClient().DownloadString(Version.buildlink) != BuildVersion.ToString())
-                        {
                             Version.upgradedBuild = new System.Net.WebClient().DownloadString(Version.buildlink);
-                            label48.Text = Version.OutOfDateBuild;
                         }
-                        else
+
+                        welcomemsg.Text = Voids.GetLangFile(CurrentLang, 1);
+                        welcomemsg2.Text = "!";
+                        leftallmsg.Text = Voids.GetLangFile(CurrentLang, 3);
+                        leftall2.Text = Voids.GetLangFile(CurrentLang, 4);
+
+                        this.Text = "R42Bot++ v" + Version.version + " " + Voids.GetLangFile(CurrentLang, 97) + " " + System.Configuration.ConfigurationManager.AppSettings["Build"];
+                        if (!Version.versionLoaded)
                         {
-                            label48.Visible = true;
-                            label48.ForeColor = Color.DarkOliveGreen;
-                            label48.Text = Version.UpToDate;
+                            Version.UpToDate = Voids.GetLangFile(CurrentLang, 96).Replace("(V)", Version.version);
+                            Version.OutOfDate = Voids.GetLangFile(CurrentLang, 94).Replace("(V)", Version.version).Replace("[V]", Version.upgradedVersion);
+                            Version.OutOfDateBuild = Voids.GetLangFile(CurrentLang, 95).Replace("(B)", BuildVersion.ToString()).Replace("[B]", Version.upgradedBuild);
+
+                            if (Version.upgradedVersion != Version.version)
+                            {
+                                label48.Text = Version.OutOfDate;
+                            }
+                            else if (Version.upgradedBuild != BuildVersion.ToString())
+                            {
+                                label48.Text = Version.OutOfDateBuild;
+                            }
+                            else
+                            {
+                                label48.Visible = true;
+                                label48.ForeColor = Color.DarkOliveGreen;
+                                label48.Text = Version.UpToDate;
+                            }
+                            Version.versionLoaded = true;
                         }
                         Thread.Sleep(100);
                     }

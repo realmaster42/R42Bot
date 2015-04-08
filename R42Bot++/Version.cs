@@ -17,5 +17,7 @@ namespace R42Bot
         public static string UpToDate = "";
         public static string OutOfDate = "";
         public static string OutOfDateBuild = "";
+
+        public static bool versionLoaded = false;
     }
 }

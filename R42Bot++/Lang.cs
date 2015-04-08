@@ -24,8 +24,6 @@ namespace R42Bot
                 "Remove",
                 "non-caps",
                 "caps",
-                "non-caps",
-                "caps",
                 "code",
                 "hmm... the bot needs admin to work the best.",
                 "Welcome Message",
@@ -141,10 +139,6 @@ namespace R42Bot
 "Toevoegen",
 
 "Verwijderen",
-
-"geen caps",
-
-"caps",
 
 "geen caps",
 
@@ -353,10 +347,6 @@ namespace R42Bot
 "Adicionar",
 
 "Remover",
-
-"CAPS desligado",
-
-"CAPS ligado",
 
 "CAPS desligado",
 
@@ -576,10 +566,6 @@ namespace R42Bot
 
     "caps",
 
-    "ne-caps",
-
-    "caps",
-
     "kodas",
 
 
@@ -657,8 +643,6 @@ namespace R42Bot
     "Ruzavo stiklo susprogimas",
 
     "istrinti tiktai",
-
-    "orginalus",
 
     "Lavos gyvate",
 

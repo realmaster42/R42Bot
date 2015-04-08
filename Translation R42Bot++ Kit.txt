@@ -241,6 +241,6 @@
 " won! Now he/she has (W) wins!" // remember to keep the space
 
 
-//Translation R42Bot++ Kit Unstable A2-preA0 Translation Kit Adapted to Newest Lang System v1.3
+//Translation R42Bot++ Kit Unstable A2-preA0 Translation Kit Adapted to Newest Lang System v1.4
 //Please consider unstable translation versions may be changed and your translations
 //might need to be updated.

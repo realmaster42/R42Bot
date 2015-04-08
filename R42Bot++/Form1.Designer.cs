@@ -31,216 +31,216 @@ namespace R42Bot
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.email = new System.Windows.Forms.TextBox();
-            this.pass = new System.Windows.Forms.TextBox();
-            this.idofworld = new System.Windows.Forms.TextBox();
-            this.codebox = new System.Windows.Forms.TextBox();
-            this.connector = new System.Windows.Forms.Button();
-            this.Admins = new System.Windows.Forms.ListBox();
-            this.add = new System.Windows.Forms.Button();
-            this.remove = new System.Windows.Forms.Button();
-            this.addText = new System.Windows.Forms.TextBox();
-            this.removeText = new System.Windows.Forms.TextBox();
-            this.scommand = new System.Windows.Forms.CheckBox();
-            this.firstTabControler = new System.Windows.Forms.TabControl();
-            this.Main = new System.Windows.Forms.TabPage();
-            this.cleverbotCBOX = new System.Windows.Forms.CheckBox();
-            this.givegodwithtrophycbox = new System.Windows.Forms.CheckBox();
-            this.button14 = new System.Windows.Forms.Button();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.unfairBlox = new System.Windows.Forms.CheckBox();
-            this.stalkMover = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.pmresult = new System.Windows.Forms.CheckBox();
-            this.clearstalkering = new System.Windows.Forms.Button();
-            this.alstalking = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.kJoiners = new System.Windows.Forms.CheckBox();
-            this.kbots = new System.Windows.Forms.CheckBox();
-            this.revertCboxLOL = new System.Windows.Forms.CheckBox();
-            this.FreeEdit = new System.Windows.Forms.CheckBox();
-            this.banCbox = new System.Windows.Forms.CheckBox();
-            this.kickCbox = new System.Windows.Forms.CheckBox();
-            this.clearCbox = new System.Windows.Forms.CheckBox();
-            this.loadlevelCbox = new System.Windows.Forms.CheckBox();
-            this.saveCbox = new System.Windows.Forms.CheckBox();
-            this.fbTokenGet = new System.Windows.Forms.Button();
-            this.krockhateseers = new System.Windows.Forms.CheckBox();
-            this.isFacebook = new System.Windows.Forms.CheckBox();
-            this.freeadmin = new System.Windows.Forms.CheckBox();
-            this.saytext = new System.Windows.Forms.TextBox();
-            this.button9 = new System.Windows.Forms.Button();
-            this.chatbox = new System.Windows.Forms.ListBox();
-            this.textpm = new System.Windows.Forms.TextBox();
-            this.userpm = new System.Windows.Forms.TextBox();
-            this.button8 = new System.Windows.Forms.Button();
-            this.autokickvalue = new System.Windows.Forms.CheckBox();
-            this.autokickallowd = new System.Windows.Forms.CheckBox();
-            this.winsystem1 = new System.Windows.Forms.CheckBox();
-            this.scommand2 = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.LanguageOrSettings = new System.Windows.Forms.TabPage();
-            this.label16 = new System.Windows.Forms.Label();
-            this.saveLang = new System.Windows.Forms.Button();
-            this.dutchCBOX = new System.Windows.Forms.CheckBox();
-            this.ltu = new System.Windows.Forms.CheckBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.enus = new System.Windows.Forms.CheckBox();
-            this.ptbr = new System.Windows.Forms.CheckBox();
-            this.leftall2 = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.leftallmsg = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.leftall = new System.Windows.Forms.CheckBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.welcomemsg2 = new System.Windows.Forms.TextBox();
-            this.welcomemsg = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.welcomeall = new System.Windows.Forms.CheckBox();
-            this.NEWS = new System.Windows.Forms.TabPage();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.label48 = new System.Windows.Forms.Label();
-            this.advancedEditor = new System.Windows.Forms.TabPage();
-            this.welcomeallupper = new System.Windows.Forms.CheckBox();
-            this.welcomealllower = new System.Windows.Forms.CheckBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.leftallupper = new System.Windows.Forms.CheckBox();
-            this.leftallcase = new System.Windows.Forms.CheckBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.autobolder = new System.Windows.Forms.TabPage();
-            this.grbutton = new System.Windows.Forms.Button();
-            this.boxWidthNUD = new System.Windows.Forms.NumericUpDown();
-            this.boxHeightNUD = new System.Windows.Forms.NumericUpDown();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.boxPlaceCBOX = new System.Windows.Forms.CheckBox();
-            this.BGdelbox = new System.Windows.Forms.CheckBox();
-            this.wetsandCbox = new System.Windows.Forms.CheckBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.waterchoice2 = new System.Windows.Forms.RadioButton();
-            this.waterchoice1 = new System.Windows.Forms.RadioButton();
-            this.lavaP = new System.Windows.Forms.NumericUpDown();
-            this.fdelay = new System.Windows.Forms.NumericUpDown();
-            this.label27 = new System.Windows.Forms.Label();
-            this.idofit = new System.Windows.Forms.TextBox();
-            this.paintbrushauto = new System.Windows.Forms.CheckBox();
-            this.tntallowd = new System.Windows.Forms.CheckBox();
-            this.lavadrawer = new System.Windows.Forms.CheckBox();
-            this.autobuild1 = new System.Windows.Forms.CheckBox();
-            this.smileytabs = new System.Windows.Forms.TabPage();
-            this.srandomizer = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.snakepage = new System.Windows.Forms.TabPage();
-            this.allowSnakeSpecial = new System.Windows.Forms.CheckBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.snakeSpecial2 = new System.Windows.Forms.NumericUpDown();
-            this.snakeSpecial1 = new System.Windows.Forms.NumericUpDown();
-            this.lsbx = new System.Windows.Forms.CheckBox();
-            this.faxII = new System.Windows.Forms.CheckBox();
-            this.mineralRAINBOWFAST = new System.Windows.Forms.CheckBox();
-            this.fax = new System.Windows.Forms.CheckBox();
-            this.mineralRAINBOW = new System.Windows.Forms.CheckBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.fnbs = new System.Windows.Forms.CheckBox();
-            this.nbs = new System.Windows.Forms.CheckBox();
-            this.frbs = new System.Windows.Forms.CheckBox();
-            this.rbs = new System.Windows.Forms.CheckBox();
-            this.autoPage = new System.Windows.Forms.TabPage();
-            this.autoresetmsg = new System.Windows.Forms.CheckBox();
-            this.autoresetime = new System.Windows.Forms.NumericUpDown();
-            this.label8 = new System.Windows.Forms.Label();
-            this.autoresetcheckbox = new System.Windows.Forms.CheckBox();
-            this.pollTab = new System.Windows.Forms.TabPage();
-            this.vot3 = new System.Windows.Forms.TextBox();
-            this.choice3 = new System.Windows.Forms.TextBox();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.button7 = new System.Windows.Forms.Button();
-            this.votersList = new System.Windows.Forms.ListBox();
-            this.pollstartername = new System.Windows.Forms.TextBox();
-            this.label26 = new System.Windows.Forms.Label();
-            this.vot2 = new System.Windows.Forms.TextBox();
-            this.vot1 = new System.Windows.Forms.TextBox();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.choice2 = new System.Windows.Forms.TextBox();
-            this.choice1 = new System.Windows.Forms.TextBox();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.pollname = new System.Windows.Forms.TextBox();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.pgebc = new System.Windows.Forms.CheckBox();
-            this.pgeb100loldef = new System.Windows.Forms.RadioButton();
-            this.pgeb100loldo = new System.Windows.Forms.RadioButton();
-            this.pgeb100lol = new System.Windows.Forms.CheckBox();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.addBlockEffectButton = new System.Windows.Forms.Button();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.blockEffectsLBOX = new System.Windows.Forms.ListBox();
-            this.label42 = new System.Windows.Forms.Label();
-            this.UnBanButton = new System.Windows.Forms.Button();
-            this.BanButton = new System.Windows.Forms.Button();
-            this.unbanTxtBox = new System.Windows.Forms.TextBox();
-            this.banTxtBox = new System.Windows.Forms.TextBox();
-            this.bansList = new System.Windows.Forms.ListBox();
-            this.label41 = new System.Windows.Forms.Label();
-            this.label40 = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.log5 = new System.Windows.Forms.TextBox();
-            this.log4 = new System.Windows.Forms.TextBox();
-            this.log3 = new System.Windows.Forms.TextBox();
-            this.log2 = new System.Windows.Forms.TextBox();
-            this.log1 = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button10 = new System.Windows.Forms.Button();
-            this.label35 = new System.Windows.Forms.Label();
-            this.bwl = new System.Windows.Forms.CheckBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label34 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
-            this.warningGiver = new System.Windows.Forms.CheckBox();
-            this.noRespawn = new System.Windows.Forms.CheckBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.button13 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.currentColor = new System.Windows.Forms.TextBox();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.button11 = new System.Windows.Forms.Button();
-            this.autochangerface = new System.Windows.Forms.Timer(this.components);
-            this.autokick = new System.Windows.Forms.Timer(this.components);
-            this.autoreset = new System.Windows.Forms.Timer(this.components);
-            this.BlockPlacer = new System.Windows.Forms.Timer(this.components);
-            this.TrollCatcherBlockDelete = new System.Windows.Forms.Timer(this.components);
-            this.Gen_RB = new System.Windows.Forms.Timer(this.components);
-            this.AutoFixBot = new System.Windows.Forms.Timer(this.components);
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.removeBlockEffectButton = new System.Windows.Forms.Button();
+            this.components = new Container();
+            ComponentResourceManager resources = new ComponentResourceManager(typeof(Form1));
+            this.email = new TextBox();
+            this.pass = new TextBox();
+            this.idofworld = new TextBox();
+            this.codebox = new TextBox();
+            this.connector = new Button();
+            this.Admins = new ListBox();
+            this.add = new Button();
+            this.remove = new Button();
+            this.addText = new TextBox();
+            this.removeText = new TextBox();
+            this.scommand = new CheckBox();
+            this.firstTabControler = new TabControl();
+            this.Main = new TabPage();
+            this.cleverbotCBOX = new CheckBox();
+            this.givegodwithtrophycbox = new CheckBox();
+            this.button14 = new Button();
+            this.textBox5 = new TextBox();
+            this.unfairBlox = new CheckBox();
+            this.stalkMover = new TextBox();
+            this.button2 = new Button();
+            this.pmresult = new CheckBox();
+            this.clearstalkering = new Button();
+            this.alstalking = new CheckBox();
+            this.button1 = new Button();
+            this.kJoiners = new CheckBox();
+            this.kbots = new CheckBox();
+            this.revertCboxLOL = new CheckBox();
+            this.FreeEdit = new CheckBox();
+            this.banCbox = new CheckBox();
+            this.kickCbox = new CheckBox();
+            this.clearCbox = new CheckBox();
+            this.loadlevelCbox = new CheckBox();
+            this.saveCbox = new CheckBox();
+            this.fbTokenGet = new Button();
+            this.krockhateseers = new CheckBox();
+            this.isFacebook = new CheckBox();
+            this.freeadmin = new CheckBox();
+            this.saytext = new TextBox();
+            this.button9 = new Button();
+            this.chatbox = new ListBox();
+            this.textpm = new TextBox();
+            this.userpm = new TextBox();
+            this.button8 = new Button();
+            this.autokickvalue = new CheckBox();
+            this.autokickallowd = new CheckBox();
+            this.winsystem1 = new CheckBox();
+            this.scommand2 = new CheckBox();
+            this.label1 = new Label();
+            this.LanguageOrSettings = new TabPage();
+            this.label16 = new Label();
+            this.saveLang = new Button();
+            this.dutchCBOX = new CheckBox();
+            this.ltu = new CheckBox();
+            this.label13 = new Label();
+            this.enus = new CheckBox();
+            this.ptbr = new CheckBox();
+            this.leftall2 = new TextBox();
+            this.label9 = new Label();
+            this.leftallmsg = new TextBox();
+            this.label7 = new Label();
+            this.leftall = new CheckBox();
+            this.label6 = new Label();
+            this.welcomemsg2 = new TextBox();
+            this.welcomemsg = new TextBox();
+            this.label4 = new Label();
+            this.welcomeall = new CheckBox();
+            this.NEWS = new TabPage();
+            this.textBox8 = new TextBox();
+            this.textBox7 = new TextBox();
+            this.textBox6 = new TextBox();
+            this.label48 = new Label();
+            this.advancedEditor = new TabPage();
+            this.welcomeallupper = new CheckBox();
+            this.welcomealllower = new CheckBox();
+            this.label12 = new Label();
+            this.leftallupper = new CheckBox();
+            this.leftallcase = new CheckBox();
+            this.label11 = new Label();
+            this.label10 = new Label();
+            this.autobolder = new TabPage();
+            this.grbutton = new Button();
+            this.boxWidthNUD = new NumericUpDown();
+            this.boxHeightNUD = new NumericUpDown();
+            this.label15 = new Label();
+            this.label14 = new Label();
+            this.boxPlaceCBOX = new CheckBox();
+            this.BGdelbox = new CheckBox();
+            this.wetsandCbox = new CheckBox();
+            this.panel2 = new Panel();
+            this.panel1 = new Panel();
+            this.waterchoice2 = new RadioButton();
+            this.waterchoice1 = new RadioButton();
+            this.lavaP = new NumericUpDown();
+            this.fdelay = new NumericUpDown();
+            this.label27 = new Label();
+            this.idofit = new TextBox();
+            this.paintbrushauto = new CheckBox();
+            this.tntallowd = new CheckBox();
+            this.lavadrawer = new CheckBox();
+            this.autobuild1 = new CheckBox();
+            this.smileytabs = new TabPage();
+            this.srandomizer = new Button();
+            this.checkBox1 = new CheckBox();
+            this.button6 = new Button();
+            this.button5 = new Button();
+            this.snakepage = new TabPage();
+            this.allowSnakeSpecial = new CheckBox();
+            this.label5 = new Label();
+            this.snakeSpecial2 = new NumericUpDown();
+            this.snakeSpecial1 = new NumericUpDown();
+            this.lsbx = new CheckBox();
+            this.faxII = new CheckBox();
+            this.mineralRAINBOWFAST = new CheckBox();
+            this.fax = new CheckBox();
+            this.mineralRAINBOW = new CheckBox();
+            this.numericUpDown1 = new NumericUpDown();
+            this.fnbs = new CheckBox();
+            this.nbs = new CheckBox();
+            this.frbs = new CheckBox();
+            this.rbs = new CheckBox();
+            this.autoPage = new TabPage();
+            this.autoresetmsg = new CheckBox();
+            this.autoresetime = new NumericUpDown();
+            this.label8 = new Label();
+            this.autoresetcheckbox = new CheckBox();
+            this.pollTab = new TabPage();
+            this.vot3 = new TextBox();
+            this.choice3 = new TextBox();
+            this.label29 = new Label();
+            this.label28 = new Label();
+            this.button7 = new Button();
+            this.votersList = new ListBox();
+            this.pollstartername = new TextBox();
+            this.label26 = new Label();
+            this.vot2 = new TextBox();
+            this.vot1 = new TextBox();
+            this.label25 = new Label();
+            this.label24 = new Label();
+            this.choice2 = new TextBox();
+            this.choice1 = new TextBox();
+            this.label23 = new Label();
+            this.label22 = new Label();
+            this.label21 = new Label();
+            this.pollname = new TextBox();
+            this.tabPage6 = new TabPage();
+            this.pgebc = new CheckBox();
+            this.pgeb100loldef = new RadioButton();
+            this.pgeb100loldo = new RadioButton();
+            this.pgeb100lol = new CheckBox();
+            this.tabPage7 = new TabPage();
+            this.removeBlockEffectButton = new Button();
+            this.textBox11 = new TextBox();
+            this.addBlockEffectButton = new Button();
+            this.textBox9 = new TextBox();
+            this.blockEffectsLBOX = new ListBox();
+            this.label42 = new Label();
+            this.UnBanButton = new Button();
+            this.BanButton = new Button();
+            this.unbanTxtBox = new TextBox();
+            this.banTxtBox = new TextBox();
+            this.bansList = new ListBox();
+            this.label41 = new Label();
+            this.label40 = new Label();
+            this.label39 = new Label();
+            this.label38 = new Label();
+            this.label20 = new Label();
+            this.log5 = new TextBox();
+            this.log4 = new TextBox();
+            this.log3 = new TextBox();
+            this.log2 = new TextBox();
+            this.log1 = new TextBox();
+            this.label19 = new Label();
+            this.label18 = new Label();
+            this.label17 = new Label();
+            this.label3 = new Label();
+            this.tabPage1 = new TabPage();
+            this.tabControl1 = new TabControl();
+            this.tabPage2 = new TabPage();
+            this.label2 = new Label();
+            this.textBox4 = new TextBox();
+            this.textBox3 = new TextBox();
+            this.textBox2 = new TextBox();
+            this.button10 = new Button();
+            this.label35 = new Label();
+            this.bwl = new CheckBox();
+            this.textBox1 = new TextBox();
+            this.label34 = new Label();
+            this.label33 = new Label();
+            this.label32 = new Label();
+            this.label31 = new Label();
+            this.label30 = new Label();
+            this.warningGiver = new CheckBox();
+            this.noRespawn = new CheckBox();
+            this.tabPage3 = new TabPage();
+            this.button13 = new Button();
+            this.button12 = new Button();
+            this.currentColor = new TextBox();
+            this.label37 = new Label();
+            this.label36 = new Label();
+            this.button11 = new Button();
+            this.autochangerface = new Timer(this.components);
+            this.autokick = new Timer(this.components);
+            this.autoreset = new Timer(this.components);
+            this.BlockPlacer = new Timer(this.components);
+            this.TrollCatcherBlockDelete = new Timer(this.components);
+            this.Gen_RB = new Timer(this.components);
+            this.AutoFixBot = new Timer(this.components);
+            this.blockeffectslboxupdown = new DomainUpDown();
             this.firstTabControler.SuspendLayout();
             this.Main.SuspendLayout();
             this.LanguageOrSettings.SuspendLayout();
@@ -355,7 +355,7 @@ namespace R42Bot
             // 
             this.scommand.AutoSize = true;
             this.scommand.Checked = true;
-            this.scommand.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.scommand.CheckState = CheckState.Checked;
             this.scommand.Location = new System.Drawing.Point(6, 144);
             this.scommand.Name = "scommand";
             this.scommand.Size = new System.Drawing.Size(102, 17);
@@ -433,7 +433,7 @@ namespace R42Bot
             this.Main.Controls.Add(this.Admins);
             this.Main.Location = new System.Drawing.Point(4, 22);
             this.Main.Name = "Main";
-            this.Main.Padding = new System.Windows.Forms.Padding(3);
+            this.Main.Padding = new Padding(3);
             this.Main.Size = new System.Drawing.Size(811, 336);
             this.Main.TabIndex = 0;
             this.Main.Text = "Index";
@@ -572,7 +572,7 @@ namespace R42Bot
             // 
             this.revertCboxLOL.AutoSize = true;
             this.revertCboxLOL.Checked = true;
-            this.revertCboxLOL.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.revertCboxLOL.CheckState = CheckState.Checked;
             this.revertCboxLOL.Location = new System.Drawing.Point(126, 167);
             this.revertCboxLOL.Name = "revertCboxLOL";
             this.revertCboxLOL.Size = new System.Drawing.Size(93, 17);
@@ -605,7 +605,7 @@ namespace R42Bot
             // 
             this.kickCbox.AutoSize = true;
             this.kickCbox.Checked = true;
-            this.kickCbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.kickCbox.CheckState = CheckState.Checked;
             this.kickCbox.Location = new System.Drawing.Point(6, 309);
             this.kickCbox.Name = "kickCbox";
             this.kickCbox.Size = new System.Drawing.Size(86, 17);
@@ -627,7 +627,7 @@ namespace R42Bot
             // 
             this.loadlevelCbox.AutoSize = true;
             this.loadlevelCbox.Checked = true;
-            this.loadlevelCbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.loadlevelCbox.CheckState = CheckState.Checked;
             this.loadlevelCbox.Location = new System.Drawing.Point(6, 260);
             this.loadlevelCbox.Name = "loadlevelCbox";
             this.loadlevelCbox.Size = new System.Drawing.Size(71, 17);
@@ -660,7 +660,7 @@ namespace R42Bot
             // 
             this.krockhateseers.AutoSize = true;
             this.krockhateseers.Checked = true;
-            this.krockhateseers.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.krockhateseers.CheckState = CheckState.Checked;
             this.krockhateseers.Location = new System.Drawing.Point(6, 189);
             this.krockhateseers.Name = "krockhateseers";
             this.krockhateseers.Size = new System.Drawing.Size(84, 17);
@@ -778,7 +778,7 @@ namespace R42Bot
             // 
             this.scommand2.AutoSize = true;
             this.scommand2.Checked = true;
-            this.scommand2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.scommand2.CheckState = CheckState.Checked;
             this.scommand2.Location = new System.Drawing.Point(6, 167);
             this.scommand2.Name = "scommand2";
             this.scommand2.Size = new System.Drawing.Size(104, 17);
@@ -816,7 +816,7 @@ namespace R42Bot
             this.LanguageOrSettings.Controls.Add(this.welcomeall);
             this.LanguageOrSettings.Location = new System.Drawing.Point(4, 22);
             this.LanguageOrSettings.Name = "LanguageOrSettings";
-            this.LanguageOrSettings.Padding = new System.Windows.Forms.Padding(3);
+            this.LanguageOrSettings.Padding = new Padding(3);
             this.LanguageOrSettings.Size = new System.Drawing.Size(811, 336);
             this.LanguageOrSettings.TabIndex = 1;
             this.LanguageOrSettings.Text = "Options";
@@ -876,7 +876,7 @@ namespace R42Bot
             // 
             this.enus.AutoSize = true;
             this.enus.Checked = true;
-            this.enus.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.enus.CheckState = CheckState.Checked;
             this.enus.Location = new System.Drawing.Point(12, 287);
             this.enus.Name = "enus";
             this.enus.Size = new System.Drawing.Size(59, 17);
@@ -983,7 +983,7 @@ namespace R42Bot
             // 
             this.welcomeall.AutoSize = true;
             this.welcomeall.Checked = true;
-            this.welcomeall.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.welcomeall.CheckState = CheckState.Checked;
             this.welcomeall.Location = new System.Drawing.Point(11, 6);
             this.welcomeall.Name = "welcomeall";
             this.welcomeall.Size = new System.Drawing.Size(233, 17);
@@ -1067,7 +1067,7 @@ namespace R42Bot
             // 
             this.welcomeallupper.AutoSize = true;
             this.welcomeallupper.Checked = true;
-            this.welcomeallupper.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.welcomeallupper.CheckState = CheckState.Checked;
             this.welcomeallupper.Location = new System.Drawing.Point(7, 108);
             this.welcomeallupper.Name = "welcomeallupper";
             this.welcomeallupper.Size = new System.Drawing.Size(49, 17);
@@ -1100,7 +1100,7 @@ namespace R42Bot
             // 
             this.leftallupper.AutoSize = true;
             this.leftallupper.Checked = true;
-            this.leftallupper.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.leftallupper.CheckState = CheckState.Checked;
             this.leftallupper.Location = new System.Drawing.Point(7, 48);
             this.leftallupper.Name = "leftallupper";
             this.leftallupper.Size = new System.Drawing.Size(49, 17);
@@ -1354,7 +1354,7 @@ namespace R42Bot
             this.idofit.Size = new System.Drawing.Size(32, 20);
             this.idofit.TabIndex = 7;
             this.idofit.Text = "0";
-            this.idofit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.idofit_KeyPress);
+            this.idofit.KeyPress += new KeyPressEventHandler(this.idofit_KeyPress);
             // 
             // paintbrushauto
             // 
@@ -1973,10 +1973,10 @@ namespace R42Bot
             // 
             // tabPage7
             // 
+            this.tabPage7.Controls.Add(this.blockeffectslboxupdown);
             this.tabPage7.Controls.Add(this.removeBlockEffectButton);
             this.tabPage7.Controls.Add(this.textBox11);
             this.tabPage7.Controls.Add(this.addBlockEffectButton);
-            this.tabPage7.Controls.Add(this.textBox10);
             this.tabPage7.Controls.Add(this.textBox9);
             this.tabPage7.Controls.Add(this.blockEffectsLBOX);
             this.tabPage7.Controls.Add(this.label42);
@@ -2006,6 +2006,25 @@ namespace R42Bot
             this.tabPage7.Text = "Lists";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
+            // removeBlockEffectButton
+            // 
+            this.removeBlockEffectButton.Location = new System.Drawing.Point(506, 146);
+            this.removeBlockEffectButton.Name = "removeBlockEffectButton";
+            this.removeBlockEffectButton.Size = new System.Drawing.Size(62, 23);
+            this.removeBlockEffectButton.TabIndex = 25;
+            this.removeBlockEffectButton.Text = "Remove";
+            this.removeBlockEffectButton.UseVisualStyleBackColor = true;
+            this.removeBlockEffectButton.Click += new System.EventHandler(this.removeBlockEffectButton_Click);
+            // 
+            // textBox11
+            // 
+            this.textBox11.Location = new System.Drawing.Point(367, 149);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new System.Drawing.Size(133, 20);
+            this.textBox11.TabIndex = 24;
+            this.textBox11.Text = "Block ID";
+            this.textBox11.KeyPress += new KeyPressEventHandler(this.textBox11_KeyPress);
+            // 
             // addBlockEffectButton
             // 
             this.addBlockEffectButton.Location = new System.Drawing.Point(506, 121);
@@ -2016,15 +2035,6 @@ namespace R42Bot
             this.addBlockEffectButton.UseVisualStyleBackColor = true;
             this.addBlockEffectButton.Click += new System.EventHandler(this.addBlockEffectButton_Click);
             // 
-            // textBox10
-            // 
-            this.textBox10.Location = new System.Drawing.Point(438, 124);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(62, 20);
-            this.textBox10.TabIndex = 22;
-            this.textBox10.Text = "Potion Id";
-            this.textBox10.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox10_KeyPress);
-            // 
             // textBox9
             // 
             this.textBox9.Location = new System.Drawing.Point(367, 124);
@@ -2032,7 +2042,7 @@ namespace R42Bot
             this.textBox9.Size = new System.Drawing.Size(65, 20);
             this.textBox9.TabIndex = 21;
             this.textBox9.Text = "Block ID";
-            this.textBox9.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox9_KeyPress);
+            this.textBox9.KeyPress += new KeyPressEventHandler(this.textBox9_KeyPress);
             // 
             // blockEffectsLBOX
             // 
@@ -2253,7 +2263,7 @@ namespace R42Bot
             this.tabPage2.Controls.Add(this.noRespawn);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Padding = new Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(803, 313);
             this.tabPage2.TabIndex = 0;
             this.tabPage2.Text = "Command Restrictions";
@@ -2333,7 +2343,7 @@ namespace R42Bot
             this.textBox1.TabIndex = 7;
             this.textBox1.Text = "3";
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.textBox1.KeyPress += new KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // label34
             // 
@@ -2383,7 +2393,7 @@ namespace R42Bot
             // 
             this.warningGiver.AutoSize = true;
             this.warningGiver.Checked = true;
-            this.warningGiver.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.warningGiver.CheckState = CheckState.Checked;
             this.warningGiver.Location = new System.Drawing.Point(229, 23);
             this.warningGiver.Name = "warningGiver";
             this.warningGiver.Size = new System.Drawing.Size(252, 17);
@@ -2413,7 +2423,7 @@ namespace R42Bot
             this.tabPage3.Controls.Add(this.button11);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Padding = new Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(803, 313);
             this.tabPage3.TabIndex = 1;
             this.tabPage3.Text = "Customize...";
@@ -2513,34 +2523,25 @@ namespace R42Bot
             this.AutoFixBot.Enabled = true;
             this.AutoFixBot.Tick += new System.EventHandler(this.AutoFixBot_Tick);
             // 
-            // textBox11
+            // blockeffectslboxupdown
             // 
-            this.textBox11.Location = new System.Drawing.Point(367, 149);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(133, 20);
-            this.textBox11.TabIndex = 24;
-            this.textBox11.Text = "Block ID";
-            this.textBox11.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox11_KeyPress);
-            // 
-            // removeBlockEffectButton
-            // 
-            this.removeBlockEffectButton.Location = new System.Drawing.Point(506, 146);
-            this.removeBlockEffectButton.Name = "removeBlockEffectButton";
-            this.removeBlockEffectButton.Size = new System.Drawing.Size(62, 23);
-            this.removeBlockEffectButton.TabIndex = 25;
-            this.removeBlockEffectButton.Text = "Remove";
-            this.removeBlockEffectButton.UseVisualStyleBackColor = true;
-            this.removeBlockEffectButton.Click += new System.EventHandler(this.removeBlockEffectButton_Click);
+            this.blockeffectslboxupdown.Items.Add("zombie");
+            this.blockeffectslboxupdown.Items.Add("curse");
+            this.blockeffectslboxupdown.Location = new System.Drawing.Point(438, 124);
+            this.blockeffectslboxupdown.Name = "blockeffectslboxupdown";
+            this.blockeffectslboxupdown.Size = new System.Drawing.Size(61, 20);
+            this.blockeffectslboxupdown.TabIndex = 26;
+            this.blockeffectslboxupdown.Text = "zombie";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(815, 361);
             this.Controls.Add(this.firstTabControler);
             this.Name = "Form1";
             this.Text = "R42Bot++ v";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.FormClosing += new FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.firstTabControler.ResumeLayout(false);
             this.Main.ResumeLayout(false);
@@ -2786,13 +2787,13 @@ namespace R42Bot
         private Button UnBanButton;
         private Button BanButton;
         private CheckBox cleverbotCBOX;
-        private TextBox textBox10;
         private TextBox textBox9;
         private ListBox blockEffectsLBOX;
         private Label label42;
         private Button addBlockEffectButton;
         private TextBox textBox11;
         private Button removeBlockEffectButton;
+        private DomainUpDown blockeffectslboxupdown;
     }
 }
 

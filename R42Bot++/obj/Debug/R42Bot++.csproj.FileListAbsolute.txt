@@ -1,4 +1,3 @@
-C:\Users\MarcoAntonio\Documents\Visual Studio 2015\Projects\R42Bot++\R42Bot++\obj\Debug\R42Bot++.csprojResolveAssemblyReference.cache
 C:\Users\MarcoAntonio\Documents\Visual Studio 2015\Projects\R42Bot++\R42Bot++\obj\Debug\WindowsFormsApplication2.Properties.Resources.resources
 C:\Users\MarcoAntonio\Documents\Visual Studio 2015\Projects\R42Bot++\R42Bot++\obj\Debug\R42Bot++.csproj.GenerateResource.Cache
 C:\Users\MarcoAntonio\Documents\Visual Studio 2015\Projects\R42Bot++\R42Bot++\bin\Debug\WindowsFormsApplication2.exe.config
