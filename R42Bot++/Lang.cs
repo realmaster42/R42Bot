@@ -104,7 +104,7 @@ namespace R42Bot
                 "More",
                 "command Restrictions",
                 "customize...",
-                "Bot System",
+                "System",
                 "Ban List",
                 "your R42Bot++ version (V) is outdated! Newest version is [V] ! ",
                 "your R42Bot++ build (B) is outdated! Newest build is [B] ! ",

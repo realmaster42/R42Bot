@@ -15,8 +15,8 @@ namespace R42Bot
             // Get world data
             var p = 0u;
             var data = new Stack<object>();
-            while (m[++p] as string != "ws") { }
-            while (m[++p] as string != "we") { data.Push(m[p]); }
+            while (m[p] as string != "ws") { ++p; }
+            while (m[p] as string != "we") { data.Push(m[++p]); }
 
             // Parse world data
             var chunks = new List<DataChunk>();

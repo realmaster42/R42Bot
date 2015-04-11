@@ -24,7 +24,7 @@ namespace R42Bot
 
     public partial class Form1 : Form
     {
-        public static string nBuild = "103";
+        public static string nBuild = "104";
         public static ColorDialog c = new ColorDialog();
 
         public static Connection con;
@@ -195,7 +195,6 @@ namespace R42Bot
         {
             switch (m.Type)
             {
-
                 case "k":
                     if (botFullyConnected)
                     {
@@ -209,15 +208,15 @@ namespace R42Bot
                             }
                         }
                     }
-                    return;
+                    break;
                 case "ks":
                     if (givegodwithtrophycbox.Checked)
                     {
                         con.Send("say", "/godon " + names[m.GetInt(0)]);
                     }
-                    return;
+                    break;
                 case "write":
-                    return;
+                    break;
                 case "updatemeta":
                     worldowner = m.GetString(0);
                     worldtitle = m.GetString(1);
@@ -228,7 +227,7 @@ namespace R42Bot
                     currentTitle = worldtitle;
                     currentPlays = plays;
                     currentWoots = woots;
-                    return;
+                    break;
                 case "init":
                     try
                     {
@@ -293,7 +292,20 @@ namespace R42Bot
                     {
                         MessageBox.Show(Error.Message);
                     }
-                    return;
+                    break;
+                case "reset":
+                    if (botFullyConnected)
+                    {
+                        var chunks = InitParse.Parse(m);
+                        foreach (var chunk in chunks)
+                        {
+                            foreach (var pos in chunk.Locations)
+                            {
+                                blockIDs[chunk.Layer, pos.X, pos.Y] = chunk.Type;
+                            }
+                        }
+                    }
+                    break;
                 case "add":
                     if (CallsSettings.AllowJoiners)
                     {
@@ -357,13 +369,13 @@ namespace R42Bot
                     {
                         add.Enabled = true;
                     }
-                    return;
+                    break;
                 case "access":
                     con.Send("say", Voids.GetLangFile(CurrentLang, 72));
-                    return;
+                    break;
                 case "lostaccess":
                     con.Send("say", Voids.GetLangFile(CurrentLang, 73));
-                    return;
+                    break;
                 case "left":
                     if (!kJoiners.Checked)
                     {
@@ -404,7 +416,7 @@ namespace R42Bot
                                 names.Remove(m.GetInt(0));
                         }
                     }
-                    return;
+                    break;
                 case "b":
                     if (botFullyConnected)
                     {
@@ -1276,7 +1288,7 @@ namespace R42Bot
                         #endregion
                     }
 
-                    return;
+                    break;
                 case "m":
                     if (botFullyConnected)
                     {
@@ -1336,9 +1348,9 @@ namespace R42Bot
 
 
 
-                    return;
+                    break;
                 case "god":
-                    return;
+                    break;
                 case "say":
                     if (botFullyConnected)
                     {
@@ -2518,14 +2530,11 @@ namespace R42Bot
                             }
                         });
                     }
-
-                    return;
-
+                    break;
             }
         }
 
         #region ...
-
         private void connector_Click(object sender, EventArgs e)
         {
             if (connector.Text == "Connect")
@@ -2536,11 +2545,11 @@ namespace R42Bot
                     {
                         if (!isFacebook.Checked)
                         {
-                            MessageBox.Show("Email, Password and WorldID must be fillen up!", "R42Bot++ v" + Version.version + " System");
+                            MessageBox.Show(Voids.GetLangFile(CurrentLang, 76), "R42Bot++ v" + Version.version + " " + Voids.GetLangFile(CurrentLang, 92));
                         }
                         else
                         {
-                            MessageBox.Show("TokenID and WorldID must be fillen up!", "R42Bot++ v" + Version.version + " System");
+                            MessageBox.Show(Voids.GetLangFile(CurrentLang, 77), "R42Bot++ v" + Version.version + " " + Voids.GetLangFile(CurrentLang, 92));
                         }
                     }
                 }
@@ -2820,7 +2829,7 @@ namespace R42Bot
         {
             if (lavadrawer.Checked)
             {
-                MessageBox.Show("Now placing water bricks will auto-update.", "R42Bot++ v" + Version.version + " System");
+                MessageBox.Show("Now placing water bricks will auto-update.", "R42Bot++ v" + Version.version + " " + Voids.GetLangFile(CurrentLang, 92));
             }
         }
 
@@ -2880,7 +2889,7 @@ namespace R42Bot
         {
             if (tntallowd.Checked)
             {
-                MessageBox.Show("Now whenever someones places a red checker block it will FALL and destroy!", "R42Bot++ v" + Version.version + " System");
+                MessageBox.Show("Now whenever someones places a red checker block it will FALL and destroy!", "R42Bot++ v" + Version.version + " " + Voids.GetLangFile(CurrentLang, 92));
             }
         }
 
@@ -2925,7 +2934,7 @@ namespace R42Bot
             }
             else
             {
-                MessageBox.Show("'" + userpm.Text + "' isn't in the connected world." + "R42Bot++ v" + Version.version + " System");
+                MessageBox.Show("'" + userpm.Text + "' isn't in the connected world." + "R42Bot++ v" + Version.version + " " + Voids.GetLangFile(CurrentLang, 92));
             }
         }
 
@@ -2949,7 +2958,7 @@ namespace R42Bot
             {
                 if (e.KeyChar != 8)
                 {
-                    MessageBox.Show("You must enter a valid number.", "R42Bot++ System v" + Version.version);
+                    MessageBox.Show("You must enter a valid number.", "R42Bot++ v" + Version.version + " " + Voids.GetLangFile(CurrentLang, 92));
                     Thread.Sleep(250);
                     textBox1.Text = "3";
                 }
@@ -3241,7 +3250,7 @@ namespace R42Bot
             }
             else
             {
-                MessageBox.Show("Save File not found. (R42Bot++Admins.xml)", "R42Bot++ System v" + Version.version, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Save File not found. (R42Bot++Admins.xml)", "R42Bot++ v" + Version.version + " " + Voids.GetLangFile(CurrentLang, 92), MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -3767,7 +3776,7 @@ namespace R42Bot
             else
             {
                 unbanTxtBox.Clear();
-                MessageBox.Show("User not banned.", "R42Bot++ System");
+                MessageBox.Show("User not banned.", "R42Bot++ v" + Version.version + " " + Voids.GetLangFile(CurrentLang, 92));
             }
         }
 
@@ -3782,7 +3791,7 @@ namespace R42Bot
             else
             {
                 banTxtBox.Clear();
-                MessageBox.Show("User already banned.", "R42Bot++ System");
+                MessageBox.Show("User already banned.", "R42Bot++ v" + Version.version + " " + Voids.GetLangFile(CurrentLang, 92));
             }
         }
     }
