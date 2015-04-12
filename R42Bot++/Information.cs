@@ -6,7 +6,6 @@ namespace R42Bot
     public class Information
     {
         public bool Stalk { get; set; }
-        public bool StalkPM { get; set; }
         public List<List<string>> Restrictions { get; set; }
         public string language{ get; set; }
         public string[] Admins{ get; set; }

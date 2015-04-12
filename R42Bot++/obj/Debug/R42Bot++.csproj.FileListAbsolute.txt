@@ -6,3 +6,4 @@ C:\Users\MarcoAntonio\Documents\Visual Studio 2015\Projects\R42Bot++\R42Bot++\bi
 C:\Users\MarcoAntonio\Documents\Visual Studio 2015\Projects\R42Bot++\R42Bot++\obj\Debug\WindowsFormsApplication2.exe
 C:\Users\MarcoAntonio\Documents\Visual Studio 2015\Projects\R42Bot++\R42Bot++\obj\Debug\WindowsFormsApplication2.pdb
 C:\Users\MarcoAntonio\Documents\Visual Studio 2015\Projects\R42Bot++\R42Bot++\obj\Debug\R42Bot.Form1.resources
+C:\Users\MarcoAntonio\Documents\Visual Studio 2015\Projects\R42Bot++\R42Bot++\obj\Debug\R42Bot++.csprojResolveAssemblyReference.cache
