@@ -24,7 +24,7 @@ namespace R42Bot
 
     public partial class Form1 : Form
     {
-        public static string nBuild = "104";
+        public static string nBuild = "106";
         public static ColorDialog c = new ColorDialog();
 
         public static Connection con;
@@ -166,7 +166,7 @@ namespace R42Bot
             {
                 try
                 {
-                    client = PlayerIO.QuickConnect.SimpleConnect("everybody-edits-su9rn58o40itdbnw69plyw", email, pass);
+                    client = PlayerIO.QuickConnect.SimpleConnect("everybody-edits-su9rn58o40itdbnw69plyw", email, pass, null);
                     con = client.Multiplayer.JoinRoom(idofworld, null);
                     con.OnMessage += new MessageReceivedEventHandler(onMessage);
                 }
@@ -179,7 +179,7 @@ namespace R42Bot
             {
                 try
                 {
-                    client = PlayerIO.QuickConnect.FacebookOAuthConnect("everybody-edits-su9rn58o40itdbnw69plyw", email, "");
+                    client = PlayerIO.QuickConnect.FacebookOAuthConnect("everybody-edits-su9rn58o40itdbnw69plyw", email, "", null);
                     con = client.Multiplayer.JoinRoom(idofworld, null);
                     con.OnMessage += new MessageReceivedEventHandler(onMessage);
                 }
@@ -1403,7 +1403,7 @@ namespace R42Bot
                                     }
                                     else
                                     {
-                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 101));
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 100));
                                     }
                                 }
                                 else if (str.StartsWith("!autokick "))
@@ -1421,8 +1421,8 @@ namespace R42Bot
                                                     if (bwl.Checked)
                                                     {
                                                         con.Send("say", "/pm " + names[m.GetInt(0)] + " Warning limit reached! You are getting banned.");
-                                                        Thread.Sleep(5);
-                                                        con.Send("say", "/ban " + names[m.GetInt(0)]);
+                                                        Thread.Sleep(575);
+                                                        con.Send("say", "/kick " + names[m.GetInt(0)]);
                                                     }
                                                     else
                                                     {
@@ -1558,7 +1558,7 @@ namespace R42Bot
                                     }
                                     else
                                     {
-                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 101));
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 100));
                                     }
                                 }
                                 else if (str.StartsWith("!revert "))
@@ -1624,7 +1624,7 @@ namespace R42Bot
                                     }
                                     else
                                     {
-                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 101));
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 100));
                                     }
                                 }
                                 else if (str.StartsWith("!snakespeed "))
@@ -1681,7 +1681,7 @@ namespace R42Bot
                                     }
                                     else
                                     {
-                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 101));
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 100));
                                     }
                                 }
                                 else if (str.StartsWith("!name "))
@@ -2290,19 +2290,74 @@ namespace R42Bot
                                 }
                                 else if (str.StartsWith("!loadlevel"))
                                 {
-                                    if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                    if (loadlevelCbox.Checked)
                                     {
-                                        con.Send("say", "/loadlevel");
-                                        con.Send("say", "[R42Bot++] " + Voids.Shortest(names[m.GetInt(0)]).ToUpper() + ": level loaded.");
-                                        #region BOT LOG
-                                        DefineLogZones();
-                                        Thread.Sleep(250);
-                                        log1.Text = "1. " + names[m.GetInt(0)].ToUpper() + " loaded the level.";
-                                        #endregion
+                                        if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                        {
+                                            con.Send("say", "/loadlevel");
+                                            con.Send("say", "[R42Bot++] " + Voids.Shortest(names[m.GetInt(0)]).ToUpper() + ": level loaded.");
+                                            #region BOT LOG
+                                            DefineLogZones();
+                                            Thread.Sleep(250);
+                                            log1.Text = "1. " + names[m.GetInt(0)].ToUpper() + " loaded the level.";
+                                            #endregion
+                                        }
+                                        else
+                                        {
+                                            con.Send("say", "/pm " + names[m.GetInt(0)] + "  you are not an admin in the bot! D:<");
+                                        }
                                     }
                                     else
                                     {
-                                        con.Send("say", "/pm " + names[m.GetInt(0)] + "  you are not an admin in the bot! D:<");
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 100));
+                                    }
+                                }
+                                else if (str.StartsWith("!save"))
+                                {
+                                    if (saveCbox.Checked)
+                                    {
+                                        if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                        {
+                                            con.Send("save");
+                                            con.Send("say", "[R42Bot++] " + Voids.Shortest(names[m.GetInt(0)]).ToUpper() + ": level saved.");
+                                            #region BOT LOG
+                                            DefineLogZones();
+                                            Thread.Sleep(250);
+                                            log1.Text = "1. " + names[m.GetInt(0)].ToUpper() + " saved the level.";
+                                            #endregion
+                                        }
+                                        else
+                                        {
+                                            con.Send("say", "/pm " + names[m.GetInt(0)] + "  you are not an admin in the bot! D:<");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 100));
+                                    }
+                                }
+                                else if (str.StartsWith("!clear"))
+                                {
+                                    if (clearCbox.Checked)
+                                    {
+                                        if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                        {
+                                            con.Send("clear");
+                                            con.Send("say", "[R42Bot++] " + Voids.Shortest(names[m.GetInt(0)]).ToUpper() + ": level cleared.");
+                                            #region BOT LOG
+                                            DefineLogZones();
+                                            Thread.Sleep(250);
+                                            log1.Text = "1. " + names[m.GetInt(0)].ToUpper() + " cleared the level.";
+                                            #endregion
+                                        }
+                                        else
+                                        {
+                                            con.Send("say", "/pm " + names[m.GetInt(0)] + "  you are not an admin in the bot! D:<");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 100));
                                     }
                                 }
                                 else if (str.StartsWith("!download"))
@@ -2403,34 +2458,67 @@ namespace R42Bot
                                     string[] split = str.Split(' ');
                                     if (Admins.Items.Contains(names[m.GetInt(0)]))
                                     {
-                                        if (scommand2.Checked)
+                                        if (noRespawn3.Checked)
                                         {
-                                            if (split[1] == "nikooos" && names.ContainsValue("nikooooooos"))
+                                            if (warningGiver3.Checked)
                                             {
-                                                con.Send("say", "/giveedit NIKOOOOOOOS");
-                                                Thread.Sleep(200);
-                                                con.Send("say", "[R42Bot++] NIKOOO(...)s is now in creative mode.");
-                                                Thread.Sleep(200);
-                                                con.Send("say", "/pm NIKOOOOOOOS [R42Bott+] hey... you are now in creative mode.");
-                                                Thread.Sleep(200);
-                                            }
-                                            else if (names.ContainsValue(split[1]))
-                                            {
-                                                con.Send("say", "/giveedit " + split[1]);
-                                                Thread.Sleep(200);
-                                                con.Send("say", "/pm " + names[m.GetInt(0)] + "  " + split[1].ToUpper() + " is now in creative mode.");
-                                                Thread.Sleep(200);
-                                                con.Send("say", "/pm " + split[1] + " [R42Bot++] hey... you are now in creative mode!");
-                                                Thread.Sleep(200);
+                                                int warnumber = Convert.ToInt32(limit3.Text);
+                                                if (player[m.GetInt(0)].warnings > warnumber)
+                                                {
+                                                    if (bwl3.Checked)
+                                                    {
+                                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " Warning limit reached! You are getting banned.");
+                                                        Thread.Sleep(575);
+                                                        con.Send("say", "/kick " + names[m.GetInt(0)]);
+                                                    }
+                                                    else
+                                                    {
+                                                        con.Send("say", "/kick " + names[m.GetInt(0)] + " Warning limit reached!");
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    player[m.GetInt(0)].warnings = player[m.GetInt(0)].warnings + 1;
+                                                    Thread.Sleep(250);
+                                                    con.Send("say", names[m.GetInt(0)].ToUpper() + ": Please don't use /respawn. Warning " + player[m.GetInt(0)].warnings + " out of " + textBox1.Text + ".");
+                                                }
                                             }
                                             else
                                             {
-                                                con.Send("say", "/pm " + names[m.GetInt(0)] + "  " + split[1] + " isn't in this world or isn't an valid username.");
+                                                con.Send("say", "/kick " + names[m.GetInt(0)] + " Please don't use /respawn command!");
                                             }
                                         }
                                         else
                                         {
-                                            con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 100));
+                                            if (scommand2.Checked)
+                                            {
+                                                if (split[1] == "nikooos" && names.ContainsValue("nikooooooos"))
+                                                {
+                                                    con.Send("say", "/giveedit NIKOOOOOOOS");
+                                                    Thread.Sleep(200);
+                                                    con.Send("say", "[R42Bot++] NIKOOO(...)s is now in creative mode.");
+                                                    Thread.Sleep(200);
+                                                    con.Send("say", "/pm NIKOOOOOOOS [R42Bott+] hey... you are now in creative mode.");
+                                                    Thread.Sleep(200);
+                                                }
+                                                else if (names.ContainsValue(split[1]))
+                                                {
+                                                    con.Send("say", "/giveedit " + split[1]);
+                                                    Thread.Sleep(200);
+                                                    con.Send("say", "/pm " + names[m.GetInt(0)] + "  " + split[1].ToUpper() + " is now in creative mode.");
+                                                    Thread.Sleep(200);
+                                                    con.Send("say", "/pm " + split[1] + " [R42Bot++] hey... you are now in creative mode!");
+                                                    Thread.Sleep(200);
+                                                }
+                                                else
+                                                {
+                                                    con.Send("say", "/pm " + names[m.GetInt(0)] + "  " + split[1] + " isn't in this world or isn't an valid username.");
+                                                }
+                                            }
+                                            else
+                                            {
+                                                con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 100));
+                                            }
                                         }
                                     }
                                     else
@@ -2443,28 +2531,61 @@ namespace R42Bot
                                     string[] split = str.Split(' ');
                                     if (Admins.Items.Contains(names[m.GetInt(0)]))
                                     {
-                                        if (scommand.Checked)
+                                        if (noRespawn2.Checked)
                                         {
-                                            if (split[1] == "nikooooooos" && names.ContainsValue("nikooos"))
+                                            if (warningGiver2.Checked)
                                             {
-                                                con.Send("say", "/removeedit NIKOOOOOOOS");
-                                                con.Send("say", "[R42Bot++] NIKOOO(...)s is now in survival mode.");
-                                                con.Send("say", "/pm NIKOOOOOOOS [R42Bott+] hey... you are now in survival mode.");
-                                            }
-                                            else if (names.ContainsValue(split[1]))
-                                            {
-                                                con.Send("say", "/removeedit " + split[1]);
-                                                con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToUpper() + " " + split[1].ToUpper() + " is now in survival mode.");
-                                                con.Send("say", "/pm " + split[1] + " [R42Bot++] hey... you are now in survival mode!");
+                                                int warnumber = Convert.ToInt32(limit2.Text);
+                                                if (player[m.GetInt(0)].warnings > warnumber)
+                                                {
+                                                    if (bwl2.Checked)
+                                                    {
+                                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " Warning limit reached! You are getting banned.");
+                                                        Thread.Sleep(575);
+                                                        con.Send("say", "/kick " + names[m.GetInt(0)]);
+                                                    }
+                                                    else
+                                                    {
+                                                        con.Send("say", "/kick " + names[m.GetInt(0)] + " Warning limit reached!");
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    player[m.GetInt(0)].warnings = player[m.GetInt(0)].warnings + 1;
+                                                    Thread.Sleep(250);
+                                                    con.Send("say", names[m.GetInt(0)].ToUpper() + ": Please don't use /respawn. Warning " + player[m.GetInt(0)].warnings + " out of " + textBox1.Text + ".");
+                                                }
                                             }
                                             else
                                             {
-                                                con.Send("say", "/pm " + names[m.GetInt(0)] + "  " + split[1].ToUpper() + " isn't in this world or isn't an valid username.");
+                                                con.Send("say", "/kick " + names[m.GetInt(0)] + " Please don't use /respawn command!");
                                             }
                                         }
                                         else
                                         {
-                                            con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 100));
+                                            if (scommand.Checked)
+                                            {
+                                                if (split[1] == "nikooooooos" && names.ContainsValue("nikooos"))
+                                                {
+                                                    con.Send("say", "/removeedit NIKOOOOOOOS");
+                                                    con.Send("say", "[R42Bot++] NIKOOO(...)s is now in survival mode.");
+                                                    con.Send("say", "/pm NIKOOOOOOOS [R42Bott+] hey... you are now in survival mode.");
+                                                }
+                                                else if (names.ContainsValue(split[1]))
+                                                {
+                                                    con.Send("say", "/removeedit " + split[1]);
+                                                    con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToUpper() + " " + split[1].ToUpper() + " is now in survival mode.");
+                                                    con.Send("say", "/pm " + split[1] + " [R42Bot++] hey... you are now in survival mode!");
+                                                }
+                                                else
+                                                {
+                                                    con.Send("say", "/pm " + names[m.GetInt(0)] + "  " + split[1].ToUpper() + " isn't in this world or isn't an valid username.");
+                                                }
+                                            }
+                                            else
+                                            {
+                                                con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 100));
+                                            }
                                         }
                                     }
                                     else
@@ -2649,106 +2770,97 @@ namespace R42Bot
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (File.Exists("StalkInfo.xml"))
-            {
-                var xs = new XmlSerializer(typeof(Information));
-                var read = new FileStream("StalkInfo.xml", FileMode.Open, FileAccess.Read, FileShare.Read);
-                var info = (Information)xs.Deserialize(read);
-                if (info.Data5 == "r0")
-                {
-                    alstalking.Checked = false;
-                }
-                else
-                {
-                    alstalking.Checked = true;
-                }
-            }
-            if (File.Exists("R42Bot++Customization.xml"))
-            {
-                var xs = new XmlSerializer(typeof(Information));
-                var read = new FileStream("R42Bot++Customization.xml", FileMode.Open, FileAccess.Read, FileShare.Read);
-                var info = (Information)xs.Deserialize(read);
-                #region Color Changer
-                if (info.Color1 == Color.White)
-                {
-                    currentColor.Text = "Default";
-                    tabPage1.BackColor = Color.White;
-                    tabPage2.BackColor = Color.White;
-                    tabPage3.BackColor = Color.White;
-                    Main.BackColor = Color.White;
-                    pollTab.BackColor = Color.White;
-                    autoPage.BackColor = Color.White;
-                    NEWS.BackColor = Color.Beige;
-                    LanguageOrSettings.BackColor = Color.White;
-                    autobolder.BackColor = Color.White;
-                    advancedEditor.BackColor = Color.White;
-                    snakepage.BackColor = Color.White;
-                    smileytabs.BackColor = Color.White;
-                    tabPage6.BackColor = Color.White;
-                }
-                else
-                {
-                    currentColor.Text = c.Color.ToString();
-
-                    tabPage1.BackColor = info.Color1;
-                    tabPage2.BackColor = info.Color1;
-                    tabPage3.BackColor = info.Color1;
-                    Main.BackColor = info.Color1;
-                    pollTab.BackColor = info.Color1;
-                    autoPage.BackColor = info.Color1;
-                    NEWS.BackColor = info.Color1;
-                    LanguageOrSettings.BackColor = info.Color1;
-                    autobolder.BackColor = info.Color1;
-                    advancedEditor.BackColor = info.Color1;
-                    snakepage.BackColor = info.Color1;
-                    smileytabs.BackColor = info.Color1;
-                }
-                #endregion
-            }
-
             if (File.Exists("R42Bot++SavedData.xml"))
             {
                 var xs = new XmlSerializer(typeof(Information));
                 var read = new FileStream("R42Bot++SavedData.xml", FileMode.Open, FileAccess.Read, FileShare.Read);
                 var info = (Information)xs.Deserialize(read);
-                textBox2.Text = info.Data1;
-                textBox3.Text = info.Data2;
-                textBox1.Text = info.Data3;
-                textBox4.Text = info.Data4;
-            }
+                alstalking.Checked = info.Stalk;
+                pmresult.Checked = info.StalkPM;
+                foreach(string admin in info.Admins)
+                {
+                    Admins.Items.Add(admin);
+                }
+                foreach (List<string> strlist in info.Restrictions)
+                {
+                    if (strlist[0] == "autokick")
+                    {
+                        noRespawn.Checked = Convert.ToBoolean(strlist[1]);
+                        warningGiver.Checked = Convert.ToBoolean(strlist[2]);
+                        textBox1.Text = strlist[3];
+                        bwl.Checked = Convert.ToBoolean(strlist[4]);
+                    }
+                    else if (strlist[0] == "survival")
+                    {
+                        noRespawn2.Checked = Convert.ToBoolean(strlist[1]);
+                        warningGiver2.Checked = Convert.ToBoolean(strlist[2]);
+                        limit2.Text = strlist[3];
+                        bwl2.Checked = Convert.ToBoolean(strlist[4]);
+                    }
+                    else if (strlist[0] == "creative")
+                    {
+                        noRespawn3.Checked = Convert.ToBoolean(strlist[1]);
+                        warningGiver3.Checked = Convert.ToBoolean(strlist[2]);
+                        limit3.Text = strlist[3];
+                        bwl3.Checked = Convert.ToBoolean(strlist[4]);
+                    }
 
-            if (File.Exists("R42Bot++LanguageFile.xml"))
-            {
-                var xs = new XmlSerializer(typeof(Information));
-                var read = new FileStream("R42Bot++LanguageFile.xml", FileMode.Open, FileAccess.Read, FileShare.Read);
-                var info = (Information)xs.Deserialize(read);
-                if (info.language == "enUS")
-                {
-                    enus.Checked = true;
-                }
-                else if (info.language == "ptbr")
-                {
-                    ptbr.Checked = true;
-                }
-                else if (info.language == "ltu")
-                {
-                    ltu.Checked = true;
-                }
-                else if (info.language == "dutch")
-                {
-                    dutchCBOX.Checked = true;
+                    if (info.language == "enUS")
+                    {
+                        enus.Checked = true;
+                    }
+                    else if (info.language == "ptbr")
+                    {
+                        ptbr.Checked = true;
+                    }
+                    else if (info.language == "ltu")
+                    {
+                        ltu.Checked = true;
+                    }
+                    else if (info.language == "dutch")
+                    {
+                        dutchCBOX.Checked = true;
+                    }
+
+                    #region Color Changer
+                    if (info.Color1 == Color.White)
+                    {
+                        currentColor.Text = "Default";
+                        tabPage1.BackColor = Color.White;
+                        tabPage2.BackColor = Color.White;
+                        tabPage3.BackColor = Color.White;
+                        Main.BackColor = Color.White;
+                        pollTab.BackColor = Color.White;
+                        autoPage.BackColor = Color.White;
+                        NEWS.BackColor = Color.Beige;
+                        LanguageOrSettings.BackColor = Color.White;
+                        autobolder.BackColor = Color.White;
+                        advancedEditor.BackColor = Color.White;
+                        snakepage.BackColor = Color.White;
+                        smileytabs.BackColor = Color.White;
+                        tabPage6.BackColor = Color.White;
+                    }
+                    else
+                    {
+                        currentColor.Text = c.Color.ToString();
+
+                        tabPage1.BackColor = info.Color1;
+                        tabPage2.BackColor = info.Color1;
+                        tabPage3.BackColor = info.Color1;
+                        Main.BackColor = info.Color1;
+                        pollTab.BackColor = info.Color1;
+                        autoPage.BackColor = info.Color1;
+                        NEWS.BackColor = info.Color1;
+                        LanguageOrSettings.BackColor = info.Color1;
+                        autobolder.BackColor = info.Color1;
+                        advancedEditor.BackColor = info.Color1;
+                        snakepage.BackColor = info.Color1;
+                        smileytabs.BackColor = info.Color1;
+                    }
+                    #endregion
                 }
             }
             Thread.Sleep(250);
-            #region restriction commands
-            #region /respawn
-            noRespawn.Checked = (textBox2.Text == "r0") ? false : true;
-
-            warningGiver.Checked = (textBox3.Text == "r0") ? false : true;
-
-            bwl.Checked = (textBox4.Text == "r0") ? false : true;
-            #endregion
-            #endregion
 
             BuildVersion = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["Build"]);
             Version.upgradedBuild = new System.Net.WebClient().DownloadString(Version.buildlink);
@@ -2836,11 +2948,6 @@ namespace R42Bot
         private void button6_Click(object sender, EventArgs e)
         {
             con.Send(worldKey + "f", 0);
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            Console.WriteLine(Voids.GetLangFile(CurrentLang, 100));
         }
 
         private void autochangerface_Tick(object sender, EventArgs e)
@@ -2952,15 +3059,13 @@ namespace R42Bot
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            string[] nums = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
+            char ch = e.KeyChar;
 
-            if (!nums.Contains(e.KeyChar.ToString()))
+            if (!Char.IsDigit(ch))
             {
                 if (e.KeyChar != 8)
                 {
-                    MessageBox.Show("You must enter a valid number.", "R42Bot++ v" + Version.version + " " + Voids.GetLangFile(CurrentLang, 92));
-                    Thread.Sleep(250);
-                    textBox1.Text = "3";
+                    e.Handled = true;
                 }
             }
         }
@@ -2969,13 +3074,85 @@ namespace R42Bot
         {
             try
             {
-                // /respawn
-                var info = new Information();
-                info.Data1 = textBox2.Text;
-                info.Data2 = textBox3.Text;
-                info.Data3 = textBox1.Text;
-                info.Data4 = textBox4.Text;
-                Class1.SaveData(info, "R42Bot++SavedData.xml");
+                if (!File.Exists(@"R42Bot++SavedData.xml"))
+                {
+                    var info = new Information();
+                    List<string> ls = new List<string> { };
+                    ls.Add("autokick");
+                    ls.Add(noRespawn.Checked.ToString());
+                    ls.Add(warningGiver.Checked.ToString());
+                    ls.Add(textBox1.Text);
+                    ls.Add(bwl.Checked.ToString());
+                    info.Restrictions.Add(ls);
+
+                    List<string> ls2 = new List<string> { };
+                    ls2.Add("survival");
+                    ls2.Add(noRespawn2.Checked.ToString());
+                    ls2.Add(warningGiver2.Checked.ToString());
+                    ls2.Add(limit2.Text);
+                    ls2.Add(bwl2.Checked.ToString());
+                    info.Restrictions.Add(ls2);
+
+                    List<string> ls3 = new List<string> { };
+                    ls3.Add("creative");
+                    ls3.Add(noRespawn3.Checked.ToString());
+                    ls3.Add(warningGiver3.Checked.ToString());
+                    ls3.Add(limit3.Text);
+                    ls3.Add(bwl3.Checked.ToString());
+                    info.Restrictions.Add(ls3);
+
+
+                    Saver.SaveData(info, "R42Bot++SavedData.xml");
+                }
+                else
+                {
+                    var xs = new XmlSerializer(typeof(Information));
+                    var read = new FileStream("R42Bot++SavedData.xml", FileMode.Open, FileAccess.Read, FileShare.Read);
+                    var info = (Information)xs.Deserialize(read);
+
+                    foreach (List<string> ls in info.Restrictions)
+                    {
+                        if (ls[0] == "autokick")
+                        {
+                            foreach (string s in ls)
+                            {
+                                ls.Remove(s);
+                            }
+
+                            ls.Add("autokick");
+                            ls.Add(noRespawn.Checked.ToString());
+                            ls.Add(warningGiver.Checked.ToString());
+                            ls.Add(textBox1.Text);
+                            ls.Add(bwl.Checked.ToString());
+                        }
+                        else if (ls[0] == "survival")
+                        {
+                            foreach (string s in ls)
+                            {
+                                ls.Remove(s);
+                            }
+
+                            ls.Add("survival");
+                            ls.Add(noRespawn2.Checked.ToString());
+                            ls.Add(warningGiver2.Checked.ToString());
+                            ls.Add(limit2.Text);
+                            ls.Add(bwl2.Checked.ToString());
+                        }
+                        else if (ls[0] == "creative")
+                        {
+                            foreach (string s in ls)
+                            {
+                                ls.Remove(s);
+                            }
+
+                            ls.Add("creative");
+                            ls.Add(noRespawn3.Checked.ToString());
+                            ls.Add(warningGiver3.Checked.ToString());
+                            ls.Add(limit3.Text);
+                            ls.Add(bwl3.Checked.ToString());
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -2983,36 +3160,39 @@ namespace R42Bot
             }
         }
 
-        private void noRespawn_CheckedChanged(object sender, EventArgs e)
-        {
-            textBox2.Text = (noRespawn.Checked) ? "r1" : "r0";
-        }
-
-        private void warningGiver_CheckedChanged(object sender, EventArgs e)
-        {
-            textBox3.Text = (warningGiver.Checked) ? "r1" : "r0";
-        }
-
-        private void bwl_CheckedChanged(object sender, EventArgs e)
-        {
-            textBox4.Text = (bwl.Checked) ? "r1" : "r0";
-        }
-
         private void button11_Click(object sender, EventArgs e)
         {
             try
             {
-                // /respawn
-                var info = new Information();
-                if (currentColor.Text == "Default")
+                if (!File.Exists(@"R42Bot++SavedData.xml"))
                 {
-                    info.Color1 = Color.White;
+                    var info = new Information();
+                    if (currentColor.Text == "Default")
+                    {
+                        info.Color1 = Color.White;
+                    }
+                    else
+                    {
+                        info.Color1 = c.Color;
+                    }
+                    Saver.SaveData(info, "R42Bot++SavedData.xml");
                 }
                 else
                 {
-                    info.Color1 = c.Color;
+                    var xs = new XmlSerializer(typeof(Information));
+                    var read = new FileStream("R42Bot++SavedData.xml", FileMode.Open, FileAccess.Read, FileShare.Read);
+                    var info = (Information)xs.Deserialize(read);
+
+                    if (currentColor.Text == "Default")
+                    {
+                        info.Color1 = Color.White;
+                    }
+                    else
+                    {
+                        info.Color1 = c.Color;
+                    }
+                    Saver.SaveData(info, "R42Bot++SavedData.xml");
                 }
-                Class1.SaveData(info, "R42Bot++Customization.xml");
             }
             catch (Exception ex)
             {
@@ -3064,19 +3244,27 @@ namespace R42Bot
             }
         }
 
-        private void alstalking_CheckedChanged(object sender, EventArgs e)
-        {
-            textBox5.Text = (alstalking.Checked) ? "r1" : "r0";
-        }
-
         private void button14_Click(object sender, EventArgs e)
         {
             try
             {
-                // /respawn
-                var info = new Information();
-                info.Data5 = (textBox5.Text == "r0") ? "r0" : "r1";
-                Class1.SaveData(info, "StalkInfo.xml");
+                if (!File.Exists(@"R42Bot++SavedData.xml"))
+                {
+                    var info = new Information();
+                    info.Stalk = alstalking.Checked;
+                    info.StalkPM = pmresult.Checked;
+                    Saver.SaveData(info, "R42Bot++SavedData.xml");
+                }
+                else
+                {
+                    var xs = new XmlSerializer(typeof(Information));
+                    var read = new FileStream("R42Bot++SavedData.xml", FileMode.Open, FileAccess.Read, FileShare.Read);
+                    var info = (Information)xs.Deserialize(read);
+
+                    info.Stalk = alstalking.Checked;
+                    info.StalkPM = pmresult.Checked;
+                    Saver.SaveData(info, "R42Bot++SavedData.xml");
+                }
             }
             catch (Exception ex)
             {
@@ -3216,15 +3404,33 @@ namespace R42Bot
         {
             try
             {
-                var info = new Information();
-                ListBox.ObjectCollection items = Admins.Items;
-                string[] Items1 = new string[] { };
-                for (int i = 1; i < items.Count; i++)
+                if (!File.Exists(@"R42Bot++SavedData.xml"))
                 {
-                    Items1[i] = items[i].ToString();
+                    var info = new Information();
+                    ListBox.ObjectCollection items = Admins.Items;
+                    string[] Items1 = new string[] { };
+                    for (int i = 1; i < items.Count; i++)
+                    {
+                        Items1[i] = items[i].ToString();
+                    }
+                    info.Admins = Items1;
+                    Saver.SaveData(info, "R42Bot++SavedData.xml");
                 }
-                info.Admins = Items1;
-                Class1.SaveData(info, "R42Bot++Admins.xml");
+                else
+                {
+                    var xs = new XmlSerializer(typeof(Information));
+                    var read = new FileStream("R42Bot++SavedData.xml", FileMode.Open, FileAccess.Read, FileShare.Read);
+                    var info = (Information)xs.Deserialize(read);
+
+                    ListBox.ObjectCollection items = Admins.Items;
+                    string[] Items1 = new string[] { };
+                    for (int i = 1; i < items.Count; i++)
+                    {
+                        Items1[i] = items[i].ToString();
+                    }
+                    info.Admins = Items1;
+                    Saver.SaveData(info, "R42Bot++SavedData.xml");
+                }
             }
             catch (Exception ex)
             {
@@ -3410,6 +3616,48 @@ namespace R42Bot
             {
                 blockEffectsLBOX.Items.RemoveAt(blockEffectsLBOX.Items.IndexOf(textBox11.Text)+1);
                 blockEffectsLBOX.Items.Remove(textBox11.Text);
+            }
+        }
+
+        private void limit2_TextChanged(object sender, EventArgs e)
+        {
+            if (limit2.Text == "")
+            {
+                limit2.Text = "3";
+            }
+        }
+
+        private void limit3_TextChanged(object sender, EventArgs e)
+        {
+            if (limit3.Text == "")
+            {
+                limit3.Text = "3";
+            }
+        }
+
+        private void limit2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+
+            if (!Char.IsDigit(ch))
+            {
+                if (e.KeyChar != 8)
+                {
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void limit3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+
+            if (!Char.IsDigit(ch))
+            {
+                if (e.KeyChar != 8)
+                {
+                    e.Handled = true;
+                }
             }
         }
 
@@ -3755,10 +4003,21 @@ namespace R42Bot
         {
             try
             {
-                // /respawn
-                var info = new Information();
-                info.language = CurrentLang;
-                Class1.SaveData(info, "R42Bot++LanguageFile.xml");
+                if (!File.Exists(@"R42Bot++SavedData.xml"))
+                {
+                    var info = new Information();
+                    info.language = CurrentLang;
+                    Saver.SaveData(info, "R42Bot++SavedData.xml");
+                }
+                else
+                {
+                    var xs = new XmlSerializer(typeof(Information));
+                    var read = new FileStream("R42Bot++SavedData.xml", FileMode.Open, FileAccess.Read, FileShare.Read);
+                    var info = (Information)xs.Deserialize(read);
+
+                    info.language = CurrentLang;
+                    Saver.SaveData(info, "R42Bot++SavedData.xml");
+                }
             }
             catch (Exception ex)
             {

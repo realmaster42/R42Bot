@@ -112,7 +112,6 @@ namespace R42Bot
                 "Build",
                 "[R42Bot++] World reseted. Reseting marked for every (X) ms!",
                 "[R42Bot++] Autokick enabled.",
-                "...S M I L E Y  C H A N G E R  C H O O S E  C H A N G E D...",
                 "command not enabled.",
                 " won! Now he/she has (W) wins!" // remember to keep the space
             };
@@ -320,8 +319,6 @@ namespace R42Bot
 
 "[R42Bot++] Automatisch 'kicken' ingeschaleld.",
 
-"...S M I L E Y  V E R A N D E R A A R  K E U Z E  V E R A N D E R D...",
-
                 "commando niet ingeschakeld.",
 
                 " won! Hij/Zij heeft nu (W) keer gewonnen!" // remember to keep the space
@@ -527,8 +524,6 @@ namespace R42Bot
                 "[R42Bot++] Mundo resetado. Reset marcado para cada (X) ms!",
 
 "[R42Bot++] Entrada desativada.",
-
-"...ESCOLHA DO MUDA-SMILEYS MUDADA...",
 
 "commando não ligado.",
 
@@ -770,8 +765,6 @@ namespace R42Bot
                 "[R42Bot++] Pasaulis restartuotas. restartavimas pazimetas kiekvienom (X) milisekundem!",
 
     "[R42Bot++] Autoispirimas leidziamas.",
-
-    "...s m a i l u   k e i t e l i o t o j o   p a s i r i n k i m a s   p a k e i s t a s...",
 
     "komanda neleidziama.",
 

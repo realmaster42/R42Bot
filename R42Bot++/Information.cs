@@ -1,14 +1,13 @@
 ﻿using System.Drawing;
+using System.Collections.Generic;
 
 namespace R42Bot
 {
     public class Information
     {
-        public string Data1 { get; set; }
-        public string Data2{ get; set; }
-        public string Data3{ get; set; }
-        public string Data4{ get; set; }
-        public string Data5{ get; set; }
+        public bool Stalk { get; set; }
+        public bool StalkPM { get; set; }
+        public List<List<string>> Restrictions { get; set; }
         public string language{ get; set; }
         public string[] Admins{ get; set; }
 

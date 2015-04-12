@@ -3,7 +3,7 @@ using System.IO;
 
 namespace R42Bot
 {
-    internal class Class1
+    internal class Saver
     {
         public static void SaveData(object obj, string filename)
         {
@@ -11,7 +11,6 @@ namespace R42Bot
             TextWriter writer = new StreamWriter(filename);
             sr.Serialize(writer, obj);
             writer.Close();
-
         }
     }
 }

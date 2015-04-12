@@ -31,8 +31,8 @@ namespace R42Bot
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new Container();
-            ComponentResourceManager resources = new ComponentResourceManager(typeof(Form1));
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.email = new TextBox();
             this.pass = new TextBox();
             this.idofworld = new TextBox();
@@ -49,7 +49,6 @@ namespace R42Bot
             this.cleverbotCBOX = new CheckBox();
             this.givegodwithtrophycbox = new CheckBox();
             this.button14 = new Button();
-            this.textBox5 = new TextBox();
             this.unfairBlox = new CheckBox();
             this.stalkMover = new TextBox();
             this.button2 = new Button();
@@ -183,6 +182,7 @@ namespace R42Bot
             this.pgeb100loldo = new RadioButton();
             this.pgeb100lol = new CheckBox();
             this.tabPage7 = new TabPage();
+            this.blockeffectslboxupdown = new DomainUpDown();
             this.removeBlockEffectButton = new Button();
             this.textBox11 = new TextBox();
             this.addBlockEffectButton = new Button();
@@ -211,12 +211,18 @@ namespace R42Bot
             this.tabPage1 = new TabPage();
             this.tabControl1 = new TabControl();
             this.tabPage2 = new TabPage();
+            this.bwl3 = new CheckBox();
+            this.bwl2 = new CheckBox();
+            this.limit3 = new TextBox();
+            this.limit2 = new TextBox();
+            this.warningGiver3 = new CheckBox();
+            this.warningGiver2 = new CheckBox();
+            this.noRespawn3 = new CheckBox();
+            this.label44 = new Label();
+            this.noRespawn2 = new CheckBox();
+            this.label43 = new Label();
             this.label2 = new Label();
-            this.textBox4 = new TextBox();
-            this.textBox3 = new TextBox();
-            this.textBox2 = new TextBox();
             this.button10 = new Button();
-            this.label35 = new Label();
             this.bwl = new CheckBox();
             this.textBox1 = new TextBox();
             this.label34 = new Label();
@@ -240,7 +246,6 @@ namespace R42Bot
             this.TrollCatcherBlockDelete = new Timer(this.components);
             this.Gen_RB = new Timer(this.components);
             this.AutoFixBot = new Timer(this.components);
-            this.blockeffectslboxupdown = new DomainUpDown();
             this.firstTabControler.SuspendLayout();
             this.Main.SuspendLayout();
             this.LanguageOrSettings.SuspendLayout();
@@ -388,7 +393,6 @@ namespace R42Bot
             this.Main.Controls.Add(this.cleverbotCBOX);
             this.Main.Controls.Add(this.givegodwithtrophycbox);
             this.Main.Controls.Add(this.button14);
-            this.Main.Controls.Add(this.textBox5);
             this.Main.Controls.Add(this.unfairBlox);
             this.Main.Controls.Add(this.stalkMover);
             this.Main.Controls.Add(this.button2);
@@ -469,15 +473,6 @@ namespace R42Bot
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(541, 233);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(10, 20);
-            this.textBox5.TabIndex = 7;
-            this.textBox5.Text = "r0";
-            this.textBox5.Visible = false;
-            // 
             // unfairBlox
             // 
             this.unfairBlox.AutoSize = true;
@@ -534,7 +529,6 @@ namespace R42Bot
             this.alstalking.TabIndex = 6;
             this.alstalking.Text = "Allow Stalking.";
             this.alstalking.UseVisualStyleBackColor = true;
-            this.alstalking.CheckedChanged += new System.EventHandler(this.alstalking_CheckedChanged);
             // 
             // button1
             // 
@@ -1431,7 +1425,6 @@ namespace R42Bot
             this.checkBox1.TabIndex = 2;
             this.checkBox1.Text = "auto-change \':)\' -> \':(\'";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // button6
             // 
@@ -2006,6 +1999,16 @@ namespace R42Bot
             this.tabPage7.Text = "Lists";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
+            // blockeffectslboxupdown
+            // 
+            this.blockeffectslboxupdown.Items.Add("zombie");
+            this.blockeffectslboxupdown.Items.Add("curse");
+            this.blockeffectslboxupdown.Location = new System.Drawing.Point(438, 124);
+            this.blockeffectslboxupdown.Name = "blockeffectslboxupdown";
+            this.blockeffectslboxupdown.Size = new System.Drawing.Size(61, 20);
+            this.blockeffectslboxupdown.TabIndex = 26;
+            this.blockeffectslboxupdown.Text = "zombie";
+            // 
             // removeBlockEffectButton
             // 
             this.removeBlockEffectButton.Location = new System.Drawing.Point(506, 146);
@@ -2246,12 +2249,18 @@ namespace R42Bot
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.bwl3);
+            this.tabPage2.Controls.Add(this.bwl2);
+            this.tabPage2.Controls.Add(this.limit3);
+            this.tabPage2.Controls.Add(this.limit2);
+            this.tabPage2.Controls.Add(this.warningGiver3);
+            this.tabPage2.Controls.Add(this.warningGiver2);
+            this.tabPage2.Controls.Add(this.noRespawn3);
+            this.tabPage2.Controls.Add(this.label44);
+            this.tabPage2.Controls.Add(this.noRespawn2);
+            this.tabPage2.Controls.Add(this.label43);
             this.tabPage2.Controls.Add(this.label2);
-            this.tabPage2.Controls.Add(this.textBox4);
-            this.tabPage2.Controls.Add(this.textBox3);
-            this.tabPage2.Controls.Add(this.textBox2);
             this.tabPage2.Controls.Add(this.button10);
-            this.tabPage2.Controls.Add(this.label35);
             this.tabPage2.Controls.Add(this.bwl);
             this.tabPage2.Controls.Add(this.textBox1);
             this.tabPage2.Controls.Add(this.label34);
@@ -2269,6 +2278,108 @@ namespace R42Bot
             this.tabPage2.Text = "Command Restrictions";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // bwl3
+            // 
+            this.bwl3.AutoSize = true;
+            this.bwl3.Location = new System.Drawing.Point(633, 79);
+            this.bwl3.Name = "bwl3";
+            this.bwl3.Size = new System.Drawing.Size(140, 17);
+            this.bwl3.TabIndex = 24;
+            this.bwl3.Text = "BAN WHEN REACHED";
+            this.bwl3.UseVisualStyleBackColor = true;
+            // 
+            // bwl2
+            // 
+            this.bwl2.AutoSize = true;
+            this.bwl2.Location = new System.Drawing.Point(633, 51);
+            this.bwl2.Name = "bwl2";
+            this.bwl2.Size = new System.Drawing.Size(140, 17);
+            this.bwl2.TabIndex = 23;
+            this.bwl2.Text = "BAN WHEN REACHED";
+            this.bwl2.UseVisualStyleBackColor = true;
+            // 
+            // limit3
+            // 
+            this.limit3.Location = new System.Drawing.Point(507, 76);
+            this.limit3.Name = "limit3";
+            this.limit3.Size = new System.Drawing.Size(120, 20);
+            this.limit3.TabIndex = 22;
+            this.limit3.Text = "3";
+            this.limit3.TextChanged += new System.EventHandler(this.limit3_TextChanged);
+            this.limit3.KeyPress += new KeyPressEventHandler(this.limit3_KeyPress);
+            // 
+            // limit2
+            // 
+            this.limit2.Location = new System.Drawing.Point(507, 49);
+            this.limit2.Name = "limit2";
+            this.limit2.Size = new System.Drawing.Size(120, 20);
+            this.limit2.TabIndex = 21;
+            this.limit2.Text = "3";
+            this.limit2.TextChanged += new System.EventHandler(this.limit2_TextChanged);
+            this.limit2.KeyPress += new KeyPressEventHandler(this.limit2_KeyPress);
+            // 
+            // warningGiver3
+            // 
+            this.warningGiver3.AutoSize = true;
+            this.warningGiver3.Checked = true;
+            this.warningGiver3.CheckState = CheckState.Checked;
+            this.warningGiver3.Location = new System.Drawing.Point(229, 76);
+            this.warningGiver3.Name = "warningGiver3";
+            this.warningGiver3.Size = new System.Drawing.Size(249, 17);
+            this.warningGiver3.TabIndex = 20;
+            this.warningGiver3.Text = "Give warning when using \'!creative\' (if disabled)";
+            this.warningGiver3.UseVisualStyleBackColor = true;
+            // 
+            // warningGiver2
+            // 
+            this.warningGiver2.AutoSize = true;
+            this.warningGiver2.Checked = true;
+            this.warningGiver2.CheckState = CheckState.Checked;
+            this.warningGiver2.Location = new System.Drawing.Point(229, 49);
+            this.warningGiver2.Name = "warningGiver2";
+            this.warningGiver2.Size = new System.Drawing.Size(247, 17);
+            this.warningGiver2.TabIndex = 19;
+            this.warningGiver2.Text = "Give warning when using \'!survival\' (if disabled)";
+            this.warningGiver2.UseVisualStyleBackColor = true;
+            // 
+            // noRespawn3
+            // 
+            this.noRespawn3.AutoSize = true;
+            this.noRespawn3.Location = new System.Drawing.Point(90, 76);
+            this.noRespawn3.Name = "noRespawn3";
+            this.noRespawn3.Size = new System.Drawing.Size(126, 17);
+            this.noRespawn3.TabIndex = 18;
+            this.noRespawn3.Text = "Disable \'creative\' use";
+            this.noRespawn3.UseVisualStyleBackColor = true;
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(18, 76);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(48, 13);
+            this.label44.TabIndex = 17;
+            this.label44.Text = "!creative";
+            // 
+            // noRespawn2
+            // 
+            this.noRespawn2.AutoSize = true;
+            this.noRespawn2.Location = new System.Drawing.Point(90, 49);
+            this.noRespawn2.Name = "noRespawn2";
+            this.noRespawn2.Size = new System.Drawing.Size(127, 17);
+            this.noRespawn2.TabIndex = 16;
+            this.noRespawn2.Text = "Disable \'!survival\' use";
+            this.noRespawn2.UseVisualStyleBackColor = true;
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(18, 49);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(46, 13);
+            this.label43.TabIndex = 15;
+            this.label43.Text = "!survival";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -2277,33 +2388,6 @@ namespace R42Bot
             this.label2.Size = new System.Drawing.Size(51, 13);
             this.label2.TabIndex = 14;
             this.label2.Text = "!autokick";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(76, 21);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(10, 20);
-            this.textBox4.TabIndex = 13;
-            this.textBox4.Text = "r0";
-            this.textBox4.Visible = false;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(76, 21);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(10, 20);
-            this.textBox3.TabIndex = 12;
-            this.textBox3.Text = "r1";
-            this.textBox3.Visible = false;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(76, 21);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(10, 20);
-            this.textBox2.TabIndex = 11;
-            this.textBox2.Text = "r0";
-            this.textBox2.Visible = false;
             // 
             // button10
             // 
@@ -2315,31 +2399,21 @@ namespace R42Bot
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(762, 27);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(35, 13);
-            this.label35.TabIndex = 9;
-            this.label35.Text = "LIMIT";
-            // 
             // bwl
             // 
             this.bwl.AutoSize = true;
-            this.bwl.Location = new System.Drawing.Point(660, 7);
+            this.bwl.Location = new System.Drawing.Point(633, 23);
             this.bwl.Name = "bwl";
             this.bwl.Size = new System.Drawing.Size(140, 17);
             this.bwl.TabIndex = 8;
             this.bwl.Text = "BAN WHEN REACHED";
             this.bwl.UseVisualStyleBackColor = true;
-            this.bwl.CheckedChanged += new System.EventHandler(this.bwl_CheckedChanged);
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(507, 21);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(152, 20);
+            this.textBox1.Size = new System.Drawing.Size(120, 20);
             this.textBox1.TabIndex = 7;
             this.textBox1.Text = "3";
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
@@ -2400,7 +2474,6 @@ namespace R42Bot
             this.warningGiver.TabIndex = 1;
             this.warningGiver.Text = "Give warning when using \'!autokick\' (if disabled)";
             this.warningGiver.UseVisualStyleBackColor = true;
-            this.warningGiver.CheckedChanged += new System.EventHandler(this.warningGiver_CheckedChanged);
             // 
             // noRespawn
             // 
@@ -2411,7 +2484,6 @@ namespace R42Bot
             this.noRespawn.TabIndex = 0;
             this.noRespawn.Text = "Disable \'!autokick\' use";
             this.noRespawn.UseVisualStyleBackColor = true;
-            this.noRespawn.CheckedChanged += new System.EventHandler(this.noRespawn_CheckedChanged);
             // 
             // tabPage3
             // 
@@ -2522,16 +2594,6 @@ namespace R42Bot
             // 
             this.AutoFixBot.Enabled = true;
             this.AutoFixBot.Tick += new System.EventHandler(this.AutoFixBot_Tick);
-            // 
-            // blockeffectslboxupdown
-            // 
-            this.blockeffectslboxupdown.Items.Add("zombie");
-            this.blockeffectslboxupdown.Items.Add("curse");
-            this.blockeffectslboxupdown.Location = new System.Drawing.Point(438, 124);
-            this.blockeffectslboxupdown.Name = "blockeffectslboxupdown";
-            this.blockeffectslboxupdown.Size = new System.Drawing.Size(61, 20);
-            this.blockeffectslboxupdown.TabIndex = 26;
-            this.blockeffectslboxupdown.Text = "zombie";
             // 
             // Form1
             // 
@@ -2693,12 +2755,8 @@ namespace R42Bot
         private Label label32;
         private Label label31;
         private TextBox textBox1;
-        private Label label35;
         private CheckBox bwl;
         private Button button10;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private TextBox textBox4;
         private Button button11;
         private TextBox currentColor;
         private Label label37;
@@ -2706,7 +2764,6 @@ namespace R42Bot
         private Button button13;
         private Button button12;
         private Label label2;
-        private TextBox textBox5;
         private Button button14;
         private NumericUpDown fdelay;
         private CheckBox freeadmin;
@@ -2794,6 +2851,16 @@ namespace R42Bot
         private TextBox textBox11;
         private Button removeBlockEffectButton;
         private DomainUpDown blockeffectslboxupdown;
+        private Label label43;
+        private Label label44;
+        private CheckBox noRespawn2;
+        private CheckBox noRespawn3;
+        private CheckBox bwl3;
+        private CheckBox bwl2;
+        private TextBox limit3;
+        private TextBox limit2;
+        private CheckBox warningGiver3;
+        private CheckBox warningGiver2;
     }
 }
 
