@@ -24,7 +24,7 @@ namespace R42Bot
 
     public partial class Form1 : Form
     {
-        public static string nBuild = "117";
+        public static string nBuild = "120";
         public static ColorDialog c = new ColorDialog();
 
         public static Connection con;
@@ -232,8 +232,11 @@ namespace R42Bot
                     try
                     {
                         con.Send("init2");
-                        Thread.Sleep(255);
+                        //Thread.Sleep(255);
                         worldowner = m.GetString(0);
+                        if(!Admins.Items.Contains(worldowner.ToLower()))
+                            Admins.Items.Add(worldowner.ToLower());
+
                         worldtitle = m.GetString(1);
                         currentOwner = worldowner;
                         currentTitle = worldtitle;
@@ -244,17 +247,20 @@ namespace R42Bot
                         currentWoots = woots;
                         totalwoots = m.GetInt(4);
                         botid = m.GetInt(6);
-                        botName = m.GetString(9);
-                        worldWidth = m.GetInt(12);
-                        worldHeight = m.GetInt(13);
+                        botName = m.GetString(12);
+                        worldWidth = m.GetInt(15);
+                        worldHeight = m.GetInt(16);
                         if (!names.ContainsValue(botName))
                         {
                             names.Add(m.GetInt(6), botName);
                         }
+                        if (botName != null && !Admins.Items.Contains(botName.ToLower()))
+                            Admins.Items.Add(botName.ToString());
+
                         if (banList.Contains(botName))
                         {
-                            MessageBox.Show(Voids.GetLangFile(CurrentLang, 69), "R42Bot++ v" + Version.version + " System");
-                            Thread.Sleep(250);
+                            MessageBox.Show(Voids.GetLangFile(CurrentLang, 69), "R42Bot++ v" + Version.version + Voids.GetLangFile(CurrentLang, 92));
+                            //Thread.Sleep(250);
                             con.Send("say", "[R42Bot++] Goodbye, the user using me is banned! :D");
                             con.Disconnect();
                             Application.Exit();
@@ -266,6 +272,7 @@ namespace R42Bot
                         }
                         botFullyConnected = true;
 
+                        con.Send("access", codebox.Text);
                         CallsSettings.Welcome_Text = welcomemsg.Text;
                         CallsSettings.Welcome_Text_2 = welcomemsg2.Text;
                         CallsSettings.Goodbye_Text = leftallmsg.Text;
@@ -275,8 +282,8 @@ namespace R42Bot
                         lavaP.Enabled = true;
                         boxHeightNUD.Maximum = worldHeight - 1;
                         boxWidthNUD.Maximum = worldWidth - 1;
-                        blockIDs = new uint[2, m.GetInt(12), m.GetInt(13)];
-                        blockPLACERs = new string[2, m.GetInt(12), m.GetInt(13)];
+                        blockIDs = new uint[2, m.GetInt(15), m.GetInt(16)];
+                        blockPLACERs = new string[2, m.GetInt(15), m.GetInt(16)];
                         var chunks = InitParse.Parse(m);
                         foreach (var chunk in chunks)
                         {
@@ -286,7 +293,6 @@ namespace R42Bot
                             }
                         }
 
-                        con.Send("access", codebox.Text);
                         //Read(m, 20);//18);
                     }
                     catch (PlayerIOError Error)
@@ -1305,40 +1311,7 @@ namespace R42Bot
                         int m6 = Convert.ToInt32(Math.Round(Convert.ToDecimal(m[6]), 0));
                         int xp = m1 + m5;
                         int yp = m2 + m6;
-
-                        if (m.GetInt(7) == 1 && m.GetInt(8) == 0) // right
-                        {
-                            if (blockEffectsLBOX.Items.Contains(blockIDs[0, X + 1, Y]))
-                            {
-                                con.Send(worldKey + "p", blockEffectsLBOX.Items[blockEffectsLBOX.Items.IndexOf(blockIDs[0, X + 1, Y]) + 1].ToString().Substring(0,1));
-                                con.Send("touch", player[m.GetInt(0)].userid, blockEffectsLBOX.Items[blockEffectsLBOX.Items.IndexOf(blockIDs[0, X + 1, Y]) + 1].ToString().Substring(0, 1));
-                            }
-                        }
-                        else if (m.GetInt(7) == -1 && m.GetInt(8) == 0) // left
-                        {
-                            if (blockEffectsLBOX.Items.Contains(blockIDs[0, X - 1, Y]))
-                            {
-                                con.Send(worldKey + "p", blockEffectsLBOX.Items[blockEffectsLBOX.Items.IndexOf(blockIDs[0, X + 1, Y]) + 1].ToString().Substring(0, 1));
-                                con.Send("touch", player[m.GetInt(0)].userid, blockEffectsLBOX.Items[blockEffectsLBOX.Items.IndexOf(blockIDs[0, X + 1, Y]) + 1].ToString().Substring(0, 1));
-                            }
-                        }
-                        else if (m.GetInt(7) == 0 && m.GetInt(8) == 1) // down
-                        {
-                            if (blockEffectsLBOX.Items.Contains(blockIDs[0, X, Y + 1]))
-                            {
-                                con.Send(worldKey + "p", blockEffectsLBOX.Items[blockEffectsLBOX.Items.IndexOf(blockIDs[0, X, Y + 1]) + 1].ToString().Substring(0, 1));
-                                con.Send("touch", player[m.GetInt(0)].userid, blockEffectsLBOX.Items[blockEffectsLBOX.Items.IndexOf(blockIDs[0, X, Y + 1]) + 1].ToString().Substring(0, 1));
-                            }
-                        }
-                        else if (m.GetInt(7) == 0 && m.GetInt(8) == -1) // up
-                        {
-                            if (blockEffectsLBOX.Items.Contains(blockIDs[0, X, Y - 1]))
-                            {
-                                con.Send(worldKey + "p", blockEffectsLBOX.Items[blockEffectsLBOX.Items.IndexOf(blockIDs[0, X, Y - 1]) + 1].ToString().Substring(0, 1));
-                                con.Send("touch", player[m.GetInt(0)].userid, blockEffectsLBOX.Items[blockEffectsLBOX.Items.IndexOf(blockIDs[0, X, Y - 1]) + 1].ToString().Substring(0, 1));
-                            }
-                        }
-
+                        
                         if (alstalking.Checked == true)
                         {
                             if (names.ContainsValue(names[m.GetInt(0)]))
@@ -1529,14 +1502,15 @@ namespace R42Bot
                                                         string sample = cmdPar.Replace("!kick ", "");
                                                         string reasson = "";
 
-                                                        reasson = sample.Substring(((kicking.Length - 1) + 1) + 1);
+                                                        if (sample.Length > kicking.Length)
+                                                            reasson = sample.Substring(kicking.Length);
 
                                                         if (reasson == "" || reasson == " ")
                                                         {
                                                             reasson = "The bot admin " + names[m.GetInt(0)] + " has kicked you.";
                                                         }
 
-                                                        con.Send("say", "/kick " + kicking + " " + reasson);
+                                                        con.Send("say", "/kick " + kicking + " [R42Bot++] " + reasson);
                                                         #region BOT LOG
                                                         DefineLogZones();
                                                         Thread.Sleep(250);
@@ -2660,10 +2634,7 @@ namespace R42Bot
                     {
                         MessageBox.Show(error.Message);
                     }
-                    if (botName != null)
-                    {
-                        Admins.Items.Add(botName.ToString());
-                    }
+
                     connector.Text = "Disconnect";
                     button8.Enabled = true;
                     button9.Enabled = true;
