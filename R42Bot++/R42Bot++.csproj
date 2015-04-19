@@ -47,6 +47,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ChatterBotAPI, Version=1.1.4989.20315, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\ChatterBotAPI.dll</HintPath>
+    </Reference>
     <Reference Include="PlayerIOClient, Version=2.3.6.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\PlayerIOClient.dll</HintPath>
