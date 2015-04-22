@@ -161,4 +161,28 @@
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>49</value>
   </metadata>
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAJAAAAGf///wEAAAADKioqJ4ODg//ExMT/0tLS/9LS0v/ExMT/g4OD/SoqKhn///8B////AQAA
+        AAP///8B////Af///wEAAAALhoaG4SIcfP8OAXr/DgB9/w0Ae/8MAG7/CQBW/wcBPv8dHz//hoaGyQAA
+        ABn///8B////Af///wETExMZra2t/xEBl/8TAKn/EgCm/xAAmf8PAI3/DgB//wwAcv8LAGT/CQBP/wYD
+        Mv+tra3lExMTKQAAAAMAAAANj4+P/xQBrP8WAMX/FQC9/xMAsv8SAKb/EQCa/w8AjP8NAH//DABy/wsA
+        Zf8KAFb/BwMy/4+Pj/8AAAADMjIyEScYq/8XANL/FwDR/xcAyP8VAL7/EwCz/xIAp/8RAJr/DwCN/w4A
+        gP8NAHP/CwBk/wkAUP8cHzz/MjIyHY+Pj/8WAcT/FwDV/xgA2P8XAND/FgDH/xYAv/8UALP/EgCn/xEA
+        m/8QAI7/DgCA/wwAc/8LAGb/BwFA/4+Pj//S0tL/FgDN/xgA0v8YANb/GADZ/xgA0f8WAMj/FQC+/xQA
+        tP8TAKj/EQCb/xAAjv8OAIH/DQBz/woAWv/S0tL/9vb2/xYAxv8XAM3/GADT/xgA1/8YANn/GADR/xYA
+        yf8VAL//FAC0/xMAqP8SAJz/EACP/w4Agv8MAHH/+fn5//n5+f8VAL3/eN35/3Xh//934f//M192/zNf
+        dv934f//d+H//zNfdv80X3f/d+H//3fh//922vX/DQB///b29v/d3d3/FAC1/2isx/+B5P//geT//wsc
+        Lv8LHC7/geT//4Hk//8LHC7/Cxwu/4Hk//+B5P//ZqnE/w8Ahf/a2tr/nZ2d/xMBo/8UALH/FQC8/xYA
+        xv8LHC7/Cxwu/xgA1/8YANr/Cxwu/wscLv8VAMH/FAC1/xMAqv8PAYn/nZ2d/0BAQA0eGXn/EwCo/xQA
+        sP8VALv/FgDG/xcAz/8XANT/GADY/xgA2/8XANT/FwDK/xUAwf8UALH/IRWS80BAQAsAAAADqKio9REC
+        i/8SAKX/EwCw/xUAu/8WAMb/FwDP/xcA1f8YANj/GADb/xgA1P8WAMn/FAGs/6ioqOn///8B////ARkZ
+        GRPS0tL/EQKK/xIApv8UALD/FQC7/xYAxf8XAM7/GADU/xgA2P8YANj/FgG//8/Pz/8ZGRkH////Af//
+        /wH///8BHBwcG62trf8eGXX/EgGe/xQAsv8VALz/FgDG/xcA0P8XAc3/IxS1/62trf8cHBwT////Af//
+        /wH///8B////Af///wH///8BSUlJFaurq//u7u7//f39//39/f/u7u7/q6ur/0lJSRH///8BAAAAAwAA
+        AAUAAAARAAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA
+        //8AAP//AAD//w==
+</value>
+  </data>
 </root>

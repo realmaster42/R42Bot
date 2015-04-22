@@ -20,5 +20,6 @@ namespace R42Bot
             warnings,
             BlocksPlacedInaSecond;
 
+        public List<List<string>> blocks;
     }
 }

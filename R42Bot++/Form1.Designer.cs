@@ -46,6 +46,7 @@ namespace R42Bot
             this.scommand = new System.Windows.Forms.CheckBox();
             this.firstTabControler = new System.Windows.Forms.TabControl();
             this.Main = new System.Windows.Forms.TabPage();
+            this.reloadCBox = new System.Windows.Forms.CheckBox();
             this.cleverbotCBOX = new System.Windows.Forms.CheckBox();
             this.givegodwithtrophycbox = new System.Windows.Forms.CheckBox();
             this.button14 = new System.Windows.Forms.Button();
@@ -111,6 +112,7 @@ namespace R42Bot
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.autobolder = new System.Windows.Forms.TabPage();
+            this.lavaDraw = new System.Windows.Forms.CheckBox();
             this.grbutton = new System.Windows.Forms.Button();
             this.boxWidthNUD = new System.Windows.Forms.NumericUpDown();
             this.boxHeightNUD = new System.Windows.Forms.NumericUpDown();
@@ -176,6 +178,10 @@ namespace R42Bot
             this.label21 = new System.Windows.Forms.Label();
             this.pollname = new System.Windows.Forms.TextBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.eRandomTxtB = new System.Windows.Forms.TextBox();
+            this.chngbtn = new System.Windows.Forms.Button();
+            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.pgebc = new System.Windows.Forms.CheckBox();
             this.pgeb100loldef = new System.Windows.Forms.RadioButton();
             this.pgeb100loldo = new System.Windows.Forms.RadioButton();
@@ -245,7 +251,6 @@ namespace R42Bot
             this.TrollCatcherBlockDelete = new System.Windows.Forms.Timer(this.components);
             this.Gen_RB = new System.Windows.Forms.Timer(this.components);
             this.AutoFixBot = new System.Windows.Forms.Timer(this.components);
-            this.lavaDraw = new System.Windows.Forms.CheckBox();
             this.firstTabControler.SuspendLayout();
             this.Main.SuspendLayout();
             this.LanguageOrSettings.SuspendLayout();
@@ -265,6 +270,8 @@ namespace R42Bot
             ((System.ComponentModel.ISupportInitialize)(this.autoresetime)).BeginInit();
             this.pollTab.SuspendLayout();
             this.tabPage6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.tabPage7.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -390,6 +397,7 @@ namespace R42Bot
             // 
             // Main
             // 
+            this.Main.Controls.Add(this.reloadCBox);
             this.Main.Controls.Add(this.cleverbotCBOX);
             this.Main.Controls.Add(this.givegodwithtrophycbox);
             this.Main.Controls.Add(this.button14);
@@ -442,6 +450,16 @@ namespace R42Bot
             this.Main.Text = "Index";
             this.Main.UseVisualStyleBackColor = true;
             // 
+            // reloadCBox
+            // 
+            this.reloadCBox.AutoSize = true;
+            this.reloadCBox.Location = new System.Drawing.Point(6, 284);
+            this.reloadCBox.Name = "reloadCBox";
+            this.reloadCBox.Size = new System.Drawing.Size(58, 17);
+            this.reloadCBox.TabIndex = 54;
+            this.reloadCBox.Text = "!reload";
+            this.reloadCBox.UseVisualStyleBackColor = true;
+            // 
             // cleverbotCBOX
             // 
             this.cleverbotCBOX.AutoSize = true;
@@ -455,7 +473,7 @@ namespace R42Bot
             // givegodwithtrophycbox
             // 
             this.givegodwithtrophycbox.AutoSize = true;
-            this.givegodwithtrophycbox.Location = new System.Drawing.Point(126, 190);
+            this.givegodwithtrophycbox.Location = new System.Drawing.Point(126, 213);
             this.givegodwithtrophycbox.Name = "givegodwithtrophycbox";
             this.givegodwithtrophycbox.Size = new System.Drawing.Size(97, 17);
             this.givegodwithtrophycbox.TabIndex = 52;
@@ -556,7 +574,7 @@ namespace R42Bot
             this.revertCboxLOL.AutoSize = true;
             this.revertCboxLOL.Checked = true;
             this.revertCboxLOL.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.revertCboxLOL.Location = new System.Drawing.Point(126, 167);
+            this.revertCboxLOL.Location = new System.Drawing.Point(126, 190);
             this.revertCboxLOL.Name = "revertCboxLOL";
             this.revertCboxLOL.Size = new System.Drawing.Size(93, 17);
             this.revertCboxLOL.TabIndex = 45;
@@ -577,7 +595,7 @@ namespace R42Bot
             // banCbox
             // 
             this.banCbox.AutoSize = true;
-            this.banCbox.Location = new System.Drawing.Point(126, 144);
+            this.banCbox.Location = new System.Drawing.Point(126, 166);
             this.banCbox.Name = "banCbox";
             this.banCbox.Size = new System.Drawing.Size(84, 17);
             this.banCbox.TabIndex = 43;
@@ -589,7 +607,7 @@ namespace R42Bot
             this.kickCbox.AutoSize = true;
             this.kickCbox.Checked = true;
             this.kickCbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.kickCbox.Location = new System.Drawing.Point(6, 309);
+            this.kickCbox.Location = new System.Drawing.Point(126, 144);
             this.kickCbox.Name = "kickCbox";
             this.kickCbox.Size = new System.Drawing.Size(86, 17);
             this.kickCbox.TabIndex = 42;
@@ -599,7 +617,7 @@ namespace R42Bot
             // clearCbox
             // 
             this.clearCbox.AutoSize = true;
-            this.clearCbox.Location = new System.Drawing.Point(6, 283);
+            this.clearCbox.Location = new System.Drawing.Point(6, 308);
             this.clearCbox.Name = "clearCbox";
             this.clearCbox.Size = new System.Drawing.Size(52, 17);
             this.clearCbox.TabIndex = 41;
@@ -1150,6 +1168,17 @@ namespace R42Bot
             this.autobolder.TabIndex = 5;
             this.autobolder.Text = "AutoBuilder";
             this.autobolder.UseVisualStyleBackColor = true;
+            // 
+            // lavaDraw
+            // 
+            this.lavaDraw.AutoSize = true;
+            this.lavaDraw.Location = new System.Drawing.Point(245, 41);
+            this.lavaDraw.Name = "lavaDraw";
+            this.lavaDraw.Size = new System.Drawing.Size(83, 17);
+            this.lavaDraw.TabIndex = 24;
+            this.lavaDraw.Text = "Lava Placer";
+            this.lavaDraw.UseVisualStyleBackColor = true;
+            this.lavaDraw.CheckedChanged += new System.EventHandler(this.lavaDraw_CheckedChanged);
             // 
             // grbutton
             // 
@@ -1899,6 +1928,10 @@ namespace R42Bot
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.eRandomTxtB);
+            this.tabPage6.Controls.Add(this.chngbtn);
+            this.tabPage6.Controls.Add(this.numericUpDown3);
+            this.tabPage6.Controls.Add(this.numericUpDown2);
             this.tabPage6.Controls.Add(this.pgebc);
             this.tabPage6.Controls.Add(this.pgeb100loldef);
             this.tabPage6.Controls.Add(this.pgeb100loldo);
@@ -1907,8 +1940,61 @@ namespace R42Bot
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Size = new System.Drawing.Size(811, 336);
             this.tabPage6.TabIndex = 14;
-            this.tabPage6.Text = "Custom User Ideas";
+            this.tabPage6.Text = "Misc.";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // eRandomTxtB
+            // 
+            this.eRandomTxtB.Enabled = false;
+            this.eRandomTxtB.Location = new System.Drawing.Point(279, 49);
+            this.eRandomTxtB.Name = "eRandomTxtB";
+            this.eRandomTxtB.Size = new System.Drawing.Size(70, 20);
+            this.eRandomTxtB.TabIndex = 7;
+            // 
+            // chngbtn
+            // 
+            this.chngbtn.Location = new System.Drawing.Point(197, 47);
+            this.chngbtn.Name = "chngbtn";
+            this.chngbtn.Size = new System.Drawing.Size(75, 23);
+            this.chngbtn.TabIndex = 6;
+            this.chngbtn.Text = "Random";
+            this.chngbtn.UseVisualStyleBackColor = true;
+            this.chngbtn.Click += new System.EventHandler(this.chngbtn_Click);
+            // 
+            // numericUpDown3
+            // 
+            this.numericUpDown3.Location = new System.Drawing.Point(100, 51);
+            this.numericUpDown3.Maximum = new decimal(new int[] {
+            1410065408,
+            2,
+            0,
+            0});
+            this.numericUpDown3.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown3.Name = "numericUpDown3";
+            this.numericUpDown3.Size = new System.Drawing.Size(90, 20);
+            this.numericUpDown3.TabIndex = 5;
+            this.numericUpDown3.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(3, 51);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            1410065408,
+            2,
+            0,
+            0});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(91, 20);
+            this.numericUpDown2.TabIndex = 4;
+            this.numericUpDown2.ValueChanged += new System.EventHandler(this.numericUpDown2_ValueChanged);
             // 
             // pgebc
             // 
@@ -2585,23 +2671,13 @@ namespace R42Bot
             this.AutoFixBot.Enabled = true;
             this.AutoFixBot.Tick += new System.EventHandler(this.AutoFixBot_Tick);
             // 
-            // lavaDraw
-            // 
-            this.lavaDraw.AutoSize = true;
-            this.lavaDraw.Location = new System.Drawing.Point(245, 41);
-            this.lavaDraw.Name = "lavaDraw";
-            this.lavaDraw.Size = new System.Drawing.Size(83, 17);
-            this.lavaDraw.TabIndex = 24;
-            this.lavaDraw.Text = "Lava Placer";
-            this.lavaDraw.UseVisualStyleBackColor = true;
-            this.lavaDraw.CheckedChanged += new System.EventHandler(this.lavaDraw_CheckedChanged);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(815, 361);
             this.Controls.Add(this.firstTabControler);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "R42Bot++ v";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -2635,6 +2711,8 @@ namespace R42Bot
             this.pollTab.PerformLayout();
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.tabPage7.ResumeLayout(false);
             this.tabPage7.PerformLayout();
             this.tabPage1.ResumeLayout(false);
@@ -2862,6 +2940,11 @@ namespace R42Bot
         private CheckBox warningGiver3;
         private CheckBox warningGiver2;
         private CheckBox lavaDraw;
+        private TextBox eRandomTxtB;
+        private Button chngbtn;
+        private NumericUpDown numericUpDown3;
+        private NumericUpDown numericUpDown2;
+        private CheckBox reloadCBox;
     }
 }
 
