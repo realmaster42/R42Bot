@@ -18,8 +18,9 @@ namespace R42Bot
 
         public int wins,
             warnings,
-            BlocksPlacedInaSecond;
+            BlocksPlacedInaSecond,
+            Face;
 
-        public List<List<string>> blocks;
+        public List<List<int>> blocks;
     }
 }

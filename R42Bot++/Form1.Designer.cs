@@ -46,6 +46,8 @@ namespace R42Bot
             this.scommand = new System.Windows.Forms.CheckBox();
             this.firstTabControler = new System.Windows.Forms.TabControl();
             this.Main = new System.Windows.Forms.TabPage();
+            this.adEditOJ = new System.Windows.Forms.CheckBox();
+            this.label35 = new System.Windows.Forms.Label();
             this.reloadCBox = new System.Windows.Forms.CheckBox();
             this.cleverbotCBOX = new System.Windows.Forms.CheckBox();
             this.givegodwithtrophycbox = new System.Windows.Forms.CheckBox();
@@ -112,6 +114,7 @@ namespace R42Bot
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.autobolder = new System.Windows.Forms.TabPage();
+            this.paintbrushauto = new System.Windows.Forms.Button();
             this.lavaDraw = new System.Windows.Forms.CheckBox();
             this.grbutton = new System.Windows.Forms.Button();
             this.boxWidthNUD = new System.Windows.Forms.NumericUpDown();
@@ -129,7 +132,6 @@ namespace R42Bot
             this.fdelay = new System.Windows.Forms.NumericUpDown();
             this.label27 = new System.Windows.Forms.Label();
             this.idofit = new System.Windows.Forms.TextBox();
-            this.paintbrushauto = new System.Windows.Forms.CheckBox();
             this.tntallowd = new System.Windows.Forms.CheckBox();
             this.lavadrawer = new System.Windows.Forms.CheckBox();
             this.autobuild1 = new System.Windows.Forms.CheckBox();
@@ -187,13 +189,8 @@ namespace R42Bot
             this.pgeb100loldo = new System.Windows.Forms.RadioButton();
             this.pgeb100lol = new System.Windows.Forms.CheckBox();
             this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.blockeffectslboxupdown = new System.Windows.Forms.DomainUpDown();
-            this.removeBlockEffectButton = new System.Windows.Forms.Button();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.addBlockEffectButton = new System.Windows.Forms.Button();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.blockEffectsLBOX = new System.Windows.Forms.ListBox();
-            this.label42 = new System.Windows.Forms.Label();
+            this.banreassonbox = new System.Windows.Forms.TextBox();
+            this.banreassons = new System.Windows.Forms.ListBox();
             this.UnBanButton = new System.Windows.Forms.Button();
             this.BanButton = new System.Windows.Forms.Button();
             this.unbanTxtBox = new System.Windows.Forms.TextBox();
@@ -251,6 +248,20 @@ namespace R42Bot
             this.TrollCatcherBlockDelete = new System.Windows.Forms.Timer(this.components);
             this.Gen_RB = new System.Windows.Forms.Timer(this.components);
             this.AutoFixBot = new System.Windows.Forms.Timer(this.components);
+            this.eSAfC = new System.Windows.Forms.CheckBox();
+            this.face1 = new System.Windows.Forms.NumericUpDown();
+            this.face2 = new System.Windows.Forms.NumericUpDown();
+            this.label42 = new System.Windows.Forms.Label();
+            this.fP1 = new System.Windows.Forms.Panel();
+            this.fP2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.fsbeta = new System.Windows.Forms.CheckBox();
+            this.frainbowsb = new System.Windows.Forms.CheckBox();
+            this.sbeta = new System.Windows.Forms.CheckBox();
+            this.rainbowsb = new System.Windows.Forms.CheckBox();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.firstTabControler.SuspendLayout();
             this.Main.SuspendLayout();
             this.LanguageOrSettings.SuspendLayout();
@@ -277,6 +288,8 @@ namespace R42Bot
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.face1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.face2)).BeginInit();
             this.SuspendLayout();
             // 
             // email
@@ -397,6 +410,8 @@ namespace R42Bot
             // 
             // Main
             // 
+            this.Main.Controls.Add(this.adEditOJ);
+            this.Main.Controls.Add(this.label35);
             this.Main.Controls.Add(this.reloadCBox);
             this.Main.Controls.Add(this.cleverbotCBOX);
             this.Main.Controls.Add(this.givegodwithtrophycbox);
@@ -450,6 +465,25 @@ namespace R42Bot
             this.Main.Text = "Index";
             this.Main.UseVisualStyleBackColor = true;
             // 
+            // adEditOJ
+            // 
+            this.adEditOJ.AutoSize = true;
+            this.adEditOJ.Location = new System.Drawing.Point(677, 237);
+            this.adEditOJ.Name = "adEditOJ";
+            this.adEditOJ.Size = new System.Drawing.Size(118, 17);
+            this.adEditOJ.TabIndex = 56;
+            this.adEditOJ.Text = "Admins Edit on Join";
+            this.adEditOJ.UseVisualStyleBackColor = true;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(202, 288);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(357, 13);
+            this.label35.TabIndex = 55;
+            this.label35.Text = "P.S.: RM42(Realmaster42) is marcoantonimsantos in EE, or, alt: realmaster";
+            // 
             // reloadCBox
             // 
             this.reloadCBox.AutoSize = true;
@@ -473,7 +507,7 @@ namespace R42Bot
             // givegodwithtrophycbox
             // 
             this.givegodwithtrophycbox.AutoSize = true;
-            this.givegodwithtrophycbox.Location = new System.Drawing.Point(126, 213);
+            this.givegodwithtrophycbox.Location = new System.Drawing.Point(677, 213);
             this.givegodwithtrophycbox.Name = "givegodwithtrophycbox";
             this.givegodwithtrophycbox.Size = new System.Drawing.Size(97, 17);
             this.givegodwithtrophycbox.TabIndex = 52;
@@ -1141,6 +1175,7 @@ namespace R42Bot
             // 
             // autobolder
             // 
+            this.autobolder.Controls.Add(this.paintbrushauto);
             this.autobolder.Controls.Add(this.lavaDraw);
             this.autobolder.Controls.Add(this.grbutton);
             this.autobolder.Controls.Add(this.boxWidthNUD);
@@ -1158,7 +1193,6 @@ namespace R42Bot
             this.autobolder.Controls.Add(this.fdelay);
             this.autobolder.Controls.Add(this.label27);
             this.autobolder.Controls.Add(this.idofit);
-            this.autobolder.Controls.Add(this.paintbrushauto);
             this.autobolder.Controls.Add(this.tntallowd);
             this.autobolder.Controls.Add(this.lavadrawer);
             this.autobolder.Controls.Add(this.autobuild1);
@@ -1168,6 +1202,16 @@ namespace R42Bot
             this.autobolder.TabIndex = 5;
             this.autobolder.Text = "AutoBuilder";
             this.autobolder.UseVisualStyleBackColor = true;
+            // 
+            // paintbrushauto
+            // 
+            this.paintbrushauto.Location = new System.Drawing.Point(4, 79);
+            this.paintbrushauto.Name = "paintbrushauto";
+            this.paintbrushauto.Size = new System.Drawing.Size(44, 23);
+            this.paintbrushauto.TabIndex = 25;
+            this.paintbrushauto.Text = "Fill";
+            this.paintbrushauto.UseVisualStyleBackColor = true;
+            this.paintbrushauto.Click += new System.EventHandler(this.paintbrushauto_Click);
             // 
             // lavaDraw
             // 
@@ -1369,16 +1413,6 @@ namespace R42Bot
             this.idofit.Text = "0";
             this.idofit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.idofit_KeyPress);
             // 
-            // paintbrushauto
-            // 
-            this.paintbrushauto.AutoSize = true;
-            this.paintbrushauto.Location = new System.Drawing.Point(4, 85);
-            this.paintbrushauto.Name = "paintbrushauto";
-            this.paintbrushauto.Size = new System.Drawing.Size(52, 17);
-            this.paintbrushauto.TabIndex = 6;
-            this.paintbrushauto.Text = "Filling";
-            this.paintbrushauto.UseVisualStyleBackColor = true;
-            // 
             // tntallowd
             // 
             this.tntallowd.AutoSize = true;
@@ -1414,6 +1448,12 @@ namespace R42Bot
             // 
             // smileytabs
             // 
+            this.smileytabs.Controls.Add(this.fP2);
+            this.smileytabs.Controls.Add(this.fP1);
+            this.smileytabs.Controls.Add(this.label42);
+            this.smileytabs.Controls.Add(this.face2);
+            this.smileytabs.Controls.Add(this.face1);
+            this.smileytabs.Controls.Add(this.eSAfC);
             this.smileytabs.Controls.Add(this.srandomizer);
             this.smileytabs.Controls.Add(this.checkBox1);
             this.smileytabs.Controls.Add(this.button6);
@@ -1438,7 +1478,7 @@ namespace R42Bot
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(72, 16);
+            this.checkBox1.Location = new System.Drawing.Point(72, 21);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(124, 17);
             this.checkBox1.TabIndex = 2;
@@ -1447,7 +1487,7 @@ namespace R42Bot
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(41, 15);
+            this.button6.Location = new System.Drawing.Point(40, 17);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(24, 23);
             this.button6.TabIndex = 1;
@@ -1467,6 +1507,14 @@ namespace R42Bot
             // 
             // snakepage
             // 
+            this.snakepage.Controls.Add(this.panel6);
+            this.snakepage.Controls.Add(this.panel5);
+            this.snakepage.Controls.Add(this.fsbeta);
+            this.snakepage.Controls.Add(this.frainbowsb);
+            this.snakepage.Controls.Add(this.sbeta);
+            this.snakepage.Controls.Add(this.rainbowsb);
+            this.snakepage.Controls.Add(this.panel4);
+            this.snakepage.Controls.Add(this.panel3);
             this.snakepage.Controls.Add(this.allowSnakeSpecial);
             this.snakepage.Controls.Add(this.label5);
             this.snakepage.Controls.Add(this.snakeSpecial2);
@@ -1555,7 +1603,7 @@ namespace R42Bot
             // lsbx
             // 
             this.lsbx.AutoSize = true;
-            this.lsbx.Location = new System.Drawing.Point(353, 15);
+            this.lsbx.Location = new System.Drawing.Point(387, 15);
             this.lsbx.Name = "lsbx";
             this.lsbx.Size = new System.Drawing.Size(84, 17);
             this.lsbx.TabIndex = 9;
@@ -1608,7 +1656,7 @@ namespace R42Bot
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(12, 119);
+            this.numericUpDown1.Location = new System.Drawing.Point(11, 178);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             2500,
             0,
@@ -2042,13 +2090,8 @@ namespace R42Bot
             // 
             // tabPage7
             // 
-            this.tabPage7.Controls.Add(this.blockeffectslboxupdown);
-            this.tabPage7.Controls.Add(this.removeBlockEffectButton);
-            this.tabPage7.Controls.Add(this.textBox11);
-            this.tabPage7.Controls.Add(this.addBlockEffectButton);
-            this.tabPage7.Controls.Add(this.textBox9);
-            this.tabPage7.Controls.Add(this.blockEffectsLBOX);
-            this.tabPage7.Controls.Add(this.label42);
+            this.tabPage7.Controls.Add(this.banreassonbox);
+            this.tabPage7.Controls.Add(this.banreassons);
             this.tabPage7.Controls.Add(this.UnBanButton);
             this.tabPage7.Controls.Add(this.BanButton);
             this.tabPage7.Controls.Add(this.unbanTxtBox);
@@ -2075,70 +2118,22 @@ namespace R42Bot
             this.tabPage7.Text = "Lists";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
-            // blockeffectslboxupdown
+            // banreassonbox
             // 
-            this.blockeffectslboxupdown.Items.Add("zombie");
-            this.blockeffectslboxupdown.Items.Add("curse");
-            this.blockeffectslboxupdown.Location = new System.Drawing.Point(438, 124);
-            this.blockeffectslboxupdown.Name = "blockeffectslboxupdown";
-            this.blockeffectslboxupdown.Size = new System.Drawing.Size(61, 20);
-            this.blockeffectslboxupdown.TabIndex = 26;
-            this.blockeffectslboxupdown.Text = "zombie";
+            this.banreassonbox.Location = new System.Drawing.Point(368, 123);
+            this.banreassonbox.Name = "banreassonbox";
+            this.banreassonbox.Size = new System.Drawing.Size(200, 20);
+            this.banreassonbox.TabIndex = 20;
+            this.banreassonbox.Text = "You have been banned by world owner.";
             // 
-            // removeBlockEffectButton
+            // banreassons
             // 
-            this.removeBlockEffectButton.Location = new System.Drawing.Point(506, 146);
-            this.removeBlockEffectButton.Name = "removeBlockEffectButton";
-            this.removeBlockEffectButton.Size = new System.Drawing.Size(62, 23);
-            this.removeBlockEffectButton.TabIndex = 25;
-            this.removeBlockEffectButton.Text = "Remove";
-            this.removeBlockEffectButton.UseVisualStyleBackColor = true;
-            this.removeBlockEffectButton.Click += new System.EventHandler(this.removeBlockEffectButton_Click);
-            // 
-            // textBox11
-            // 
-            this.textBox11.Location = new System.Drawing.Point(367, 149);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(133, 20);
-            this.textBox11.TabIndex = 24;
-            this.textBox11.Text = "Block ID";
-            this.textBox11.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox11_KeyPress);
-            // 
-            // addBlockEffectButton
-            // 
-            this.addBlockEffectButton.Location = new System.Drawing.Point(506, 121);
-            this.addBlockEffectButton.Name = "addBlockEffectButton";
-            this.addBlockEffectButton.Size = new System.Drawing.Size(62, 23);
-            this.addBlockEffectButton.TabIndex = 23;
-            this.addBlockEffectButton.Text = "Add";
-            this.addBlockEffectButton.UseVisualStyleBackColor = true;
-            this.addBlockEffectButton.Click += new System.EventHandler(this.addBlockEffectButton_Click);
-            // 
-            // textBox9
-            // 
-            this.textBox9.Location = new System.Drawing.Point(367, 124);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(65, 20);
-            this.textBox9.TabIndex = 21;
-            this.textBox9.Text = "Block ID";
-            this.textBox9.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox9_KeyPress);
-            // 
-            // blockEffectsLBOX
-            // 
-            this.blockEffectsLBOX.FormattingEnabled = true;
-            this.blockEffectsLBOX.Location = new System.Drawing.Point(367, 29);
-            this.blockEffectsLBOX.Name = "blockEffectsLBOX";
-            this.blockEffectsLBOX.Size = new System.Drawing.Size(201, 82);
-            this.blockEffectsLBOX.TabIndex = 20;
-            // 
-            // label42
-            // 
-            this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(430, 13);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(70, 13);
-            this.label42.TabIndex = 19;
-            this.label42.Text = "Block Effects";
+            this.banreassons.Enabled = false;
+            this.banreassons.FormattingEnabled = true;
+            this.banreassons.Location = new System.Drawing.Point(367, 29);
+            this.banreassons.Name = "banreassons";
+            this.banreassons.Size = new System.Drawing.Size(201, 82);
+            this.banreassons.TabIndex = 19;
             // 
             // UnBanButton
             // 
@@ -2651,7 +2646,6 @@ namespace R42Bot
             // 
             // BlockPlacer
             // 
-            this.BlockPlacer.Enabled = true;
             this.BlockPlacer.Interval = 10;
             this.BlockPlacer.Tick += new System.EventHandler(this.BlockPlacer_Tick);
             // 
@@ -2670,6 +2664,135 @@ namespace R42Bot
             // 
             this.AutoFixBot.Enabled = true;
             this.AutoFixBot.Tick += new System.EventHandler(this.AutoFixBot_Tick);
+            // 
+            // eSAfC
+            // 
+            this.eSAfC.AutoSize = true;
+            this.eSAfC.Location = new System.Drawing.Point(12, 105);
+            this.eSAfC.Name = "eSAfC";
+            this.eSAfC.Size = new System.Drawing.Size(117, 17);
+            this.eSAfC.TabIndex = 4;
+            this.eSAfC.Text = "Enable Auto Smiley";
+            this.eSAfC.UseVisualStyleBackColor = true;
+            // 
+            // face1
+            // 
+            this.face1.Location = new System.Drawing.Point(12, 76);
+            this.face1.Maximum = new decimal(new int[] {
+            103,
+            0,
+            0,
+            0});
+            this.face1.Name = "face1";
+            this.face1.Size = new System.Drawing.Size(41, 20);
+            this.face1.TabIndex = 5;
+            // 
+            // face2
+            // 
+            this.face2.Location = new System.Drawing.Point(115, 76);
+            this.face2.Maximum = new decimal(new int[] {
+            103,
+            0,
+            0,
+            0});
+            this.face2.Name = "face2";
+            this.face2.Size = new System.Drawing.Size(39, 20);
+            this.face2.TabIndex = 6;
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(87, 80);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(22, 13);
+            this.label42.TabIndex = 7;
+            this.label42.Text = "<->";
+            // 
+            // fP1
+            // 
+            this.fP1.Location = new System.Drawing.Point(59, 77);
+            this.fP1.Name = "fP1";
+            this.fP1.Size = new System.Drawing.Size(23, 19);
+            this.fP1.TabIndex = 8;
+            // 
+            // fP2
+            // 
+            this.fP2.Location = new System.Drawing.Point(160, 76);
+            this.fP2.Name = "fP2";
+            this.fP2.Size = new System.Drawing.Size(23, 19);
+            this.fP2.TabIndex = 9;
+            // 
+            // panel3
+            // 
+            this.panel3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel3.BackgroundImage")));
+            this.panel3.Location = new System.Drawing.Point(315, 15);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(16, 16);
+            this.panel3.TabIndex = 14;
+            // 
+            // panel4
+            // 
+            this.panel4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel4.BackgroundImage")));
+            this.panel4.Location = new System.Drawing.Point(316, 74);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(16, 16);
+            this.panel4.TabIndex = 15;
+            // 
+            // panel5
+            // 
+            this.panel5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel5.BackgroundImage")));
+            this.panel5.Location = new System.Drawing.Point(316, 133);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(16, 16);
+            this.panel5.TabIndex = 20;
+            // 
+            // fsbeta
+            // 
+            this.fsbeta.AutoSize = true;
+            this.fsbeta.Location = new System.Drawing.Point(187, 155);
+            this.fsbeta.Name = "fsbeta";
+            this.fsbeta.Size = new System.Drawing.Size(141, 17);
+            this.fsbeta.TabIndex = 19;
+            this.fsbeta.Text = "Fast Normal Beta Snake";
+            this.fsbeta.UseVisualStyleBackColor = true;
+            // 
+            // frainbowsb
+            // 
+            this.frainbowsb.AutoSize = true;
+            this.frainbowsb.Location = new System.Drawing.Point(12, 155);
+            this.frainbowsb.Name = "frainbowsb";
+            this.frainbowsb.Size = new System.Drawing.Size(150, 17);
+            this.frainbowsb.TabIndex = 18;
+            this.frainbowsb.Text = "Fast Rainbow Beta Snake";
+            this.frainbowsb.UseVisualStyleBackColor = true;
+            // 
+            // sbeta
+            // 
+            this.sbeta.AutoSize = true;
+            this.sbeta.Location = new System.Drawing.Point(187, 132);
+            this.sbeta.Name = "sbeta";
+            this.sbeta.Size = new System.Drawing.Size(118, 17);
+            this.sbeta.TabIndex = 17;
+            this.sbeta.Text = "Normal Beta Snake";
+            this.sbeta.UseVisualStyleBackColor = true;
+            // 
+            // rainbowsb
+            // 
+            this.rainbowsb.AutoSize = true;
+            this.rainbowsb.Location = new System.Drawing.Point(12, 132);
+            this.rainbowsb.Name = "rainbowsb";
+            this.rainbowsb.Size = new System.Drawing.Size(127, 17);
+            this.rainbowsb.TabIndex = 16;
+            this.rainbowsb.Text = "Rainbow Beta Snake";
+            this.rainbowsb.UseVisualStyleBackColor = true;
+            // 
+            // panel6
+            // 
+            this.panel6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel6.BackgroundImage")));
+            this.panel6.Location = new System.Drawing.Point(477, 15);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(16, 16);
+            this.panel6.TabIndex = 21;
             // 
             // Form1
             // 
@@ -2721,6 +2844,8 @@ namespace R42Bot
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.face1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.face2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2807,7 +2932,6 @@ namespace R42Bot
         private Label label26;
         private Label label27;
         private TextBox idofit;
-        private CheckBox paintbrushauto;
         private ListBox votersList;
         private Button button7;
         private Label label28;
@@ -2922,13 +3046,6 @@ namespace R42Bot
         private Button UnBanButton;
         private Button BanButton;
         private CheckBox cleverbotCBOX;
-        private TextBox textBox9;
-        private ListBox blockEffectsLBOX;
-        private Label label42;
-        private Button addBlockEffectButton;
-        private TextBox textBox11;
-        private Button removeBlockEffectButton;
-        private DomainUpDown blockeffectslboxupdown;
         private Label label43;
         private Label label44;
         private CheckBox noRespawn2;
@@ -2945,6 +3062,25 @@ namespace R42Bot
         private NumericUpDown numericUpDown3;
         private NumericUpDown numericUpDown2;
         private CheckBox reloadCBox;
+        private Label label35;
+        private Button paintbrushauto;
+        private ListBox banreassons;
+        private TextBox banreassonbox;
+        private CheckBox adEditOJ;
+        private Label label42;
+        private NumericUpDown face2;
+        private NumericUpDown face1;
+        private CheckBox eSAfC;
+        private Panel fP2;
+        private Panel fP1;
+        private Panel panel3;
+        private Panel panel4;
+        private Panel panel5;
+        private CheckBox fsbeta;
+        private CheckBox frainbowsb;
+        private CheckBox sbeta;
+        private CheckBox rainbowsb;
+        private Panel panel6;
     }
 }
 
