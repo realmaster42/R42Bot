@@ -7,6 +7,6 @@ After first update on Everybody Edits (EE), EE2 was immediately shutdown, and co
 However, this bot will continue to recieve updates because of the new team!
 
 The team:
--realmaster (marcoantonimsantos)
+-realmaster (marcoantonimsantos), (old realmaster42)
 
 -legitturtle09
