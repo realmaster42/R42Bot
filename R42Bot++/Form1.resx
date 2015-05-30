@@ -117,6 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 56</value>
+  </metadata>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 56</value>
+  </metadata>
+  <data name="codebox.ToolTip" xml:space="preserve">
+    <value>The code is the access key to edit in the world.
+Without this the bot won't be able to edit and possibly
+most of the features will be gone!
+P.S.: If the bot is your main account in one of your
+worlds, code is not necessary.</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="panel2.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -140,7 +153,7 @@
   <data name="panel6.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAALESURBVDhPJZPZS5RhFMY/gqgsu9DMIIhKsnLJVtNWWzUr
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAALESURBVDhPJZPZS5RhFMY/gqgsu9DMIIhKsnLJVtNWWzUr
         +g+6iWi50YJuQrAForwuIpAQwkKbchmbxWncx2VEZxy3wpAWCvKiqEAFraffcS5ezve+7znPeZ7nvJ/j
         ubBY7ZeXKFSyUn03VylclqzogzXqvr6Cs0T1lycpxn7oTopGKlL1uTpNoxXsSxM1XJ4sZ7wsSVP310od
         B6XoMWnkhPSO1XtAcu+QYkfYF3JHrGNv0bdPatgj1WTKGb6dInk58ORLXYelARLeH5fGjkptedIw0QBj
@@ -158,7 +171,7 @@
   <data name="panel5.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuNWWFMmUA
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuNWWFMmUA
         AAJQSURBVDhPJZL/S1NRGMbPvXfszm22ja01dULYmnOktSaVkUmWYa2yWJE5JIlFktiMzEJLkkElJkQQ
         DCkwSVkh2Cjop0ClSJKKhmL0gz8miv0Pfc4uPBzec+77PM/75QrHeGjrdNT3br9zIlySq/PlDrizkdL3
         B91vIlzLPzbwUvbhkHc6ylUf8Qt91N+2mn608bZv7QUnGN6cJgbpjawRPNmcAUfyXcpVm7CMlgfnTsJ5
@@ -175,7 +188,7 @@
   <data name="panel4.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAOuSURBVDhPHZNbUJQFFMf3xYccnHIsKLMEzUQEbIYhiri7
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAOuSURBVDhPHZNbUJQFFMf3xYccnHIsKLMEzUQEbIYhiri7
         wAe7i9xZRG5yEeWiwMKCGJeFQBSoiEBQIVLAiHBCRMZqUmsAmbgsDC0CC+wS7II40WWqt19fPZyXc2Z+
         53/O/xyJ+90X8Lr3PO79Owi4b4V0YCfvdj2Ha8923Ht2cPTOSwTft0E2+BrCvd1I+19BGNiD9M5uhA4r
         JG/ftsD2mwOEToZQZaikWF9EoT6fkHE5SjFXYlTT8fQzGkwfUWosJll/Es2KBumEF74tLyNx7tqObDyA
@@ -197,7 +210,7 @@
   <data name="panel3.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAD7SURBVDhPYxBMlvpPCQYbUH4u6v/c+/X/Fz5swcBz7zfB
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAD7SURBVDhPYxBMlvpPCQYbUH4u6v/c+/X/Fz5swcBz7zfB
         8bRbZf8bLyX+jz/o9l9vmi7CgOl3qsGc6H0e/zOP+cFxzAGn/xH7HeDYZ6vlf4/NpmC1at06qAZE7nL5
         n3jIDY6Dd1n/999pDseOmwz/O2wwAGPL5br/tSaiGZB0yIMozTCM0wBiNFst1/+vNUEb0wBiNVstQzOg
         7mIiSZqxGhC005JozRgGRO1zhhtAjGYMA/y2WZCkGcMA762mJGkGYRQD7NehaiSkGYRRDDBdoA/m6M/W

@@ -136,11 +136,25 @@ namespace R42Bot
             this.lavadrawer = new System.Windows.Forms.CheckBox();
             this.autobuild1 = new System.Windows.Forms.CheckBox();
             this.smileytabs = new System.Windows.Forms.TabPage();
+            this.fP2 = new System.Windows.Forms.Panel();
+            this.fP1 = new System.Windows.Forms.Panel();
+            this.label42 = new System.Windows.Forms.Label();
+            this.face2 = new System.Windows.Forms.NumericUpDown();
+            this.face1 = new System.Windows.Forms.NumericUpDown();
+            this.eSAfC = new System.Windows.Forms.CheckBox();
             this.srandomizer = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.snakepage = new System.Windows.Forms.TabPage();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.fsbeta = new System.Windows.Forms.CheckBox();
+            this.frainbowsb = new System.Windows.Forms.CheckBox();
+            this.sbeta = new System.Windows.Forms.CheckBox();
+            this.rainbowsb = new System.Windows.Forms.CheckBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.allowSnakeSpecial = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.snakeSpecial2 = new System.Windows.Forms.NumericUpDown();
@@ -248,20 +262,14 @@ namespace R42Bot
             this.TrollCatcherBlockDelete = new System.Windows.Forms.Timer(this.components);
             this.Gen_RB = new System.Windows.Forms.Timer(this.components);
             this.AutoFixBot = new System.Windows.Forms.Timer(this.components);
-            this.eSAfC = new System.Windows.Forms.CheckBox();
-            this.face1 = new System.Windows.Forms.NumericUpDown();
-            this.face2 = new System.Windows.Forms.NumericUpDown();
-            this.label42 = new System.Windows.Forms.Label();
-            this.fP1 = new System.Windows.Forms.Panel();
-            this.fP2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.fsbeta = new System.Windows.Forms.CheckBox();
-            this.frainbowsb = new System.Windows.Forms.CheckBox();
-            this.sbeta = new System.Windows.Forms.CheckBox();
-            this.rainbowsb = new System.Windows.Forms.CheckBox();
-            this.panel6 = new System.Windows.Forms.Panel();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.blockidsfbox = new System.Windows.Forms.NumericUpDown();
+            this.fireplac = new System.Windows.Forms.CheckBox();
+            this.portalplac = new System.Windows.Forms.CheckBox();
+            this.portalplac1 = new System.Windows.Forms.CheckBox();
+            this.label45 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
+            this.label47 = new System.Windows.Forms.Label();
             this.firstTabControler.SuspendLayout();
             this.Main.SuspendLayout();
             this.LanguageOrSettings.SuspendLayout();
@@ -273,6 +281,8 @@ namespace R42Bot
             ((System.ComponentModel.ISupportInitialize)(this.lavaP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fdelay)).BeginInit();
             this.smileytabs.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.face2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.face1)).BeginInit();
             this.snakepage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.snakeSpecial2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.snakeSpecial1)).BeginInit();
@@ -288,8 +298,7 @@ namespace R42Bot
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.face1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.face2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.blockidsfbox)).BeginInit();
             this.SuspendLayout();
             // 
             // email
@@ -299,6 +308,8 @@ namespace R42Bot
             this.email.Size = new System.Drawing.Size(100, 20);
             this.email.TabIndex = 0;
             this.email.Text = "Email";
+            this.toolTip1.SetToolTip(this.email, "Email is your user\'s email address in the game.\r\nWithout this info the bot will n" +
+        "ot be able to recognize the database object.");
             // 
             // pass
             // 
@@ -306,6 +317,7 @@ namespace R42Bot
             this.pass.Name = "pass";
             this.pass.Size = new System.Drawing.Size(100, 20);
             this.pass.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.pass, "This is your game password.\r\nWithout this the bot can\'t connect.");
             this.pass.UseSystemPasswordChar = true;
             // 
             // idofworld
@@ -315,6 +327,7 @@ namespace R42Bot
             this.idofworld.Size = new System.Drawing.Size(100, 20);
             this.idofworld.TabIndex = 2;
             this.idofworld.Text = "world ID";
+            this.toolTip1.SetToolTip(this.idofworld, "World Id is the ID of the world you are in.\r\nWithout this the bot can\'t join.");
             // 
             // codebox
             // 
@@ -323,6 +336,7 @@ namespace R42Bot
             this.codebox.Size = new System.Drawing.Size(100, 20);
             this.codebox.TabIndex = 3;
             this.codebox.Text = "Code";
+            this.toolTip1.SetToolTip(this.codebox, resources.GetString("codebox.ToolTip"));
             // 
             // connector
             // 
@@ -589,6 +603,7 @@ namespace R42Bot
             this.kJoiners.Size = new System.Drawing.Size(83, 17);
             this.kJoiners.TabIndex = 47;
             this.kJoiners.Text = "Kick Joiners";
+            this.toolTip1.SetToolTip(this.kJoiners, "Disallow or not people joining.");
             this.kJoiners.UseVisualStyleBackColor = true;
             this.kJoiners.CheckedChanged += new System.EventHandler(this.kJoiners_CheckedChanged);
             // 
@@ -600,6 +615,7 @@ namespace R42Bot
             this.kbots.Size = new System.Drawing.Size(71, 17);
             this.kbots.TabIndex = 46;
             this.kbots.Text = "Kick Bots";
+            this.toolTip1.SetToolTip(this.kbots, "Disallow or not people using bots in your world.");
             this.kbots.UseVisualStyleBackColor = true;
             this.kbots.CheckedChanged += new System.EventHandler(this.kbots_CheckedChanged);
             // 
@@ -711,6 +727,7 @@ namespace R42Bot
             this.isFacebook.Size = new System.Drawing.Size(74, 17);
             this.isFacebook.TabIndex = 37;
             this.isFacebook.Text = "Facebook";
+            this.toolTip1.SetToolTip(this.isFacebook, "Enables or disables facebook mode for bots.\r\n(Enable if you use facebook EE)");
             this.isFacebook.UseVisualStyleBackColor = true;
             this.isFacebook.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
@@ -1049,6 +1066,7 @@ namespace R42Bot
             this.textBox8.Size = new System.Drawing.Size(468, 35);
             this.textBox8.TabIndex = 7;
             this.textBox8.Text = "https://github.com/realmaster42/R42Bot";
+            this.textBox8.TextChanged += new System.EventHandler(this.textBox8_TextChanged);
             // 
             // textBox7
             // 
@@ -1175,6 +1193,13 @@ namespace R42Bot
             // 
             // autobolder
             // 
+            this.autobolder.Controls.Add(this.label47);
+            this.autobolder.Controls.Add(this.label46);
+            this.autobolder.Controls.Add(this.label45);
+            this.autobolder.Controls.Add(this.portalplac1);
+            this.autobolder.Controls.Add(this.portalplac);
+            this.autobolder.Controls.Add(this.fireplac);
+            this.autobolder.Controls.Add(this.blockidsfbox);
             this.autobolder.Controls.Add(this.paintbrushauto);
             this.autobolder.Controls.Add(this.lavaDraw);
             this.autobolder.Controls.Add(this.grbutton);
@@ -1221,13 +1246,13 @@ namespace R42Bot
             this.lavaDraw.Size = new System.Drawing.Size(83, 17);
             this.lavaDraw.TabIndex = 24;
             this.lavaDraw.Text = "Lava Placer";
+            this.toolTip1.SetToolTip(this.lavaDraw, "When placing water bricks generate LAVA.");
             this.lavaDraw.UseVisualStyleBackColor = true;
-            this.lavaDraw.CheckedChanged += new System.EventHandler(this.lavaDraw_CheckedChanged);
             // 
             // grbutton
             // 
             this.grbutton.Enabled = false;
-            this.grbutton.Location = new System.Drawing.Point(257, 16);
+            this.grbutton.Location = new System.Drawing.Point(258, 12);
             this.grbutton.Name = "grbutton";
             this.grbutton.Size = new System.Drawing.Size(143, 23);
             this.grbutton.TabIndex = 23;
@@ -1295,6 +1320,7 @@ namespace R42Bot
             this.boxPlaceCBOX.Size = new System.Drawing.Size(44, 17);
             this.boxPlaceCBOX.TabIndex = 17;
             this.boxPlaceCBOX.Text = "Box";
+            this.toolTip1.SetToolTip(this.boxPlaceCBOX, "When placing dark basic generate a BOX.");
             this.boxPlaceCBOX.UseVisualStyleBackColor = true;
             // 
             // BGdelbox
@@ -1305,6 +1331,7 @@ namespace R42Bot
             this.BGdelbox.Size = new System.Drawing.Size(118, 17);
             this.BGdelbox.TabIndex = 16;
             this.BGdelbox.Text = "Background Delete";
+            this.toolTip1.SetToolTip(this.BGdelbox, "When deleting a block also deletes background.");
             this.BGdelbox.UseVisualStyleBackColor = true;
             // 
             // wetsandCbox
@@ -1315,6 +1342,7 @@ namespace R42Bot
             this.wetsandCbox.Size = new System.Drawing.Size(74, 17);
             this.wetsandCbox.TabIndex = 15;
             this.wetsandCbox.Text = "Wet Sand";
+            this.toolTip1.SetToolTip(this.wetsandCbox, "When water touches sand makes it wetter till dark.");
             this.wetsandCbox.UseVisualStyleBackColor = true;
             // 
             // panel2
@@ -1421,8 +1449,8 @@ namespace R42Bot
             this.tntallowd.Size = new System.Drawing.Size(48, 17);
             this.tntallowd.TabIndex = 5;
             this.tntallowd.Text = "TNT";
+            this.toolTip1.SetToolTip(this.tntallowd, "When placing red basic block will start TNT.");
             this.tntallowd.UseVisualStyleBackColor = true;
-            this.tntallowd.CheckedChanged += new System.EventHandler(this.tntallowd_CheckedChanged);
             // 
             // lavadrawer
             // 
@@ -1432,8 +1460,8 @@ namespace R42Bot
             this.lavadrawer.Size = new System.Drawing.Size(88, 17);
             this.lavadrawer.TabIndex = 3;
             this.lavadrawer.Text = "Water Placer";
+            this.toolTip1.SetToolTip(this.lavadrawer, "When placing mud bricks generate WATER.");
             this.lavadrawer.UseVisualStyleBackColor = true;
-            this.lavadrawer.CheckedChanged += new System.EventHandler(this.lavadrawer_CheckedChanged);
             // 
             // autobuild1
             // 
@@ -1443,8 +1471,8 @@ namespace R42Bot
             this.autobuild1.Size = new System.Drawing.Size(90, 17);
             this.autobuild1.TabIndex = 0;
             this.autobuild1.Text = "Smiley Border";
+            this.toolTip1.SetToolTip(this.autobuild1, "When placing basic gray background generate a SMILEY BORDER.");
             this.autobuild1.UseVisualStyleBackColor = true;
-            this.autobuild1.CheckedChanged += new System.EventHandler(this.autobuild1_CheckedChanged);
             // 
             // smileytabs
             // 
@@ -1464,6 +1492,63 @@ namespace R42Bot
             this.smileytabs.TabIndex = 9;
             this.smileytabs.Text = "Smiley Changer";
             this.smileytabs.UseVisualStyleBackColor = true;
+            // 
+            // fP2
+            // 
+            this.fP2.Location = new System.Drawing.Point(160, 76);
+            this.fP2.Name = "fP2";
+            this.fP2.Size = new System.Drawing.Size(23, 19);
+            this.fP2.TabIndex = 9;
+            // 
+            // fP1
+            // 
+            this.fP1.Location = new System.Drawing.Point(59, 77);
+            this.fP1.Name = "fP1";
+            this.fP1.Size = new System.Drawing.Size(23, 19);
+            this.fP1.TabIndex = 8;
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(87, 80);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(22, 13);
+            this.label42.TabIndex = 7;
+            this.label42.Text = "<->";
+            // 
+            // face2
+            // 
+            this.face2.Location = new System.Drawing.Point(115, 76);
+            this.face2.Maximum = new decimal(new int[] {
+            103,
+            0,
+            0,
+            0});
+            this.face2.Name = "face2";
+            this.face2.Size = new System.Drawing.Size(39, 20);
+            this.face2.TabIndex = 6;
+            // 
+            // face1
+            // 
+            this.face1.Location = new System.Drawing.Point(12, 76);
+            this.face1.Maximum = new decimal(new int[] {
+            103,
+            0,
+            0,
+            0});
+            this.face1.Name = "face1";
+            this.face1.Size = new System.Drawing.Size(41, 20);
+            this.face1.TabIndex = 5;
+            // 
+            // eSAfC
+            // 
+            this.eSAfC.AutoSize = true;
+            this.eSAfC.Location = new System.Drawing.Point(12, 105);
+            this.eSAfC.Name = "eSAfC";
+            this.eSAfC.Size = new System.Drawing.Size(117, 17);
+            this.eSAfC.TabIndex = 4;
+            this.eSAfC.Text = "Enable Auto Smiley";
+            this.eSAfC.UseVisualStyleBackColor = true;
             // 
             // srandomizer
             // 
@@ -1535,6 +1620,78 @@ namespace R42Bot
             this.snakepage.TabIndex = 10;
             this.snakepage.Text = "Snakes";
             this.snakepage.UseVisualStyleBackColor = true;
+            // 
+            // panel6
+            // 
+            this.panel6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel6.BackgroundImage")));
+            this.panel6.Location = new System.Drawing.Point(477, 15);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(16, 16);
+            this.panel6.TabIndex = 21;
+            // 
+            // panel5
+            // 
+            this.panel5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel5.BackgroundImage")));
+            this.panel5.Location = new System.Drawing.Point(316, 133);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(16, 16);
+            this.panel5.TabIndex = 20;
+            // 
+            // fsbeta
+            // 
+            this.fsbeta.AutoSize = true;
+            this.fsbeta.Location = new System.Drawing.Point(187, 155);
+            this.fsbeta.Name = "fsbeta";
+            this.fsbeta.Size = new System.Drawing.Size(141, 17);
+            this.fsbeta.TabIndex = 19;
+            this.fsbeta.Text = "Fast Normal Beta Snake";
+            this.fsbeta.UseVisualStyleBackColor = true;
+            // 
+            // frainbowsb
+            // 
+            this.frainbowsb.AutoSize = true;
+            this.frainbowsb.Location = new System.Drawing.Point(12, 155);
+            this.frainbowsb.Name = "frainbowsb";
+            this.frainbowsb.Size = new System.Drawing.Size(150, 17);
+            this.frainbowsb.TabIndex = 18;
+            this.frainbowsb.Text = "Fast Rainbow Beta Snake";
+            this.frainbowsb.UseVisualStyleBackColor = true;
+            // 
+            // sbeta
+            // 
+            this.sbeta.AutoSize = true;
+            this.sbeta.Location = new System.Drawing.Point(187, 132);
+            this.sbeta.Name = "sbeta";
+            this.sbeta.Size = new System.Drawing.Size(118, 17);
+            this.sbeta.TabIndex = 17;
+            this.sbeta.Text = "Normal Beta Snake";
+            this.sbeta.UseVisualStyleBackColor = true;
+            // 
+            // rainbowsb
+            // 
+            this.rainbowsb.AutoSize = true;
+            this.rainbowsb.Location = new System.Drawing.Point(12, 132);
+            this.rainbowsb.Name = "rainbowsb";
+            this.rainbowsb.Size = new System.Drawing.Size(127, 17);
+            this.rainbowsb.TabIndex = 16;
+            this.rainbowsb.Text = "Rainbow Beta Snake";
+            this.rainbowsb.UseVisualStyleBackColor = true;
+            // 
+            // panel4
+            // 
+            this.panel4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel4.BackgroundImage")));
+            this.panel4.Location = new System.Drawing.Point(316, 74);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(16, 16);
+            this.panel4.TabIndex = 15;
+            // 
+            // panel3
+            // 
+            this.panel3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel3.BackgroundImage")));
+            this.panel3.Location = new System.Drawing.Point(315, 15);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(16, 16);
+            this.panel3.TabIndex = 14;
             // 
             // allowSnakeSpecial
             // 
@@ -2665,139 +2822,85 @@ namespace R42Bot
             this.AutoFixBot.Enabled = true;
             this.AutoFixBot.Tick += new System.EventHandler(this.AutoFixBot_Tick);
             // 
-            // eSAfC
+            // blockidsfbox
             // 
-            this.eSAfC.AutoSize = true;
-            this.eSAfC.Location = new System.Drawing.Point(12, 105);
-            this.eSAfC.Name = "eSAfC";
-            this.eSAfC.Size = new System.Drawing.Size(117, 17);
-            this.eSAfC.TabIndex = 4;
-            this.eSAfC.Text = "Enable Auto Smiley";
-            this.eSAfC.UseVisualStyleBackColor = true;
-            // 
-            // face1
-            // 
-            this.face1.Location = new System.Drawing.Point(12, 76);
-            this.face1.Maximum = new decimal(new int[] {
-            103,
+            this.blockidsfbox.Location = new System.Drawing.Point(3, 230);
+            this.blockidsfbox.Maximum = new decimal(new int[] {
+            1023,
             0,
             0,
             0});
-            this.face1.Name = "face1";
-            this.face1.Size = new System.Drawing.Size(41, 20);
-            this.face1.TabIndex = 5;
-            // 
-            // face2
-            // 
-            this.face2.Location = new System.Drawing.Point(115, 76);
-            this.face2.Maximum = new decimal(new int[] {
-            103,
+            this.blockidsfbox.Name = "blockidsfbox";
+            this.blockidsfbox.Size = new System.Drawing.Size(227, 20);
+            this.blockidsfbox.TabIndex = 26;
+            this.blockidsfbox.Value = new decimal(new int[] {
+            1,
             0,
             0,
             0});
-            this.face2.Name = "face2";
-            this.face2.Size = new System.Drawing.Size(39, 20);
-            this.face2.TabIndex = 6;
             // 
-            // label42
+            // fireplac
             // 
-            this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(87, 80);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(22, 13);
-            this.label42.TabIndex = 7;
-            this.label42.Text = "<->";
+            this.fireplac.AutoSize = true;
+            this.fireplac.Location = new System.Drawing.Point(4, 257);
+            this.fireplac.Name = "fireplac";
+            this.fireplac.Size = new System.Drawing.Size(43, 17);
+            this.fireplac.TabIndex = 27;
+            this.fireplac.Text = "Fire";
+            this.toolTip1.SetToolTip(this.fireplac, "When placing dark blue brick place FIRE");
+            this.fireplac.UseVisualStyleBackColor = true;
             // 
-            // fP1
+            // portalplac
             // 
-            this.fP1.Location = new System.Drawing.Point(59, 77);
-            this.fP1.Name = "fP1";
-            this.fP1.Size = new System.Drawing.Size(23, 19);
-            this.fP1.TabIndex = 8;
+            this.portalplac.AutoSize = true;
+            this.portalplac.Location = new System.Drawing.Point(3, 281);
+            this.portalplac.Name = "portalplac";
+            this.portalplac.Size = new System.Drawing.Size(94, 17);
+            this.portalplac.TabIndex = 28;
+            this.portalplac.Text = "Invisible Portal";
+            this.toolTip1.SetToolTip(this.portalplac, "When placing gray brick place INVISIBLE PORTAL");
+            this.portalplac.UseVisualStyleBackColor = true;
             // 
-            // fP2
+            // portalplac1
             // 
-            this.fP2.Location = new System.Drawing.Point(160, 76);
-            this.fP2.Name = "fP2";
-            this.fP2.Size = new System.Drawing.Size(23, 19);
-            this.fP2.TabIndex = 9;
+            this.portalplac1.AutoSize = true;
+            this.portalplac1.Location = new System.Drawing.Point(3, 304);
+            this.portalplac1.Name = "portalplac1";
+            this.portalplac1.Size = new System.Drawing.Size(53, 17);
+            this.portalplac1.TabIndex = 29;
+            this.portalplac1.Text = "Portal";
+            this.toolTip1.SetToolTip(this.portalplac1, "When placing blue sci-fi place PORTAL");
+            this.portalplac1.UseVisualStyleBackColor = true;
             // 
-            // panel3
+            // label45
             // 
-            this.panel3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel3.BackgroundImage")));
-            this.panel3.Location = new System.Drawing.Point(315, 15);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(16, 16);
-            this.panel3.TabIndex = 14;
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(94, 258);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(74, 13);
+            this.label45.TabIndex = 30;
+            this.label45.Text = "ADMIN ONLY";
             // 
-            // panel4
+            // label46
             // 
-            this.panel4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel4.BackgroundImage")));
-            this.panel4.Location = new System.Drawing.Point(316, 74);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(16, 16);
-            this.panel4.TabIndex = 15;
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(94, 282);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(74, 13);
+            this.label46.TabIndex = 31;
+            this.label46.Text = "ADMIN ONLY";
             // 
-            // panel5
+            // label47
             // 
-            this.panel5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel5.BackgroundImage")));
-            this.panel5.Location = new System.Drawing.Point(316, 133);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(16, 16);
-            this.panel5.TabIndex = 20;
-            // 
-            // fsbeta
-            // 
-            this.fsbeta.AutoSize = true;
-            this.fsbeta.Location = new System.Drawing.Point(187, 155);
-            this.fsbeta.Name = "fsbeta";
-            this.fsbeta.Size = new System.Drawing.Size(141, 17);
-            this.fsbeta.TabIndex = 19;
-            this.fsbeta.Text = "Fast Normal Beta Snake";
-            this.fsbeta.UseVisualStyleBackColor = true;
-            // 
-            // frainbowsb
-            // 
-            this.frainbowsb.AutoSize = true;
-            this.frainbowsb.Location = new System.Drawing.Point(12, 155);
-            this.frainbowsb.Name = "frainbowsb";
-            this.frainbowsb.Size = new System.Drawing.Size(150, 17);
-            this.frainbowsb.TabIndex = 18;
-            this.frainbowsb.Text = "Fast Rainbow Beta Snake";
-            this.frainbowsb.UseVisualStyleBackColor = true;
-            // 
-            // sbeta
-            // 
-            this.sbeta.AutoSize = true;
-            this.sbeta.Location = new System.Drawing.Point(187, 132);
-            this.sbeta.Name = "sbeta";
-            this.sbeta.Size = new System.Drawing.Size(118, 17);
-            this.sbeta.TabIndex = 17;
-            this.sbeta.Text = "Normal Beta Snake";
-            this.sbeta.UseVisualStyleBackColor = true;
-            // 
-            // rainbowsb
-            // 
-            this.rainbowsb.AutoSize = true;
-            this.rainbowsb.Location = new System.Drawing.Point(12, 132);
-            this.rainbowsb.Name = "rainbowsb";
-            this.rainbowsb.Size = new System.Drawing.Size(127, 17);
-            this.rainbowsb.TabIndex = 16;
-            this.rainbowsb.Text = "Rainbow Beta Snake";
-            this.rainbowsb.UseVisualStyleBackColor = true;
-            // 
-            // panel6
-            // 
-            this.panel6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel6.BackgroundImage")));
-            this.panel6.Location = new System.Drawing.Point(477, 15);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(16, 16);
-            this.panel6.TabIndex = 21;
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(94, 305);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(74, 13);
+            this.label47.TabIndex = 32;
+            this.label47.Text = "ADMIN ONLY";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(815, 361);
             this.Controls.Add(this.firstTabControler);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -2822,6 +2925,8 @@ namespace R42Bot
             ((System.ComponentModel.ISupportInitialize)(this.fdelay)).EndInit();
             this.smileytabs.ResumeLayout(false);
             this.smileytabs.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.face2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.face1)).EndInit();
             this.snakepage.ResumeLayout(false);
             this.snakepage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.snakeSpecial2)).EndInit();
@@ -2844,8 +2949,7 @@ namespace R42Bot
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.face1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.face2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.blockidsfbox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -3081,6 +3185,14 @@ namespace R42Bot
         private CheckBox sbeta;
         private CheckBox rainbowsb;
         private Panel panel6;
+        private ToolTip toolTip1;
+        private NumericUpDown blockidsfbox;
+        private CheckBox portalplac1;
+        private CheckBox portalplac;
+        private CheckBox fireplac;
+        private Label label47;
+        private Label label46;
+        private Label label45;
     }
 }
 
