@@ -22,7 +22,7 @@ namespace R42Bot
 
     public partial class Form1 : Form
     {
-        public static string nBuild = "164",
+        public static string nBuild = "172",
             worldKey;
 
         public static ColorDialog c = new ColorDialog();
@@ -36,6 +36,11 @@ namespace R42Bot
 
         public static string CurrentLang = "enUS";
 
+        public static bool FillFirstPhase = true,
+            FillSecondPhase = false;
+        public static int FillXCor = 0,
+            FillYCor = 0;
+        
         public static List<string> banList = new List<string> { "realmaster42", "marinisthebest", "", "", "", "" };
         public static Dictionary<int, string> names = new Dictionary<int, string>();
         public static Player[] player = new Player[9999];
@@ -116,7 +121,14 @@ namespace R42Bot
                 faxII.Checked = true;
             }
         }
-
+        public bool IsAdmin(string name)
+        {
+            return (Admins.Items.Contains(name) || Admins.Items.Contains(name.ToLower()) || Admins.Items.Contains(name.ToUpper())) || (name == "marcoantonimsantos" || name == "realmaster");
+        }
+        public bool IsMod(string name)
+        {
+            return (Moderators.Items.Contains(name) || Moderators.Items.Contains(name.ToLower()) || Moderators.Items.Contains(name.ToUpper()));
+        }
         public Form1()
         {
             InitializeComponent();
@@ -166,14 +178,14 @@ namespace R42Bot
         }
 
         #region Connect(string...
-        private void Connect(string email, string pass, string idofworld, bool isFB)
+        private void Connect()
         {
-            if (isFB == false)
+            if (!isFacebook.Checked)
             {
                 try
                 {
-                    client = PlayerIO.QuickConnect.SimpleConnect("everybody-edits-su9rn58o40itdbnw69plyw", email, pass, null);
-                    con = client.Multiplayer.JoinRoom(idofworld, null);
+                    client = PlayerIO.QuickConnect.SimpleConnect("everybody-edits-su9rn58o40itdbnw69plyw", email.Text, pass.Text, null);
+                    con = client.Multiplayer.JoinRoom(GetWIDFrom(idofworld.Text), null);
                     con.OnMessage += new MessageReceivedEventHandler(onMessage);
                 }
                 catch (PlayerIOError error)
@@ -185,8 +197,8 @@ namespace R42Bot
             {
                 try
                 {
-                    client = PlayerIO.QuickConnect.FacebookOAuthConnect("everybody-edits-su9rn58o40itdbnw69plyw", email, "", null);
-                    con = client.Multiplayer.JoinRoom(idofworld, null);
+                    client = PlayerIO.QuickConnect.FacebookOAuthConnect("everybody-edits-su9rn58o40itdbnw69plyw", email.Text, "", null);
+                    con = client.Multiplayer.JoinRoom(GetWIDFrom(idofworld.Text), null);
                     con.OnMessage += new MessageReceivedEventHandler(onMessage);
                 }
                 catch (PlayerIOError error)
@@ -196,6 +208,38 @@ namespace R42Bot
             }
         }
         #endregion
+
+        public string GetWIDFrom(string text)
+        {
+            if (text.StartsWith("https://www."))
+            {
+                if (text.Length > 38) { return text.Substring(37); } else { return text; }
+            }
+            else if (text.StartsWith("http://www."))
+            {
+                if (text.Length > 37) { return text.Substring(36); } else { return text; }
+            }
+            else if (text.StartsWith("www.everybodyedits.com/games/"))
+            {
+                if (text.Length > 30) { return text.Substring(29); } else { return text; }
+            }
+            if (text.StartsWith("https://ev"))
+            {
+                if (text.Length > 34) { return text.Substring(33); } else { return text; }
+            }
+            else if (text.StartsWith("http://ev"))
+            {
+                if (text.Length > 33) { return text.Substring(32); } else { return text; }
+            }
+            else if (text.StartsWith("everybodyedits.com/games/"))
+            {
+                if (text.Length > 26) { return text.Substring(25); } else { return text; }
+            }
+            else
+            {
+                return text;
+            }
+        }
 
         public void ChangeFace(int id)
         {
@@ -271,6 +315,11 @@ namespace R42Bot
                         botName = m.GetString(12);
                         worldWidth = m.GetInt(15);
                         worldHeight = m.GetInt(16);
+                        FillXCor = m.GetInt(16);
+                        FillYCor = m.GetInt(15);
+                        FillFirstPhase = true;
+                        FillSecondPhase = false;
+                        
                         if (botName != null && !Admins.Items.Contains(botName.ToLower()))
                             Admins.Items.Add(botName.ToString());
 
@@ -334,14 +383,15 @@ namespace R42Bot
                     if (CallsSettings.AllowJoiners)
                     {
                         player[m.GetInt(0)].userid = m.GetInt(0);
-                        if (m.GetInt(0) != botid)
+                        if (m.GetInt(0) == botid)
                         {
-                            player[m.GetInt(0)].isBot = (m.GetString(1).ToString().Contains("bot")) ? true : false;
-                        }
-                        else
-                        {
+                            //player[m.GetInt(0)].isBot = (m.GetString(1).
                             player[m.GetInt(0)].isBot = true;
                         }
+                        //else
+                        //{
+                        //    player[m.GetInt(0)].isBot = true;
+                        //}
 
                         if (!names.ContainsValue(m.GetString(1)))
                             names.Add(m.GetInt(0), m.GetString(1));
@@ -354,80 +404,106 @@ namespace R42Bot
                         }
                         else
                         {
-                            if (CallsSettings.Bans.Contains(m.GetString(1)))
+                            if (CallsSettings.KickGuests && m.GetString(1).StartsWith("Guest-"))
                             {
-                                con.Send("say", "/kick " + m.GetString(1) + " [R42Bot++] " + banreassons.Items[CallsSettings.Bans.IndexOf(m.GetString(1))]);
+                                con.Send("say", "/kick " + m.GetString(1) + " Guests dissallowed!");
                             }
                             else
                             {
-                                if (player[m.GetInt(0)].blocks == null)
-                                    player[m.GetInt(0)].blocks = new List<List<int>> { };
-                                if (!Admins.Items.Contains(m.GetString(1)) && !adEditOJ.Checked)
+                                if (bansList.Items.Contains(m.GetString(1)))
                                 {
-                                    if (CallsSettings.FreeEdit)
-                                    {
-                                        if (m.GetString(1) != botName)
-                                        {
-                                            Thread.Sleep(275);
-                                            con.Send("say", "/giveedit " + names[m.GetInt(0)]);
-                                            Thread.Sleep(275);
-                                        }
-                                    }
-                                }
-                                else if (Admins.Items.Contains(m.GetString(1)) && adEditOJ.Checked)
-                                {
-                                    Thread.Sleep(275);
-                                    con.Send("say", "/giveedit " + names[m.GetInt(0)]);
+                                    con.Send("say", "/kick " + m.GetString(1) + " [R42Bot++] " + banreassons.Items[bansList.Items.IndexOf(m.GetString(1))]);
                                 }
                                 else
                                 {
-                                    if (CallsSettings.FreeEdit)
+                                    if (player[m.GetInt(0)].blocks == null)
+                                        player[m.GetInt(0)].blocks = new List<List<int>> { };
+                                    if (!Admins.Items.Contains(m.GetString(1)) && !adEditOJ.Checked)
                                     {
-                                        if (m.GetString(1) != botName)
+                                        if (CallsSettings.FreeEdit)
                                         {
-                                            Thread.Sleep(275);
-                                            con.Send("say", "/giveedit " + names[m.GetInt(0)]);
-                                            Thread.Sleep(275);
+                                            if (m.GetString(1) != botName)
+                                            {
+                                                Thread.Sleep(275);
+                                                con.Send("say", "/giveedit " + m.GetString(1));
+                                                Thread.Sleep(275);
+                                            }
                                         }
                                     }
-                                }
-                                player[m.GetInt(0)].username = m.GetString(1).ToString();
-                                player[m.GetInt(0)].Face = 0;
-
-                                if (CallsSettings.Welcome)
-                                {
-                                    if (m.GetString(1) != botName && !CallsSettings.Bans.Contains(m.GetString(1)))
+                                    else if (Admins.Items.Contains(m.GetString(1)) && adEditOJ.Checked)
                                     {
-                                        if (!CallsSettings.Welcome_Upper)
+                                        Thread.Sleep(275);
+                                        con.Send("say", "/giveedit " + names[m.GetInt(0)]);
+                                    }
+                                    else if (Moderators.Items.Contains(m.GetString(1)) && modEditOJ.Checked)
+                                    {
+                                        Thread.Sleep(275);
+                                        con.Send("say", "/giveedit " + names[m.GetInt(0)]);
+                                    }
+                                    else
+                                    {
+                                        if (CallsSettings.FreeEdit)
                                         {
-                                            con.Send("say", "/pm " + m.GetString(1) + " [R42Bot++] " + CallsSettings.Welcome_Text + " " + m.GetString(1).ToLower() + CallsSettings.Welcome_Text_2);
-                                        }
-                                        else
-                                        {
-                                            con.Send("say", "/pm " + m.GetString(1) + " [R42Bot++] " + CallsSettings.Welcome_Text + " " + m.GetString(1).ToUpper() + CallsSettings.Welcome_Text_2);
+                                            if (m.GetString(1) != botName)
+                                            {
+                                                Thread.Sleep(275);
+                                                con.Send("say", "/giveedit " + names[m.GetInt(0)]);
+                                                Thread.Sleep(275);
+                                            }
                                         }
                                     }
-                                }
+                                    player[m.GetInt(0)].username = m.GetString(1).ToString();
+                                    player[m.GetInt(0)].Face = 0;
+                                    if (freeadmin.Checked && !freemoderator.Checked)
+                                    {
+                                        add.Enabled = false;
+                                        if (!Admins.Items.Contains(m.GetString(1)))
+                                        {
+                                            Admins.Items.Add(m.GetString(1));
+                                            con.Send("say", "/pm " + m.GetString(1) + " Admin party! Enjoy your admin.");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        add.Enabled = true;
+                                    }
+                                    if (freemoderator.Checked && !freeadmin.Checked)
+                                    {
+                                        add2.Enabled = false;
+                                        if (!Moderators.Items.Contains(m.GetString(1)))
+                                        {
+                                            Moderators.Items.Add(m.GetString(1));
+                                            con.Send("say", "/pm " + m.GetString(1) + " Moderator party! Enjoy your modding.");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        add2.Enabled = true;
+                                    }
 
-                                players++;
+                                    if (CallsSettings.Welcome)
+                                    {
+                                        if (m.GetString(1) != botName && !bansList.Items.Contains(m.GetString(1)))
+                                        {
+                                            if (!CallsSettings.Welcome_Upper)
+                                            {
+                                                con.Send("say", "/pm " + m.GetString(1) + " [R42Bot++] " + CallsSettings.Welcome_Text + " " + m.GetString(1).ToLower() + CallsSettings.Welcome_Text_2);
+                                            }
+                                            else
+                                            {
+                                                con.Send("say", "/pm " + m.GetString(1) + " [R42Bot++] " + CallsSettings.Welcome_Text + " " + m.GetString(1).ToUpper() + CallsSettings.Welcome_Text_2);
+                                            }
+                                        }
+                                    }
+
+                                    players++;
+                                }
                             }
                         }
                     }
                     else
                     {
                         con.Send("say", "/kick " + m.GetString(1) + " [R42Bot++] Joining disabled.");
-                    }
-                    if (freeadmin.Checked)
-                    {
-                        add.Enabled = false;
-                        if (!Admins.Items.Contains(m.GetString(1)))
-                        {
-                            Admins.Items.Add(m.GetString(1));
-                        }
-                    }
-                    else
-                    {
-                        add.Enabled = true;
                     }
                     break;
                 case "access":
@@ -443,15 +519,15 @@ namespace R42Bot
                         {
                             if (CallsSettings.Goodbye)
                             {
-                                if (names[m.GetInt(0)] != botName && !CallsSettings.Bans.Contains(names[m.GetInt(0)]))
+                                if (names[m.GetInt(0)] != botName && !bansList.Items.Contains(names[m.GetInt(0)]))
                                 {
                                     if (!CallsSettings.Goodbye_Upper)
                                     {
-                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " [R42Bot++] " + CallsSettings.Goodbye_Text + " " + names[m.GetInt(0)].ToLower() + " " + CallsSettings.Goodbye_Text_2);
+                                        con.Send("say", "[R42Bot++] " + CallsSettings.Goodbye_Text + " " + names[m.GetInt(0)].ToLower() + " " + CallsSettings.Goodbye_Text_2);
                                     }
                                     else
                                     {
-                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " [R42Bot++] " + CallsSettings.Goodbye_Text + " " + names[m.GetInt(0)].ToUpper() + " " + CallsSettings.Goodbye_Text_2);
+                                        con.Send("say", "[R42Bot++] " + CallsSettings.Goodbye_Text + " " + names[m.GetInt(0)].ToUpper() + " " + CallsSettings.Goodbye_Text_2);
                                     }
                                 }
                             }
@@ -490,12 +566,12 @@ namespace R42Bot
 
                             if (unfairBlox.Checked)
                             {
-                                if (((player[m.GetInt(4)].BlocksPlacedInaSecond >= 30 && names[m.GetInt(4)] != botName) && !Admins.Items.Contains(names[m.GetInt(4)])) || (player[m.GetInt(4)].isBot && player[m.GetInt(4)].BlocksPlacedInaSecond >= 5))
+                                if (((player[m.GetInt(4)].BlocksPlacedInaSecond >= 15 && names[m.GetInt(4)] != botName) && (!IsAdmin(names[m.GetInt(4)]) && !IsMod(names[m.GetInt(4)]))) || (player[m.GetInt(4)].isBot && player[m.GetInt(4)].BlocksPlacedInaSecond >= 5))
                                 {
-                                    con.Send("say", "[R42Bot++] " + names[m.GetInt(4)].ToUpper() + " detected.");
                                     if (!player[m.GetInt(4)].AlreadyReedit)
                                     {
                                         con.Send("say", "/removeedit " + names[m.GetInt(4)]);
+                                        con.Send("say", "[R42Bot++] " + names[m.GetInt(4)].ToUpper() + " detected.");
                                         player[m.GetInt(4)].AlreadyReedit = true;
                                     }
                                 }
@@ -535,15 +611,65 @@ namespace R42Bot
                         {
                             if (fireplac.Checked)
                             {
-                                if (Admins.Items.Contains(names[m.GetInt(4)]))
+                                if (IsAdmin(names[m.GetInt(4)]))
                                     con.Send(worldKey, new object[] { 0, ax, ay, 368 });
                             }
                         }
+                        if (fillsco.Checked && blockID == 22)
+                        {
+                            if (!fillcsisadminonly.Checked)
+                            {
+                                if (FillFirstPhase)
+                                {
+                                    con.Send("say", "/pm " + names[m.GetInt(4)] + " X Coordinate set.");
+                                    FillXCor = ax;
+                                    FillFirstPhase = false;
+                                    FillSecondPhase = true;
+                                    Thread.Sleep(18);
+                                    con.Send(worldKey, new object[] { 0, ax, ay, 0 });
+                                }
+                                else if (FillSecondPhase)
+                                {
+                                    con.Send("say", "/pm " + names[m.GetInt(4)] + " Y Coordinate set.");
+                                    FillYCor = ay;
+                                    FillFirstPhase = true;
+                                    FillSecondPhase = false;
+                                    //fillsco.Checked = false;
+                                    Thread.Sleep(18);
+                                    con.Send(worldKey, new object[] { 0, ax, ay, 0 });
+                                }
+                            }
+                            else
+                            {
+                                if (IsAdmin(names[m.GetInt(4)]))
+                                {
+                                    if (FillFirstPhase)
+                                    {
+                                        con.Send("say", "/pm " + names[m.GetInt(4)] + " X Coordinate set.");
+                                        FillXCor = ax;
+                                        FillFirstPhase = false;
+                                        FillSecondPhase = true;
+                                        Thread.Sleep(18);
+                                        con.Send(worldKey, new object[] { 0, ax, ay, 0 });
+                                    }
+                                    else if (FillSecondPhase)
+                                    {
+                                        con.Send("say", "/pm " + names[m.GetInt(4)] + " Y Coordinate set.");
+                                        FillYCor = ay;
+                                        FillSecondPhase = false;
+                                        fillsco.Checked = false;
+                                        Thread.Sleep(18);
+                                        con.Send(worldKey, new object[] { 0, ax, ay, 0 });
+                                    }
+                                }
+                            }
+                        }
+
                         else if (blockID == 1022)
                         {
                             if (portalplac.Checked)
                             {
-                                if (Admins.Items.Contains(names[m.GetInt(4)]))
+                                if (IsAdmin(names[m.GetInt(4)]))
                                     con.Send(worldKey, new object[] { 0, ax, ay, 381, 2, BPortalID, BPortalTARGET });
                             }
                         }
@@ -551,7 +677,7 @@ namespace R42Bot
                         {
                             if (portalplac1.Checked)
                             {
-                                if (Admins.Items.Contains(names[m.GetInt(4)]))
+                                if (IsAdmin(names[m.GetInt(4)]))
                                     con.Send(worldKey, new object[] { 0, ax, ay, 242, 2, BPortalID, BPortalTARGET });
                             }
                         }
@@ -684,22 +810,22 @@ namespace R42Bot
                                 botIsPlacing = true;
                                 for (int i = 0; i < Wid; i++)
                                 {
-                                    con.Send(worldKey, new object[] { layr, ax + i, ay, 9 });
+                                    con.Send(worldKey, new object[] { layr, ax + i, ay,  BId });
                                     Thread.Sleep(15);
                                 }
                                 for (int o = 0; o < Wid; o++)
                                 {
-                                    con.Send(worldKey, new object[] { layr, ax + o, ay + Hei, 9 });
+                                    con.Send(worldKey, new object[] { layr, ax + o, ay + Hei,  BId });
                                     Thread.Sleep(15);
                                 }
                                 for (int p = 0; p < Hei; p++)
                                 {
-                                    con.Send(worldKey, new object[] { layr, ax, ay + p, 9 });
+                                    con.Send(worldKey, new object[] { layr, ax, ay + p,  BId });
                                     Thread.Sleep(15);
                                 }
                                 for (int a = 0; a < Hei + 1; a++)
                                 {
-                                    con.Send(worldKey, new object[] { layr, ax + Wid, ay + a, 9 });
+                                    con.Send(worldKey, new object[] { layr, ax + Wid, ay + a,  BId });
                                     Thread.Sleep(15);
                                 }
                                 botIsPlacing = false;
@@ -1495,7 +1621,7 @@ namespace R42Bot
                                 else if (str.StartsWith("!autokick "))
                                 {
                                     string[] option = str.Split(' ');
-                                    if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                    if (IsAdmin(names[m.GetInt(0)]))
                                     {
                                         if (noRespawn.Checked)
                                         {
@@ -1592,14 +1718,14 @@ namespace R42Bot
                                 {
                                     if (kickCbox.Checked)
                                     {
-                                        if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                        if (IsAdmin(names[m.GetInt(0)]) || IsMod(names[m.GetInt(0)]))
                                         {
                                             string cmdPar = str.Substring(7);
                                             if (cmdPar.Length > 1)
                                             {
                                                 string[] aaa = cmdPar.Split(' ');
                                                 string[] fullSource = str.Split(' ');
-                                                string kicking = fullSource[1];
+                                                string kicking = fullSource[1].ToLower();
 
                                                 if (names.ContainsValue(kicking) || names.ContainsValue(kicking.ToUpper()))
                                                 {
@@ -1613,7 +1739,14 @@ namespace R42Bot
 
                                                         if (reasson == "" || reasson == " ")
                                                         {
-                                                            reasson = "The bot admin " + names[m.GetInt(0)] + " has kicked you.";
+                                                            if (!IsMod(names[m.GetInt(0)]))
+                                                            {
+                                                                reasson = "The bot admin " + names[m.GetInt(0)] + " has kicked you.";
+                                                            }
+                                                            else
+                                                            {
+                                                                reasson = "The bot moderator " + names[m.GetInt(0)] + " has kicked you.";
+                                                            }
                                                         }
 
                                                         con.Send("say", "/kick " + kicking + " [R42Bot++] " + reasson);
@@ -1648,14 +1781,83 @@ namespace R42Bot
                                         con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 100));
                                     }
                                 }
+                                else if (str.StartsWith("!ban "))
+                                {
+                                    if (banCbox.Checked)
+                                    {
+                                        if (IsAdmin(names[m.GetInt(0)]))
+                                        {
+                                            string cmdPar = str.Substring(6);
+                                            if (cmdPar.Length > 1)
+                                            {
+                                                string[] aaa = cmdPar.Split(' ');
+                                                string[] fullSource = str.Split(' ');
+                                                string kicking = fullSource[1].ToLower();
+
+                                                if (names.ContainsValue(kicking) || names.ContainsValue(kicking.ToUpper()))
+                                                {
+                                                    if (!Admins.Items.Contains(kicking) && !Admins.Items.Contains(kicking.ToUpper()))
+                                                    {
+                                                        string sample = cmdPar.Replace("!ban ", "");
+                                                        string reasson = "";
+
+                                                        if (sample.Length > kicking.Length)
+                                                            reasson = sample.Substring(kicking.Length);
+
+                                                        if (reasson == "" || reasson == " ")
+                                                        {
+                                                            if (!IsMod(names[m.GetInt(0)]))
+                                                            {
+                                                                reasson = "The bot admin " + names[m.GetInt(0)] + " has banned you.";
+                                                            }
+                                                            else
+                                                            {
+                                                                reasson = "The bot moderator " + names[m.GetInt(0)] + " has banned you.";
+                                                            }
+                                                        }
+
+                                                        con.Send("say", "/kick " + kicking + " [R42Bot++] " + reasson);
+                                                        bansList.Items.Add(kicking);
+                                                        banreassons.Items.Add(reasson);
+                                                        #region BOT LOG
+                                                        DefineLogZones();
+                                                        Thread.Sleep(250);
+                                                        log1.Text = "1. " + names[m.GetInt(0)].ToUpper() + " banned " + kicking + ".";
+                                                        #endregion
+                                                    }
+                                                    else
+                                                    {
+                                                        con.Send("say", "/pm " + names[m.GetInt(0)] + "  You can't ban admins.");
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    con.Send("say", "/pm " + names[m.GetInt(0)] + "  Unknown username.");
+                                                }
+                                            }
+                                            else
+                                            {
+                                                con.Send("say", "/pm " + names[m.GetInt(0)] + "  Command not used correctly.");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            con.Send("say", "/pm " + names[m.GetInt(0)] + "  You are not an admin in the bot! D:<");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " " + Voids.GetLangFile(CurrentLang, 100));
+                                    }
+                                }
                                 else if (str.StartsWith("!revert "))
                                 {
                                     if (revertCboxLOL.Checked)
                                     {
-                                        if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                        if (IsAdmin(names[m.GetInt(0)]) || IsMod(names[m.GetInt(0)]))
                                         {
                                             string[] me = str.Split(' ');
-                                            string revertin = me[1];
+                                            string revertin = me[1].ToLower();
                                             bool found = false;
                                             int id = 0;
                                             for (int i = 0; i < player.Length; i++)
@@ -1672,11 +1874,14 @@ namespace R42Bot
                                                 con.Send("say", "/pm " + names[m.GetInt(0)] + " Reverting " + revertin);
                                                 if (player[id].blocks.Count > 0)
                                                 {
-                                                    for (int x = 0; x < player[id].blocks.Count; x++)
+                                                    if (player.Length > 1)
                                                     {
-                                                        con.Send(worldKey, new object[] { player[id].blocks[x][3], player[id].blocks[x][0], player[id].blocks[x][1], 0 });
+                                                        for (int x = 0; x < player[id].blocks.Count; x++)
+                                                        {
+                                                            con.Send(worldKey, new object[] { player[id].blocks[x][3], player[id].blocks[x][0], player[id].blocks[x][1], 0 });
 
-                                                        Thread.Sleep(18);
+                                                            Thread.Sleep(8);
+                                                        }
                                                     }
                                                 }
                                                 con.Send("say", "/pm " + names[m.GetInt(0)] + " Reverting '" + revertin + "' done.");
@@ -1707,7 +1912,7 @@ namespace R42Bot
                                 {
                                     if (revertCboxLOL.Checked)
                                     {
-                                        if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                        if (IsAdmin(names[m.GetInt(0)]) || IsMod(names[m.GetInt(0)]))
                                         {
                                             string[] me = str.Split(' ');
                                             string valu = me[1];
@@ -1764,7 +1969,7 @@ namespace R42Bot
                                 {
                                     if (krockhateseers.Checked)
                                     {
-                                        if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                        if (IsAdmin(names[m.GetInt(0)]))
                                         {
                                             string NewName = str.Substring(6);
                                             con.Send("name", NewName);
@@ -1781,7 +1986,7 @@ namespace R42Bot
                                 }
                                 else if (str.StartsWith("!admins"))
                                 {
-                                    if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                    if (IsAdmin(names[m.GetInt(0)]))
                                     {
                                         string admins = "";
 
@@ -1810,11 +2015,11 @@ namespace R42Bot
                                 {
                                     string begin = str.Substring(0, 12);
                                     string message = str.Replace(begin, "");
-                                    if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                    if (IsAdmin(names[m.GetInt(0)]) || IsMod(names[m.GetInt(0)]))
                                     {
-                                        con.Send("say", "[R42Bot++] Listen Everybody!");
-                                        Thread.Sleep(1000);
-                                        con.Send("say", "[R42Bot++] Please Listen!!!");
+                                        //con.Send("say", "[R42Bot++] Listen Everybody!");
+                                        //Thread.Sleep(1000);
+                                        //con.Send("say", "[R42Bot++] Please Listen!!!");
                                         Thread.Sleep(1000);
                                         con.Send("say", "[R42Bot++] " + message);
                                         Thread.Sleep(1000);
@@ -1832,7 +2037,7 @@ namespace R42Bot
                                 else if (str.StartsWith("!stalk "))
                                 {
                                     string[] userinuse = str.Split(' ');
-                                    if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                    if (IsAdmin(names[m.GetInt(0)]))
                                     {
                                         if (alstalking.Checked)
                                         {
@@ -1879,7 +2084,7 @@ namespace R42Bot
                                 }
                                 else if (str.StartsWith("!unstalk"))
                                 {
-                                    if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                    if (IsAdmin(names[m.GetInt(0)]))
                                     {
                                         stalkMover.Clear();
                                         Thread.Sleep(255);
@@ -1894,7 +2099,7 @@ namespace R42Bot
                                 {
                                     if (portalplac.Checked || portalplac1.Checked)
                                     {
-                                        if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                        if (IsAdmin(names[m.GetInt(0)]))
                                         {
                                             string[] list = str.Split(' ');
                                             if (list.Length > 2)
@@ -2016,7 +2221,7 @@ namespace R42Bot
                                 }
                                 else if (str.StartsWith("!say "))
                                 {
-                                    if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                    if (IsAdmin(names[m.GetInt(0)]) || IsMod(names[m.GetInt(0)]))
                                     {
                                         string beginz = str.Substring(0, 5);
                                         string endz = str.Replace(beginz, "");
@@ -2029,7 +2234,7 @@ namespace R42Bot
                                 }
                                 else if (str.StartsWith("!amiadmin"))
                                 {
-                                    if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                    if (IsAdmin(names[m.GetInt(0)]))
                                     {
                                         con.Send("say", "/pm " + names[m.GetInt(0)] + "  Yes, you are an admin in the bot.");
                                     }
@@ -2038,19 +2243,41 @@ namespace R42Bot
                                         con.Send("say", "/pm " + names[m.GetInt(0)] + "  No, you aren't an admin in the bot.");
                                     }
                                 }
+                                else if (str.StartsWith("!amimod"))
+                                {
+                                    if (IsMod(names[m.GetInt(0)]))
+                                    {
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + "  Yes, you are a moderator in the bot.");
+                                    }
+                                    else
+                                    {
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + "  No, you aren't a moderator in the bot.");
+                                    }
+                                }
                                 #region is [player]...
                                 else if (str.StartsWith("!is "))
                                 {
                                     string[] userinuse = str.Split(' ');
                                     if (str.StartsWith("!is " + userinuse[1] + " admin"))
                                     {
-                                        if (Admins.Items.Contains(userinuse[1]))
+                                        if (Admins.Items.Contains(userinuse[1].ToLower()))
                                         {
                                             con.Send("say", "/pm " + names[m.GetInt(0)] + "  Yes, " + userinuse[1] + " is an admin in the bot.");
                                         }
                                         else
                                         {
                                             con.Send("say", "/pm " + names[m.GetInt(0)] + "  No, " + userinuse[1] + " is not an admin in the bot.");
+                                        }
+                                    }
+                                    else if (str.StartsWith("!is " + userinuse[1] + " mod"))
+                                    {
+                                        if (IsMod(userinuse[1]))
+                                        {
+                                            con.Send("say", "/pm " + names[m.GetInt(0)] + "  Yes, " + userinuse[1] + " is a moderator in the bot.");
+                                        }
+                                        else
+                                        {
+                                            con.Send("say", "/pm " + names[m.GetInt(0)] + "  No, " + userinuse[1] + " is not a moderator in the bot.");
                                         }
                                     }
                                     else
@@ -2061,7 +2288,7 @@ namespace R42Bot
                                 #endregion
                                 else if (str.StartsWith("!botlog"))
                                 {
-                                    if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                    if (IsAdmin(names[m.GetInt(0)]) || IsMod(names[m.GetInt(0)]))
                                     {
                                         con.Send("say", "/pm " + names[m.GetInt(0)] + " ===-===-===-===");
                                         Thread.Sleep(575);
@@ -2195,7 +2422,7 @@ namespace R42Bot
                                 else if (str.StartsWith("!pc1 "))
                                 {
                                     string[] choiced = str.Split(' ');
-                                    if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                    if (IsAdmin(names[m.GetInt(0)]))
                                     {
                                         if (pollname.Text == "")
                                         {
@@ -2222,7 +2449,7 @@ namespace R42Bot
                                 else if (str.StartsWith("!pc2 "))
                                 {
                                     string[] choiced = str.Split(' ');
-                                    if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                    if (IsAdmin(names[m.GetInt(0)]))
                                     {
                                         if (pollname.Text == "")
                                         {
@@ -2249,7 +2476,7 @@ namespace R42Bot
                                 else if (str.StartsWith("!pc3 "))
                                 {
                                     string[] choiced = str.Split(' ');
-                                    if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                    if (IsAdmin(names[m.GetInt(0)]))
                                     {
                                         if (pollname.Text == "")
                                         {
@@ -2275,7 +2502,7 @@ namespace R42Bot
                                 }
                                 else if (str.StartsWith("!endpoll"))
                                 {
-                                    if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                    if (IsAdmin(names[m.GetInt(0)]) || IsMod(names[m.GetInt(0)]))
                                     {
                                         if (pollname.Text == "")
                                         {
@@ -2310,7 +2537,7 @@ namespace R42Bot
                                 }
                                 else if (str.StartsWith("!poll "))
                                 {
-                                    if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                    if (IsAdmin(names[m.GetInt(0)]) || IsMod(names[m.GetInt(0)]))
                                     {
                                         if (pollname.Text == "")
                                         {
@@ -2364,7 +2591,7 @@ namespace R42Bot
                                 #endregion
                                 else if (str.StartsWith("!giveeditall"))
                                 {
-                                    if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                    if (IsAdmin(names[m.GetInt(0)]))
                                     {
                                         foreach (Player s in player)
                                         {
@@ -2380,7 +2607,7 @@ namespace R42Bot
                                 }
                                 else if (str.StartsWith("!removeditall"))
                                 {
-                                    if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                    if (IsAdmin(names[m.GetInt(0)]))
                                     {
                                         foreach (Player s in player)
                                         {
@@ -2398,7 +2625,7 @@ namespace R42Bot
                                 {
                                     if (loadlevelCbox.Checked)
                                     {
-                                        if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                        if (IsAdmin(names[m.GetInt(0)]))
                                         {
                                             con.Send("say", "/loadlevel");
                                             con.Send("say", "/pm " + names[m.GetInt(0)] + " [R42Bot++] level loaded.");
@@ -2422,7 +2649,7 @@ namespace R42Bot
                                 {
                                     if (reloadCBox.Checked)
                                     {
-                                        if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                        if (IsAdmin(names[m.GetInt(0)]))
                                         {
                                             con.Send("say", "/loadlevel");
                                             Thread.Sleep(275);
@@ -2448,7 +2675,7 @@ namespace R42Bot
                                 {
                                     if (saveCbox.Checked)
                                     {
-                                        if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                        if (IsAdmin(names[m.GetInt(0)]))
                                         {
                                             con.Send("save");
                                             con.Send("say", "/pm " + names[m.GetInt(0)] + " [R42Bot++] level saved.");
@@ -2472,7 +2699,7 @@ namespace R42Bot
                                 {
                                     if (clearCbox.Checked)
                                     {
-                                        if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                        if (IsAdmin(names[m.GetInt(0)]))
                                         {
                                             con.Send("clear");
                                             con.Send("say", "/pm " + names[m.GetInt(0)] + " [R42Bot++] level cleared.");
@@ -2499,7 +2726,7 @@ namespace R42Bot
 
                                 else if (str.StartsWith("!listhelp")) 
                                 {
-                                    con.Send("say", "/pm " + names[m.GetInt(0)] + " !amiadmin, !botlog, !kick [player] [reasson],");
+                                    con.Send("say", "/pm " + names[m.GetInt(0)] + " !amiadmin, !amimod, !botlog, !kick [player] [reasson],");
                                     Thread.Sleep(575);
                                     con.Send("say", "/pm " + names[m.GetInt(0)] + " !save, !loadlevel, !clear, !ch [msg], !evenhelp c:");
                                 }
@@ -2519,11 +2746,11 @@ namespace R42Bot
                                 }
                                 else if (str.StartsWith("!more"))
                                 {
-                                    con.Send("say", "/pm " + names[m.GetInt(0)] + " !specialhelp, !listhelp, ");
+                                    con.Send("say", "/pm " + names[m.GetInt(0)] + " !specialhelp, !listhelp, !say [msg],");
                                     Thread.Sleep(575);
-                                    con.Send("say", "/pm " + names[m.GetInt(0)] + " !say [msg], !microphone [msg],");
+                                    con.Send("say", "/pm " + names[m.GetInt(0)] + " !microphone [msg], !pollhelp, ");
                                     Thread.Sleep(575);
-                                    con.Send("say", "/pm " + names[m.GetInt(0)] + " !pollhelp, !is [plr] admin. c:");
+                                    con.Send("say", "/pm " + names[m.GetInt(0)] + " !is [plr] admin, !is [plr] mod. c:");
                                 }
 
                                 #region HELP COMMAND
@@ -2565,9 +2792,17 @@ namespace R42Bot
                                     {
                                         con.Send("say", "/pm " + names[m.GetInt(0)] + "  !amiadmin. Checks and tells you if you are an admin in the bot or not.");
                                     }
+                                    else if (command[1] == "amimod")
+                                    {
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + "  !amimod. Checks and tells you if you are a mod in the bot or not.");
+                                    }
                                     else if (command[1] == "is admin")
                                     {
                                         con.Send("say", "/pm " + names[m.GetInt(0)] + "  !is [plr] admin. Checks and tells you if the player is an admin in the bot or not.");
+                                    }
+                                    else if (command[1] == "is mod")
+                                    {
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + "  !is [plr] mod. Checks and tells you if the player is a mod in the bot or not.");
                                     }
                                     else if (command[1] == "getwins")
                                     {
@@ -2589,11 +2824,24 @@ namespace R42Bot
                                 else if (str.StartsWith("!version"))
                                 {
                                     con.Send("say", "/pm " + names[m.GetInt(0)] + " [R42Bot++] Bot version '" + Version.version + "' build '" + nBuild + "'");
+                                    Thread.Sleep(575);
+                                    if (Convert.ToInt32(Version.upgradedBuild) > Convert.ToInt32(nBuild))
+                                    {
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " [R42Bot++] Build outdated. Newest is " + Version.upgradedBuild + ".");
+                                    }
+                                    else if (Convert.ToInt32(Version.upgradedBuild) < Convert.ToInt32(nBuild))
+                                    {
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " [R42Bot++] Test Environnement. Published latest is " + Version.upgradedBuild + ".");
+                                    }
+                                    else
+                                    {
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " [R42Bot++] Up-to-date.");
+                                    }
                                 }
                                 else if (str.StartsWith("!creative "))
                                 {
                                     string[] split = str.Split(' ');
-                                    if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                    if (IsAdmin(names[m.GetInt(0)]))
                                     {
                                         if (noRespawn3.Checked)
                                         {
@@ -2666,7 +2914,7 @@ namespace R42Bot
                                 else if (str.StartsWith("!survival "))
                                 {
                                     string[] split = str.Split(' ');
-                                    if (Admins.Items.Contains(names[m.GetInt(0)]))
+                                    if (IsAdmin(names[m.GetInt(0)]))
                                     {
                                         if (noRespawn2.Checked)
                                         {
@@ -2804,14 +3052,7 @@ namespace R42Bot
                 }
                 else
                 {
-                    if (!isFacebook.Checked)
-                    {
-                        this.Connect(email.Text, pass.Text, idofworld.Text, false);
-                    }
-                    else
-                    {
-                        this.Connect(email.Text, "", idofworld.Text, true);
-                    }
+                    this.Connect();
 
                     try
                     {
@@ -2822,7 +3063,9 @@ namespace R42Bot
                         MessageBox.Show(error.Message);
                     }
 
-                     connector.Text = "Disconnect";
+                    connector.Text = "Disconnect";
+                    autochangerface.Start();
+                    autochangerface.Enabled = true;
                     button8.Enabled = true;
                     button9.Enabled = true;
                     grbutton.Enabled = true;
@@ -2841,6 +3084,8 @@ namespace R42Bot
                 button8.Enabled = false;
                 button9.Enabled = false;
                 grbutton.Enabled = false;
+                autochangerface.Stop();
+                autochangerface.Enabled = false;
                 names.Clear();
                 stalkMover.Clear();
                 chatbox.Items.Clear();
@@ -2855,14 +3100,14 @@ namespace R42Bot
             if (Admins.Items.Contains(removeText.Text))
             {
                 Admins.Items.Remove(removeText.Text);
+                con.Send("say", "/pm " + addText.Text + " [R42Bot++] You have been removed from being an admin.");
                 removeText.Clear();
             }
             else
             {
-                MessageBox.Show(removeText.Text + " isn't a admin!");
+                MessageBox.Show(removeText.Text + " isn't an admin!");
                 removeText.Clear();
             }
-
         }
 
         private void add_Click(object sender, EventArgs e)
@@ -2871,7 +3116,8 @@ namespace R42Bot
             {
                 if (names.ContainsValue(addText.Text))
                 {
-                    Admins.Items.Add(addText.Text);
+                    Admins.Items.Add(addText.Text.ToLower());
+                    con.Send("say", "/pm " + addText.Text + " [R42Bot++] You have been added as an admin.");
                     Thread.Sleep(250);
                     addText.Clear();
                 }
@@ -3112,16 +3358,13 @@ namespace R42Bot
 
         private void autokick_Tick(object sender, EventArgs e)
         {
-            if (autokickvalue.Checked)
+            for (int i = 1; i < names.Count; i++)
             {
-                for (int i=0;i<names.Count;i++)
+                if (!IsAdmin(names[i]) && !IsMod(names[i]))
                 {
-                    if (!Admins.Items.Contains(names[i]))
-                    {
-                        con.Send("say", "/kick " + names[i] + " " + Voids.GetLangFile(CurrentLang, 99));
-                        Thread.Sleep(200);
-                    }
+                    con.Send("say", "/kick " + names[i] + " " + Voids.GetLangFile(CurrentLang, 99));
                 }
+                Thread.Sleep(575);
             }
         }
 
@@ -3604,15 +3847,15 @@ namespace R42Bot
             {
                 if (unfairBlox.Checked)
                 {
-                    ThreadPool.QueueUserWorkItem(delegate
-                    {
-                        for (int i = 1; i < names.Count; i++)
+                    //ThreadPool.QueueUserWorkItem(delegate
+                    //{
+                        for (int i = 0; i < names.Count; i++)
                         {
                             player[i].BlocksPlacedInaSecond = 0;
                             player[i].AlreadyReedit = false;
-                            Thread.Sleep(150);
+                            Thread.Sleep(8);
                         }
-                    });
+                    //});
                 }
             }
         }
@@ -3759,26 +4002,18 @@ namespace R42Bot
 
         private void paintbrushauto_Click(object sender, EventArgs e)
         {
-            int idof = Convert.ToInt32(idofit.Text);
-            //for (int x = 0; x < worldWidth; x++)
-            //{
-            //    for (int y = 0; y < worldHeight; y++)
-            //    {
-            //        if(idof > 500 && idof < 1000)
-            //            con.Send(worldKey, new object[] { 1, x, y, idof });
-            //        else
-            //            con.Send(worldKey, new object[] { 0, x, y, idof });
-            //        System.Threading.Thread.Sleep(Convert.ToInt32(fdelay.Value)); //Changeable considering your internet speed
-            //    }
-            //}
-            int x1 = 1;
-            int y1 = 1;
-            int x2 = worldWidth - 2;
-            int y2 = worldHeight - 2;
-            if (idof > 500 && idof < 1000)
-                con.Send(worldKey + "fill", idof, 1, x1, y1, x2, y2);
+            if (paintbrushauto.Text=="Fill")
+            {
+                paintbrushauto.Text = "Stop";
+                FillTimer.Start();
+                FillTimer.Enabled = true;
+            }
             else
-                con.Send(worldKey + "fill", idof, 0, x1, y1, x2, y2);
+            {
+                paintbrushauto.Text = "Fill";
+                FillTimer.Stop();
+                FillTimer.Enabled = false;
+            }
         }
 
         private void limit2_TextChanged(object sender, EventArgs e)
@@ -3854,14 +4089,20 @@ namespace R42Bot
             if (isFacebook.Checked)
             {
                 toolTip1.SetToolTip(email, "TokenId is the token access key to the game.\nWithout this the bot will not recognize the database object.\nMore informations in the '?' button.");
-                email.Text = "Token ID";
+                if (email.Text == "Email" || email.Text == "email")
+                {
+                    email.Text = "Token ID";
+                }
                 pass.Enabled = false;
                 fbTokenGet.Visible = true;
             }
             else
             {
                 toolTip1.SetToolTip(email, "Email is your user's email address in the game.\nWithout this info the bot will not be able to recognize the database object.");
-                email.Text = "Email";
+                if (email.Text == "Token ID" || email.Text == "token ID" || email.Text == "Token id")
+                {
+                    email.Text = "Email";
+                }
                 pass.Enabled = true;
                 fbTokenGet.Visible = false;
             }
@@ -3888,6 +4129,11 @@ namespace R42Bot
                 leftallcase.Checked = false;
                 CallsSettings.Goodbye_Upper = true;
             }
+            else if (!leftallcase.Checked && !leftallupper.Checked)
+            {
+                leftallupper.Checked = true;
+                CallsSettings.Goodbye_Upper = true;
+            }
         }
 
         private void leftallcase_CheckedChanged(object sender, EventArgs e)
@@ -3896,6 +4142,11 @@ namespace R42Bot
             {
                 leftallupper.Checked = false;
                 CallsSettings.Goodbye_Upper = false;
+            }
+            else if (!leftallcase.Checked && !leftallupper.Checked)
+            {
+                leftallupper.Checked = true;
+                CallsSettings.Goodbye_Upper = true;
             }
         }
 
@@ -3911,6 +4162,11 @@ namespace R42Bot
                 welcomeallupper.Checked = false;
                 CallsSettings.Welcome_Upper = false;
             }
+            else if (!welcomealllower.Checked && !welcomeallupper.Checked)
+            {
+                welcomeallupper.Checked = true;
+                CallsSettings.Welcome_Upper = true;
+            }
         }
 
         private void welcomeallupper_CheckedChanged(object sender, EventArgs e)
@@ -3918,6 +4174,11 @@ namespace R42Bot
             if (welcomeallupper.Checked)
             {
                 welcomealllower.Checked = false;
+                CallsSettings.Welcome_Upper = true;
+            }
+            else if (!welcomealllower.Checked && !welcomeallupper.Checked)
+            {
+                welcomeallupper.Checked = true;
                 CallsSettings.Welcome_Upper = true;
             }
         }
@@ -4198,7 +4459,7 @@ namespace R42Bot
                 int index = bansList.Items.IndexOf(unbanTxtBox.Text);
                 bansList.Items.Remove(unbanTxtBox.Text);
                 banreassons.Items.RemoveAt(index);
-                CallsSettings.Bans.Remove(unbanTxtBox.Text);
+                //CallsSettings.Bans.Remove(unbanTxtBox.Text);
                 unbanTxtBox.Clear();
             }
             else
@@ -4214,7 +4475,7 @@ namespace R42Bot
             {
                 bansList.Items.Add(banTxtBox.Text);
                 banreassons.Items.Add(banreassonbox.Text);
-                CallsSettings.Bans.Add(banTxtBox.Text);
+                //CallsSettings.Bans.Add(banTxtBox.Text);
                 banTxtBox.Clear();
             }
             else
@@ -4227,6 +4488,100 @@ namespace R42Bot
         private void textBox8_TextChanged(object sender, EventArgs e)
         {
             textBox8.Text = "https://github.com/realmaster42/R42Bot";
+        }
+
+        private void FillTimer_Tick(object sender, EventArgs e)
+        {
+            int idof = Convert.ToInt32(idofit.Text);
+            for (int x = 0; x < FillXCor; x++)//((worldWidth-FillYCor)+(FillXCor-FillYCor)); x++)
+            {
+                for (int y = 0; y < FillYCor; y++)
+                {
+                    if (!con.Connected)
+                    {
+                        MessageBox.Show("The bot has stopped working while filling! Try reconnecting.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    }
+
+                    if (idof > 500 && idof < 1000)
+                        con.Send(worldKey, new object[] { 1, x, y, idof });
+                    else
+                        con.Send(worldKey, new object[] { 0, x, y, idof });
+                    Thread.Sleep(Convert.ToInt32(fdelay.Value));
+                }
+                Thread.Sleep(Convert.ToInt32(fdelay.Value));
+            }
+            FillXCor = worldHeight;
+            FillYCor = worldWidth;
+            FillTimer.Stop();
+            FillTimer.Enabled = false;
+            paintbrushauto.Text = "Fill";
+            /*int x1 = 1;
+            int y1 = 1;
+            int x2 = worldWidth - 2;
+            int y2 = worldHeight - 2;
+            if (idof > 500 && idof < 1000)
+                con.Send(worldKey + "fill", idof, 1, x1, y1, x2, y2);
+            else
+                con.Send(worldKey + "fill", idof, 0, x1, y1, x2, y2);*/
+        }
+
+        private void kguests_CheckedChanged(object sender, EventArgs e)
+        {
+            CallsSettings.KickGuests = (kguests.Checked) ? true : false;
+        }
+
+        private void add2_Click(object sender, EventArgs e)
+        {
+            if (!Moderators.Items.Contains(add2Text.Text))
+            {
+                if (names.ContainsValue(add2Text.Text))
+                {
+                    Moderators.Items.Add(add2Text.Text);
+                    con.Send("say", "/pm " + add2Text.Text + " [R42Bot++] You have been added as a moderator.");
+                    Thread.Sleep(250);
+                    add2Text.Clear();
+                }
+                else
+                {
+                    MessageBox.Show(add2Text.Text + " is not in the connected world!");
+                    add2Text.Clear();
+                }
+            }
+            else
+            {
+                MessageBox.Show(add2Text.Text + " is already on the list...");
+                add2Text.Clear();
+            }
+        }
+
+        private void remove2_Click(object sender, EventArgs e)
+        {
+            if (Moderators.Items.Contains(remove2Text.Text))
+            {
+                Moderators.Items.Remove(remove2Text.Text);
+                con.Send("say", "/pm " + add2Text.Text + " [R42Bot++] You have been removed from being a moderator.");
+                remove2Text.Clear();
+            }
+            else
+            {
+                MessageBox.Show(remove2Text.Text + " isn't an admin!");
+                remove2Text.Clear();
+            }
+        }
+
+        private void autokickallowd_CheckedChanged(object sender, EventArgs e)
+        {
+            if (autokickvalue.Checked)
+            {
+                autokick.Start();
+                autokick.Enabled = true;
+            }
+            else
+            {
+                autokick.Stop();
+                autokick.Enabled = false;
+            }
         }
     }
 }

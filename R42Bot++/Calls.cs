@@ -13,7 +13,8 @@ namespace R42Bot
     {
         public static bool WinSystem = false;
         public static bool AllowJoiners = true,
-            KickBots = false;
+            KickBots = false,
+            KickGuests = false;
         public static bool Welcome_Upper = true,
             Welcome = true;
         public static bool Goodbye_Upper = true,
@@ -23,6 +24,5 @@ namespace R42Bot
             Welcome_Text_2 = "";
         public static string Goodbye_Text = "",
             Goodbye_Text_2 = "";
-        public static List<string> Bans = new List<string> { };
     }
 }
