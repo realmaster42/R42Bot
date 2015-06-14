@@ -46,6 +46,11 @@ namespace R42Bot
             this.scommand = new System.Windows.Forms.CheckBox();
             this.firstTabControler = new System.Windows.Forms.TabControl();
             this.Main = new System.Windows.Forms.TabPage();
+            this.adminsgmodc = new System.Windows.Forms.CheckBox();
+            this.freemoderator = new System.Windows.Forms.CheckBox();
+            this.label49 = new System.Windows.Forms.Label();
+            this.modEditOJ = new System.Windows.Forms.CheckBox();
+            this.kguests = new System.Windows.Forms.CheckBox();
             this.adEditOJ = new System.Windows.Forms.CheckBox();
             this.label35 = new System.Windows.Forms.Label();
             this.reloadCBox = new System.Windows.Forms.CheckBox();
@@ -77,12 +82,13 @@ namespace R42Bot
             this.textpm = new System.Windows.Forms.TextBox();
             this.userpm = new System.Windows.Forms.TextBox();
             this.button8 = new System.Windows.Forms.Button();
-            this.autokickvalue = new System.Windows.Forms.CheckBox();
             this.autokickallowd = new System.Windows.Forms.CheckBox();
             this.winsystem1 = new System.Windows.Forms.CheckBox();
             this.scommand2 = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.LanguageOrSettings = new System.Windows.Forms.TabPage();
+            this.awhenvigjoins = new System.Windows.Forms.CheckBox();
+            this.awhenmodjoins = new System.Windows.Forms.CheckBox();
             this.label16 = new System.Windows.Forms.Label();
             this.saveLang = new System.Windows.Forms.Button();
             this.dutchCBOX = new System.Windows.Forms.CheckBox();
@@ -106,6 +112,14 @@ namespace R42Bot
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label48 = new System.Windows.Forms.Label();
             this.advancedEditor = new System.Windows.Forms.TabPage();
+            this.smtext2 = new System.Windows.Forms.TextBox();
+            this.smtext = new System.Windows.Forms.TextBox();
+            this.button16 = new System.Windows.Forms.Button();
+            this.button15 = new System.Windows.Forms.Button();
+            this.RGSignMsgs = new System.Windows.Forms.ListBox();
+            this.label52 = new System.Windows.Forms.Label();
+            this.label51 = new System.Windows.Forms.Label();
+            this.autokickvalue = new System.Windows.Forms.CheckBox();
             this.welcomeallupper = new System.Windows.Forms.CheckBox();
             this.welcomealllower = new System.Windows.Forms.CheckBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -179,6 +193,12 @@ namespace R42Bot
             this.frbs = new System.Windows.Forms.CheckBox();
             this.rbs = new System.Windows.Forms.CheckBox();
             this.autoPage = new System.Windows.Forms.TabPage();
+            this.label54 = new System.Windows.Forms.Label();
+            this.label53 = new System.Windows.Forms.Label();
+            this.time3 = new System.Windows.Forms.TextBox();
+            this.time2 = new System.Windows.Forms.TextBox();
+            this.time1 = new System.Windows.Forms.TextBox();
+            this.dncycle = new System.Windows.Forms.CheckBox();
             this.autoresetmsg = new System.Windows.Forms.CheckBox();
             this.autoresetime = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
@@ -212,6 +232,14 @@ namespace R42Bot
             this.pgeb100loldo = new System.Windows.Forms.RadioButton();
             this.pgeb100lol = new System.Windows.Forms.CheckBox();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.label50 = new System.Windows.Forms.Label();
+            this.remove2Text = new System.Windows.Forms.TextBox();
+            this.add2Text = new System.Windows.Forms.TextBox();
+            this.remove2 = new System.Windows.Forms.Button();
+            this.add2 = new System.Windows.Forms.Button();
+            this.Moderators = new System.Windows.Forms.ListBox();
             this.banreassonbox = new System.Windows.Forms.TextBox();
             this.banreassons = new System.Windows.Forms.ListBox();
             this.UnBanButton = new System.Windows.Forms.Button();
@@ -273,15 +301,10 @@ namespace R42Bot
             this.AutoFixBot = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.FillTimer = new System.Windows.Forms.Timer(this.components);
-            this.kguests = new System.Windows.Forms.CheckBox();
-            this.modEditOJ = new System.Windows.Forms.CheckBox();
-            this.label49 = new System.Windows.Forms.Label();
-            this.Moderators = new System.Windows.Forms.ListBox();
-            this.add2 = new System.Windows.Forms.Button();
-            this.remove2 = new System.Windows.Forms.Button();
-            this.add2Text = new System.Windows.Forms.TextBox();
-            this.remove2Text = new System.Windows.Forms.TextBox();
-            this.freemoderator = new System.Windows.Forms.CheckBox();
+            this.DayNightCycle = new System.Windows.Forms.Timer(this.components);
+            this.awhendevjoins = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.firstTabControler.SuspendLayout();
             this.Main.SuspendLayout();
             this.LanguageOrSettings.SuspendLayout();
@@ -436,6 +459,7 @@ namespace R42Bot
             // 
             // Main
             // 
+            this.Main.Controls.Add(this.adminsgmodc);
             this.Main.Controls.Add(this.freemoderator);
             this.Main.Controls.Add(this.label49);
             this.Main.Controls.Add(this.modEditOJ);
@@ -471,7 +495,6 @@ namespace R42Bot
             this.Main.Controls.Add(this.textpm);
             this.Main.Controls.Add(this.userpm);
             this.Main.Controls.Add(this.button8);
-            this.Main.Controls.Add(this.autokickvalue);
             this.Main.Controls.Add(this.autokickallowd);
             this.Main.Controls.Add(this.winsystem1);
             this.Main.Controls.Add(this.scommand2);
@@ -495,10 +518,60 @@ namespace R42Bot
             this.Main.Text = "Index";
             this.Main.UseVisualStyleBackColor = true;
             // 
+            // adminsgmodc
+            // 
+            this.adminsgmodc.AutoSize = true;
+            this.adminsgmodc.Location = new System.Drawing.Point(126, 214);
+            this.adminsgmodc.Name = "adminsgmodc";
+            this.adminsgmodc.Size = new System.Drawing.Size(137, 17);
+            this.adminsgmodc.TabIndex = 61;
+            this.adminsgmodc.Text = "!mod [player] for admins";
+            this.adminsgmodc.UseVisualStyleBackColor = true;
+            // 
+            // freemoderator
+            // 
+            this.freemoderator.AutoSize = true;
+            this.freemoderator.Location = new System.Drawing.Point(569, 260);
+            this.freemoderator.Name = "freemoderator";
+            this.freemoderator.Size = new System.Drawing.Size(71, 17);
+            this.freemoderator.TabIndex = 60;
+            this.freemoderator.Text = "Free Mod";
+            this.freemoderator.UseVisualStyleBackColor = true;
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(272, 189);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(148, 13);
+            this.label49.TabIndex = 59;
+            this.label49.Text = "Moderators visible in Lists tab.";
+            // 
+            // modEditOJ
+            // 
+            this.modEditOJ.AutoSize = true;
+            this.modEditOJ.Location = new System.Drawing.Point(677, 260);
+            this.modEditOJ.Name = "modEditOJ";
+            this.modEditOJ.Size = new System.Drawing.Size(110, 17);
+            this.modEditOJ.TabIndex = 58;
+            this.modEditOJ.Text = "Mods Edit on Join";
+            this.modEditOJ.UseVisualStyleBackColor = true;
+            // 
+            // kguests
+            // 
+            this.kguests.AutoSize = true;
+            this.kguests.Location = new System.Drawing.Point(112, 80);
+            this.kguests.Name = "kguests";
+            this.kguests.Size = new System.Drawing.Size(83, 17);
+            this.kguests.TabIndex = 57;
+            this.kguests.Text = "Kick Guests";
+            this.kguests.UseVisualStyleBackColor = true;
+            this.kguests.CheckedChanged += new System.EventHandler(this.kguests_CheckedChanged);
+            // 
             // adEditOJ
             // 
             this.adEditOJ.AutoSize = true;
-            this.adEditOJ.Location = new System.Drawing.Point(677, 260);
+            this.adEditOJ.Location = new System.Drawing.Point(677, 237);
             this.adEditOJ.Name = "adEditOJ";
             this.adEditOJ.Size = new System.Drawing.Size(118, 17);
             this.adEditOJ.TabIndex = 56;
@@ -527,7 +600,7 @@ namespace R42Bot
             // cleverbotCBOX
             // 
             this.cleverbotCBOX.AutoSize = true;
-            this.cleverbotCBOX.Location = new System.Drawing.Point(677, 213);
+            this.cleverbotCBOX.Location = new System.Drawing.Point(677, 190);
             this.cleverbotCBOX.Name = "cleverbotCBOX";
             this.cleverbotCBOX.Size = new System.Drawing.Size(131, 17);
             this.cleverbotCBOX.TabIndex = 53;
@@ -537,7 +610,7 @@ namespace R42Bot
             // givegodwithtrophycbox
             // 
             this.givegodwithtrophycbox.AutoSize = true;
-            this.givegodwithtrophycbox.Location = new System.Drawing.Point(677, 235);
+            this.givegodwithtrophycbox.Location = new System.Drawing.Point(677, 214);
             this.givegodwithtrophycbox.Name = "givegodwithtrophycbox";
             this.givegodwithtrophycbox.Size = new System.Drawing.Size(97, 17);
             this.givegodwithtrophycbox.TabIndex = 52;
@@ -557,7 +630,7 @@ namespace R42Bot
             // unfairBlox
             // 
             this.unfairBlox.AutoSize = true;
-            this.unfairBlox.Location = new System.Drawing.Point(677, 189);
+            this.unfairBlox.Location = new System.Drawing.Point(569, 212);
             this.unfairBlox.Name = "unfairBlox";
             this.unfairBlox.Size = new System.Drawing.Size(91, 17);
             this.unfairBlox.TabIndex = 51;
@@ -810,17 +883,6 @@ namespace R42Bot
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
-            // autokickvalue
-            // 
-            this.autokickvalue.AutoSize = true;
-            this.autokickvalue.Enabled = false;
-            this.autokickvalue.Location = new System.Drawing.Point(569, 213);
-            this.autokickvalue.Name = "autokickvalue";
-            this.autokickvalue.Size = new System.Drawing.Size(91, 17);
-            this.autokickvalue.TabIndex = 21;
-            this.autokickvalue.Text = "Auto Kick ON";
-            this.autokickvalue.UseVisualStyleBackColor = true;
-            // 
             // autokickallowd
             // 
             this.autokickallowd.AutoSize = true;
@@ -866,6 +928,11 @@ namespace R42Bot
             // 
             // LanguageOrSettings
             // 
+            this.LanguageOrSettings.Controls.Add(this.checkBox3);
+            this.LanguageOrSettings.Controls.Add(this.checkBox2);
+            this.LanguageOrSettings.Controls.Add(this.awhendevjoins);
+            this.LanguageOrSettings.Controls.Add(this.awhenvigjoins);
+            this.LanguageOrSettings.Controls.Add(this.awhenmodjoins);
             this.LanguageOrSettings.Controls.Add(this.label16);
             this.LanguageOrSettings.Controls.Add(this.saveLang);
             this.LanguageOrSettings.Controls.Add(this.dutchCBOX);
@@ -890,6 +957,26 @@ namespace R42Bot
             this.LanguageOrSettings.TabIndex = 1;
             this.LanguageOrSettings.Text = "Options";
             this.LanguageOrSettings.UseVisualStyleBackColor = true;
+            // 
+            // awhenvigjoins
+            // 
+            this.awhenvigjoins.AutoSize = true;
+            this.awhenvigjoins.Location = new System.Drawing.Point(275, 30);
+            this.awhenvigjoins.Name = "awhenvigjoins";
+            this.awhenvigjoins.Size = new System.Drawing.Size(174, 17);
+            this.awhenvigjoins.TabIndex = 20;
+            this.awhenvigjoins.Text = "Advice when a moderator joins.";
+            this.awhenvigjoins.UseVisualStyleBackColor = true;
+            // 
+            // awhenmodjoins
+            // 
+            this.awhenmodjoins.AutoSize = true;
+            this.awhenmodjoins.Location = new System.Drawing.Point(275, 6);
+            this.awhenmodjoins.Name = "awhenmodjoins";
+            this.awhenmodjoins.Size = new System.Drawing.Size(161, 17);
+            this.awhenmodjoins.TabIndex = 19;
+            this.awhenmodjoins.Text = "Advice when an admin joins.";
+            this.awhenmodjoins.UseVisualStyleBackColor = true;
             // 
             // label16
             // 
@@ -1119,6 +1206,14 @@ namespace R42Bot
             // 
             // advancedEditor
             // 
+            this.advancedEditor.Controls.Add(this.smtext2);
+            this.advancedEditor.Controls.Add(this.smtext);
+            this.advancedEditor.Controls.Add(this.button16);
+            this.advancedEditor.Controls.Add(this.button15);
+            this.advancedEditor.Controls.Add(this.RGSignMsgs);
+            this.advancedEditor.Controls.Add(this.label52);
+            this.advancedEditor.Controls.Add(this.label51);
+            this.advancedEditor.Controls.Add(this.autokickvalue);
             this.advancedEditor.Controls.Add(this.welcomeallupper);
             this.advancedEditor.Controls.Add(this.welcomealllower);
             this.advancedEditor.Controls.Add(this.label12);
@@ -1132,6 +1227,85 @@ namespace R42Bot
             this.advancedEditor.TabIndex = 4;
             this.advancedEditor.Text = "Advanced Options";
             this.advancedEditor.UseVisualStyleBackColor = true;
+            // 
+            // smtext2
+            // 
+            this.smtext2.Location = new System.Drawing.Point(298, 202);
+            this.smtext2.Name = "smtext2";
+            this.smtext2.Size = new System.Drawing.Size(93, 20);
+            this.smtext2.TabIndex = 29;
+            // 
+            // smtext
+            // 
+            this.smtext.Location = new System.Drawing.Point(298, 173);
+            this.smtext.Name = "smtext";
+            this.smtext.Size = new System.Drawing.Size(93, 20);
+            this.smtext.TabIndex = 28;
+            // 
+            // button16
+            // 
+            this.button16.Location = new System.Drawing.Point(272, 199);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(20, 23);
+            this.button16.TabIndex = 27;
+            this.button16.Text = "-";
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
+            // 
+            // button15
+            // 
+            this.button15.Location = new System.Drawing.Point(272, 170);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(20, 23);
+            this.button15.TabIndex = 26;
+            this.button15.Text = "+";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
+            // 
+            // RGSignMsgs
+            // 
+            this.RGSignMsgs.Enabled = false;
+            this.RGSignMsgs.FormattingEnabled = true;
+            this.RGSignMsgs.Items.AddRange(new object[] {
+            "abc",
+            "abcd",
+            "abcde",
+            "abcdef",
+            "abcdefg",
+            "abcdefgh"});
+            this.RGSignMsgs.Location = new System.Drawing.Point(271, 69);
+            this.RGSignMsgs.Name = "RGSignMsgs";
+            this.RGSignMsgs.Size = new System.Drawing.Size(120, 95);
+            this.RGSignMsgs.TabIndex = 25;
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(268, 48);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(79, 13);
+            this.label52.TabIndex = 24;
+            this.label52.Text = "Sign Messages";
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(268, 29);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(97, 13);
+            this.label51.TabIndex = 23;
+            this.label51.Text = "Random Generator";
+            // 
+            // autokickvalue
+            // 
+            this.autokickvalue.AutoSize = true;
+            this.autokickvalue.Enabled = false;
+            this.autokickvalue.Location = new System.Drawing.Point(7, 131);
+            this.autokickvalue.Name = "autokickvalue";
+            this.autokickvalue.Size = new System.Drawing.Size(91, 17);
+            this.autokickvalue.TabIndex = 22;
+            this.autokickvalue.Text = "Auto Kick ON";
+            this.autokickvalue.UseVisualStyleBackColor = true;
             // 
             // welcomeallupper
             // 
@@ -1250,6 +1424,8 @@ namespace R42Bot
             // fillcsisadminonly
             // 
             this.fillcsisadminonly.AutoSize = true;
+            this.fillcsisadminonly.Checked = true;
+            this.fillcsisadminonly.CheckState = System.Windows.Forms.CheckState.Checked;
             this.fillcsisadminonly.Location = new System.Drawing.Point(190, 83);
             this.fillcsisadminonly.Name = "fillcsisadminonly";
             this.fillcsisadminonly.Size = new System.Drawing.Size(79, 17);
@@ -1999,6 +2175,12 @@ namespace R42Bot
             // 
             // autoPage
             // 
+            this.autoPage.Controls.Add(this.label54);
+            this.autoPage.Controls.Add(this.label53);
+            this.autoPage.Controls.Add(this.time3);
+            this.autoPage.Controls.Add(this.time2);
+            this.autoPage.Controls.Add(this.time1);
+            this.autoPage.Controls.Add(this.dncycle);
             this.autoPage.Controls.Add(this.autoresetmsg);
             this.autoPage.Controls.Add(this.autoresetime);
             this.autoPage.Controls.Add(this.label8);
@@ -2009,6 +2191,58 @@ namespace R42Bot
             this.autoPage.TabIndex = 11;
             this.autoPage.Text = "Auto...";
             this.autoPage.UseVisualStyleBackColor = true;
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(242, 42);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(10, 13);
+            this.label54.TabIndex = 9;
+            this.label54.Text = ":";
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(196, 42);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(13, 13);
+            this.label53.TabIndex = 8;
+            this.label53.Text = " :";
+            // 
+            // time3
+            // 
+            this.time3.Enabled = false;
+            this.time3.Location = new System.Drawing.Point(258, 39);
+            this.time3.Name = "time3";
+            this.time3.Size = new System.Drawing.Size(29, 20);
+            this.time3.TabIndex = 7;
+            // 
+            // time2
+            // 
+            this.time2.Enabled = false;
+            this.time2.Location = new System.Drawing.Point(212, 39);
+            this.time2.Name = "time2";
+            this.time2.Size = new System.Drawing.Size(29, 20);
+            this.time2.TabIndex = 6;
+            // 
+            // time1
+            // 
+            this.time1.Enabled = false;
+            this.time1.Location = new System.Drawing.Point(167, 39);
+            this.time1.Name = "time1";
+            this.time1.Size = new System.Drawing.Size(29, 20);
+            this.time1.TabIndex = 5;
+            // 
+            // dncycle
+            // 
+            this.dncycle.AutoSize = true;
+            this.dncycle.Location = new System.Drawing.Point(167, 15);
+            this.dncycle.Name = "dncycle";
+            this.dncycle.Size = new System.Drawing.Size(103, 17);
+            this.dncycle.TabIndex = 4;
+            this.dncycle.Text = "Day/Night cycle";
+            this.dncycle.UseVisualStyleBackColor = true;
             // 
             // autoresetmsg
             // 
@@ -2367,6 +2601,9 @@ namespace R42Bot
             // 
             // tabPage7
             // 
+            this.tabPage7.Controls.Add(this.button4);
+            this.tabPage7.Controls.Add(this.button3);
+            this.tabPage7.Controls.Add(this.label50);
             this.tabPage7.Controls.Add(this.remove2Text);
             this.tabPage7.Controls.Add(this.add2Text);
             this.tabPage7.Controls.Add(this.remove2);
@@ -2399,6 +2636,77 @@ namespace R42Bot
             this.tabPage7.TabIndex = 15;
             this.tabPage7.Text = "Lists";
             this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(687, 188);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(85, 23);
+            this.button4.TabIndex = 51;
+            this.button4.Text = "Load Mods";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(574, 188);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(107, 23);
+            this.button3.TabIndex = 50;
+            this.button3.Text = "Save Mods";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(571, 13);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(60, 13);
+            this.label50.TabIndex = 26;
+            this.label50.Text = "Moderators";
+            // 
+            // remove2Text
+            // 
+            this.remove2Text.Location = new System.Drawing.Point(656, 162);
+            this.remove2Text.Name = "remove2Text";
+            this.remove2Text.Size = new System.Drawing.Size(116, 20);
+            this.remove2Text.TabIndex = 25;
+            // 
+            // add2Text
+            // 
+            this.add2Text.Location = new System.Drawing.Point(655, 133);
+            this.add2Text.Name = "add2Text";
+            this.add2Text.Size = new System.Drawing.Size(117, 20);
+            this.add2Text.TabIndex = 24;
+            // 
+            // remove2
+            // 
+            this.remove2.Location = new System.Drawing.Point(574, 159);
+            this.remove2.Name = "remove2";
+            this.remove2.Size = new System.Drawing.Size(75, 23);
+            this.remove2.TabIndex = 23;
+            this.remove2.Text = "Remove";
+            this.remove2.UseVisualStyleBackColor = true;
+            this.remove2.Click += new System.EventHandler(this.remove2_Click);
+            // 
+            // add2
+            // 
+            this.add2.Location = new System.Drawing.Point(574, 130);
+            this.add2.Name = "add2";
+            this.add2.Size = new System.Drawing.Size(75, 23);
+            this.add2.TabIndex = 22;
+            this.add2.Text = "Add";
+            this.add2.UseVisualStyleBackColor = true;
+            this.add2.Click += new System.EventHandler(this.add2_Click);
+            // 
+            // Moderators
+            // 
+            this.Moderators.FormattingEnabled = true;
+            this.Moderators.Location = new System.Drawing.Point(574, 29);
+            this.Moderators.Name = "Moderators";
+            this.Moderators.Size = new System.Drawing.Size(198, 95);
+            this.Moderators.TabIndex = 21;
             // 
             // banreassonbox
             // 
@@ -2950,87 +3258,41 @@ namespace R42Bot
             this.FillTimer.Interval = 2;
             this.FillTimer.Tick += new System.EventHandler(this.FillTimer_Tick);
             // 
-            // kguests
+            // DayNightCycle
             // 
-            this.kguests.AutoSize = true;
-            this.kguests.Location = new System.Drawing.Point(112, 80);
-            this.kguests.Name = "kguests";
-            this.kguests.Size = new System.Drawing.Size(83, 17);
-            this.kguests.TabIndex = 57;
-            this.kguests.Text = "Kick Guests";
-            this.kguests.UseVisualStyleBackColor = true;
-            this.kguests.CheckedChanged += new System.EventHandler(this.kguests_CheckedChanged);
+            this.DayNightCycle.Enabled = true;
+            this.DayNightCycle.Interval = 125;
+            this.DayNightCycle.Tick += new System.EventHandler(this.DayNightCycle_Tick);
             // 
-            // modEditOJ
+            // awhendevjoins
             // 
-            this.modEditOJ.AutoSize = true;
-            this.modEditOJ.Location = new System.Drawing.Point(677, 284);
-            this.modEditOJ.Name = "modEditOJ";
-            this.modEditOJ.Size = new System.Drawing.Size(110, 17);
-            this.modEditOJ.TabIndex = 58;
-            this.modEditOJ.Text = "Mods Edit on Join";
-            this.modEditOJ.UseVisualStyleBackColor = true;
+            this.awhendevjoins.AutoSize = true;
+            this.awhendevjoins.Location = new System.Drawing.Point(275, 53);
+            this.awhendevjoins.Name = "awhendevjoins";
+            this.awhendevjoins.Size = new System.Drawing.Size(174, 17);
+            this.awhendevjoins.TabIndex = 21;
+            this.awhendevjoins.Text = "Advice when a developer joins.";
+            this.awhendevjoins.UseVisualStyleBackColor = true;
             // 
-            // label49
+            // checkBox2
             // 
-            this.label49.AutoSize = true;
-            this.label49.Location = new System.Drawing.Point(272, 189);
-            this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(148, 13);
-            this.label49.TabIndex = 59;
-            this.label49.Text = "Moderators visible in Lists tab.";
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(464, 6);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(173, 17);
+            this.checkBox2.TabIndex = 22;
+            this.checkBox2.Text = "Advice when a bot admin joins.";
+            this.checkBox2.UseVisualStyleBackColor = true;
             // 
-            // Moderators
+            // checkBox3
             // 
-            this.Moderators.FormattingEnabled = true;
-            this.Moderators.Location = new System.Drawing.Point(574, 29);
-            this.Moderators.Name = "Moderators";
-            this.Moderators.Size = new System.Drawing.Size(198, 95);
-            this.Moderators.TabIndex = 21;
-            // 
-            // add2
-            // 
-            this.add2.Location = new System.Drawing.Point(574, 130);
-            this.add2.Name = "add2";
-            this.add2.Size = new System.Drawing.Size(75, 23);
-            this.add2.TabIndex = 22;
-            this.add2.Text = "Add";
-            this.add2.UseVisualStyleBackColor = true;
-            this.add2.Click += new System.EventHandler(this.add2_Click);
-            // 
-            // remove2
-            // 
-            this.remove2.Location = new System.Drawing.Point(574, 159);
-            this.remove2.Name = "remove2";
-            this.remove2.Size = new System.Drawing.Size(75, 23);
-            this.remove2.TabIndex = 23;
-            this.remove2.Text = "Remove";
-            this.remove2.UseVisualStyleBackColor = true;
-            this.remove2.Click += new System.EventHandler(this.remove2_Click);
-            // 
-            // add2Text
-            // 
-            this.add2Text.Location = new System.Drawing.Point(655, 133);
-            this.add2Text.Name = "add2Text";
-            this.add2Text.Size = new System.Drawing.Size(117, 20);
-            this.add2Text.TabIndex = 24;
-            // 
-            // remove2Text
-            // 
-            this.remove2Text.Location = new System.Drawing.Point(656, 162);
-            this.remove2Text.Name = "remove2Text";
-            this.remove2Text.Size = new System.Drawing.Size(116, 20);
-            this.remove2Text.TabIndex = 25;
-            // 
-            // freemoderator
-            // 
-            this.freemoderator.AutoSize = true;
-            this.freemoderator.Location = new System.Drawing.Point(569, 260);
-            this.freemoderator.Name = "freemoderator";
-            this.freemoderator.Size = new System.Drawing.Size(71, 17);
-            this.freemoderator.TabIndex = 60;
-            this.freemoderator.Text = "Free Mod";
-            this.freemoderator.UseVisualStyleBackColor = true;
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(464, 30);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(192, 17);
+            this.checkBox3.TabIndex = 23;
+            this.checkBox3.Text = "Advice when a bot moderator joins.";
+            this.checkBox3.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -3144,7 +3406,6 @@ namespace R42Bot
         private Button button6;
         private CheckBox checkBox1;
         private CheckBox autokickallowd;
-        private CheckBox autokickvalue;
         private Timer autochangerface;
         private Timer autokick;
         private TabPage autoPage;
@@ -3338,6 +3599,30 @@ namespace R42Bot
         private TextBox add2Text;
         private Button remove2;
         private CheckBox freemoderator;
+        private CheckBox autokickvalue;
+        private Label label50;
+        private CheckBox adminsgmodc;
+        private Button button4;
+        private Button button3;
+        private Label label51;
+        private Label label52;
+        private ListBox RGSignMsgs;
+        private CheckBox awhenvigjoins;
+        private CheckBox awhenmodjoins;
+        private Button button15;
+        private Button button16;
+        private TextBox smtext2;
+        private TextBox smtext;
+        private CheckBox dncycle;
+        private Timer DayNightCycle;
+        private TextBox time3;
+        private TextBox time2;
+        private TextBox time1;
+        private Label label53;
+        private Label label54;
+        private CheckBox awhendevjoins;
+        private CheckBox checkBox3;
+        private CheckBox checkBox2;
     }
 }
 

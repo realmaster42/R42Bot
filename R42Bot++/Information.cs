@@ -9,7 +9,8 @@ namespace R42Bot
         public List<List<string>> Restrictions { get; set; }
         public string language{ get; set; }
         public string[] Admins{ get; set; }
-
+        public string[] Mods { get; set; }
+        public List<List<string>> Bans { get; set; }
         public Color Color1{ get; set; }
     }
 }

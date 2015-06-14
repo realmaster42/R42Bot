@@ -113,7 +113,8 @@ namespace R42Bot
                 "[R42Bot++] World reseted. Reseting marked for every (X) ms!",
                 "[R42Bot++] Autokick enabled.",
                 "command not enabled.",
-                " won! Now he/she has (W) wins!" // remember to keep the space
+                " won! Now he/she has (W) wins!", // remember to keep the space
+                "Insufficient permissions to run this command."
             };
         }
         public partial class Dutch
@@ -321,7 +322,8 @@ namespace R42Bot
 
                 "commando niet ingeschakeld.",
 
-                " won! Hij/Zij heeft nu (W) keer gewonnen!" // remember to keep the space
+                " won! Hij/Zij heeft nu (W) keer gewonnen!", // remember to keep the space
+                "Error"
             };
         }
         public partial class PT
@@ -527,7 +529,8 @@ namespace R42Bot
 
 "commando não ligado.",
 
-                " ganhou! Agora ele(a) tem (W) vitórias!" // remember to keep the space
+                " ganhou! Agora ele(a) tem (W) vitórias!", // remember to keep the space
+                "Permissões insuficientes para correr este commando."
                 };
         }
         public partial class LTU
@@ -768,7 +771,8 @@ namespace R42Bot
 
     "komanda neleidziama.",
 
-    " leimejimas! dabar ji/jis turi (W) laimejimu!" // remember to keep the space
+    " leimejimas! dabar ji/jis turi (W) laimejimu!", // remember to keep the space
+    "Error."
             };
         }
     }
