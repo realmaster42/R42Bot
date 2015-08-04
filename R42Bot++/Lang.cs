@@ -91,7 +91,7 @@ namespace R42Bot
                 "Email, Password and WorldID must be fillen up!",
                 "TokenID and WorldID must be fillen up!",
                 "Index",
-                "Options",
+                "Options/DigBot",
                 "News",
                 "Advanced Options",
                 "AutoBuilder",
@@ -278,7 +278,7 @@ namespace R42Bot
 
                 "Index",
 
-"Opties",
+"Opties/DigBot",
 
 "Nieuws",
 
@@ -485,7 +485,7 @@ namespace R42Bot
 
                 "Casa",
 
-"Opções",
+"Opções/DigBot",
 
 "Novidades",
 
@@ -719,7 +719,7 @@ namespace R42Bot
 
                 "Indeksas",
 
-    "pasirinkimas",
+    "pasirinkimas/digbot",
 
     "Naujienos",
 
@@ -772,6 +772,7 @@ namespace R42Bot
     "komanda neleidziama.",
 
     " leimejimas! dabar ji/jis turi (W) laimejimu!", // remember to keep the space
+
     "Error."
             };
         }

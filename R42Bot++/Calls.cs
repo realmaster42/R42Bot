@@ -9,6 +9,11 @@ using PlayerIOClient;
 
 namespace R42Bot
 {
+    public partial class DigBot
+    {
+
+    }
+
     public partial class CallsSettings
     {
         public static bool WinSystem = false;

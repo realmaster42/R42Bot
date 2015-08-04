@@ -13,7 +13,7 @@ namespace R42Bot__
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new R42Bot.Form1());
+            Application.Run(new R42Bot.R42BotForm());
         }
     }
 }
