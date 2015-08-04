@@ -4,7 +4,7 @@ R42Bot++, a bot made for Everybody Edits, was originally made by realmaster42 (R
 
 After first update on Everybody Edits (EE), EE2 was immediately shutdown, and consequently this bot too.
 
-However, this bot will continue to recieve updates because of the new team!
+However, this bot will continue to recieve updates, and this time, for original Everybody Edits!
 
 The team:
 -realmaster (marcoantonimsantos), (old realmaster42)
