@@ -46,6 +46,8 @@ namespace R42Bot
             this.scommand = new System.Windows.Forms.CheckBox();
             this.firstTabControler = new System.Windows.Forms.TabControl();
             this.Main = new System.Windows.Forms.TabPage();
+            this.button18 = new System.Windows.Forms.Button();
+            this.button17 = new System.Windows.Forms.Button();
             this.label46 = new System.Windows.Forms.Label();
             this.remove2Text = new System.Windows.Forms.TextBox();
             this.add2 = new System.Windows.Forms.Button();
@@ -126,6 +128,10 @@ namespace R42Bot
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.bfmods = new System.Windows.Forms.CheckBox();
+            this.nfmods = new System.Windows.Forms.CheckBox();
+            this.sfmods = new System.Windows.Forms.CheckBox();
+            this.cfmods = new System.Windows.Forms.CheckBox();
             this.rrlfmods = new System.Windows.Forms.CheckBox();
             this.adminsgmodc = new System.Windows.Forms.CheckBox();
             this.resetCBOX = new System.Windows.Forms.CheckBox();
@@ -312,12 +318,8 @@ namespace R42Bot
             this.AutoFixBot = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.DayNightCycle = new System.Windows.Forms.Timer(this.components);
-            this.cfmods = new System.Windows.Forms.CheckBox();
-            this.sfmods = new System.Windows.Forms.CheckBox();
-            this.nfmods = new System.Windows.Forms.CheckBox();
-            this.bfmods = new System.Windows.Forms.CheckBox();
-            this.button17 = new System.Windows.Forms.Button();
-            this.button18 = new System.Windows.Forms.Button();
+            this.boxisaonly = new System.Windows.Forms.CheckBox();
+            this.boxismonly = new System.Windows.Forms.CheckBox();
             this.firstTabControler.SuspendLayout();
             this.Main.SuspendLayout();
             this.LanguageOrSettings.SuspendLayout();
@@ -531,6 +533,26 @@ namespace R42Bot
             this.Main.TabIndex = 0;
             this.Main.Text = "Index";
             this.Main.UseVisualStyleBackColor = true;
+            // 
+            // button18
+            // 
+            this.button18.Location = new System.Drawing.Point(736, 278);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(63, 23);
+            this.button18.TabIndex = 63;
+            this.button18.Text = "Load";
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
+            // 
+            // button17
+            // 
+            this.button17.Location = new System.Drawing.Point(668, 278);
+            this.button17.Name = "button17";
+            this.button17.Size = new System.Drawing.Size(67, 23);
+            this.button17.TabIndex = 62;
+            this.button17.Text = "Save Wins";
+            this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
             // label46
             // 
@@ -1381,6 +1403,46 @@ namespace R42Bot
             this.tabPage4.Text = "Cmds";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // bfmods
+            // 
+            this.bfmods.AutoSize = true;
+            this.bfmods.Location = new System.Drawing.Point(114, 313);
+            this.bfmods.Name = "bfmods";
+            this.bfmods.Size = new System.Drawing.Size(90, 17);
+            this.bfmods.TabIndex = 67;
+            this.bfmods.Text = "!ban for mods";
+            this.bfmods.UseVisualStyleBackColor = true;
+            // 
+            // nfmods
+            // 
+            this.nfmods.AutoSize = true;
+            this.nfmods.Location = new System.Drawing.Point(114, 256);
+            this.nfmods.Name = "nfmods";
+            this.nfmods.Size = new System.Drawing.Size(98, 17);
+            this.nfmods.TabIndex = 66;
+            this.nfmods.Text = "!name for mods";
+            this.nfmods.UseVisualStyleBackColor = true;
+            // 
+            // sfmods
+            // 
+            this.sfmods.AutoSize = true;
+            this.sfmods.Location = new System.Drawing.Point(114, 233);
+            this.sfmods.Name = "sfmods";
+            this.sfmods.Size = new System.Drawing.Size(95, 17);
+            this.sfmods.TabIndex = 65;
+            this.sfmods.Text = "!save for mods";
+            this.sfmods.UseVisualStyleBackColor = true;
+            // 
+            // cfmods
+            // 
+            this.cfmods.AutoSize = true;
+            this.cfmods.Location = new System.Drawing.Point(114, 210);
+            this.cfmods.Name = "cfmods";
+            this.cfmods.Size = new System.Drawing.Size(95, 17);
+            this.cfmods.TabIndex = 64;
+            this.cfmods.Text = "!clear for mods";
+            this.cfmods.UseVisualStyleBackColor = true;
+            // 
             // rrlfmods
             // 
             this.rrlfmods.AutoSize = true;
@@ -1525,6 +1587,8 @@ namespace R42Bot
             // 
             // autobolder
             // 
+            this.autobolder.Controls.Add(this.boxismonly);
+            this.autobolder.Controls.Add(this.boxisaonly);
             this.autobolder.Controls.Add(this.fillcsismodalso);
             this.autobolder.Controls.Add(this.portalCboxMod);
             this.autobolder.Controls.Add(this.portalCboxAdmin);
@@ -3425,65 +3489,29 @@ namespace R42Bot
             this.DayNightCycle.Interval = 125;
             this.DayNightCycle.Tick += new System.EventHandler(this.DayNightCycle_Tick);
             // 
-            // cfmods
+            // boxisaonly
             // 
-            this.cfmods.AutoSize = true;
-            this.cfmods.Location = new System.Drawing.Point(114, 210);
-            this.cfmods.Name = "cfmods";
-            this.cfmods.Size = new System.Drawing.Size(95, 17);
-            this.cfmods.TabIndex = 64;
-            this.cfmods.Text = "!clear for mods";
-            this.cfmods.UseVisualStyleBackColor = true;
+            this.boxisaonly.AutoSize = true;
+            this.boxisaonly.Checked = true;
+            this.boxisaonly.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.boxisaonly.Location = new System.Drawing.Point(245, 206);
+            this.boxisaonly.Name = "boxisaonly";
+            this.boxisaonly.Size = new System.Drawing.Size(79, 17);
+            this.boxisaonly.TabIndex = 38;
+            this.boxisaonly.Text = "Admin Only";
+            this.boxisaonly.UseVisualStyleBackColor = true;
+            this.boxisaonly.CheckedChanged += new System.EventHandler(this.boxisaonly_CheckedChanged);
             // 
-            // sfmods
+            // boxismonly
             // 
-            this.sfmods.AutoSize = true;
-            this.sfmods.Location = new System.Drawing.Point(114, 233);
-            this.sfmods.Name = "sfmods";
-            this.sfmods.Size = new System.Drawing.Size(95, 17);
-            this.sfmods.TabIndex = 65;
-            this.sfmods.Text = "!save for mods";
-            this.sfmods.UseVisualStyleBackColor = true;
-            // 
-            // nfmods
-            // 
-            this.nfmods.AutoSize = true;
-            this.nfmods.Location = new System.Drawing.Point(114, 256);
-            this.nfmods.Name = "nfmods";
-            this.nfmods.Size = new System.Drawing.Size(98, 17);
-            this.nfmods.TabIndex = 66;
-            this.nfmods.Text = "!name for mods";
-            this.nfmods.UseVisualStyleBackColor = true;
-            // 
-            // bfmods
-            // 
-            this.bfmods.AutoSize = true;
-            this.bfmods.Location = new System.Drawing.Point(114, 313);
-            this.bfmods.Name = "bfmods";
-            this.bfmods.Size = new System.Drawing.Size(90, 17);
-            this.bfmods.TabIndex = 67;
-            this.bfmods.Text = "!ban for mods";
-            this.bfmods.UseVisualStyleBackColor = true;
-            // 
-            // button17
-            // 
-            this.button17.Location = new System.Drawing.Point(668, 278);
-            this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(67, 23);
-            this.button17.TabIndex = 62;
-            this.button17.Text = "Save Wins";
-            this.button17.UseVisualStyleBackColor = true;
-            this.button17.Click += new System.EventHandler(this.button17_Click);
-            // 
-            // button18
-            // 
-            this.button18.Location = new System.Drawing.Point(736, 278);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(63, 23);
-            this.button18.TabIndex = 63;
-            this.button18.Text = "Load";
-            this.button18.UseVisualStyleBackColor = true;
-            this.button18.Click += new System.EventHandler(this.button18_Click);
+            this.boxismonly.AutoSize = true;
+            this.boxismonly.Location = new System.Drawing.Point(245, 233);
+            this.boxismonly.Name = "boxismonly";
+            this.boxismonly.Size = new System.Drawing.Size(80, 17);
+            this.boxismonly.TabIndex = 39;
+            this.boxismonly.Text = "Allow Mods";
+            this.boxismonly.UseVisualStyleBackColor = true;
+            this.boxismonly.CheckedChanged += new System.EventHandler(this.boxismonly_CheckedChanged);
             // 
             // R42BotForm
             // 
@@ -3829,6 +3857,8 @@ namespace R42Bot
         private CheckBox bfmods;
         private Button button17;
         private Button button18;
+        private CheckBox boxismonly;
+        private CheckBox boxisaonly;
     }
 }
 
