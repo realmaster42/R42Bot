@@ -71,6 +71,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LangFB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LangFB.Designer.cs">
+      <DependentUpon>LangFB.cs</DependentUpon>
+    </Compile>
     <Compile Include="R42BotForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +93,9 @@
     <Compile Include="Version.cs" />
     <Compile Include="Voids.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="LangFB.resx">
+      <DependentUpon>LangFB.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="R42BotForm.resx">
       <DependentUpon>R42BotForm.cs</DependentUpon>
     </EmbeddedResource>

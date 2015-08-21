@@ -118,10 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>141, 53</value>
-  </metadata>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>141, 53</value>
+    <value>17, 95</value>
   </metadata>
   <data name="codebox.ToolTip" xml:space="preserve">
     <value>The code is the access key to edit in the world.
@@ -148,6 +145,22 @@ worlds, code is not necessary.</value>
         AEpHK8AZWv4PjPml7uxxM3WwEPgEWyhcPiGB7fV2Z+DS3QhQRIVHC8Mc3IVLFTng47ElFt7n+f87AgBF
         mEg5X+1xEaNdAgQARCICbFp9+JHt6VcqJcHsYTdU5ZZicjGBFkAdJG7j/BgJI2gHvb/IH24tLEcb5Fky
         AAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="panel7.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAIuSURBVDhPbZPLaxNRFMazs0zmlYnEKtQH7oqK2JYwSZrH
+        JJlJZmKwPkAKVpTSLhShPqrF2mrrRqvUohDRKlSJCoL4oi7cufDf+jznTm86aVx8JPebc78753fPxPx3
+        Jk62t1Vr6XBXQ1WWdXiPjc5aetUFU2j0qg4RMPbzAJqbh9D8sR+NzwOov++Hv5FE5SFtXksiaO9D48OA
+        kP+mH0FrN9wVE7krWhgw/jeN839sjG0OCvnfDiL4sgfl+wl4r1No/jrc88x/acG+rCBWXzdx+vegSK8+
+        07pUmNXgtgzU3xpdvvtER/mejqFTfYix0fhOqe29PUWFG/R/TUeNDon6zGH0GgXU6A0YkvfcQmUlgdKi
+        FuquBuc2FRGk4jydRizYK82TP0ea1ZGb1jDkUUDpJiUuJeEsJ+As0QZ6tcyUivwtKtxaF+5oyE52e1xz
+        ohpHLDtFV8Vkv6YQfDKJvokCneI+NTpr9wWFMI+IV6K1eAMOqK2nUN+wOn1yMbci1zs95pCdVnHc+U+A
+        hBcNiHoSYm5SCwOKMwTpUaIDkSExoPx1tQuc9CTE9Hgcx4p0jQLiAxPFBUMQZ3F/XCzBMTTpcSv5GRUj
+        5xQcze8KW3BfWWh8tMR9S0lwPAc8rdLraYEDdg5LtO8KzQl/YNITH9OcieylCMQy3a23SgPFQ7UlHlXu
+        21ncfiY3sz98RgkZ2BMq7IsKJSqwJxRkLqhCI2fjGA7iSNOv9KI+bz6S6cM/W47T8JfcPsIAAAAASUVO
+        RK5CYII=
 </value>
   </data>
   <data name="panel6.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -218,25 +231,43 @@ worlds, code is not necessary.</value>
 </value>
   </data>
   <metadata name="autochangerface.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>142, 19</value>
+    <value>270, 17</value>
   </metadata>
   <metadata name="autokick.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>279, 20</value>
+    <value>413, 17</value>
   </metadata>
   <metadata name="autoreset.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>367, 21</value>
+    <value>613, 17</value>
   </metadata>
   <metadata name="TrollCatcherBlockDelete.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>455, 19</value>
+    <value>416, 56</value>
   </metadata>
   <metadata name="Gen_RB.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>638, 18</value>
+    <value>598, 56</value>
   </metadata>
   <metadata name="AutoFixBot.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>26, 52</value>
+    <value>691, 56</value>
   </metadata>
   <metadata name="DayNightCycle.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>138, 17</value>
+  </metadata>
+  <metadata name="_digbottimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
+  </metadata>
+  <metadata name="saveopen.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>510, 17</value>
+  </metadata>
+  <metadata name="autoaurachanger.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>272, 56</value>
+  </metadata>
+  <metadata name="_digbottimer2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>144, 56</value>
+  </metadata>
+  <metadata name="bossbot.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>716, 17</value>
+  </metadata>
+  <metadata name="playercounter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 56</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>49</value>

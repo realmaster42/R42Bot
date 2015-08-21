@@ -209,7 +209,18 @@ namespace R42Bot
             }
             return name;
         }
-
+        public static string HexFromUInt(uint Uint)
+        {
+            try
+            {
+                return "#" + Convert.ToInt32(Uint).ToString("X");
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine(exc.Message);
+                return "#" + Convert.ToInt64(Uint).ToString("X");
+            }
+        }
         public static string GetLangFile(string LangType, int FileId)
         {
             if (LangType == "enUS")

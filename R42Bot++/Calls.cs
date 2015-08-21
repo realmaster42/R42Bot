@@ -9,13 +9,9 @@ using PlayerIOClient;
 
 namespace R42Bot
 {
-    public partial class DigBot
-    {
-
-    }
-
     public partial class CallsSettings
     {
+        public static string CurrentLang = "enUS";
         public static bool WinSystem = false;
         public static bool AllowJoiners = true,
             KickBots = false,

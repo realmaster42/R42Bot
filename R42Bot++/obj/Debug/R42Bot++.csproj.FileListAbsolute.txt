@@ -16,3 +16,4 @@ C:\Users\MarcoAntonio\Documents\Visual Studio 2013\Projects\R42Bot++\R42Bot++\ob
 C:\Users\MarcoAntonio\Documents\Visual Studio 2013\Projects\R42Bot++\R42Bot++\obj\Debug\WindowsFormsApplication2.Properties.Resources.resources
 C:\Users\MarcoAntonio\Documents\Visual Studio 2013\Projects\R42Bot++\R42Bot++\obj\Debug\R42Bot++.csproj.GenerateResource.Cache
 C:\Users\MarcoAntonio\Documents\Visual Studio 2013\Projects\R42Bot++\R42Bot++\obj\Debug\R42Bot.R42BotForm.resources
+C:\Users\MarcoAntonio\Documents\Visual Studio 2013\Projects\R42Bot++\R42Bot++\obj\Debug\WindowsFormsApplication2.LangFB.resources

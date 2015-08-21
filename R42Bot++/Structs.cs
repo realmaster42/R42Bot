@@ -19,7 +19,29 @@ namespace R42Bot
         public int wins,
             warnings,
             BlocksPlacedInaSecond,
-            Face;
+            Face,
+            diggyscore,
+            emeralds,
+            rubies,
+            silver,
+            gold,
+            diamond,
+            emeraldingots,
+            rubieingots,
+            silveringots,
+            goldingots,
+            diamondingots;
+
+        public bool FillFirstPhase,
+            FillSecondPhase,
+            FillLastPhase,
+            FillBIDSet;
+        public int FillXCor,
+            FillX2Cor,
+            FillYCor,
+            FillY2Cor,
+            FillBID;
+
 
         public List<List<int>> blocks;
     }
