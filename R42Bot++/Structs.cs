@@ -30,7 +30,8 @@ namespace R42Bot
             rubieingots,
             silveringots,
             goldingots,
-            diamondingots;
+            diamondingots,
+            pickHard;
 
         public bool FillFirstPhase,
             FillSecondPhase,

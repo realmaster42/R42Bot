@@ -7,7 +7,7 @@
     <ProjectGuid>{352990BF-4D15-461A-88BB-45317E973954}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WindowsFormsApplication2</RootNamespace>
+    <RootNamespace>R42Bot</RootNamespace>
     <AssemblyName>WindowsFormsApplication2</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -88,7 +88,6 @@
     <Compile Include="DataSaverLoader.cs" />
     <Compile Include="Information.cs" />
     <Compile Include="InitParse.cs" />
-    <Compile Include="Lang.cs" />
     <Compile Include="Structs.cs" />
     <Compile Include="Version.cs" />
     <Compile Include="Voids.cs" />
@@ -107,6 +106,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">

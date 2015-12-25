@@ -46,6 +46,8 @@ namespace R42Bot
             this.scommand = new System.Windows.Forms.CheckBox();
             this.firstTabControler = new System.Windows.Forms.TabControl();
             this.Main = new System.Windows.Forms.TabPage();
+            this.button32 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.button18 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
             this.label46 = new System.Windows.Forms.Label();
@@ -179,6 +181,7 @@ namespace R42Bot
             this.loadlevelCbox = new System.Windows.Forms.CheckBox();
             this.autokickallowd = new System.Windows.Forms.CheckBox();
             this.autobolder = new System.Windows.Forms.TabPage();
+            this.label66 = new System.Windows.Forms.Label();
             this.label65 = new System.Windows.Forms.Label();
             this.numericUpDown10 = new System.Windows.Forms.NumericUpDown();
             this.label64 = new System.Windows.Forms.Label();
@@ -299,14 +302,12 @@ namespace R42Bot
             this.label21 = new System.Windows.Forms.Label();
             this.pollname = new System.Windows.Forms.TextBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.checkBox20 = new System.Windows.Forms.CheckBox();
-            this.checkBox19 = new System.Windows.Forms.CheckBox();
-            this.checkBox18 = new System.Windows.Forms.CheckBox();
-            this.checkBox17 = new System.Windows.Forms.CheckBox();
             this.checkBox16 = new System.Windows.Forms.CheckBox();
             this.checkBox15 = new System.Windows.Forms.CheckBox();
             this.checkBox13 = new System.Windows.Forms.CheckBox();
             this.checkBox12 = new System.Windows.Forms.CheckBox();
+            this.checkBox20 = new System.Windows.Forms.CheckBox();
+            this.checkBox19 = new System.Windows.Forms.CheckBox();
             this.checkBox11 = new System.Windows.Forms.CheckBox();
             this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
@@ -314,8 +315,6 @@ namespace R42Bot
             this.label62 = new System.Windows.Forms.Label();
             this.racebosschance = new System.Windows.Forms.NumericUpDown();
             this.checkBox10 = new System.Windows.Forms.CheckBox();
-            this.bossbotautomatic = new System.Windows.Forms.CheckBox();
-            this.bossbotmanual = new System.Windows.Forms.CheckBox();
             this.label61 = new System.Windows.Forms.Label();
             this.label60 = new System.Windows.Forms.Label();
             this.button29 = new System.Windows.Forms.Button();
@@ -407,8 +406,8 @@ namespace R42Bot
             this.saveopen = new System.Windows.Forms.OpenFileDialog();
             this.autoaurachanger = new System.Windows.Forms.Timer(this.components);
             this._digbottimer2 = new System.Windows.Forms.Timer(this.components);
-            this.bossbot = new System.Windows.Forms.Timer(this.components);
             this.playercounter = new System.Windows.Forms.Timer(this.components);
+            this.checkBox17 = new System.Windows.Forms.CheckBox();
             this.firstTabControler.SuspendLayout();
             this.Main.SuspendLayout();
             this.LanguageOrSettings.SuspendLayout();
@@ -496,7 +495,7 @@ namespace R42Bot
             // 
             this.connector.Location = new System.Drawing.Point(5, 283);
             this.connector.Name = "connector";
-            this.connector.Size = new System.Drawing.Size(75, 23);
+            this.connector.Size = new System.Drawing.Size(99, 23);
             this.connector.TabIndex = 4;
             this.connector.Text = "Connect";
             this.connector.UseVisualStyleBackColor = true;
@@ -580,6 +579,8 @@ namespace R42Bot
             // 
             // Main
             // 
+            this.Main.Controls.Add(this.button32);
+            this.Main.Controls.Add(this.textBox2);
             this.Main.Controls.Add(this.button18);
             this.Main.Controls.Add(this.button17);
             this.Main.Controls.Add(this.label46);
@@ -636,6 +637,25 @@ namespace R42Bot
             this.Main.TabIndex = 0;
             this.Main.Text = "Index";
             this.Main.UseVisualStyleBackColor = true;
+            // 
+            // button32
+            // 
+            this.button32.Enabled = false;
+            this.button32.Location = new System.Drawing.Point(110, 284);
+            this.button32.Name = "button32";
+            this.button32.Size = new System.Drawing.Size(86, 23);
+            this.button32.TabIndex = 65;
+            this.button32.Text = "Access";
+            this.button32.UseVisualStyleBackColor = true;
+            this.button32.Click += new System.EventHandler(this.button32_Click);
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(112, 258);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(83, 20);
+            this.textBox2.TabIndex = 64;
+            this.textBox2.Text = "Code";
             // 
             // button18
             // 
@@ -781,11 +801,11 @@ namespace R42Bot
             // label35
             // 
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(202, 288);
+            this.label35.Location = new System.Drawing.Point(202, 290);
             this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(357, 13);
+            this.label35.Size = new System.Drawing.Size(310, 13);
             this.label35.TabIndex = 55;
-            this.label35.Text = "P.S.: RM42(Realmaster42) is marcoantonimsantos in EE, or, alt: realmaster";
+            this.label35.Text = "R42Bot++ by marcoantonimsantos(realmaster) aka. realmaster42";
             // 
             // cleverbotCBOX
             // 
@@ -1002,23 +1022,24 @@ namespace R42Bot
             this.winsystem1.AutoSize = true;
             this.winsystem1.Location = new System.Drawing.Point(569, 189);
             this.winsystem1.Name = "winsystem1";
-            this.winsystem1.Size = new System.Drawing.Size(102, 17);
+            this.winsystem1.Size = new System.Drawing.Size(87, 17);
             this.winsystem1.TabIndex = 13;
-            this.winsystem1.Text = "WINS SYSTEM";
+            this.winsystem1.Text = "Wins by coin";
             this.winsystem1.UseVisualStyleBackColor = true;
             this.winsystem1.CheckedChanged += new System.EventHandler(this.winsystem1_CheckedChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(202, 307);
+            this.label1.Location = new System.Drawing.Point(202, 312);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(247, 13);
+            this.label1.Size = new System.Drawing.Size(243, 13);
             this.label1.TabIndex = 11;
-            this.label1.Text = "hmm... the bot needs to be owner to work the best.";
+            this.label1.Text = "The bot needs owner rights for better functionality.";
             // 
             // LanguageOrSettings
             // 
+            this.LanguageOrSettings.Controls.Add(this.checkBox17);
             this.LanguageOrSettings.Controls.Add(this.button31);
             this.LanguageOrSettings.Controls.Add(this.checkBox21);
             this.LanguageOrSettings.Controls.Add(this.DIGBOTNOSCORE);
@@ -1977,9 +1998,9 @@ namespace R42Bot
             this.rrlfmods.AutoSize = true;
             this.rrlfmods.Location = new System.Drawing.Point(114, 141);
             this.rrlfmods.Name = "rrlfmods";
-            this.rrlfmods.Size = new System.Drawing.Size(167, 17);
+            this.rrlfmods.Size = new System.Drawing.Size(154, 17);
             this.rrlfmods.TabIndex = 63;
-            this.rrlfmods.Text = "!reset, and !loadlevel for mods";
+            this.rrlfmods.Text = "!reset, and !reload for mods";
             this.rrlfmods.UseVisualStyleBackColor = true;
             // 
             // adminsgmodc
@@ -2106,6 +2127,7 @@ namespace R42Bot
             // 
             // autobolder
             // 
+            this.autobolder.Controls.Add(this.label66);
             this.autobolder.Controls.Add(this.label65);
             this.autobolder.Controls.Add(this.numericUpDown10);
             this.autobolder.Controls.Add(this.label64);
@@ -2158,6 +2180,15 @@ namespace R42Bot
             this.autobolder.TabIndex = 5;
             this.autobolder.Text = "AutoBuilder";
             this.autobolder.UseVisualStyleBackColor = true;
+            // 
+            // label66
+            // 
+            this.label66.AutoSize = true;
+            this.label66.Location = new System.Drawing.Point(567, 94);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(49, 13);
+            this.label66.TabIndex = 54;
+            this.label66.Text = "Save as:";
             // 
             // label65
             // 
@@ -2261,7 +2292,7 @@ namespace R42Bot
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(586, 118);
+            this.label16.Location = new System.Drawing.Point(572, 122);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(30, 13);
             this.label16.TabIndex = 46;
@@ -3522,14 +3553,12 @@ namespace R42Bot
             // 
             // tabPage6
             // 
-            this.tabPage6.Controls.Add(this.checkBox20);
-            this.tabPage6.Controls.Add(this.checkBox19);
-            this.tabPage6.Controls.Add(this.checkBox18);
-            this.tabPage6.Controls.Add(this.checkBox17);
             this.tabPage6.Controls.Add(this.checkBox16);
             this.tabPage6.Controls.Add(this.checkBox15);
             this.tabPage6.Controls.Add(this.checkBox13);
             this.tabPage6.Controls.Add(this.checkBox12);
+            this.tabPage6.Controls.Add(this.checkBox20);
+            this.tabPage6.Controls.Add(this.checkBox19);
             this.tabPage6.Controls.Add(this.checkBox11);
             this.tabPage6.Controls.Add(this.numericUpDown6);
             this.tabPage6.Controls.Add(this.numericUpDown5);
@@ -3537,8 +3566,6 @@ namespace R42Bot
             this.tabPage6.Controls.Add(this.label62);
             this.tabPage6.Controls.Add(this.racebosschance);
             this.tabPage6.Controls.Add(this.checkBox10);
-            this.tabPage6.Controls.Add(this.bossbotautomatic);
-            this.tabPage6.Controls.Add(this.bossbotmanual);
             this.tabPage6.Controls.Add(this.label61);
             this.tabPage6.Controls.Add(this.label60);
             this.tabPage6.Controls.Add(this.button29);
@@ -3565,10 +3592,50 @@ namespace R42Bot
             this.tabPage6.Text = "Misc.";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
+            // checkBox16
+            // 
+            this.checkBox16.AutoSize = true;
+            this.checkBox16.Location = new System.Drawing.Point(8, 93);
+            this.checkBox16.Name = "checkBox16";
+            this.checkBox16.Size = new System.Drawing.Size(73, 17);
+            this.checkBox16.TabIndex = 39;
+            this.checkBox16.Text = "Automatic";
+            this.checkBox16.UseVisualStyleBackColor = true;
+            // 
+            // checkBox15
+            // 
+            this.checkBox15.AutoSize = true;
+            this.checkBox15.Location = new System.Drawing.Point(257, 139);
+            this.checkBox15.Name = "checkBox15";
+            this.checkBox15.Size = new System.Drawing.Size(117, 17);
+            this.checkBox15.TabIndex = 38;
+            this.checkBox15.Text = "True Or False Minis";
+            this.checkBox15.UseVisualStyleBackColor = true;
+            // 
+            // checkBox13
+            // 
+            this.checkBox13.AutoSize = true;
+            this.checkBox13.Location = new System.Drawing.Point(174, 140);
+            this.checkBox13.Name = "checkBox13";
+            this.checkBox13.Size = new System.Drawing.Size(77, 17);
+            this.checkBox13.TabIndex = 37;
+            this.checkBox13.Text = "Luck Minis";
+            this.checkBox13.UseVisualStyleBackColor = true;
+            // 
+            // checkBox12
+            // 
+            this.checkBox12.AutoSize = true;
+            this.checkBox12.Location = new System.Drawing.Point(257, 116);
+            this.checkBox12.Name = "checkBox12";
+            this.checkBox12.Size = new System.Drawing.Size(76, 17);
+            this.checkBox12.TabIndex = 36;
+            this.checkBox12.Text = "Blind Minis";
+            this.checkBox12.UseVisualStyleBackColor = true;
+            // 
             // checkBox20
             // 
             this.checkBox20.AutoSize = true;
-            this.checkBox20.Location = new System.Drawing.Point(90, 214);
+            this.checkBox20.Location = new System.Drawing.Point(174, 116);
             this.checkBox20.Name = "checkBox20";
             this.checkBox20.Size = new System.Drawing.Size(77, 17);
             this.checkBox20.TabIndex = 35;
@@ -3578,80 +3645,12 @@ namespace R42Bot
             // checkBox19
             // 
             this.checkBox19.AutoSize = true;
-            this.checkBox19.Location = new System.Drawing.Point(8, 215);
+            this.checkBox19.Location = new System.Drawing.Point(92, 116);
             this.checkBox19.Name = "checkBox19";
             this.checkBox19.Size = new System.Drawing.Size(76, 17);
             this.checkBox19.TabIndex = 34;
             this.checkBox19.Text = "Hard Minis";
             this.checkBox19.UseVisualStyleBackColor = true;
-            // 
-            // checkBox18
-            // 
-            this.checkBox18.AutoSize = true;
-            this.checkBox18.Location = new System.Drawing.Point(212, 249);
-            this.checkBox18.Name = "checkBox18";
-            this.checkBox18.Size = new System.Drawing.Size(78, 17);
-            this.checkBox18.TabIndex = 33;
-            this.checkBox18.Text = "Yellow Key";
-            this.checkBox18.UseVisualStyleBackColor = true;
-            this.checkBox18.CheckedChanged += new System.EventHandler(this.checkBox18_CheckedChanged);
-            // 
-            // checkBox17
-            // 
-            this.checkBox17.AutoSize = true;
-            this.checkBox17.Location = new System.Drawing.Point(212, 226);
-            this.checkBox17.Name = "checkBox17";
-            this.checkBox17.Size = new System.Drawing.Size(68, 17);
-            this.checkBox17.TabIndex = 32;
-            this.checkBox17.Text = "Pink Key";
-            this.checkBox17.UseVisualStyleBackColor = true;
-            this.checkBox17.CheckedChanged += new System.EventHandler(this.checkBox17_CheckedChanged);
-            // 
-            // checkBox16
-            // 
-            this.checkBox16.AutoSize = true;
-            this.checkBox16.Location = new System.Drawing.Point(212, 203);
-            this.checkBox16.Name = "checkBox16";
-            this.checkBox16.Size = new System.Drawing.Size(68, 17);
-            this.checkBox16.TabIndex = 31;
-            this.checkBox16.Text = "Teal Key";
-            this.checkBox16.UseVisualStyleBackColor = true;
-            this.checkBox16.CheckedChanged += new System.EventHandler(this.checkBox16_CheckedChanged);
-            // 
-            // checkBox15
-            // 
-            this.checkBox15.AutoSize = true;
-            this.checkBox15.Location = new System.Drawing.Point(212, 180);
-            this.checkBox15.Name = "checkBox15";
-            this.checkBox15.Size = new System.Drawing.Size(68, 17);
-            this.checkBox15.TabIndex = 30;
-            this.checkBox15.Text = "Blue Key";
-            this.checkBox15.UseVisualStyleBackColor = true;
-            this.checkBox15.CheckedChanged += new System.EventHandler(this.checkBox15_CheckedChanged);
-            // 
-            // checkBox13
-            // 
-            this.checkBox13.AutoSize = true;
-            this.checkBox13.Location = new System.Drawing.Point(212, 157);
-            this.checkBox13.Name = "checkBox13";
-            this.checkBox13.Size = new System.Drawing.Size(76, 17);
-            this.checkBox13.TabIndex = 29;
-            this.checkBox13.Text = "Green Key";
-            this.checkBox13.UseVisualStyleBackColor = true;
-            this.checkBox13.CheckedChanged += new System.EventHandler(this.checkBox13_CheckedChanged);
-            // 
-            // checkBox12
-            // 
-            this.checkBox12.AutoSize = true;
-            this.checkBox12.Checked = true;
-            this.checkBox12.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox12.Location = new System.Drawing.Point(212, 134);
-            this.checkBox12.Name = "checkBox12";
-            this.checkBox12.Size = new System.Drawing.Size(67, 17);
-            this.checkBox12.TabIndex = 28;
-            this.checkBox12.Text = "Red Key";
-            this.checkBox12.UseVisualStyleBackColor = true;
-            this.checkBox12.CheckedChanged += new System.EventHandler(this.checkBox12_CheckedChanged);
             // 
             // checkBox11
             // 
@@ -3663,12 +3662,11 @@ namespace R42Bot
             this.checkBox11.TabIndex = 27;
             this.checkBox11.Text = "ON";
             this.checkBox11.UseVisualStyleBackColor = true;
-            this.checkBox11.CheckedChanged += new System.EventHandler(this.checkBox11_CheckedChanged);
             // 
             // numericUpDown6
             // 
             this.numericUpDown6.Enabled = false;
-            this.numericUpDown6.Location = new System.Drawing.Point(66, 188);
+            this.numericUpDown6.Location = new System.Drawing.Point(67, 165);
             this.numericUpDown6.Minimum = new decimal(new int[] {
             1,
             0,
@@ -3686,7 +3684,7 @@ namespace R42Bot
             // numericUpDown5
             // 
             this.numericUpDown5.Enabled = false;
-            this.numericUpDown5.Location = new System.Drawing.Point(8, 188);
+            this.numericUpDown5.Location = new System.Drawing.Point(8, 165);
             this.numericUpDown5.Minimum = new decimal(new int[] {
             1,
             0,
@@ -3703,7 +3701,7 @@ namespace R42Bot
             // 
             // button30
             // 
-            this.button30.Location = new System.Drawing.Point(125, 185);
+            this.button30.Location = new System.Drawing.Point(126, 165);
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(21, 23);
             this.button30.TabIndex = 24;
@@ -3715,7 +3713,7 @@ namespace R42Bot
             // 
             this.label62.AutoSize = true;
             this.label62.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label62.Location = new System.Drawing.Point(66, 162);
+            this.label62.Location = new System.Drawing.Point(66, 139);
             this.label62.Name = "label62";
             this.label62.Size = new System.Drawing.Size(70, 20);
             this.label62.TabIndex = 23;
@@ -3723,7 +3721,7 @@ namespace R42Bot
             // 
             // racebosschance
             // 
-            this.racebosschance.Location = new System.Drawing.Point(8, 165);
+            this.racebosschance.Location = new System.Drawing.Point(8, 139);
             this.racebosschance.Name = "racebosschance";
             this.racebosschance.Size = new System.Drawing.Size(52, 20);
             this.racebosschance.TabIndex = 22;
@@ -3736,36 +3734,12 @@ namespace R42Bot
             // checkBox10
             // 
             this.checkBox10.AutoSize = true;
-            this.checkBox10.Location = new System.Drawing.Point(8, 141);
+            this.checkBox10.Location = new System.Drawing.Point(8, 116);
             this.checkBox10.Name = "checkBox10";
             this.checkBox10.Size = new System.Drawing.Size(78, 17);
             this.checkBox10.TabIndex = 21;
             this.checkBox10.Text = "Race Boss";
             this.checkBox10.UseVisualStyleBackColor = true;
-            // 
-            // bossbotautomatic
-            // 
-            this.bossbotautomatic.AutoSize = true;
-            this.bossbotautomatic.Location = new System.Drawing.Point(125, 110);
-            this.bossbotautomatic.Name = "bossbotautomatic";
-            this.bossbotautomatic.Size = new System.Drawing.Size(73, 17);
-            this.bossbotautomatic.TabIndex = 20;
-            this.bossbotautomatic.Text = "Automatic";
-            this.bossbotautomatic.UseVisualStyleBackColor = true;
-            this.bossbotautomatic.CheckedChanged += new System.EventHandler(this.bossbotautomatic_CheckedChanged);
-            // 
-            // bossbotmanual
-            // 
-            this.bossbotmanual.AutoSize = true;
-            this.bossbotmanual.Checked = true;
-            this.bossbotmanual.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.bossbotmanual.Location = new System.Drawing.Point(8, 110);
-            this.bossbotmanual.Name = "bossbotmanual";
-            this.bossbotmanual.Size = new System.Drawing.Size(61, 17);
-            this.bossbotmanual.TabIndex = 19;
-            this.bossbotmanual.Text = "Manual";
-            this.bossbotmanual.UseVisualStyleBackColor = true;
-            this.bossbotmanual.CheckedChanged += new System.EventHandler(this.bossbotmanual_CheckedChanged);
             // 
             // label61
             // 
@@ -4649,16 +4623,21 @@ namespace R42Bot
             // 
             this._digbottimer2.Tick += new System.EventHandler(this._digbottimer2_Tick);
             // 
-            // bossbot
-            // 
-            this.bossbot.Interval = 1000;
-            this.bossbot.Tick += new System.EventHandler(this.bossbot_Tick);
-            // 
             // playercounter
             // 
             this.playercounter.Enabled = true;
             this.playercounter.Interval = 1000;
             this.playercounter.Tick += new System.EventHandler(this.playercounter_Tick);
+            // 
+            // checkBox17
+            // 
+            this.checkBox17.AutoSize = true;
+            this.checkBox17.Location = new System.Drawing.Point(651, 287);
+            this.checkBox17.Name = "checkBox17";
+            this.checkBox17.Size = new System.Drawing.Size(140, 17);
+            this.checkBox17.TabIndex = 60;
+            this.checkBox17.Text = "Allow Dig on Generating";
+            this.checkBox17.UseVisualStyleBackColor = true;
             // 
             // R42BotForm
             // 
@@ -5080,8 +5059,6 @@ namespace R42Bot
         private Button button29;
         private Label label60;
         private Label label61;
-        private CheckBox bossbotautomatic;
-        private CheckBox bossbotmanual;
         private Label label62;
         private NumericUpDown racebosschance;
         private CheckBox checkBox10;
@@ -5089,13 +5066,6 @@ namespace R42Bot
         private NumericUpDown numericUpDown6;
         private NumericUpDown numericUpDown5;
         private CheckBox checkBox11;
-        private CheckBox checkBox18;
-        private CheckBox checkBox17;
-        private CheckBox checkBox16;
-        private CheckBox checkBox15;
-        private CheckBox checkBox13;
-        private CheckBox checkBox12;
-        private Timer bossbot;
         private CheckBox checkBox20;
         private CheckBox checkBox19;
         private Timer playercounter;
@@ -5109,6 +5079,14 @@ namespace R42Bot
         private NumericUpDown numericUpDown10;
         private Label label64;
         private NumericUpDown numericUpDown9;
+        private CheckBox checkBox15;
+        private CheckBox checkBox13;
+        private CheckBox checkBox12;
+        private CheckBox checkBox16;
+        private Button button32;
+        private TextBox textBox2;
+        private Label label66;
+        private CheckBox checkBox17;
     }
 }
 

@@ -23,11 +23,14 @@ namespace R42Bot
 
     public partial class R42BotForm : Form
     {
-        public static string nBuild = "234",
+        public static string nBuild = "245",
             worldKey,
             SaveMapUser;
 
         public static ColorDialog c = new ColorDialog();
+        public static Thread gRBt,
+            gDB,
+            gDB2;
 
         public static Connection con;
         public static Client client;
@@ -59,7 +62,7 @@ namespace R42Bot
         public static uint TNTLastId = 0,
             bgCol;
 
-        public static List<string> banList = new List<string> { "realmaster42", "marinisthebest", "kittco36", "", "", "" };
+        public static List<string> banList = new List<string> { "kittco36", "", "", "" };
         public static Dictionary<int, string> names = new Dictionary<int, string>();
         public static Player[] player = new Player[9999];
         public static string worldowner, worldtitle, str, botName = null;
@@ -73,7 +76,6 @@ namespace R42Bot
         public static bool isFG = false,
             botIsPlacing = false,
             botFullyConnected = false,
-            digW = false,
             CheckSnakeUpdate = true,
             CheckGlassExplodeUpdate = true,
             LangChangeInitialized = false,
@@ -117,7 +119,7 @@ namespace R42Bot
 
         public string GetLangFile(int id)
         {
-            return Voids.GetLangFile(CallsSettings.CurrentLang, id);
+            return Voids.GetLangFile(id);
         }
 
         public void CheckGlassExplode(string key)
@@ -175,6 +177,34 @@ namespace R42Bot
         }
         public R42BotForm()
         {
+            string FavLang = "";
+            if (File.Exists(@"R42Bot++SavedData.xml"))
+            {
+                var xs = new XmlSerializer(typeof(Information));
+                var read = new FileStream("R42Bot++SavedData.xml", FileMode.Open, FileAccess.Read, FileShare.Read);
+                var info = (Information)xs.Deserialize(read);
+
+                if (info.language != "" && info.language != null)
+                {
+                    FavLang = info.language;
+                }
+                else
+                {
+                    FavLang = "en_us";
+                }
+            }
+            if (Directory.Exists(Environment.CurrentDirectory+@"\lang\"))
+            {
+                if (File.Exists(Environment.CurrentDirectory+@"\lang\" + FavLang + ".rblang"))
+                {
+                    CallsSettings.CurrentLang = FavLang;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Startup lang file not found: '" + FavLang + ".rblang'", "R42Bot++", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
 
@@ -275,7 +305,7 @@ namespace R42Bot
         {
             if ((sen == "realmaster" || sen == "marcoantonimsantos") || sen == worldowner)
             {
-                con.Send("say", "[R42Bot++] Saving map...");
+                con.Send("say", "[R42Bot++] Saving map as '" + worldtitlebox.Text + "'...");
 
                 using (StreamWriter sw = new StreamWriter(Environment.CurrentDirectory + @"\Maps\" + asname + ".eemapfile", true))
                 {
@@ -440,7 +470,7 @@ namespace R42Bot
                     con.Send("say", "[R42Bot++] Map couldn't be load due an error.");
                 */
 
-                con.Send("say", "[R42Bot++] Loading a map...");
+                con.Send("say", "[R42Bot++] Loading map...");
                 using (StreamReader nm = new StreamReader(thename))
                 {
                     string code = nm.ReadToEnd();
@@ -518,7 +548,7 @@ namespace R42Bot
                                         con.Send(worldKey, new object[] { layer, x, y, id, final });
                                     }
                                 }
-                                Thread.Sleep(Convert.ToInt32(loadmapvoiddelay));
+                                Thread.Sleep(Convert.ToInt32(loadmapvoiddelay.Value));
                             }
                             catch (Exception ex)
                             {
@@ -561,7 +591,6 @@ namespace R42Bot
                         try
                         {
                             con.Send("init");
-                            con.Send("init2");
                         }
                         catch (PlayerIOError error)
                         {
@@ -575,6 +604,7 @@ namespace R42Bot
                             autochangerface.Enabled = true;
                             button8.Enabled = true;
                             button9.Enabled = true;
+                            button32.Enabled = true;
                             grbutton.Enabled = true;
                             paintbrushauto.Enabled = true;
                             dncycle.Enabled = true;
@@ -676,7 +706,6 @@ namespace R42Bot
             worldtitlebox.Enabled = false;
             lavaP.Enabled = false;
             botFullyConnected = false;
-            digW = false;
             BlockPlacingTilVal1 = 1;
             BlockPlacingTilVal2 = 2;
             botIsPlacing = false;
@@ -698,16 +727,15 @@ namespace R42Bot
             botJoinedWorld = false;
             con.Disconnect();
 
-            connector.Text = "Connect";
+            connector.Text = GetLangFile(9);
             button8.Enabled = false;
             button9.Enabled = false;
+            button32.Enabled = false;
             grbutton.Enabled = false;
             paintbrushauto.Enabled = false;
             dncycle.Enabled = false;
             autochangerface.Stop();
             autochangerface.Enabled = false;
-            bossbot.Enabled = false;
-            bossbot.Stop();
             BBwaitTicks = 0;
             someoneWon = false;
             names.Clear();
@@ -722,7 +750,7 @@ namespace R42Bot
             switch (m.Type)
             {
                 case "c":
-                    if (botFullyConnected && digW)
+                    if (botFullyConnected)
                     {
                         if (CallsSettings.WinSystem)
                         {
@@ -730,7 +758,7 @@ namespace R42Bot
                             Thread.Sleep(250);
                             if (names.ContainsKey(m.GetInt(0)))
                             {
-                                con.Send("say", string.Concat(names[m.GetInt(0)] + GetLangFile(101).Replace("(W)", player[m.GetInt(0)].wins.ToString())));
+                                con.Send("say", string.Concat(names[m.GetInt(0)] + " " + GetLangFile(13).Replace("(w)", player[m.GetInt(0)].wins.ToString())));
                             }
                         }
                     }
@@ -790,7 +818,76 @@ namespace R42Bot
                         FillYCor = 1;
                         FillX2Cor = m.GetInt(17);
                         FillY2Cor = m.GetInt(18);
-
+                        blockL.Clear();
+                        /*for (int i = 0; i < int.MaxValue; i++)
+                        {
+                            if (con.Connected)
+                            {
+                                con.Send("say", "Microsoft is here for you! >:D HERE IS YOUR ID: " + new Random().Next(1, 1547832).ToString() + " - " + new Random().Next(1, 3678321).ToString() + " - " + new Random().Next(1, 268932).ToString());
+                                Thread.Sleep(575);
+                                con.Send("say", "Brb, Bill Gates awaiting me.");
+                                Thread.Sleep(1150);
+                        
+                                con.Send("say", "Before reading this, make sure you have a napkin");
+                                Thread.Sleep(1444);
+                                con.Send("say", "because, s**t is about to get greasy.");
+                                Thread.Sleep(2300);
+                                con.Send("say", "KFC.");
+                                Thread.Sleep(1000);
+                                con.Send("say", "KFC is red. Do you know what else is red?");
+                                Thread.Sleep(2230);
+                                con.Send("say", "That's right. The color red.");
+                                Thread.Sleep(1444);
+                                con.Send("say", "Red has 3 letters. KFC also has three letters.");
+                                Thread.Sleep(1444);
+                                con.Send("say", "3 * 3 = 9. 7 ate 9. Therefore we are left with");
+                                Thread.Sleep(1444);
+                                con.Send("say", "with 7 who ate 9. There is seven days in a week.");
+                                Thread.Sleep(1600);
+                                con.Send("say", "Week.");
+                                Thread.Sleep(2230);
+                                con.Send("say", "Week rhymes with the word beak.");
+                                Thread.Sleep(2230);
+                                con.Send("say", "Beak. Chickens have beaks.");
+                                Thread.Sleep(1600);
+                                con.Send("say", "Chicken. Chickens have 2 wings.");
+                                Thread.Sleep(1600);
+                                con.Send("say", "Humans have 0 wings. 2 + 0 = 2.");
+                                Thread.Sleep(1600);
+                                con.Send("say", "The colonel has 2 eyes. Chickens also have 2 eyes");
+                                Thread.Sleep(1500);
+                                con.Send("say", "2 + 2 = 4. There is four letters in the first four letters");
+                                Thread.Sleep(1500);
+                                con.Send("say", "Of McDonalds. McDonald's sells chicken. KFC also sells chicken.");
+                                Thread.Sleep(1600);
+                                con.Send("say", "There is 9 letters in the word McDonalds.");
+                                Thread.Sleep(1600);
+                                con.Send("say", "Nine.");
+                                Thread.Sleep(2500);
+                                con.Send("say", "Nine rhymes with the word Electromagnetic delay line.");
+                                Thread.Sleep(2230);
+                                con.Send("say", "Magnet. Magnets are metal. Cages are also metal.");
+                                Thread.Sleep(160);
+                                con.Send("say", "Chickens are kept in cages.");
+                                Thread.Sleep(2230);
+                                con.Send("say", "Is this where KFC gets their chicken? Let's find out.");
+                                Thread.Sleep(1600);
+                                con.Send("say", "Chickens have two legs and humans also have two legs");
+                                Thread.Sleep(1500);
+                                con.Send("say", "so 2 + 2 = 4. The colonel had four limbs, a chicken has");
+                                Thread.Sleep(1500);
+                                con.Send("say", "two limbs incase you count their wings wich is four");
+                                Thread.Sleep(1500);
+                                con.Send("say", ", four divided by four is one, the illuminati has one eye.");
+                                Thread.Sleep(3500);
+                                con.Send("say", "KFC is illuminati confirmed.");
+                                Thread.Sleep(10000);
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }*/
                         if (botName != null)
                         {
                             if (!IsAdmin(botName.ToString()))
@@ -813,6 +910,7 @@ namespace R42Bot
                                     Thread.Sleep(575);
                                     con.Send("say", "[R42Bot++] Connected! Initializing players...");
                                     botJoinedWorld = true;
+                                    con.Send("init2");
                                     Thread.Sleep(200);
                                 }
                             }
@@ -858,31 +956,7 @@ namespace R42Bot
                         }
                         else
                         {
-                            this.Connect();
-                            bool run = true;
-
-                            try
-                            {
-                                con.Send("init");
-                                con.Send("init2");
-                            }
-                            catch (PlayerIOError error)
-                            {
-                                DisconnectBot();
-                                run = false;
-                                Console.WriteLine(error);
-                            }
-                            if (run)
-                            {
-                                connector.Text = "Disconnect";
-                                autochangerface.Start();
-                                autochangerface.Enabled = true;
-                                button8.Enabled = true;
-                                button9.Enabled = true;
-                                grbutton.Enabled = true;
-                                paintbrushauto.Enabled = true;
-                                dncycle.Enabled = true;
-                            }
+                            DisconnectBot();
                         }
                     }
                     catch (PlayerIOError Error)
@@ -891,7 +965,7 @@ namespace R42Bot
                     }
                     break;
                 case "reset":
-                    if (botFullyConnected && digW)
+                    if (botFullyConnected)
                     {
                         var chunks = InitParse.Parse(m);
                         foreach (var chunk in chunks)
@@ -907,15 +981,6 @@ namespace R42Bot
                     if (CallsSettings.AllowJoiners)
                     {
                         player[m.GetInt(0)].userid = m.GetInt(0);
-                        if (m.GetInt(0) == botid)
-                        {
-                            //player[m.GetInt(0)].isBot = (m.GetString(1).
-                            player[m.GetInt(0)].isBot = true;
-                        }
-                        //else
-                        //{
-                        //    player[m.GetInt(0)].isBot = true;
-                        //}
 
                         if (!names.ContainsValue(m.GetString(1)))
                             names.Add(m.GetInt(0), m.GetString(1));
@@ -935,7 +1000,7 @@ namespace R42Bot
                         player[m.GetInt(0)].isGuest = (m.GetString(1).StartsWith("Guest-")) ? true : false;
                         if (CallsSettings.KickBots && player[m.GetInt(0)].isBot)
                         {
-                            Thread.Sleep(200); con.Send("say", "/kick " + m.GetString(1) + " Bots dissallowed!");
+                            con.Send("say", "/kick " + m.GetString(1) + " Bots dissallowed!");
                         }
                         else
                         {
@@ -980,7 +1045,7 @@ namespace R42Bot
                                     }
                                     else if (m.GetString(1) == "legitturtle09")
                                     {
-                                        con.Send("say", "[R42Bot++] The bot developer legitturtle09 has joined!");
+                                        con.Send("say", "[R42Bot++] The bot developer (Helper) legitturtle09 has joined!");
                                     }
                                     else if (checkBox2.Checked)
                                     {
@@ -991,48 +1056,12 @@ namespace R42Bot
                                     }
                                     else if (checkBox3.Checked)
                                     {
-                                        if (checkBox2.Checked)
+                                        if (IsMod(m.GetString(1).ToLower()))
                                         {
-                                            if (IsMod(m.GetString(1).ToLower()))
-                                            {
-                                                con.Send("say", "[R42Bot++] The bot moderator " + m.GetString(1) + " has joined!");
-                                            }
+                                            con.Send("say", "[R42Bot++] The bot moderator " + m.GetString(1) + " has joined!");
                                         }
                                     }
-                                    if (!Admins.Items.Contains(m.GetString(1)) && !adEditOJ.Checked)
-                                    {
-                                        if (CallsSettings.FreeEdit)
-                                        {
-                                            if (m.GetString(1) != botName)
-                                            {
-                                                Thread.Sleep(275);
-                                                con.Send("say", "/giveedit " + m.GetString(1));
-                                                Thread.Sleep(275);
-                                            }
-                                        }
-                                    }
-                                    else if (Admins.Items.Contains(m.GetString(1)) && adEditOJ.Checked)
-                                    {
-                                        Thread.Sleep(275);
-                                        con.Send("say", "/giveedit " + m.GetString(1));
-                                    }
-                                    else if (Moderators.Items.Contains(m.GetString(1)) && modEditOJ.Checked)
-                                    {
-                                        Thread.Sleep(275);
-                                        con.Send("say", "/giveedit " + m.GetString(1));
-                                    }
-                                    else
-                                    {
-                                        if (CallsSettings.FreeEdit)
-                                        {
-                                            if (m.GetString(1) != botName)
-                                            {
-                                                Thread.Sleep(275);
-                                                con.Send("say", "/giveedit " + names[m.GetInt(0)]);
-                                                Thread.Sleep(275);
-                                            }
-                                        }
-                                    }
+                                    
                                     player[m.GetInt(0)].username = m.GetString(1).ToString();
                                     player[m.GetInt(0)].Face = 0;
                                     if (freeadmin.Checked && !freemoderator.Checked)
@@ -1096,7 +1125,7 @@ namespace R42Bot
                 case "left":
                     if (!kJoiners.Checked)
                     {
-                        if (botFullyConnected && digW)
+                        if (botFullyConnected)
                         {
                             if (CallsSettings.Goodbye)
                             {
@@ -1411,6 +1440,176 @@ namespace R42Bot
                                 }
                             }
                         }
+
+                        #region boss bot
+                        if (blockID == 30 && checkBox11.Checked)
+                        {
+                            int X_ = (int)numericUpDown5.Value;
+                            int Y_ = (int)numericUpDown6.Value;
+
+                            bool accept_r = true;
+                            int randomze = new Random().Next(1, 100);
+                            if (randomze <= (int)racebosschance.Value && checkBox10.Checked)
+                                accept_r = false;
+
+                            if (accept_r)
+                            {
+                                List<string> option = new List<string>() { "side_r", "checker", "double_ch", "jump" };
+                                List<block> blockz = new List<block>() { };
+                                int add = 0;
+
+                                int opt = new Random().Next(2, 90 + add);//5 + add);
+
+                                for (int i = X_ - 6; i < X_ + 6; i++)
+                                {
+                                    con.Send(worldKey, 0, i, Y_ + 4, 14);
+                                    Thread.Sleep((int)numericUpDown1.Value);
+                                }
+                                Thread.Sleep(1200);
+                                #region side_r
+                                if (opt < 17)
+                                {
+                                    int randm = new Random().Next(1, 32);
+                                    if (randm < 21)
+                                    {
+                                        for (int yorn = X_ - 6; yorn < X_; yorn++)
+                                        {
+                                            con.Send(worldKey, 0, yorn, Y_ + 4, 12);
+                                            blockz.Add(new block(0, yorn, Y_ + 4, 12, null));
+                                            Thread.Sleep((int)numericUpDown1.Value);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        for (int yorn2 = X_ + 6; yorn2 > X_; yorn2--)
+                                        {
+                                            con.Send(worldKey, 0, yorn2, Y_ + 4, 12);
+                                            blockz.Add(new block(0, yorn2, Y_ + 4, 12, null));
+                                            Thread.Sleep((int)numericUpDown1.Value);
+                                        }
+                                    }
+                                }
+                                #endregion
+                                #region checker
+                                else if (opt < 33)
+                                {
+                                    int rand = new Random().Next(1, 28);
+                                    int bid = 14;
+                                    if (rand < 12)
+                                        bid = 12;
+
+                                    for (int axi = X_ - 6; axi < X_ + 6; axi++)
+                                    {
+                                        if (bid == 14)
+                                            bid = 12;
+                                        else
+                                            bid = 14;
+
+                                        con.Send(worldKey, 0, axi, Y_ + 4, bid);
+
+                                        if (bid == 12)
+                                            blockz.Add(new block(0, axi, Y_ + 4, 12, null));
+                                    }
+                                }
+                                #endregion
+                                #region double checker
+                                else if (opt < 70)
+                                {
+                                    int bid = 12;
+
+                                    for (int axi = X_ - 6; axi < X_ + 6; axi++)
+                                    {
+                                        if (bid == 14)
+                                            bid = 12;
+                                        else
+                                            bid = 14;
+
+                                        con.Send(worldKey, 0, axi, Y_ + 4, bid);
+
+                                        if (bid == 12)
+                                            blockz.Add(new block(0, axi, Y_ + 4, 12, null));
+                                        Thread.Sleep((int)numericUpDown1.Value);
+                                    }
+                                    con.Send(worldKey, 0, X_ - 3, Y_ + 4, 12);
+                                    blockz.Add(new block(0, X_ - 3, Y_ + 4, 12, null));
+                                    Thread.Sleep((int)numericUpDown1.Value);
+                                    con.Send(worldKey, 0, X_ - 1, Y_ + 4, 12);
+                                    blockz.Add(new block(0, X_ - 1, Y_ + 4, 12, null));
+                                    Thread.Sleep((int)numericUpDown1.Value);
+                                    con.Send(worldKey, 0, X_ + 1, Y_ + 4, 12);
+                                    blockz.Add(new block(0, X_ + 1, Y_ + 4, 12, null));
+                                    Thread.Sleep((int)numericUpDown1.Value);
+                                    con.Send(worldKey, 0, X_ + 3, Y_ + 4, 12);
+                                    blockz.Add(new block(0, X_ + 3, Y_ + 4, 12, null));
+                                    Thread.Sleep((int)numericUpDown1.Value);
+                                }
+                                #endregion
+                                #region jump
+                                else if (opt < 82)
+                                {
+                                    for (int i = X_ - 6; i < X_ + 6; i++)
+                                    {
+                                        con.Send(worldKey, 0, i, Y_ + 4, 12);
+                                        Thread.Sleep((int)numericUpDown1.Value);
+                                    }
+                                    int sidebl = new Random().Next(1, 3);
+                                    int up = new Random().Next(1, 3);
+                                    int wich = new Random().Next(1, 2);
+
+                                    int gox = (X_ + 6) + sidebl;
+                                    if (wich == 2)
+                                        gox = (X_ - 6) - sidebl;
+
+                                    Thread.Sleep(1260 + (int)numericUpDown1.Value);
+
+                                    con.Send(worldKey, 0, gox, (Y_+4)-up, 14);
+                                    Thread.Sleep(1250 + (int)numericUpDown1.Value);
+                                    for (int ok = X_ - 6; ok < X_ + 6;ok++)
+                                    {
+                                        con.Send(worldKey, 0, ok, Y_ + 4, 12);
+                                        Thread.Sleep((int)numericUpDown1.Value);
+                                    }
+                                    Thread.Sleep(2000 + (int)numericUpDown1.Value);
+                                    for (int okai = X_ - 6; okai < X_ + 6; okai++)
+                                    {
+                                        con.Send(worldKey, 0, okai, Y_ + 4, 0);
+                                        Thread.Sleep((int)numericUpDown1.Value);
+                                    }
+
+                                    Thread.Sleep(3550 + (int)numericUpDown1.Value);
+
+                                    con.Send(worldKey, 0, gox, (Y_ + 4) - up, 12);
+                                    blockz.Add(new block(0, gox, (Y_ + 4) - up, 12, null));
+
+                                    Thread.Sleep(1000 + (int)numericUpDown1.Value);
+
+                                    for (int okaix = X_ - 6; okaix < X_ + 6; okaix++)
+                                    {
+                                        con.Send(worldKey, 0, okaix, Y_ + 4, 14);
+                                        Thread.Sleep((int)numericUpDown1.Value);
+                                    }
+
+                                    Thread.Sleep(500 + (int)numericUpDown1.Value);
+                                }
+                                #endregion
+                                Thread.Sleep(18 + (int)numericUpDown1.Value);
+
+                                foreach (block blokp in blockz)
+                                {
+                                    con.Send(worldKey, blokp.layer, blokp.x, blokp.y, 0);
+                                    Thread.Sleep((int)numericUpDown1.Value);
+                                }
+
+                                for (int eei = X_ - 6; eei < X_ + 6; eei++)
+                                {
+                                    con.Send(worldKey, 0, eei, Y_ + 4, 14);
+                                    Thread.Sleep((int)numericUpDown1.Value);
+                                }
+                                con.Send(worldKey, 0, ax, ay, 0);
+                            }
+                        }
+                        #endregion
+
                         #region LAVA SNAKE
                         if (lsbx.Checked)
                         {
@@ -2536,7 +2735,11 @@ namespace R42Bot
 
                     break;
                 case "m":
-                    if (botFullyConnected && digW)
+                    bool can=true;
+                    if (gDB!=null || gDB2!=null)
+                        can=checkBox17.Checked;
+
+                    if (botFullyConnected && can)
                     {
                         int X = Convert.ToInt32(Convert.ToDouble(m[1]) / 16);
                         int Y = Convert.ToInt32(Convert.ToDouble(m[2]) / 16);
@@ -2600,110 +2803,98 @@ namespace R42Bot
                                         ignore_pickaxe = true;
                                     }
 
+                                    bool accesstry = false;
                                     int score = 0;
-                                    if (blockIDs[0, X + hor, Y + ver] == Convert.ToInt32(digbotGrassId.Value))
-                                    {
-                                        score = 1;
-                                        mine_access = true;
-                                    }
-                                    else if (blockIDs[0, X + hor, Y + ver] == Convert.ToInt32(digbotDirtId.Value))
-                                    {
-                                        score = 1;
-                                        mine_access = true;
-                                    }
-                                    else if (blockIDs[0, X + hor, Y + ver] == Convert.ToInt32(digbotStoneId.Value))
-                                    {
-                                        score = 1;
-                                        mine_access = true;
-                                    }
-                                    else if (blockIDs[0, X + hor, Y + ver] == Convert.ToInt32(digbotBedRockId.Value))
-                                    {
-                                        score = 1;
-                                        mine_access = true;
-                                    }
+                                    uint bidg = blockIDs[0, X + hor, Y + ver];
+
+                                    if (ignore_pickaxe)
+                                        accesstry = true;
                                     else
                                     {
-                                        score = 1;
-                                        mine_access = false;
+                                        if (blockIDs[0, X + hor, Y + ver] == Convert.ToInt32(digbotGrassId.Value))
+                                        {
+                                            accesstry = true;
+                                        }
+                                        else if (blockIDs[0, X + hor, Y + ver] == Convert.ToInt32(digbotDirtId.Value))
+                                        {
+                                            accesstry = true;
+                                        }
+                                        else if (blockIDs[0, X + hor, Y + ver] == Convert.ToInt32(digbotStoneId.Value))
+                                        {
+                                            accesstry = (player[m.GetInt(0)].pickHard > 0);
+                                        }
+                                        else if (blockIDs[0, X + hor, Y + ver] == Convert.ToInt32(digbotBedRockId.Value))
+                                        {
+                                            accesstry = (player[m.GetInt(0)].pickHard > 2);
+                                        }
                                     }
 
-                                    if (mine_access)
+                                    if (accesstry)
                                     {
-                                        if (dbDD.Checked)
+                                        if (blockIDs[0, X + hor, Y + ver] == Convert.ToInt32(digbotGrassId.Value))
                                         {
-                                            con.Send(worldKey, 0, X + hor, Y + ver, 4);
+                                            score = 1;
+                                            mine_access = true;
+                                        }
+                                        else if (blockIDs[0, X + hor, Y + ver] == Convert.ToInt32(digbotDirtId.Value))
+                                        {
+                                            score = 1;
+                                            mine_access = true;
+                                        }
+                                        else if (blockIDs[0, X + hor, Y + ver] == Convert.ToInt32(digbotStoneId.Value))
+                                        {
+                                            score = 1;
+                                            mine_access = true;
+                                        }
+                                        else if (blockIDs[0, X + hor, Y + ver] == Convert.ToInt32(digbotBedRockId.Value))
+                                        {
+                                            score = 1;
+                                            mine_access = true;
                                         }
                                         else
                                         {
-                                            con.Send(worldKey, 0, X + hor, Y + ver, 0);
+                                            score = 1;
+                                            mine_access = false;
                                         }
-                                        if (blockIDs[1, X + hor, Y + ver] != 0)
+
+                                        if (mine_access)
                                         {
-                                            bool allow = true;
-                                            if (blockIDs[1, X + hor, Y + ver] == 615)
+                                            if (dbDD.Checked)
                                             {
-                                                Thread.Sleep(200);
-                                                score = 5;
-                                                con.Send("say", "/pm " + names[m.GetInt(0)] + " You have found an emerald ore.");
-                                            }
-                                            else if (blockIDs[1, X + hor, Y + ver] == 613)
-                                            {
-                                                Thread.Sleep(200);
-                                                score = 4;
-                                                con.Send("say", "/pm " + names[m.GetInt(0)] + " You have found a ruby ore.");
-                                            }
-                                            else if (blockIDs[1, X + hor, Y + ver] == 527)
-                                            {
-                                                Thread.Sleep(200);
-                                                score = 3;
-                                                con.Send("say", "/pm " + names[m.GetInt(0)] + " You have found a gold ore.");
-                                            }
-                                            else if (blockIDs[1, X + hor, Y + ver] == 564)
-                                            {
-                                                Thread.Sleep(200);
-                                                score = 2;
-                                                con.Send("say", "/pm " + names[m.GetInt(0)] + " You have found a silver ore.");
-                                            }
-                                            else if (blockIDs[1, X + hor, Y + ver] == 616)
-                                            {
-                                                Thread.Sleep(200);
-                                                score = 6;
-                                                con.Send("say", "/pm " + names[m.GetInt(0)] + " You have found a diamond ore.");
+                                                con.Send(worldKey, 0, X + hor, Y + ver, 4);
                                             }
                                             else
                                             {
-                                                Random tR = new Random();
-                                                int em = tR.Next(1, 2900);
-                                                int rub = tR.Next(1, 1600);
-                                                int gol = tR.Next(1, 2100);
-                                                int sil = tR.Next(1, 1000);
-                                                int diam = tR.Next(1, 5000);
-
-                                                if (em == 9)
+                                                con.Send(worldKey, 0, X + hor, Y + ver, 0);
+                                            }
+                                            if (blockIDs[1, X + hor, Y + ver] != 0)
+                                            {
+                                                bool allow = true;
+                                                if (blockIDs[1, X + hor, Y + ver] == 615)
                                                 {
                                                     Thread.Sleep(200);
                                                     score = 5;
                                                     con.Send("say", "/pm " + names[m.GetInt(0)] + " You have found an emerald ore.");
                                                 }
-                                                else if (rub == 7)
+                                                else if (blockIDs[1, X + hor, Y + ver] == 613)
                                                 {
                                                     Thread.Sleep(200);
                                                     score = 4;
                                                     con.Send("say", "/pm " + names[m.GetInt(0)] + " You have found a ruby ore.");
                                                 }
-                                                else if (gol == 18)
+                                                else if (blockIDs[1, X + hor, Y + ver] == 527)
                                                 {
                                                     Thread.Sleep(200);
                                                     score = 3;
                                                     con.Send("say", "/pm " + names[m.GetInt(0)] + " You have found a gold ore.");
                                                 }
-                                                else if (sil == 7)
+                                                else if (blockIDs[1, X + hor, Y + ver] == 564)
                                                 {
                                                     Thread.Sleep(200);
                                                     score = 2;
                                                     con.Send("say", "/pm " + names[m.GetInt(0)] + " You have found a silver ore.");
                                                 }
-                                                else if (diam == 23)
+                                                else if (blockIDs[1, X + hor, Y + ver] == 616)
                                                 {
                                                     Thread.Sleep(200);
                                                     score = 6;
@@ -2711,20 +2902,60 @@ namespace R42Bot
                                                 }
                                                 else
                                                 {
-                                                    allow = false;
+                                                    Random tR = new Random();
+                                                    int em = tR.Next(1, 2900);
+                                                    int rub = tR.Next(1, 1600);
+                                                    int gol = tR.Next(1, 2100);
+                                                    int sil = tR.Next(1, 1000);
+                                                    int diam = tR.Next(1, 5000);
+
+                                                    if (em == 9)
+                                                    {
+                                                        Thread.Sleep(200);
+                                                        score = 5;
+                                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " You have found an emerald ore.");
+                                                    }
+                                                    else if (rub == 7)
+                                                    {
+                                                        Thread.Sleep(200);
+                                                        score = 4;
+                                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " You have found a ruby ore.");
+                                                    }
+                                                    else if (gol == 18)
+                                                    {
+                                                        Thread.Sleep(200);
+                                                        score = 3;
+                                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " You have found a gold ore.");
+                                                    }
+                                                    else if (sil == 7)
+                                                    {
+                                                        Thread.Sleep(200);
+                                                        score = 2;
+                                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " You have found a silver ore.");
+                                                    }
+                                                    else if (diam == 23)
+                                                    {
+                                                        Thread.Sleep(200);
+                                                        score = 6;
+                                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " You have found a diamond ore.");
+                                                    }
+                                                    else
+                                                    {
+                                                        allow = false;
+                                                    }
                                                 }
-                                            }
-                                            if (allow)
-                                            {
-                                                con.Send(worldKey, 1, X + hor, Y + ver, 500);
-                                                Thread.Sleep(200);
-                                                con.Send("say", "/pm " + names[m.GetInt(0)] + " You have earnd " + score.ToString() + " points by finding an ore.");
-                                                if (!dboobg.Checked)
-                                                    con.Send(worldKey, 0, X + hor, Y + ver, Convert.ToInt32(digbotStoneId.Value));
-                                            }
-                                            if (score > 0)
-                                            {
-                                                player[m.GetInt(0)].diggyscore = player[m.GetInt(0)].diggyscore + score;
+                                                if (allow)
+                                                {
+                                                    con.Send(worldKey, 1, X + hor, Y + ver, 500);
+                                                    Thread.Sleep(200);
+                                                    con.Send("say", "/pm " + names[m.GetInt(0)] + " You have earnd " + score.ToString() + " points by finding an ore.");
+                                                    if (!dboobg.Checked)
+                                                        con.Send(worldKey, 0, X + hor, Y + ver, Convert.ToInt32(digbotStoneId.Value));
+                                                }
+                                                if (score > 0)
+                                                {
+                                                    player[m.GetInt(0)].diggyscore = player[m.GetInt(0)].diggyscore + score;
+                                                }
                                             }
                                         }
                                     }
@@ -2742,8 +2973,8 @@ namespace R42Bot
                                     {
                                         ThreadPool.QueueUserWorkItem(delegate
                                         {
-                                            con.Send("m", m.GetDouble(1), m.GetDouble(2), m.GetDouble(3), m.GetDouble(4), m.GetDouble(5), m.GetDouble(6), m.GetDouble(7), m.GetDouble(8), m.GetInt(9), m.GetBoolean(10));
-                                            Thread.Sleep(125);
+                                            con.Send("teleport", botid, X, Y);
+                                            Thread.Sleep(575);
                                         });
                                     }
                                 }
@@ -2763,7 +2994,7 @@ namespace R42Bot
                     }
                     break;
                 case "say":
-                    if (botFullyConnected && digW)
+                    if (botFullyConnected)
                     {
                         str = m.GetString(1);
 
@@ -2910,7 +3141,7 @@ namespace R42Bot
                                             }
                                             else
                                             {
-                                                con.Send("say", "/pm " + names[m.GetInt(0)] + "  Option doesn't exist or option misspellen.");
+                                                con.Send("say", "/pm " + names[m.GetInt(0)] + "  Option doesn't exist or option misspelled.");
                                             }
                                         }
                                     }
@@ -3349,7 +3580,7 @@ namespace R42Bot
                                         con.Send("say", "/pm " + names[m.GetInt(0)] + " You aren't an admin!");
                                     }
                                 }
-                                else if (str.StartsWith("!portal"))
+                                else if (str.StartsWith("!portal") || str.StartsWith("!pt"))
                                 {
                                     if (portalplac.Checked || portalplac1.Checked)
                                     {
@@ -3414,7 +3645,7 @@ namespace R42Bot
                                         con.Send("say", "/pm " + names[m.GetInt(0)] + " " + GetLangFile(100));
                                     }
                                 }
-                                else if (str.StartsWith("!topwin"))
+                                else if (str.StartsWith("!topwin") || str.StartsWith("!gettopwin") || str.StartsWith("!getopwin") || str.StartsWith("!gettopwins") || str.StartsWith("!getopwins"))
                                 {
                                     if (winsystem1.Checked == true)
                                     {
@@ -3432,33 +3663,25 @@ namespace R42Bot
                                         }
                                         #endregion
 
-                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " Top winner: [" + top + ", " + topI.ToString() + " wins]");
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " Top winner: [" + top + ", " + topI.ToString() + " win(s)]");
                                     }
                                     else
                                     {
                                         con.Send("say", "/pm " + names[m.GetInt(0)] + " " + GetLangFile(100));
                                     }
                                 }
-                                else if (str.StartsWith("!mywins"))
+                                else if (str.StartsWith("!mywins") || str.StartsWith("!getmywins"))
                                 {
                                     if (winsystem1.Checked == true)
                                     {
-                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " You won " + player[m.GetInt(0)].wins + " times.");
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " You have won " + player[m.GetInt(0)].wins + " time(s).");
                                     }
                                     else
                                     {
                                         con.Send("say", "/pm " + names[m.GetInt(0)] + " " + GetLangFile(100));
                                     }
                                 }
-                                else if (str.StartsWith("!bbwinner") || str.StartsWith("!bbwin"))
-                                {
-                                    if (IsAdmin(names[m.GetInt(0)]))
-                                    {
-                                        someoneWon = true;
-                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " You have announced a winner. Boss bot will now stop for 6 seconds.");
-                                    }
-                                }
-                                else if (str.StartsWith("!getwins"))
+                                else if (str.StartsWith("!getwins") || str.StartsWith("!wins"))
                                 {
                                     string[] ls = str.Split(' ');
                                     if (ls.Length > 1)
@@ -3478,7 +3701,7 @@ namespace R42Bot
                                             }
                                             if (id != -2)
                                             {
-                                                con.Send("say", "/pm " + names[m.GetInt(0)] + " " + user + " won " + player[id].wins + " times.");
+                                                con.Send("say", "/pm " + names[m.GetInt(0)] + " " + user + " has won " + player[id].wins + " time(s).");
                                             }
                                             else
                                             {
@@ -3492,7 +3715,7 @@ namespace R42Bot
                                     }
                                     else
                                     {
-                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " Please tell wich user!");
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " You have won " + player[m.GetInt(0)].wins + " time(s).");
                                     }
                                 }
                                 else if (str.StartsWith("!say "))
@@ -3501,7 +3724,7 @@ namespace R42Bot
                                     {
                                         string beginz = str.Substring(0, 5);
                                         string endz = str.Replace(beginz, "");
-                                        con.Send("say", "[R42Bot++] " + endz);
+                                        con.Send("say", "[R42Bot++]> " + endz);
                                     }
                                     else
                                     {
@@ -3558,7 +3781,7 @@ namespace R42Bot
                                     }
                                     else
                                     {
-                                        con.Send("say", "/pm " + names[m.GetInt(0)] + "  Unknown question or misspellen question.");
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + "  Unknown question or misspelled question.");
                                     }
                                 }
                                 #endregion
@@ -3869,10 +4092,12 @@ namespace R42Bot
                                 {
                                     if (IsAdmin(names[m.GetInt(0)]))
                                     {
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " giving everyone edit...");
+                                        Thread.Sleep(575);
                                         foreach (Player s in player)
                                         {
                                             con.Send("say", "/giveedit " + s.username);
-                                            Thread.Sleep(575);
+                                            Thread.Sleep(255);
                                         }
                                         con.Send("say", "/pm " + names[m.GetInt(0)] + " Done giving edit.");
                                     }
@@ -3885,10 +4110,12 @@ namespace R42Bot
                                 {
                                     if (IsAdmin(names[m.GetInt(0)]))
                                     {
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " removing everyone's edit.");
+                                        Thread.Sleep(575);
                                         foreach (Player s in player)
                                         {
                                             con.Send("say", "/removeedit " + s.username);
-                                            Thread.Sleep(575);
+                                            Thread.Sleep(255);
                                         }
                                         con.Send("say", "/pm " + names[m.GetInt(0)] + " Done removing edit.");
                                     }
@@ -3923,7 +4150,7 @@ namespace R42Bot
                                         if (power)
                                         {
                                             con.Send("say", "/loadlevel");
-                                            con.Send("say", "/pm " + names[m.GetInt(0)] + " [R42Bot++] level reloaded.");
+                                            con.Send("say", "/pm " + names[m.GetInt(0)] + " [R42Bot++] Level reloaded.");
                                             #region BOT LOG
                                             DefineLogZones();
                                             Thread.Sleep(250);
@@ -3958,7 +4185,7 @@ namespace R42Bot
                                         if (power)
                                         {
                                             con.Send("say", "/reset");
-                                            con.Send("say", "/pm " + names[m.GetInt(0)] + " [R42Bot++] reseted.");
+                                            con.Send("say", "/pm " + names[m.GetInt(0)] + " [R42Bot++] Level resseted.");
                                             #region BOT LOG
                                             DefineLogZones();
                                             Thread.Sleep(250);
@@ -4421,13 +4648,13 @@ namespace R42Bot
                                     }
                                     if (IsAdmin(names[m.GetInt(0)]))
                                     {
-                                        con.Send("say", "/pm " + names[m.GetInt(0)].ToUpper() + " [R42Bot++] !version, !survival [plr], !creative [plr], !credits,");
+                                        con.Send("say", "/pm " + names[m.GetInt(0)].ToUpper() + " [R42Bot++] !version, !redit [plr], !edit [plr], !credits,");
                                         Thread.Sleep(575);
-                                        con.Send("say", "/pm " + names[m.GetInt(0)].ToUpper() + " [R42Bot++] !mywins, !topwin, !getwins [plr], !rank" + dbAdd);
+                                        con.Send("say", "/pm " + names[m.GetInt(0)].ToUpper() + " [R42Bot++] !mywins, !topwins, !getwins [plr], !rank" + dbAdd);
                                     }
                                     else
                                     {
-                                        con.Send("say", "/pm " + names[m.GetInt(0)].ToUpper() + " [R42Bot++] !version, !mywins, !topwin, !credits, ");
+                                        con.Send("say", "/pm " + names[m.GetInt(0)].ToUpper() + " [R42Bot++] !version, !mywins, !topwins, !credits, ");
                                         Thread.Sleep(575);
                                         con.Send("say", "/pm " + names[m.GetInt(0)].ToUpper() + " [R42Bot++] !getwins [plr], !rank" + dbAdd);
                                     }
@@ -4745,9 +4972,9 @@ namespace R42Bot
                                     {
                                         con.Send("say", "/pm " + names[m.GetInt(0)] + " !getwins [plr]. Returns the player's win count.");
                                     }
-                                    else if (command[1] == "topwin")
+                                    else if (command[1] == "topwins" || command[1]=="topwin")
                                     {
-                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " !topwin. Returns the biggest amount of wins and who owns them.");
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " !topwins. Returns the biggest amount of wins and who owns them.");
                                     }
                                     else
                                     {
@@ -4764,11 +4991,11 @@ namespace R42Bot
 
                                 else if (str.StartsWith("!version"))
                                 {
-                                    con.Send("say", "/pm " + names[m.GetInt(0)] + " [R42Bot++] Bot version '" + Version.version + "' build " + nBuild + ".");
+                                    con.Send("say", "/pm " + names[m.GetInt(0)] + " [R42Bot++] Bot version '" + Version.version + "' " + GetLangFile(12).ToLower() + " " + nBuild + ".");
                                     Thread.Sleep(575);
                                     if (Convert.ToInt32(Version.upgradedBuild) > Convert.ToInt32(nBuild))
                                     {
-                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " [R42Bot++] Build outdated. Newest is " + Version.upgradedBuild + ".");
+                                        con.Send("say", "/pm " + names[m.GetInt(0)] + " [R42Bot++] " + GetLangFile(12) + " outdated. Newest is " + Version.upgradedBuild + ".");
                                     }
                                     else if (Convert.ToInt32(Version.upgradedBuild) < Convert.ToInt32(nBuild))
                                     {
@@ -4779,7 +5006,7 @@ namespace R42Bot
                                         con.Send("say", "/pm " + names[m.GetInt(0)] + " [R42Bot++] Up-to-date.");
                                     }
                                 }
-                                else if (str.StartsWith("!creative "))
+                                else if (str.StartsWith("!edit "))
                                 {
                                     string[] split = str.Split(' ');
                                     bool power = false;
@@ -4805,7 +5032,7 @@ namespace R42Bot
                                                         con.Send("say", "/pm " + names[m.GetInt(0)] + " Warning limit reached! You are getting banned.");
                                                         Thread.Sleep(575);
                                                         bansList.Items.Add(names[m.GetInt(0)]);
-                                                        banreassons.Items.Add("Warning limit for 'creative' reached.");
+                                                        banreassons.Items.Add("Warning limit for 'edit' reached.");
                                                         con.Send("say", "/kick " + names[m.GetInt(0)]);
                                                     }
                                                     else
@@ -4817,12 +5044,12 @@ namespace R42Bot
                                                 {
                                                     player[m.GetInt(0)].warnings = player[m.GetInt(0)].warnings + 1;
                                                     Thread.Sleep(250);
-                                                    con.Send("say", names[m.GetInt(0)].ToUpper() + ": Please don't use !creative. Warning " + player[m.GetInt(0)].warnings + " out of " + textBox1.Text + ".");
+                                                    con.Send("say", names[m.GetInt(0)].ToUpper() + ": Please don't use !edit. Warning " + player[m.GetInt(0)].warnings + " out of " + textBox1.Text + ".");
                                                 }
                                             }
                                             else
                                             {
-                                                con.Send("say", "/kick " + names[m.GetInt(0)] + " Please don't use !creative command!");
+                                                con.Send("say", "/kick " + names[m.GetInt(0)] + " Please don't use !edit command!");
                                             }
                                         }
                                         else
@@ -4833,9 +5060,9 @@ namespace R42Bot
                                                 {
                                                     con.Send("say", "/giveedit " + split[1].ToLower());
                                                     Thread.Sleep(200);
-                                                    con.Send("say", "/pm " + names[m.GetInt(0)] + "  " + split[1].ToUpper() + " is now in creative mode.");
+                                                    con.Send("say", "/pm " + names[m.GetInt(0)] + "  " + split[1].ToUpper() + " is now in edit mode.");
                                                     Thread.Sleep(200);
-                                                    con.Send("say", "/pm " + split[1].ToLower() + " [R42Bot++] hey... you are now in creative mode!");
+                                                    con.Send("say", "/pm " + split[1].ToLower() + " [R42Bot++] hey... you are now in edit mode!");
                                                     Thread.Sleep(200);
                                                 }
                                                 else
@@ -4854,7 +5081,7 @@ namespace R42Bot
                                         con.Send("say", "/pm " + names[m.GetInt(0)] + "  " + GetLangFile(102));
                                     }
                                 }
-                                else if (str.StartsWith("!survival "))
+                                else if (str.StartsWith("!redit "))
                                 {
                                     string[] split = str.Split(' ');
                                     bool power = false;
@@ -4880,7 +5107,7 @@ namespace R42Bot
                                                         con.Send("say", "/pm " + names[m.GetInt(0)] + " Warning limit reached! You are getting banned.");
                                                         Thread.Sleep(575);
                                                         bansList.Items.Add(names[m.GetInt(0)]);
-                                                        banreassons.Items.Add("Warning limit for 'survival' reached.");
+                                                        banreassons.Items.Add("Warning limit for 'redit' reached.");
                                                         con.Send("say", "/kick " + names[m.GetInt(0)]);
                                                     }
                                                     else
@@ -4892,12 +5119,12 @@ namespace R42Bot
                                                 {
                                                     player[m.GetInt(0)].warnings = player[m.GetInt(0)].warnings + 1;
                                                     Thread.Sleep(250);
-                                                    con.Send("say", names[m.GetInt(0)].ToUpper() + ": Please don't use !survival. Warning " + player[m.GetInt(0)].warnings + " out of " + textBox1.Text + ".");
+                                                    con.Send("say", names[m.GetInt(0)].ToUpper() + ": Please don't use !redit. Warning " + player[m.GetInt(0)].warnings + " out of " + textBox1.Text + ".");
                                                 }
                                             }
                                             else
                                             {
-                                                con.Send("say", "/kick " + names[m.GetInt(0)] + " Please don't use !survival command!");
+                                                con.Send("say", "/kick " + names[m.GetInt(0)] + " Please don't use !redit command!");
                                             }
                                         }
                                         else
@@ -4907,8 +5134,8 @@ namespace R42Bot
                                                 if (names.ContainsValue(split[1].ToLower()))
                                                 {
                                                     con.Send("say", "/removeedit " + split[1].ToLower());
-                                                    con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToUpper() + " " + split[1].ToUpper() + " is now in survival mode.");
-                                                    con.Send("say", "/pm " + split[1].ToLower() + " [R42Bot++] hey... you are now in survival mode!");
+                                                    con.Send("say", "[R42Bot++] " + names[m.GetInt(0)].ToUpper() + " " + split[1].ToUpper() + "'s edit has been removed.");
+                                                    con.Send("say", "/pm " + split[1].ToLower() + " [R42Bot++] you have no longer access to edit.");
                                                 }
                                                 else
                                                 {
@@ -4971,55 +5198,37 @@ namespace R42Bot
         #region ...
         private void connector_Click(object sender, EventArgs e)
         {
-            if (connector.Text == "Connect")
+            if (connector.Text == GetLangFile(9))
             {
-                if ((email.Text == "Email" || email.Text == "Token ID") && (pass.Text == "" && pass.Enabled == true) && idofworld.Text == "world ID")
-                {
-                        if (!isFacebook.Checked)
-                        {
-                            MessageBox.Show(GetLangFile(76), "R42Bot++ v" + Version.version + " " + GetLangFile(92));
-                        }
-                        else
-                        {
-                            MessageBox.Show(GetLangFile(77), "R42Bot++ v" + Version.version + " " + GetLangFile(92));
-                        }
-                }
-                else if (email.Text == "Email" && (pass.Text == "" && pass.Enabled == true) && idofworld.Text == "ID do mundo")
-                {
-                    MessageBox.Show("O Email, a password e o ID do mundo tenhem de ser preenchidos.", "R42Bot++ v" + Version.version + " System");
-                }
-                else
-                {
-                    this.Connect();
-                    bool run = true;
+                this.Connect();
+                bool run = true;
 
-                    try
-                    {
-                        con.Send("init");
-                        con.Send("init2");
-                    }
-                    catch (PlayerIOError error)
-                    {
-                        errorlog.Items.Add("The bot failed to connect: " + error.Message);
-                        DisconnectBot();
-                        run = false;
-                        MessageBox.Show("The bot failed to connect: " + error.Message, "Error 000");
-                        //MessageBox.Show(error.Message);
-                    }
-                    if (run)
-                    {
-                        connector.Text = "Disconnect";
-                        autochangerface.Start();
-                        autochangerface.Enabled = true;
-                        button8.Enabled = true;
-                        button9.Enabled = true;
-                        grbutton.Enabled = true;
-                        paintbrushauto.Enabled = true;
-                        dncycle.Enabled = true;
-                    }
+                try
+                {
+                    con.Send("init");
+                }
+                catch (PlayerIOError error)
+                {
+                    errorlog.Items.Add("The bot failed to connect: " + error.Message);
+                    DisconnectBot();
+                    run = false;
+                    MessageBox.Show("The bot failed to connect: " + error.Message, "Error 000");
+                    //MessageBox.Show(error.Message);
+                }
+                if (run)
+                {
+                    connector.Text = GetLangFile(10);
+                    autochangerface.Start();
+                    autochangerface.Enabled = true;
+                    button8.Enabled = true;
+                    button9.Enabled = true;
+                    button32.Enabled = true;
+                    grbutton.Enabled = true;
+                    paintbrushauto.Enabled = true;
+                    dncycle.Enabled = true;
                 }
             }
-            else if (connector.Text == "Disconnect")
+            else if (connector.Text == GetLangFile(10))
             {
                 DisconnectBot();
             }
@@ -5092,14 +5301,14 @@ namespace R42Bot
                         textBox1.Text = strlist[3];
                         bwl.Checked = Convert.ToBoolean(strlist[4]);
                     }
-                    else if (strlist[0] == "survival")
+                    else if (strlist[0] == "redit")
                     {
                         noRespawn2.Checked = Convert.ToBoolean(strlist[1]);
                         warningGiver2.Checked = Convert.ToBoolean(strlist[2]);
                         limit2.Text = strlist[3];
                         bwl2.Checked = Convert.ToBoolean(strlist[4]);
                     }
-                    else if (strlist[0] == "creative")
+                    else if (strlist[0] == "edit")
                     {
                         noRespawn3.Checked = Convert.ToBoolean(strlist[1]);
                         warningGiver3.Checked = Convert.ToBoolean(strlist[2]);
@@ -5236,7 +5445,7 @@ namespace R42Bot
 
         private void autokick_Tick(object sender, EventArgs e)
         {
-            if (autokickvalue.Checked)
+            if (autokickvalue.Checked && botFullyConnected)
             {
                 if (player.Length > (Admins.Items.Count + Moderators.Items.Count))
                 {
@@ -5248,10 +5457,17 @@ namespace R42Bot
                             {
                                 con.Send("say", "/kick " + player[i].username + " " + GetLangFile(99));
                             }
-                            Thread.Sleep(575);
+                            Thread.Sleep(255);
                         }
                     }
                     autokickvalue.Checked = false;
+                }
+            }
+            if (checkBox11.Checked && checkBox16.Checked)
+            {
+                if (blockIDs[0,(int)numericUpDown5.Value,(int)numericUpDown6.Value]==0)
+                {
+                    con.Send(worldKey, 0, (int)numericUpDown5.Value - 5, (int)numericUpDown6.Value, 30);
                 }
             }
         }
@@ -5318,7 +5534,7 @@ namespace R42Bot
         private void button9_Click(object sender, EventArgs e)
         {
             Thread.Sleep(575);
-            con.Send("say", "[R42Bot++] " + saytext.Text);
+            con.Send("say", "[R42Bot++]> " + saytext.Text);
 
             chatbox.Items.Add(">" + saytext.Text);
         }
@@ -5357,7 +5573,7 @@ namespace R42Bot
                     info.Restrictions.Add(ls);
 
                     List<string> ls2 = new List<string> { };
-                    ls2.Add("survival");
+                    ls2.Add("redit");
                     ls2.Add(noRespawn2.Checked.ToString());
                     ls2.Add(warningGiver2.Checked.ToString());
                     ls2.Add(limit2.Text);
@@ -5365,7 +5581,7 @@ namespace R42Bot
                     info.Restrictions.Add(ls2);
 
                     List<string> ls3 = new List<string> { };
-                    ls3.Add("creative");
+                    ls3.Add("edit");
                     ls3.Add(noRespawn3.Checked.ToString());
                     ls3.Add(warningGiver3.Checked.ToString());
                     ls3.Add(limit3.Text);
@@ -5396,27 +5612,27 @@ namespace R42Bot
                             ls.Add(textBox1.Text);
                             ls.Add(bwl.Checked.ToString());
                         }
-                        else if (ls[0] == "survival")
+                        else if (ls[0] == "redit")
                         {
                             foreach (string s in ls)
                             {
                                 ls.Remove(s);
                             }
 
-                            ls.Add("survival");
+                            ls.Add("redit");
                             ls.Add(noRespawn2.Checked.ToString());
                             ls.Add(warningGiver2.Checked.ToString());
                             ls.Add(limit2.Text);
                             ls.Add(bwl2.Checked.ToString());
                         }
-                        else if (ls[0] == "creative")
+                        else if (ls[0] == "edit")
                         {
                             foreach (string s in ls)
                             {
                                 ls.Remove(s);
                             }
 
-                            ls.Add("creative");
+                            ls.Add("edit");
                             ls.Add(noRespawn3.Checked.ToString());
                             ls.Add(warningGiver3.Checked.ToString());
                             ls.Add(limit3.Text);
@@ -5735,7 +5951,7 @@ namespace R42Bot
 
         private void TrollCatcherBlockDelete_Tick(object sender, EventArgs e)
         {
-            if (botFullyConnected && digW)
+            if (botFullyConnected)
             {
                 if (unfairBlox.Checked)
                 {
@@ -5844,7 +6060,7 @@ namespace R42Bot
 
         private void paintbrushauto_Click(object sender, EventArgs e)
         {
-            if (botFullyConnected && digW)
+            if (botFullyConnected)
             {
                 int idof = Convert.ToInt32(idofit.Text);
                 if (FillBIDSet)
@@ -6101,7 +6317,7 @@ namespace R42Bot
 
         private void grbutton_Click(object sender, EventArgs e)
         {
-            if (grbutton.Text == "Generate Random Bricks")
+            if (!Gen_RB.Enabled)
             {
                 Gen_RB.Enabled = true;
                 Gen_RB.Start();
@@ -6115,7 +6331,7 @@ namespace R42Bot
             }
         }
 
-        private void Gen_RB_Tick(object sender, EventArgs e)
+        void gRB()
         {
             for (int x = 1; x < worldWidth; x++)
             {
@@ -6225,6 +6441,14 @@ namespace R42Bot
             Gen_RB.Stop();
             Gen_RB.Enabled = false;
         }
+        private void Gen_RB_Tick(object sender, EventArgs e)
+        {
+            if (gRBt == null)
+            {
+                gRBt = new Thread(new ThreadStart(gRB));
+                gRBt.Start();
+            }
+        }
 
         private void AutoFixBot_Tick(object sender, EventArgs e)
         {
@@ -6244,44 +6468,62 @@ namespace R42Bot
                     }
                 }
             }
-            if (!this.Text.Contains(GetLangFile(97)))
+            ThreadPool.QueueUserWorkItem(delegate
+            {
+                try
+                {
+                    if (!CallsSettings.LangChangeInitialized)
+                    {
+                        Main.Text = GetLangFile(1);
+                        label46.Text = GetLangFile(2);
+                        label50.Text = GetLangFile(3);
+                        add.Text = GetLangFile(4);
+                        add2.Text = GetLangFile(4);
+                        remove.Text = GetLangFile(5);
+                        remove2.Text = GetLangFile(5);
+                        email.Text = GetLangFile(6);
+                        idofworld.Text = GetLangFile(7);
+                        codebox.Text = GetLangFile(8);
+                        if (botFullyConnected)
+                            connector.Text = GetLangFile(10);
+                        else
+                            connector.Text = GetLangFile(9);
+
+                        isFacebook.Text = GetLangFile(11);
+
+                        CallsSettings.LangChangeInitialized = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            });
+
+            if (!this.Text.Contains("R42Bot++ v" + Version.version + " " + GetLangFile(12)))
             {
                 ThreadPool.QueueUserWorkItem(delegate
                 {
                     try
                     {
-                        if (!LangChangeInitialized)
-                        {
-                            welcomemsg.Text = GetLangFile(3);
-                            welcomemsg2.Text = "!";
-                            leftallmsg.Text = GetLangFile(5);
-                            leftall2.Text = GetLangFile(6);
-
-                            remove.Text = GetLangFile(9);
-                            add.Text = GetLangFile(8);
-                            add2.Text = GetLangFile(8);
-                            remove2.Text = GetLangFile(9);
-
-                            idofworld.Text = GetLangFile(7);
-
-                            allowSnakeSpecial.Text = GetLangFile(49);
-
-                            LangChangeInitialized = true;
-                        }
-
                         if (!Version.versionLoaded)
                         {
                             Version.upgradedBuildVersion = new System.Net.WebClient().DownloadString(Version.buildversionlink);
                             Version.upgradedBuild = new System.Net.WebClient().DownloadString(Version.buildlink);
                         }
 
-                        this.Text = "R42Bot++ v" + Version.version + " " + GetLangFile(97) + " " + System.Configuration.ConfigurationManager.AppSettings["Build"];
+                        this.Text = "R42Bot++ v" + Version.version + " " + GetLangFile(12) + " " + System.Configuration.ConfigurationManager.AppSettings["Build"];
                         if (!Version.versionLoaded)
                         {
-                            Version.UpToDate = GetLangFile(96).Replace("(V)", Version.version);
-                            Version.OutOfDate = GetLangFile(94).Replace("(V)", Version.version).Replace("[V]", Version.upgradedBuildVersion);
-                            Version.OutOfDateBuild = GetLangFile(95).Replace("(B)", nBuild).Replace("[B]", Version.upgradedBuild);
-                            Version.TestBuild = "R42Bot++ v" + Version.upgradedBuildVersion + " " + GetLangFile(97) + " " + nBuild;
+                            /* Version.UpToDate = GetLangFile(96).Replace("(V)", Version.version);
+                             Version.OutOfDate = GetLangFile(94).Replace("(V)", Version.version).Replace("[V]", Version.upgradedBuildVersion);
+                             Version.OutOfDateBuild = GetLangFile(95).Replace("(B)", nBuild).Replace("[B]", Version.upgradedBuild);
+                             Version.TestBuild = "R42Bot++ v" + Version.upgradedBuildVersion + " " + GetLangFile(97) + " " + nBuild;
+                             */
+                            Version.UpToDate = "Your version " + Version.version + " is up-to-date.";
+                            Version.OutOfDate = "Your version " + Version.version + " is out of date. Latest version is " + Version.upgradedBuildVersion;
+                            Version.OutOfDate = "Your " + GetLangFile(12).ToLower() + " " + nBuild + " is out of date. Latest " + GetLangFile(12).ToLower() + " is " + Version.upgradedBuild;
+                            Version.TestBuild = "R42Bot++ v" + Version.upgradedBuildVersion + " " + GetLangFile(12) + " " + nBuild;
 
                             if (Version.upgradedBuildVersion == Version.version)
                             {
@@ -6300,7 +6542,7 @@ namespace R42Bot
                             }
                             else if (Convert.ToInt32(Version.upgradedBuild) > Convert.ToInt32(nBuild))
                             {
-                                MessageBox.Show("Due to Security Reassons, you have to download the latest build: " + Version.upgradedBuild);
+                                MessageBox.Show("Due to Security Reassons, you have to download the latest " + GetLangFile(12).ToLower() + ": " + Version.upgradedBuild);
                                 label48.Text = Version.OutOfDateBuild;
                                 Application.Exit();
                             }
@@ -6331,16 +6573,51 @@ namespace R42Bot
                     }
                 });
             }
+            if (gRBt != null)
+                if (!Gen_RB.Enabled)
+                {
+                    gRBt.Abort();
+                    gRBt = null;
+                }
+            if (gDB2 != null)
+                if (!_digbottimer2.Enabled)
+                {
+                    gDB2.Abort();
+                    gDB2 = null;
+                }
+            if (gDB != null)
+                if (!_digbottimer.Enabled)
+                {
+                    gDB.Abort();
+                    gDB = null;
+                }
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             botFullyConnected = false;
-            digW = false;
             AutoFixBot.Stop();
             AutoFixBot.Enabled = false;
-            Gen_RB.Stop();
-            Gen_RB.Enabled = false;
+            if (con!=null)
+                if (con.Connected)
+                    con.Disconnect();
+
+            if (gDB != null)
+            {
+                gDB.Abort();
+                gDB = null;
+            }
+            if (gDB2 != null)
+            {
+                gDB2.Abort();
+                gDB2 = null;
+            }
+            if (gRBt!= null)
+            {
+                gRBt.Abort();
+                gRBt = null;
+            }
+
             MessageBox.Show("Thanks for using R42Bot++!", "Thanks!", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -6891,10 +7168,21 @@ namespace R42Bot
         {
             if (botFullyConnected)
             {
-                _digbottimer.Enabled = true;
-                _digbottimer.Start();
-                dbotbtn.Enabled = false;
-                dbotbtn2.Enabled = false;
+                if (_digbottimer.Enabled)
+                {
+                    dbotbtn.Text = "Generate a Hilly DigBot Map";
+                    _digbottimer.Enabled = false;
+                    _digbottimer.Stop();
+                    dbotbtn2.Enabled = true;
+                    dbotbtn.Enabled = true;
+                }
+                else
+                {
+                    dbotbtn.Text = "Stop Generating a Hilly DigBot Map";
+                    _digbottimer.Enabled = true;
+                    _digbottimer.Start();
+                    dbotbtn.Enabled = false;
+                }
             }
         }
 
@@ -7007,18 +7295,10 @@ namespace R42Bot
             ForceCheck(boxismonly, boxisaonly);
         }
 
-        private void _digbottimer_Tick(object sender, EventArgs e)
+        void HillyDigbot()
         {
             Random randomizer;
             randomizer = new Random();
-            digW = false;
-
-            autokick.Stop();
-            autokick.Enabled = false;
-            DayNightCycle.Stop();
-            DayNightCycle.Enabled = false;
-            TrollCatcherBlockDelete.Stop();
-            TrollCatcherBlockDelete.Enabled = false;
 
             int Delay = 50;
             int Width = worldWidth;
@@ -7045,7 +7325,7 @@ namespace R42Bot
             }
             if (dbGS.Checked)
             {
-                con.Send(worldKey, new object[] { 0, worldWidth/2, 4, 255});
+                con.Send(worldKey, new object[] { 0, worldWidth / 2, 4, 255 });
                 Thread.Sleep(18);
             }
             if (dbGLH.Checked)
@@ -7235,7 +7515,8 @@ namespace R42Bot
                         {
                             //break;
                         }
-                    }catch(Exception ex)
+                    }
+                    catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message);
                     }
@@ -7250,36 +7531,6 @@ namespace R42Bot
             {
                 amount = (worldWidth + worldHeight) + randomizer.Next(2, 6);
             }
-            /*for (int j = 0; j < amount; j++)
-            {
-                if (con.Connected)
-                {
-                    int x = randomizer.Next(10, worldWidth - 10);
-                    int y = randomizer.Next(10, worldHeight - 10);
-                    int width = randomizer.Next(4, 8);
-                    int height = randomizer.Next(4, 8);
-
-                    if (blockIDs[0, x, y] == Convert.ToUInt32(digbotStoneId.Value))
-                    {
-                        for (int y1 = 0; y1 < height; y1++)
-                        {
-                            for (int x1 = 0; x1 < width; x1++)
-                            {
-                                con.Send(worldKey, new object[] { 0, x1, y1, 70 });
-                                Thread.Sleep(20);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        j--;
-                    }
-                }
-                else
-                {
-                    break;
-                }
-            }*/
             if (!con.Connected)
             {
                 FillGaveError = true;
@@ -7288,17 +7539,21 @@ namespace R42Bot
             {
                 con.Send("say", "/reset");
             }
-            dbotbtn.Enabled = true;
-            dbotbtn2.Enabled = true;
-            autokick.Enabled = true;
-            autokick.Start();
-            DayNightCycle.Enabled = true;
-            DayNightCycle.Start();
-            TrollCatcherBlockDelete.Enabled = true;
-            TrollCatcherBlockDelete.Start();
-            digW = true;
+
             _digbottimer.Stop();
             _digbottimer.Enabled = false;
+            dbotbtn.Enabled = true;
+            dbotbtn2.Enabled = true;
+            dbotbtn.Text = "Generate a Hilly DigBot Map";
+        }
+
+        private void _digbottimer_Tick(object sender, EventArgs e)
+        {
+            if (gDB == null)
+            {
+                gDB = new Thread(new ThreadStart(HillyDigbot));
+                gDB.Start();
+            }
         }
 
         private void btnsmileyaura_Click(object sender, EventArgs e)
@@ -7449,307 +7704,283 @@ namespace R42Bot
         {
             if (botFullyConnected)
             {
-                _digbottimer2.Enabled = true;
-                _digbottimer2.Start();
-                dbotbtn2.Enabled = false;
-                dbotbtn.Enabled = false;
+                if (_digbottimer2.Enabled)
+                {
+                    dbotbtn2.Text = "Generate a Flat DigBot Map";
+                    _digbottimer2.Enabled = false;
+                    _digbottimer2.Stop();
+                    dbotbtn2.Enabled = true;
+                    dbotbtn.Enabled = true;
+                }
+                else
+                {
+                    dbotbtn2.Text = "Stop Generating a Flat DigBot Map";
+                    _digbottimer2.Enabled = true;
+                    _digbottimer2.Start();
+                    dbotbtn.Enabled = false;
+                }
             }
         }
 
-        private void _digbottimer2_Tick(object sender, EventArgs e)
+        void FlatDigbot()
         {
+            Random randomizer;
+            randomizer = new Random();
 
-                Random randomizer;
-                randomizer = new Random();
-                digW = false;
+            int Delay = 50;
+            int Width = worldWidth;
+            int Height = worldHeight;
+            int[] terrainContour = new int[Width * Height];
+            double rand1 = 8.0;
+            //double rand2 = 4.0;
+            //double rand3 = 4.0;
+            float peakheight = 3.0F;
+            float flatness = 6.0F;
+            int offset = 10;
+            int density = 4;
 
-                autokick.Stop();
-                autokick.Enabled = false;
-                DayNightCycle.Stop();
-                DayNightCycle.Enabled = false;
-                TrollCatcherBlockDelete.Stop();
-                TrollCatcherBlockDelete.Enabled = false;
-
-                int Delay = 50;
-                int Width = worldWidth;
-                int Height = worldHeight;
-                int[] terrainContour = new int[Width * Height];
-                double rand1 = 8.0;
-                //double rand2 = 4.0;
-                //double rand3 = 4.0;
-                float peakheight = 3.0F;
-                float flatness = 6.0F;
-                int offset = 10;
-                int density = 4;
-
-                if (dbGSKY.Checked)
+            if (dbGSKY.Checked)
+            {
+                for (int y = 0; y < 15; y++)
                 {
-                    for (int y = 0; y < 15; y++)
+                    for (int x = 0; x < worldWidth; x++)
                     {
-                        for (int x = 0; x < worldWidth; x++)
-                        {
-                            con.Send(worldKey, new object[] { 1, x, y, 530 });
-                            Thread.Sleep(18);
-                        }
+                        con.Send(worldKey, new object[] { 1, x, y, 530 });
+                        Thread.Sleep(18);
                     }
                 }
-                if (dbGS.Checked)
-                {
-                    con.Send(worldKey, new object[] { 0, worldWidth / 2, 4, 255 });
-                    Thread.Sleep(18);
-                }
-                if (dbGLH.Checked)
-                {
-                    int xTS = worldWidth / 2;
+            }
+            if (dbGS.Checked)
+            {
+                con.Send(worldKey, new object[] { 0, worldWidth / 2, 4, 255 });
+                Thread.Sleep(18);
+            }
+            if (dbGLH.Checked)
+            {
+                int xTS = worldWidth / 2;
 
-                    int bid = 93;
-                    if (dbSH.Checked)
+                int bid = 93;
+                if (dbSH.Checked)
+                {
+                    bid = 9;
+                }
+
+                int yTS = 2;
+                #region house
+                con.Send(worldKey, new object[] { 0, xTS, yTS, bid });
+                Thread.Sleep(18);
+                con.Send(worldKey, new object[] { 0, xTS - 1, yTS, bid });
+                Thread.Sleep(18);
+                con.Send(worldKey, new object[] { 0, xTS + 1, yTS, bid });
+                Thread.Sleep(18);
+                con.Send(worldKey, new object[] { 0, xTS - 2, yTS, bid });
+                Thread.Sleep(18);
+                con.Send(worldKey, new object[] { 0, xTS + 2, yTS, bid });
+                Thread.Sleep(18);
+                con.Send(worldKey, new object[] { 0, xTS + 2, yTS + 1, bid });
+                Thread.Sleep(18);
+                con.Send(worldKey, new object[] { 0, xTS + 2, yTS + 2, bid });
+                Thread.Sleep(18);
+                con.Send(worldKey, new object[] { 0, xTS + 2, yTS + 3, bid });
+                Thread.Sleep(18);
+                con.Send(worldKey, new object[] { 0, xTS - 2, yTS + 1, bid });
+                Thread.Sleep(18);
+                con.Send(worldKey, new object[] { 0, xTS - 2, yTS + 2, bid });
+                Thread.Sleep(18);
+                con.Send(worldKey, new object[] { 0, xTS - 2, yTS + 3, bid });
+                Thread.Sleep(18);
+                #endregion
+            }
+            for (int x = 0; x < Width; x++)
+            {
+                double height = peakheight / rand1 * Math.Sin((float)x / flatness * rand1 + rand1);
+                //height += peakheight / rand2 * Math.Sin((float)x / flatness * rand2 + rand2);
+                //height += peakheight / rand3 * Math.Sin((float)x / flatness * rand3 + rand3);
+                height += offset;
+                terrainContour[x] = (int)height;
+            }
+
+            int InverseOrNot = Height;
+            int InverseOrNot2 = Width;
+
+            if (dbhr.Checked)
+            {
+                InverseOrNot = Width;
+                InverseOrNot2 = Height;
+            }
+            if (dbhmgo.Checked)
+            {
+                if (InverseOrNot == Height)
+                    InverseOrNot = Height / 2;
+                else
+                    InverseOrNot2 = Height / 2;
+            }
+            for (int y = 0; y < InverseOrNot; y++)
+            {
+                for (int x = 0; x < InverseOrNot2; x++)
+                {
+                    try
                     {
-                        bid = 9;
-                    }
-
-                    int yTS = 2;
-                    #region house
-                    con.Send(worldKey, new object[] { 0, xTS, yTS, bid });
-                    Thread.Sleep(18);
-                    con.Send(worldKey, new object[] { 0, xTS - 1, yTS, bid });
-                    Thread.Sleep(18);
-                    con.Send(worldKey, new object[] { 0, xTS + 1, yTS, bid });
-                    Thread.Sleep(18);
-                    con.Send(worldKey, new object[] { 0, xTS - 2, yTS, bid });
-                    Thread.Sleep(18);
-                    con.Send(worldKey, new object[] { 0, xTS + 2, yTS, bid });
-                    Thread.Sleep(18);
-                    con.Send(worldKey, new object[] { 0, xTS + 2, yTS + 1, bid });
-                    Thread.Sleep(18);
-                    con.Send(worldKey, new object[] { 0, xTS + 2, yTS + 2, bid });
-                    Thread.Sleep(18);
-                    con.Send(worldKey, new object[] { 0, xTS + 2, yTS + 3, bid });
-                    Thread.Sleep(18);
-                    con.Send(worldKey, new object[] { 0, xTS - 2, yTS + 1, bid });
-                    Thread.Sleep(18);
-                    con.Send(worldKey, new object[] { 0, xTS - 2, yTS + 2, bid });
-                    Thread.Sleep(18);
-                    con.Send(worldKey, new object[] { 0, xTS - 2, yTS + 3, bid });
-                    Thread.Sleep(18);
-                    #endregion
-                }
-                for (int x = 0; x < Width; x++)
-                {
-                    double height = peakheight / rand1 * Math.Sin((float)x / flatness * rand1 + rand1);
-                    //height += peakheight / rand2 * Math.Sin((float)x / flatness * rand2 + rand2);
-                    //height += peakheight / rand3 * Math.Sin((float)x / flatness * rand3 + rand3);
-                    height += offset;
-                    terrainContour[x] = (int)height;
-                }
-
-                int InverseOrNot = Height;
-                int InverseOrNot2 = Width;
-
-                if (dbhr.Checked)
-                {
-                    InverseOrNot = Width;
-                    InverseOrNot2 = Height;
-                }
-                if (dbhmgo.Checked)
-                {
-                    if (InverseOrNot == Height)
-                        InverseOrNot = Height / 2;
-                    else
-                        InverseOrNot2 = Height / 2;
-                }
-                for (int y = 0; y < InverseOrNot; y++)
-                {
-                    for (int x = 0; x < InverseOrNot2; x++)
-                    {
-                        try
+                        if (con.Connected)
                         {
-                            if (con.Connected)
+                            if (y > terrainContour[x])
                             {
-                                if (y > terrainContour[x])
+                                int layer1Length = randomizer.Next(8, 11);
+                                if (y > (terrainContour[x] + layer1Length))
                                 {
-                                    int layer1Length = randomizer.Next(8, 11);
-                                    if (y > (terrainContour[x] + layer1Length))
+                                    bool CanSt = false;
+                                    if (dbEO.Checked)
                                     {
-                                        bool CanSt = false;
-                                        if (dbEO.Checked)
+                                        if (randomizer.Next(0, 10000) < (45 / density))
                                         {
-                                            if (randomizer.Next(0, 10000) < (45 / density))
-                                            {
-                                                if (!dboobg.Checked)
-                                                    con.Send(worldKey, new object[] { 0, x, y, 73 });
-                                                else
-                                                    con.Send(worldKey, new object[] { 0, x, y, Convert.ToInt32(digbotStoneId.Value) });
-
-                                                con.Send(worldKey, new object[] { 1, x, y, 616 });
-                                            }
-                                            else if (randomizer.Next(0, 10000) < (130 / density))
-                                            {
-                                                if (!dboobg.Checked)
-                                                    con.Send(worldKey, new object[] { 0, x, y, 29 });
-                                                else
-                                                    con.Send(worldKey, new object[] { 0, x, y, Convert.ToInt32(digbotStoneId.Value) });
-
-                                                con.Send(worldKey, new object[] { 1, x, y, 564 });
-                                            }
-                                            else if (randomizer.Next(0, 10000) < (100 / density))
-                                            {
-                                                if (!dboobg.Checked)
-                                                    con.Send(worldKey, new object[] { 0, x, y, 31 });
-                                                else
-                                                    con.Send(worldKey, new object[] { 0, x, y, Convert.ToInt32(digbotStoneId.Value) });
-
-                                                con.Send(worldKey, new object[] { 1, x, y, 527 });
-                                            }
-                                            else if (randomizer.Next(0, 10000) < (50 / density))
-                                            {
-                                                if (!dboobg.Checked)
-                                                    con.Send(worldKey, new object[] { 0, x, y, 74 });
-                                                else
-                                                    con.Send(worldKey, new object[] { 0, x, y, Convert.ToInt32(digbotStoneId.Value) });
-
-                                                con.Send(worldKey, new object[] { 1, x, y, 615 });
-                                            }
-                                            else if (randomizer.Next(0, 10000) < (80 / density))
-                                            {
-                                                if (!dboobg.Checked)
-                                                    con.Send(worldKey, new object[] { 0, x, y, 70 });
-                                                else
-                                                    con.Send(worldKey, new object[] { 0, x, y, Convert.ToInt32(digbotStoneId.Value) });
-
-                                                con.Send(worldKey, new object[] { 1, x, y, 613 });
-                                            }
-                                            else { CanSt = true; }
-                                        }
-                                        else
-                                        {
-                                            CanSt = true;
-                                        }
-                                        if (CanSt)
-                                        {
-                                            if (y < (Height - randomizer.Next(3, 8)))
-                                            {
-                                                con.Send(worldKey, new object[] { 0, x, y, Convert.ToInt32(digbotStoneId.Value) });
-                                                con.Send(worldKey, new object[] { 1, x, y, 500 });
-                                            }
+                                            if (!dboobg.Checked)
+                                                con.Send(worldKey, new object[] { 0, x, y, 73 });
                                             else
-                                            {
-                                                if (y < (Height - 2) && dbmagma.Checked)
-                                                {
-                                                    con.Send(worldKey, new object[] { 0, x, y, 416 });
-                                                }
-                                                else
-                                                {
-                                                    con.Send(worldKey, new object[] { 0, x, y, Convert.ToInt32(digbotBedRockId.Value) });
-                                                    con.Send(worldKey, new object[] { 1, x, y, 648 });
-                                                }
-                                            }
+                                                con.Send(worldKey, new object[] { 0, x, y, Convert.ToInt32(digbotStoneId.Value) });
 
+                                            con.Send(worldKey, new object[] { 1, x, y, 616 });
                                         }
-                                    }
-                                    else if (y > terrainContour[x] + 1)
-                                    {
-                                        if (new Random().Next(0, 10) < 8)
+                                        else if (randomizer.Next(0, 10000) < (130 / density))
                                         {
-                                            con.Send(worldKey, new object[] { 0, x, y, Convert.ToInt32(digbotDirtId.Value) });
-                                            con.Send(worldKey, new object[] { 1, x, y, 507 });
+                                            if (!dboobg.Checked)
+                                                con.Send(worldKey, new object[] { 0, x, y, 29 });
+                                            else
+                                                con.Send(worldKey, new object[] { 0, x, y, Convert.ToInt32(digbotStoneId.Value) });
+
+                                            con.Send(worldKey, new object[] { 1, x, y, 564 });
                                         }
-                                        else
+                                        else if (randomizer.Next(0, 10000) < (100 / density))
+                                        {
+                                            if (!dboobg.Checked)
+                                                con.Send(worldKey, new object[] { 0, x, y, 31 });
+                                            else
+                                                con.Send(worldKey, new object[] { 0, x, y, Convert.ToInt32(digbotStoneId.Value) });
+
+                                            con.Send(worldKey, new object[] { 1, x, y, 527 });
+                                        }
+                                        else if (randomizer.Next(0, 10000) < (50 / density))
+                                        {
+                                            if (!dboobg.Checked)
+                                                con.Send(worldKey, new object[] { 0, x, y, 74 });
+                                            else
+                                                con.Send(worldKey, new object[] { 0, x, y, Convert.ToInt32(digbotStoneId.Value) });
+
+                                            con.Send(worldKey, new object[] { 1, x, y, 615 });
+                                        }
+                                        else if (randomizer.Next(0, 10000) < (80 / density))
+                                        {
+                                            if (!dboobg.Checked)
+                                                con.Send(worldKey, new object[] { 0, x, y, 70 });
+                                            else
+                                                con.Send(worldKey, new object[] { 0, x, y, Convert.ToInt32(digbotStoneId.Value) });
+
+                                            con.Send(worldKey, new object[] { 1, x, y, 613 });
+                                        }
+                                        else { CanSt = true; }
+                                    }
+                                    else
+                                    {
+                                        CanSt = true;
+                                    }
+                                    if (CanSt)
+                                    {
+                                        if (y < (Height - randomizer.Next(3, 8)))
                                         {
                                             con.Send(worldKey, new object[] { 0, x, y, Convert.ToInt32(digbotStoneId.Value) });
                                             con.Send(worldKey, new object[] { 1, x, y, 500 });
                                         }
+                                        else
+                                        {
+                                            if (y < (Height - 2) && dbmagma.Checked)
+                                            {
+                                                con.Send(worldKey, new object[] { 0, x, y, 416 });
+                                            }
+                                            else
+                                            {
+                                                con.Send(worldKey, new object[] { 0, x, y, Convert.ToInt32(digbotBedRockId.Value) });
+                                                con.Send(worldKey, new object[] { 1, x, y, 648 });
+                                            }
+                                        }
+
+                                    }
+                                }
+                                else if (y > terrainContour[x] + 1)
+                                {
+                                    if (new Random().Next(0, 10) < 8)
+                                    {
+                                        con.Send(worldKey, new object[] { 0, x, y, Convert.ToInt32(digbotDirtId.Value) });
+                                        con.Send(worldKey, new object[] { 1, x, y, 507 });
                                     }
                                     else
                                     {
-                                        int grassid = Convert.ToInt32(digbotGrassId.Value);
-                                        if (dbSAG.Checked)
-                                        {
-                                            grassid = 140;
-                                        }
-
-                                        con.Send(worldKey, new object[] { 0, x, y, grassid });
-
-                                        if (randomizer.Next(0, 1000) < 75) { con.Send(worldKey, new object[] { 0, x, y - 1, 239 }); }
-                                        else if (randomizer.Next(0, 1000) < 75) { con.Send(worldKey, new object[] { 0, x, y - 1, 240 }); }
-                                        else if (randomizer.Next(0, 1000) < 75) { con.Send(worldKey, new object[] { 0, x, y - 1, 251 }); }
-                                        con.Send(worldKey, new object[] { 1, x, y, 507 });
+                                        con.Send(worldKey, new object[] { 0, x, y, Convert.ToInt32(digbotStoneId.Value) });
+                                        con.Send(worldKey, new object[] { 1, x, y, 500 });
                                     }
-                                    System.Threading.Thread.Sleep(Delay);
                                 }
                                 else
                                 {
+                                    int grassid = Convert.ToInt32(digbotGrassId.Value);
+                                    if (dbSAG.Checked)
+                                    {
+                                        grassid = 140;
+                                    }
+
+                                    con.Send(worldKey, new object[] { 0, x, y, grassid });
+
+                                    if (randomizer.Next(0, 1000) < 75) { con.Send(worldKey, new object[] { 0, x, y - 1, 239 }); }
+                                    else if (randomizer.Next(0, 1000) < 75) { con.Send(worldKey, new object[] { 0, x, y - 1, 240 }); }
+                                    else if (randomizer.Next(0, 1000) < 75) { con.Send(worldKey, new object[] { 0, x, y - 1, 251 }); }
+                                    con.Send(worldKey, new object[] { 1, x, y, 507 });
                                 }
+                                System.Threading.Thread.Sleep(Delay);
                             }
                             else
                             {
-                                //break;
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message);
-                        }
-                    }
-                }
-                int amount = 0;
-                if (worldHeight > 299 && worldWidth > 199)
-                {
-                    amount = (((worldWidth + worldHeight) / 340) + randomizer.Next(2, 6));
-                }
-                else
-                {
-                    amount = (worldWidth + worldHeight) + randomizer.Next(2, 6);
-                }
-                /*for (int j = 0; j < amount; j++)
-                {
-                    if (con.Connected)
-                    {
-                        int x = randomizer.Next(10, worldWidth - 10);
-                        int y = randomizer.Next(10, worldHeight - 10);
-                        int width = randomizer.Next(4, 8);
-                        int height = randomizer.Next(4, 8);
-
-                        if (blockIDs[0, x, y] == Convert.ToUInt32(digbotStoneId.Value))
-                        {
-                            for (int y1 = 0; y1 < height; y1++)
-                            {
-                                for (int x1 = 0; x1 < width; x1++)
-                                {
-                                    con.Send(worldKey, new object[] { 0, x1, y1, 70 });
-                                    Thread.Sleep(20);
-                                }
                             }
                         }
                         else
                         {
-                            j--;
+                            //break;
                         }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        break;
+                        MessageBox.Show(ex.Message);
                     }
-                }*/
-                if (!con.Connected)
-                {
-                    FillGaveError = true;
                 }
-                if (dbRPWD.Checked)
-                {
-                    con.Send("say", "/reset");
-                }
-                dbotbtn.Enabled = true;
-                dbotbtn2.Enabled = true;
-                autokick.Enabled = true;
-                autokick.Start();
-                DayNightCycle.Enabled = true;
-                DayNightCycle.Start();
-                TrollCatcherBlockDelete.Enabled = true;
-                TrollCatcherBlockDelete.Start();
-                digW = true;
-                _digbottimer2.Stop();
-                _digbottimer2.Enabled = false;
+            }
+            int amount = 0;
+            if (worldHeight > 299 && worldWidth > 199)
+            {
+                amount = (((worldWidth + worldHeight) / 340) + randomizer.Next(2, 6));
+            }
+            else
+            {
+                amount = (worldWidth + worldHeight) + randomizer.Next(2, 6);
+            }
+            if (!con.Connected)
+            {
+                FillGaveError = true;
+            }
+            if (dbRPWD.Checked)
+            {
+                con.Send("say", "/reset");
+            }
+            
+            _digbottimer2.Stop();
+            _digbottimer2.Enabled = false;
+            dbotbtn.Enabled = true;
+            dbotbtn2.Enabled = true;
+            dbotbtn2.Text = "Generate a Flat DigBot Map";
+        }
+
+        private void _digbottimer2_Tick(object sender, EventArgs e)
+        {
+            if (gDB2 == null)
+            {
+                gDB2 = new Thread(new ThreadStart(FlatDigbot));
+                gDB2.Start();
+            }
         }
 
         private void DIGBOTSCORE_CheckedChanged(object sender, EventArgs e)
@@ -7908,285 +8139,9 @@ namespace R42Bot
             con.Send(worldKey + "k");
         }
 
-        private void bossbotmanual_CheckedChanged(object sender, EventArgs e)
-        {
-            ForceCheck(bossbotmanual, bossbotautomatic);
-        }
-
-        private void bossbotautomatic_CheckedChanged(object sender, EventArgs e)
-        {
-            ForceCheck(bossbotautomatic, bossbotmanual);
-        }
-
         private void button30_Click(object sender, EventArgs e)
         {
             MessageBox.Show("[X (V)] - [Y (V)] Choose the X and Y coordinates 1 block down from the center of the keys drop zone.", "?", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void bossbot_Tick(object sender, EventArgs e)
-        {
-            bool doIt = false;
-            if (!someoneWon && BBwaitTicks>1)
-            {
-                doIt = true;
-            }
-            else if (someoneWon)
-            {
-                Thread.Sleep(6000);
-                someoneWon = false;
-                BBwaitTicks = 2;
-                if (bossbotautomatic.Checked)
-                {
-                    string key = "r";
-                    if (checkBox12.Checked)
-                        key = "r";
-                    else if (checkBox13.Checked)
-                        key = "g";
-                    else if (checkBox15.Checked)
-                        key = "b";
-                    else if (checkBox16.Checked)
-                        key = "c";
-                    else if (checkBox17.Checked)
-                        key = "m";
-                    else if (checkBox18.Checked)
-                        key = "y";
-
-                    con.Send(worldKey + key);
-                }
-                Thread.Sleep(8000);
-            }
-            else
-            {
-                BBwaitTicks++;
-            }
-
-            if (doIt)
-            {
-                digW = false;
-                if (bossbot.Enabled)
-                {
-                    bossbot.Stop();
-                    bossbot.Enabled = false;
-                }
-
-                List<block> LastBlocks = new List<block>() { };
-                int xT = Convert.ToInt32(numericUpDown5.Value);
-                int yT = Convert.ToInt32(numericUpDown6.Value);
-                int start = yT - 5;
-
-                List<string> options = new List<string>() { "middle", "checker", "jump" };
-
-                for (int xa = xT - 6; xa < xT + 6; xa++)
-                {
-                    con.Send(worldKey, 0, xa, start, 14);
-                    Thread.Sleep(64);
-                }
-                Random newRand = new Random();
-                int Option = newRand.Next(1, options.Count+1);
-                string opt = options[Option-1];
-
-                Thread.Sleep(2000);
-
-                if (opt == "checker")
-                {
-                    int bid = 14;
-                    int obl = newRand.Next(1, 3);
-                    if (obl == 3)
-                        bid = 12;
-
-                    for (int xo = xT - 6; xo < xT + 6; xo++)
-                    {
-                        if (bid == 12)
-                            bid = 14;
-                        else if (bid == 14)
-                            bid = 12;
-
-                        con.Send(worldKey, xo, start, bid);
-                        if (bid == 12)
-                            LastBlocks.Add(new block(0, xo, start, 12, null));
-
-                        Thread.Sleep(64);
-                    }
-
-                    Thread.Sleep(1262 - Convert.ToInt32(numericUpDown1.Value));
-
-                    foreach (block oops in LastBlocks)
-                    {
-                        con.Send(worldKey, 0, oops.x, oops.y, 0);
-                        Thread.Sleep(32);
-                    }
-                }
-                else if (opt == "middle")
-                {
-                    for (int xa = xT - 6; xa < xT - 1; xa++)
-                    {
-                        LastBlocks.Add(new block(0, xa, start, 12, null));
-                        con.Send(worldKey, 0, xa, start, 12);
-                        Thread.Sleep(64);
-                    }
-                    for (int xa = xT + 1; xa < xT + 6; xa++)
-                    {
-                        LastBlocks.Add(new block(0, xa, start, 12, null));
-                        con.Send(worldKey, 0, xa, start, 12);
-                        Thread.Sleep(64);
-                    }
-                    Thread.Sleep(1262 - Convert.ToInt32(numericUpDown1.Value));
-                    foreach (block atl in LastBlocks)
-                    {
-                        con.Send(worldKey, 0, atl.x, atl.y, 0);
-                        Thread.Sleep(32);
-                    }
-                    Thread.Sleep(1000);
-                }
-                for (int xa = xT - 6; xa < xT + 6; xa++)
-                {
-                    con.Send(worldKey, 0, xa, start, 14);
-                    Thread.Sleep(64);
-                }
-
-                LastBlocks.Clear();
-
-                if (bossbotautomatic.Checked)
-                {
-                    BBwaitTicks = 0;
-                    bossbot.Enabled = true;
-                    bossbot.Start();
-                }
-            }
-        }
-
-        private void checkBox11_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox11.Checked)
-            {
-                if (bossbotautomatic.Checked)
-                {
-                    if (bossbotautomatic.Checked)
-                    {
-                        string key = "r";
-                        if (checkBox12.Checked)
-                            key = "r";
-                        else if (checkBox13.Checked)
-                            key = "g";
-                        else if (checkBox15.Checked)
-                            key = "b";
-                        else if (checkBox16.Checked)
-                            key = "c"; 
-                        else if (checkBox17.Checked)
-                            key = "m";
-                        else if (checkBox18.Checked)
-                            key = "y";
-
-                        con.Send(worldKey + key);
-                    }
-                    bossbot.Enabled = true;
-                    bossbot.Start();
-                }
-            }
-            else
-            {
-                bossbot.Stop();
-                bossbot.Enabled = false;
-            }
-        }
-
-        private void checkBox12_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox12.Checked)
-            {
-                checkBox13.Checked = false;
-                checkBox15.Checked = false;
-                checkBox16.Checked = false;
-                checkBox17.Checked = false;
-                checkBox18.Checked = false;
-            }
-            else if (!checkBox12.Checked&&!checkBox13.Checked&&!checkBox14.Checked&&!checkBox15.Checked&&!checkBox16.Checked&&!checkBox17.Checked&&!checkBox18.Checked)
-            {
-                checkBox12.Checked = true;
-            }
-        }
-
-        private void checkBox13_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox13.Checked)
-            {
-                checkBox12.Checked = false;
-                checkBox15.Checked = false;
-                checkBox16.Checked = false;
-                checkBox17.Checked = false;
-                checkBox18.Checked = false;
-            }
-            else if (!checkBox12.Checked && !checkBox13.Checked && !checkBox14.Checked && !checkBox15.Checked && !checkBox16.Checked && !checkBox17.Checked && !checkBox18.Checked)
-            {
-                checkBox12.Checked = true;
-            }
-        }
-
-        private void checkBox15_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox15.Checked)
-            {
-                checkBox13.Checked = false;
-                checkBox12.Checked = false;
-                checkBox16.Checked = false;
-                checkBox17.Checked = false;
-                checkBox18.Checked = false;
-            }
-            else if (!checkBox12.Checked && !checkBox13.Checked && !checkBox14.Checked && !checkBox15.Checked && !checkBox16.Checked && !checkBox17.Checked && !checkBox18.Checked)
-            {
-                checkBox12.Checked = true;
-            }
-        }
-
-        private void checkBox16_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox16.Checked)
-            {
-                checkBox13.Checked = false;
-                checkBox14.Checked = false;
-                checkBox15.Checked = false;
-                checkBox12.Checked = false;
-                checkBox17.Checked = false;
-                checkBox18.Checked = false;
-            }
-            else if (!checkBox12.Checked && !checkBox13.Checked && !checkBox14.Checked && !checkBox15.Checked && !checkBox16.Checked && !checkBox17.Checked && !checkBox18.Checked)
-            {
-                checkBox12.Checked = true;
-            }
-        }
-
-        private void checkBox17_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox17.Checked)
-            {
-                checkBox13.Checked = false;
-                checkBox14.Checked = false;
-                checkBox15.Checked = false;
-                checkBox16.Checked = false;
-                checkBox12.Checked = false;
-                checkBox18.Checked = false;
-            }
-            else if (!checkBox12.Checked && !checkBox13.Checked && !checkBox14.Checked && !checkBox15.Checked && !checkBox16.Checked && !checkBox17.Checked && !checkBox18.Checked)
-            {
-                checkBox12.Checked = true;
-            }
-        }
-
-        private void checkBox18_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox18.Checked)
-            {
-                checkBox13.Checked = false;
-                checkBox14.Checked = false;
-                checkBox15.Checked = false;
-                checkBox16.Checked = false;
-                checkBox17.Checked = false;
-                checkBox12.Checked = false;
-            }
-            else if (!checkBox12.Checked && !checkBox13.Checked && !checkBox14.Checked && !checkBox15.Checked && !checkBox16.Checked && !checkBox17.Checked && !checkBox18.Checked)
-            {
-                checkBox12.Checked = true;
-            }
         }
 
         private void playercounter_Tick(object sender, EventArgs e)
@@ -8203,7 +8158,6 @@ namespace R42Bot
                 }
                 if (plrs == LastPlC && LastPlCT > 2)
                 {
-                    con.Send("say", GetLangFile(68).Replace("(V)", Version.version));
                     numericUpDown5.Enabled = true;
                     numericUpDown6.Enabled = true;
                     numericUpDown5.Maximum = worldWidth;
@@ -8217,9 +8171,51 @@ namespace R42Bot
                     worldtitlebox.Enabled = true;
                     worldtitlebox.Text = worldtitle;
                     botFullyConnected = true;
-                    digW = true;
                     botJoinedWorld = false;
-                    Thread.Sleep(200);
+                    for (int pl = 0; pl < player.Length; pl++)
+                    {
+                        Player plox = player[pl];
+                        if (plox.username != "")
+                        {
+                            if (plox.username != null)
+                            {
+                                if (!Admins.Items.Contains(plox.username) && !adEditOJ.Checked)
+                                {
+                                    if (CallsSettings.FreeEdit)
+                                    {
+                                        if (plox.username != botName)
+                                        {
+                                            con.Send("say", "/giveedit " + plox.username);
+                                            Thread.Sleep(275);
+                                        }
+                                    }
+                                }
+                                else if (Admins.Items.Contains(plox.username) && adEditOJ.Checked)
+                                {
+                                    Thread.Sleep(275);
+                                    con.Send("say", "/giveedit " + plox.username);
+                                }
+                                else if (Moderators.Items.Contains(plox.username) && modEditOJ.Checked)
+                                {
+                                    Thread.Sleep(275);
+                                    con.Send("say", "/giveedit " + plox.username);
+                                }
+                                else
+                                {
+                                    if (CallsSettings.FreeEdit)
+                                    {
+                                        if (plox.username != botName)
+                                        {
+                                            con.Send("say", "/giveedit " + plox.username);
+                                            Thread.Sleep(275);
+                                        }
+                                    }
+                                }
+                                Thread.Sleep(200);
+                            }
+                        }
+                    }
+                    con.Send("say", GetLangFile(68).Replace("(V)", Version.version));
                 }
                 else if (plrs == LastPlC)
                 {
@@ -8234,7 +8230,13 @@ namespace R42Bot
 
         private void button31_Click(object sender, EventArgs e)
         {
-            
+            new R42Bot.LangFB().Show();
+        }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+            if (con.Connected)
+                con.Send("access", textBox2.Text);
         }
     }
 }

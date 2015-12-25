@@ -209,35 +209,37 @@ namespace R42Bot
             }
             return name;
         }
-        public static string HexFromUInt(uint Uint)
+        public static string FloorUINT(uint Uint)
         {
-            try
+            string Uinta = Uint.ToString();
+
+            if (Uinta.IndexOf(".")!=0)
             {
-                return "#" + Convert.ToInt32(Uint).ToString("X");
+                return Uinta.Substring(0, Uinta.IndexOf("."));
             }
-            catch (Exception exc)
+            else
             {
-                Console.WriteLine(exc.Message);
-                return "#" + Convert.ToInt64(Uint).ToString("X");
+                return Uinta;
             }
         }
-        public static string GetLangFile(string LangType, int FileId)
+        public static string HexFromUInt(uint Uint)
         {
-            if (LangType == "enUS")
+            return "#" + FloorUINT(Uint);
+        }
+        public static string GetLangFile(int FileId)
+        {
+            if (System.IO.Directory.Exists(Environment.CurrentDirectory + @"\lang\"))
             {
-                return Lang.En.Organizate[FileId - 1];
-            }
-            else if (LangType == "ptbr")
-            {
-                return Lang.PT.Organizate[FileId - 1];
-            }
-            else if (LangType == "ltu")
-            {
-                return Lang.LTU.Organizate[FileId - 1];
-            }
-            else if (LangType == "dutch")
-            {
-                return Lang.Dutch.Organizate[FileId - 1];
+                if (CallsSettings.CurrentLang!="")
+                {
+                    if (System.IO.File.Exists(Environment.CurrentDirectory + @"\lang\" + CallsSettings.CurrentLang + ".rblang"))
+                    {
+                        if (System.IO.File.ReadAllLines(Environment.CurrentDirectory + @"\lang\" + CallsSettings.CurrentLang + ".rblang").Length-1 >= FileId)
+                        {
+                            return System.IO.File.ReadAllLines(Environment.CurrentDirectory + @"\lang\" + CallsSettings.CurrentLang + ".rblang")[FileId];
+                        }
+                    }
+                }
             }
             return "<LangError>";
         }

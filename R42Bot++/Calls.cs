@@ -11,11 +11,12 @@ namespace R42Bot
 {
     public partial class CallsSettings
     {
-        public static string CurrentLang = "enUS";
+        public static string CurrentLang = "";
         public static bool WinSystem = false;
         public static bool AllowJoiners = true,
             KickBots = false,
-            KickGuests = false;
+            KickGuests = false,
+            LangChangeInitialized = false;
         public static bool Welcome_Upper = true,
             Welcome = true;
         public static bool Goodbye_Upper = true,
