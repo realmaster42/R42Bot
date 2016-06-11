@@ -88,6 +88,7 @@ namespace R42Bot
             this.winsystem1 = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.LanguageOrSettings = new System.Windows.Forms.TabPage();
+            this.checkBox17 = new System.Windows.Forms.CheckBox();
             this.button31 = new System.Windows.Forms.Button();
             this.checkBox21 = new System.Windows.Forms.CheckBox();
             this.DIGBOTNOSCORE = new System.Windows.Forms.CheckBox();
@@ -395,7 +396,6 @@ namespace R42Bot
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label48 = new System.Windows.Forms.Label();
             this.autochangerface = new System.Windows.Forms.Timer(this.components);
-            this.autokick = new System.Windows.Forms.Timer(this.components);
             this.autoreset = new System.Windows.Forms.Timer(this.components);
             this.TrollCatcherBlockDelete = new System.Windows.Forms.Timer(this.components);
             this.Gen_RB = new System.Windows.Forms.Timer(this.components);
@@ -407,7 +407,6 @@ namespace R42Bot
             this.autoaurachanger = new System.Windows.Forms.Timer(this.components);
             this._digbottimer2 = new System.Windows.Forms.Timer(this.components);
             this.playercounter = new System.Windows.Forms.Timer(this.components);
-            this.checkBox17 = new System.Windows.Forms.CheckBox();
             this.firstTabControler.SuspendLayout();
             this.Main.SuspendLayout();
             this.LanguageOrSettings.SuspendLayout();
@@ -550,9 +549,9 @@ namespace R42Bot
             this.scommand.CheckState = System.Windows.Forms.CheckState.Checked;
             this.scommand.Location = new System.Drawing.Point(11, 13);
             this.scommand.Name = "scommand";
-            this.scommand.Size = new System.Drawing.Size(102, 17);
+            this.scommand.Size = new System.Drawing.Size(86, 17);
             this.scommand.TabIndex = 10;
-            this.scommand.Text = "!survival [player]";
+            this.scommand.Text = "!redit [player]";
             this.scommand.UseVisualStyleBackColor = true;
             // 
             // firstTabControler
@@ -803,9 +802,9 @@ namespace R42Bot
             this.label35.AutoSize = true;
             this.label35.Location = new System.Drawing.Point(202, 290);
             this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(310, 13);
+            this.label35.Size = new System.Drawing.Size(269, 13);
             this.label35.TabIndex = 55;
-            this.label35.Text = "R42Bot++ by marcoantonimsantos(realmaster) aka. realmaster42";
+            this.label35.Text = "R42Bot++ - marcoantonimsantos\'s bot (ALT: realmaster)";
             // 
             // cleverbotCBOX
             // 
@@ -850,7 +849,7 @@ namespace R42Bot
             // 
             // stalkMover
             // 
-            this.stalkMover.Location = new System.Drawing.Point(321, 263);
+            this.stalkMover.Location = new System.Drawing.Point(301, 265);
             this.stalkMover.Name = "stalkMover";
             this.stalkMover.Size = new System.Drawing.Size(155, 20);
             this.stalkMover.TabIndex = 5;
@@ -879,7 +878,7 @@ namespace R42Bot
             // alstalking
             // 
             this.alstalking.AutoSize = true;
-            this.alstalking.Location = new System.Drawing.Point(220, 263);
+            this.alstalking.Location = new System.Drawing.Point(205, 265);
             this.alstalking.Name = "alstalking";
             this.alstalking.Size = new System.Drawing.Size(95, 17);
             this.alstalking.TabIndex = 6;
@@ -1100,6 +1099,16 @@ namespace R42Bot
             this.LanguageOrSettings.TabIndex = 1;
             this.LanguageOrSettings.Text = "Options/DigBot";
             this.LanguageOrSettings.UseVisualStyleBackColor = true;
+            // 
+            // checkBox17
+            // 
+            this.checkBox17.AutoSize = true;
+            this.checkBox17.Location = new System.Drawing.Point(651, 287);
+            this.checkBox17.Name = "checkBox17";
+            this.checkBox17.Size = new System.Drawing.Size(140, 17);
+            this.checkBox17.TabIndex = 60;
+            this.checkBox17.Text = "Allow Dig on Generating";
+            this.checkBox17.UseVisualStyleBackColor = true;
             // 
             // button31
             // 
@@ -1804,7 +1813,6 @@ namespace R42Bot
             this.autokickvalue.TabIndex = 22;
             this.autokickvalue.Text = "Run Auto Kick";
             this.autokickvalue.UseVisualStyleBackColor = true;
-            this.autokickvalue.CheckedChanged += new System.EventHandler(this.autokickvalue_CheckedChanged);
             // 
             // welcomeallupper
             // 
@@ -1938,9 +1946,9 @@ namespace R42Bot
             this.checkBox5.AutoSize = true;
             this.checkBox5.Location = new System.Drawing.Point(131, 36);
             this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(110, 17);
+            this.checkBox5.Size = new System.Drawing.Size(89, 17);
             this.checkBox5.TabIndex = 69;
-            this.checkBox5.Text = "!creative for mods";
+            this.checkBox5.Text = "!edit for mods";
             this.checkBox5.UseVisualStyleBackColor = true;
             // 
             // checkBox4
@@ -1948,9 +1956,9 @@ namespace R42Bot
             this.checkBox4.AutoSize = true;
             this.checkBox4.Location = new System.Drawing.Point(131, 13);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(108, 17);
+            this.checkBox4.Size = new System.Drawing.Size(92, 17);
             this.checkBox4.TabIndex = 68;
-            this.checkBox4.Text = "!survival for mods";
+            this.checkBox4.Text = "!redit for mods";
             this.checkBox4.UseVisualStyleBackColor = true;
             // 
             // bfmods
@@ -2076,9 +2084,9 @@ namespace R42Bot
             this.scommand2.CheckState = System.Windows.Forms.CheckState.Checked;
             this.scommand2.Location = new System.Drawing.Point(11, 36);
             this.scommand2.Name = "scommand2";
-            this.scommand2.Size = new System.Drawing.Size(104, 17);
+            this.scommand2.Size = new System.Drawing.Size(83, 17);
             this.scommand2.TabIndex = 12;
-            this.scommand2.Text = "!creative [player]";
+            this.scommand2.Text = "!edit [player]";
             this.scommand2.UseVisualStyleBackColor = true;
             // 
             // krockhateseers
@@ -4574,12 +4582,6 @@ namespace R42Bot
             this.autochangerface.Interval = 2000;
             this.autochangerface.Tick += new System.EventHandler(this.autochangerface_Tick);
             // 
-            // autokick
-            // 
-            this.autokick.Enabled = true;
-            this.autokick.Interval = 1000;
-            this.autokick.Tick += new System.EventHandler(this.autokick_Tick);
-            // 
             // autoreset
             // 
             this.autoreset.Tick += new System.EventHandler(this.autoreset_Tick);
@@ -4628,16 +4630,6 @@ namespace R42Bot
             this.playercounter.Enabled = true;
             this.playercounter.Interval = 1000;
             this.playercounter.Tick += new System.EventHandler(this.playercounter_Tick);
-            // 
-            // checkBox17
-            // 
-            this.checkBox17.AutoSize = true;
-            this.checkBox17.Location = new System.Drawing.Point(651, 287);
-            this.checkBox17.Name = "checkBox17";
-            this.checkBox17.Size = new System.Drawing.Size(140, 17);
-            this.checkBox17.TabIndex = 60;
-            this.checkBox17.Text = "Allow Dig on Generating";
-            this.checkBox17.UseVisualStyleBackColor = true;
             // 
             // R42BotForm
             // 
@@ -4765,7 +4757,6 @@ namespace R42Bot
         private CheckBox checkBox1;
         private CheckBox autokickallowd;
         private Timer autochangerface;
-        private Timer autokick;
         private TabPage autoPage;
         private NumericUpDown autoresetime;
         private Label label8;

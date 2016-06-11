@@ -17,31 +17,31 @@ namespace R42Bot
         public LangFB()
         {
             InitializeComponent();
-            if (System.IO.Directory.Exists(Environment.CurrentDirectory + @"\lang\"))
+            if (System.IO.Directory.Exists(Environment.CurrentDirectory + @"\language\"))
             {
                 int files = 0;
-                foreach (string ok in System.IO.Directory.GetFiles(Environment.CurrentDirectory + @"\lang\"))
+                foreach (string ok in System.IO.Directory.GetFiles(Environment.CurrentDirectory + @"\language\"))
                 {
                     files++;
                     string final = ok.Replace(Environment.CurrentDirectory, "").Substring(6);
-                    if (final.EndsWith(".rblang"))
+                    if (ok.EndsWith(".txt"))
                     {
-                        if (final == "en_us.rblang" && CallsSettings.CurrentLang == "") {
+                        if (final == "en_us.txt" && CallsSettings.CurrentLang == "") {
                             CallsSettings.CurrentLang = "en_us";
                             ChosenId = "en_us";
                         }
 
-                        listBox1.Items.Add(final.Replace(".rblang", "") + " by " + System.IO.File.ReadAllLines(ok)[0]);
+                        listBox1.Items.Add(final.Replace(".txt", "") + " by " + System.IO.File.ReadAllLines(ok)[0]);
                     }
                 }
 
                 if (files == 0)
-                    MessageBox.Show("No .rblang files found.", "R42Bot++", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("No .txt files found.", "R42Bot++", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                System.IO.Directory.CreateDirectory(Environment.CurrentDirectory + @"\lang\");
-                MessageBox.Show("'lang' folder not found. Re-created one, but needs any .rblang file.", "R42Bot++", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                System.IO.Directory.CreateDirectory(Environment.CurrentDirectory + @"\language\");
+                MessageBox.Show("'language' folder not found. Re-created one, but needs a .txt file.", "R42Bot++", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -80,7 +80,7 @@ namespace R42Bot
             }
             else
             {
-                MessageBox.Show("No lang file is chosen. Please select one.", "R42Bot++", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("No language file is chosen. Please select one.", "R42Bot++", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -95,12 +95,12 @@ namespace R42Bot
             {
                 if (MessageBox.Show("This action cannot be undone! Are you sure you want to delete it?", "R42Bot++", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Yes)
                 {
-                    System.IO.File.Delete(Environment.CurrentDirectory + @"\lang\" + listBox1.Items[listBox1.SelectedIndex].ToString().Substring(0, listBox1.Items[listBox1.SelectedIndex].ToString().IndexOf("by") - 2) + ".rblang");
+                    System.IO.File.Delete(Environment.CurrentDirectory + @"\language\" + listBox1.Items[listBox1.SelectedIndex].ToString().Substring(0, listBox1.Items[listBox1.SelectedIndex].ToString().IndexOf("by") - 2) + ".rblang");
                 }
             }
             else
             {
-                MessageBox.Show("No .rblang file is choosen to be deleted.", "R42Bot++", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("No .txt file is choosen to be deleted.", "R42Bot++", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

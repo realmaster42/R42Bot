@@ -228,15 +228,15 @@ namespace R42Bot
         }
         public static string GetLangFile(int FileId)
         {
-            if (System.IO.Directory.Exists(Environment.CurrentDirectory + @"\lang\"))
+            if (System.IO.Directory.Exists(Environment.CurrentDirectory + @"\language\"))
             {
                 if (CallsSettings.CurrentLang!="")
                 {
-                    if (System.IO.File.Exists(Environment.CurrentDirectory + @"\lang\" + CallsSettings.CurrentLang + ".rblang"))
+                    if (System.IO.File.Exists(Environment.CurrentDirectory + @"\language\" + CallsSettings.CurrentLang + ".txt"))
                     {
-                        if (System.IO.File.ReadAllLines(Environment.CurrentDirectory + @"\lang\" + CallsSettings.CurrentLang + ".rblang").Length-1 >= FileId)
+                        if (System.IO.File.ReadAllLines(Environment.CurrentDirectory + @"\language\" + CallsSettings.CurrentLang + ".txt").Length-1 >= (FileId-1))
                         {
-                            return System.IO.File.ReadAllLines(Environment.CurrentDirectory + @"\lang\" + CallsSettings.CurrentLang + ".rblang")[FileId];
+                            return System.IO.File.ReadAllLines(Environment.CurrentDirectory + @"\language\" + CallsSettings.CurrentLang + ".txt")[FileId-1];
                         }
                     }
                 }

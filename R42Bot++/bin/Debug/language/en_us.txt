@@ -1,0 +1,28 @@
+Main
+Admins
+Moderators
+Add
+Remove
+Email
+world ID
+Code
+Connect
+Disconnect
+Facebook
+Build
+has won! Now has (w) win(s).
+Bot is being used from someone that is banned. Disconnecting...
+You are banned from this bot. Bye bye!
+Connected! Initializing players...
+Bots aren't allowed!
+Guests aren't allowed!
+An everybody edits admin has joined! It's name is '(n)' !
+An everybody edits moderator has joined! It's name is '(n)' !
+An everybody edits developer has joined! It's name is '(n)' !
+is here!
+The bot admin (n) has joined!
+The bot moderator (n) has joined!
+
+//Translation R42Bot++ Kit 2.0 Translation Kit
+//Please remember unstable translation versions may be changed 
+//and your translations might need to be updated.
