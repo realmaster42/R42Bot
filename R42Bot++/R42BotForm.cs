@@ -23,7 +23,7 @@ namespace R42Bot
 
     public partial class R42BotForm : Form
     {
-        public static string nBuild = "247",
+        public static string nBuild = "251",
             worldKey,
             SaveMapUser;
 
@@ -71,7 +71,10 @@ namespace R42Bot
         public static uint[, ,] blockIDs;
         public static string[, ,] blockPLACERs;
         public static int Face,
-            SmileyFaceLimit = 113;
+            SmileyFaceLimit = 125;
+
+        public static string gameid = "everybody-edits-su9rn58o40itdbnw69plyw"; // EE: "everybody-edits-su9rn58o40itdbnw69plyw"
+                                            // EBE: "eers-2-open-alpha-dq1cyz1b3ku5j7q16ej6vw"
 
         public static int[] blockMoverArray = new int[] { 12 };
         public static bool isFG = false,
@@ -99,7 +102,7 @@ namespace R42Bot
             BPortalID = 0,
             BPortalTARGET = 0,
             ax, ay, plays, likes, favourites, botid, worldWidth, worldHeight,
-            MaxAuraId = 6,
+            MaxAuraId = 5,
             AuraId = 0;
 
         public void DefineLogZones()
@@ -259,7 +262,7 @@ namespace R42Bot
             {
                 try
                 {
-                    client = PlayerIO.QuickConnect.SimpleConnect("everybody-edits-su9rn58o40itdbnw69plyw", email.Text, pass.Text, null);
+                    client = PlayerIO.QuickConnect.SimpleConnect(gameid, email.Text, pass.Text, null);
                     con = client.Multiplayer.JoinRoom(GetWIDFrom(idofworld.Text), null);
                     con.OnMessage += new MessageReceivedEventHandler(onMessage);
                 }
@@ -828,6 +831,7 @@ namespace R42Bot
                             if (banList.Contains(botName))
                             {
                                 //Thread.Sleep(250);
+                                errorlog.Items.Add("R42Bot++ is banned for you.");
                                 con.Send("say", "[R42Bot++] " + GetLangFile(14));
                                 DisconnectBot();
                                 connector.Enabled = false;
@@ -852,6 +856,7 @@ namespace R42Bot
                             {
                                 System.IO.Directory.CreateDirectory(Environment.CurrentDirectory + @"\Maps\");
                             }
+
                             con.Send("access", codebox.Text);
                             CallsSettings.Welcome_Text = welcomemsg.Text;
                             CallsSettings.Welcome_Text_2 = welcomemsg2.Text;
@@ -889,6 +894,7 @@ namespace R42Bot
                         }
                         else
                         {
+                            errorlog.Items.Add("R42Bot++ did not recieve it's botId from server.");
                             DisconnectBot();
                         }
                     }
@@ -3279,11 +3285,16 @@ namespace R42Bot
                                                 {
                                                     if (player.Length > 1)
                                                     {
+                                                        List<List<int>> toRem = new List<List<int>>() { };
                                                         for (int x = 0; x < player[id].blocks.Count; x++)
                                                         {
-                                                            con.Send("b", new object[] { player[id].blocks[x][3], player[id].blocks[x][0], player[id].blocks[x][1], 0 });
-                                                            player[id].blocks.Remove(player[id].blocks[x]);
+                                                            con.Send("b", player[id].blocks[x][3], player[id].blocks[x][0], player[id].blocks[x][1], 0);
+                                                            toRem.Add(player[id].blocks[x]);
                                                             Thread.Sleep(32);
+                                                        }
+                                                        for (int e=0;e<toRem.Count;e++)
+                                                        {
+                                                            player[id].blocks.Remove(toRem[e]);
                                                         }
                                                     }
                                                 }
@@ -4209,12 +4220,13 @@ namespace R42Bot
                                                 FillBIDSet = false;
                                                 if (botFullyConnected)
                                                 {
-                                                    con.Send("say", "/pm " + names[m.GetInt(0)] + " fill done.");
+                                                    queue.Add("/pm " + names[m.GetInt(0)] + " Fill has been completed. If nothing happened, please ensure");
+                                                    queue.Add("/pm " + names[m.GetInt(0)] + " you have used the Generic Stripes block to set coordinates.");
                                                 }
                                                 /*int x1 = 1;
                                                 int y1 = 1;
                                                 int x2 = worldWidth - 2;
-                                                int y2 = worldHeight - 2;
+                                                int y2 = worldHeight - 2;spe
                                                 if (idof > 500 && idof < 1000)
                                                     con.Send(worldKey + "fill", idof, 1, x1, y1, x2, y2);
                                                 else
@@ -5114,8 +5126,8 @@ namespace R42Bot
                                 if (chatbox.Items.Count >= 13)
                                 {
                                     string three = chatbox.Items[12].ToString();
-                                    chatbox.Items.Clear();
                                     Thread.Sleep(150);
+                                    chatbox.Items.Clear();
                                     chatbox.Items.Add(one);
                                     chatbox.Items.Add(two);
                                     chatbox.Items.Add(three);
@@ -5139,32 +5151,35 @@ namespace R42Bot
         {
             if (connector.Text == GetLangFile(9))
             {
-                bool run = true;
                 try
                 {
                     this.Connect();
 
-                    con.Send("init");
+                    if (con != null)
+                        con.Send("init");
                 }
-                catch (PlayerIOError error)
+                catch (Exception error)
                 {
                     errorlog.Items.Add("The bot failed to connect: " + error.Message);
                     DisconnectBot();
-                    run = false;
+                    
                     MessageBox.Show("The bot failed to connect: " + error.Message, "Error 000");
                     //MessageBox.Show(error.Message);
                 }
-                if (run)
+                if (con != null)
                 {
-                    connector.Text = GetLangFile(10);
-                    autochangerface.Start();
-                    autochangerface.Enabled = true;
-                    button8.Enabled = true;
-                    button9.Enabled = true;
-                    button32.Enabled = true;
-                    grbutton.Enabled = true;
-                    paintbrushauto.Enabled = true;
-                    dncycle.Enabled = true;
+                    if (con.Connected)
+                    {
+                        connector.Text = GetLangFile(10);
+                        autochangerface.Start();
+                        autochangerface.Enabled = true;
+                        button8.Enabled = true;
+                        button9.Enabled = true;
+                        button32.Enabled = true;
+                        grbutton.Enabled = true;
+                        paintbrushauto.Enabled = true;
+                        dncycle.Enabled = true;
+                    }
                 }
             }
             else if (connector.Text == GetLangFile(10))
@@ -5216,7 +5231,7 @@ namespace R42Bot
         private void Form1_Load(object sender, EventArgs e)
         {
             factory = new ChatterBotFactory();
-            bot = factory.Create(ChatterBotType.JABBERWACKY);
+            bot = factory.Create(ChatterBotType.CLEVERBOT);
             botSession = bot.CreateSession();
 
             face1.Maximum = SmileyFaceLimit;
@@ -7640,17 +7655,29 @@ namespace R42Bot
 
         private void autoaurachanger_Tick(object sender, EventArgs e)
         {
-            if (checkBox7.Checked)
+            if (con != null)
             {
-                if (AuraId != MaxAuraId)
+                if (con.Connected)
                 {
-                    AuraId++;
-                    con.Send(worldKey + "a", AuraId + 1);
-                }
-                else
-                {
-                    AuraId = 0;
-                    con.Send(worldKey + "a", 0);
+                    if (checkBox7.Checked)
+                    {
+                        int shapeId = 0;
+                        if (checkBox18.Checked)
+                            shapeId = 1;
+                        else if (checkBox22.Checked)
+                            shapeId = 2;
+
+                        if (AuraId != MaxAuraId)
+                        {
+                            AuraId++;
+                            con.Send("aura", shapeId, AuraId + 1);
+                        }
+                        else
+                        {
+                            AuraId = 0;
+                            con.Send("aura", shapeId, 0);
+                        }
+                    }
                 }
             }
         }
@@ -8045,42 +8072,42 @@ namespace R42Bot
 
         private void button23_Click(object sender, EventArgs e)
         {
-            con.Send(worldKey + "r");
+            con.Send(worldKey + "show", "red");
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
-            con.Send(worldKey + "g");
+            con.Send(worldKey + "show", "green");
         }
 
         private void button24_Click(object sender, EventArgs e)
         {
-            con.Send(worldKey + "b");
+            con.Send(worldKey + "show", "blue");
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
-            con.Send(worldKey + "c");
+            con.Send(worldKey + "show", "cyan");
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
-            con.Send(worldKey + "m");
+            con.Send(worldKey + "show", "magenta");
         }
-
+        
         private void button27_Click(object sender, EventArgs e)
         {
-            con.Send(worldKey + "y");
+            con.Send(worldKey + "show", "yellow");
         }
 
         private void button28_Click(object sender, EventArgs e)
         {
-            con.Send(worldKey + "r");
-            con.Send(worldKey + "g");
-            con.Send(worldKey + "b");
-            con.Send(worldKey + "c");
-            con.Send(worldKey + "y");
-            con.Send(worldKey + "m");
+            con.Send(worldKey + "show", "red");
+            con.Send(worldKey + "show", "green");
+            con.Send(worldKey + "show", "blue");
+            con.Send(worldKey + "show", "cyan");
+            con.Send(worldKey + "show", "yellow");
+            con.Send(worldKey + "show", "magenta");
         }
 
         private void button29_Click(object sender, EventArgs e)
@@ -8186,6 +8213,31 @@ namespace R42Bot
         {
             if (con.Connected)
                 con.Send("access", textBox2.Text);
+        }
+
+        private void checkBox23_CheckedChanged(object sender, EventArgs e)
+        {
+            ForceCheck(checkBox23, checkBox22, checkBox18);
+        }
+
+        private void boxPlaceCBOX_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void blockidsfbox_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox22_CheckedChanged(object sender, EventArgs e)
+        {
+            ForceCheck(checkBox22, checkBox18, checkBox23);
+        }
+
+        private void checkBox18_CheckedChanged(object sender, EventArgs e)
+        {
+            ForceCheck(checkBox18, checkBox22, checkBox23);
         }
     }
 }

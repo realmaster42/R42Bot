@@ -23,7 +23,7 @@ namespace R42Bot
                 foreach (string ok in System.IO.Directory.GetFiles(Environment.CurrentDirectory + @"\language\"))
                 {
                     files++;
-                    string final = ok.Replace(Environment.CurrentDirectory, "").Substring(6);
+                    string final = ok.Replace(Environment.CurrentDirectory, "").Substring(10);
                     if (ok.EndsWith(".txt"))
                     {
                         if (final == "en_us.txt" && CallsSettings.CurrentLang == "") {
@@ -95,7 +95,7 @@ namespace R42Bot
             {
                 if (MessageBox.Show("This action cannot be undone! Are you sure you want to delete it?", "R42Bot++", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Yes)
                 {
-                    System.IO.File.Delete(Environment.CurrentDirectory + @"\language\" + listBox1.Items[listBox1.SelectedIndex].ToString().Substring(0, listBox1.Items[listBox1.SelectedIndex].ToString().IndexOf("by") - 2) + ".rblang");
+                    System.IO.File.Delete(Environment.CurrentDirectory + @"\language\" + listBox1.Items[listBox1.SelectedIndex].ToString().Substring(0, listBox1.Items[listBox1.SelectedIndex].ToString().IndexOf("by") - 2) + ".txt");
                 }
             }
             else

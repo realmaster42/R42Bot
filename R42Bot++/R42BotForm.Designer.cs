@@ -230,6 +230,9 @@ namespace R42Bot
             this.lavadrawer = new System.Windows.Forms.CheckBox();
             this.autobuild1 = new System.Windows.Forms.CheckBox();
             this.smileytabs = new System.Windows.Forms.TabPage();
+            this.checkBox23 = new System.Windows.Forms.CheckBox();
+            this.checkBox22 = new System.Windows.Forms.CheckBox();
+            this.checkBox18 = new System.Windows.Forms.CheckBox();
             this.button21 = new System.Windows.Forms.Button();
             this.checkBox7 = new System.Windows.Forms.CheckBox();
             this.btnsmileyaura = new System.Windows.Forms.Button();
@@ -318,7 +321,6 @@ namespace R42Bot
             this.checkBox10 = new System.Windows.Forms.CheckBox();
             this.label61 = new System.Windows.Forms.Label();
             this.label60 = new System.Windows.Forms.Label();
-            this.button29 = new System.Windows.Forms.Button();
             this.button28 = new System.Windows.Forms.Button();
             this.button27 = new System.Windows.Forms.Button();
             this.button26 = new System.Windows.Forms.Button();
@@ -2482,7 +2484,7 @@ namespace R42Bot
             // 
             this.blockidsfbox.Location = new System.Drawing.Point(3, 230);
             this.blockidsfbox.Maximum = new decimal(new int[] {
-            1023,
+            1091,
             0,
             0,
             0});
@@ -2494,6 +2496,7 @@ namespace R42Bot
             0,
             0,
             0});
+            this.blockidsfbox.ValueChanged += new System.EventHandler(this.blockidsfbox_ValueChanged);
             // 
             // paintbrushauto
             // 
@@ -2593,6 +2596,7 @@ namespace R42Bot
             this.boxPlaceCBOX.Text = "Box";
             this.toolTip1.SetToolTip(this.boxPlaceCBOX, "When placing dark basic generate a BOX.");
             this.boxPlaceCBOX.UseVisualStyleBackColor = true;
+            this.boxPlaceCBOX.CheckedChanged += new System.EventHandler(this.boxPlaceCBOX_CheckedChanged);
             // 
             // BGdelbox
             // 
@@ -2747,6 +2751,9 @@ namespace R42Bot
             // 
             // smileytabs
             // 
+            this.smileytabs.Controls.Add(this.checkBox23);
+            this.smileytabs.Controls.Add(this.checkBox22);
+            this.smileytabs.Controls.Add(this.checkBox18);
             this.smileytabs.Controls.Add(this.button21);
             this.smileytabs.Controls.Add(this.checkBox7);
             this.smileytabs.Controls.Add(this.btnsmileyaura);
@@ -2766,6 +2773,41 @@ namespace R42Bot
             this.smileytabs.TabIndex = 9;
             this.smileytabs.Text = "Smiley Changer";
             this.smileytabs.UseVisualStyleBackColor = true;
+            // 
+            // checkBox23
+            // 
+            this.checkBox23.AutoSize = true;
+            this.checkBox23.Checked = true;
+            this.checkBox23.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox23.Location = new System.Drawing.Point(551, 21);
+            this.checkBox23.Name = "checkBox23";
+            this.checkBox23.Size = new System.Drawing.Size(59, 17);
+            this.checkBox23.TabIndex = 15;
+            this.checkBox23.Text = "Normal";
+            this.checkBox23.UseVisualStyleBackColor = true;
+            this.checkBox23.CheckedChanged += new System.EventHandler(this.checkBox23_CheckedChanged);
+            // 
+            // checkBox22
+            // 
+            this.checkBox22.AutoSize = true;
+            this.checkBox22.Location = new System.Drawing.Point(470, 21);
+            this.checkBox22.Name = "checkBox22";
+            this.checkBox22.Size = new System.Drawing.Size(75, 17);
+            this.checkBox22.TabIndex = 14;
+            this.checkBox22.Text = "Pin Wheel";
+            this.checkBox22.UseVisualStyleBackColor = true;
+            this.checkBox22.CheckedChanged += new System.EventHandler(this.checkBox22_CheckedChanged);
+            // 
+            // checkBox18
+            // 
+            this.checkBox18.AutoSize = true;
+            this.checkBox18.Location = new System.Drawing.Point(411, 21);
+            this.checkBox18.Name = "checkBox18";
+            this.checkBox18.Size = new System.Drawing.Size(53, 17);
+            this.checkBox18.TabIndex = 13;
+            this.checkBox18.Text = "Torus";
+            this.checkBox18.UseVisualStyleBackColor = true;
+            this.checkBox18.CheckedChanged += new System.EventHandler(this.checkBox18_CheckedChanged);
             // 
             // button21
             // 
@@ -2825,7 +2867,7 @@ namespace R42Bot
             // 
             this.face2.Location = new System.Drawing.Point(115, 76);
             this.face2.Maximum = new decimal(new int[] {
-            103,
+            155,
             0,
             0,
             0});
@@ -2837,7 +2879,7 @@ namespace R42Bot
             // 
             this.face1.Location = new System.Drawing.Point(12, 76);
             this.face1.Maximum = new decimal(new int[] {
-            103,
+            155,
             0,
             0,
             0});
@@ -2944,7 +2986,7 @@ namespace R42Bot
             // 
             this.numericUpDown4.Location = new System.Drawing.Point(663, 12);
             this.numericUpDown4.Maximum = new decimal(new int[] {
-            1024,
+            1091,
             0,
             0,
             0});
@@ -3095,7 +3137,7 @@ namespace R42Bot
             // 
             this.snakeSpecial2.Location = new System.Drawing.Point(599, 12);
             this.snakeSpecial2.Maximum = new decimal(new int[] {
-            1024,
+            1091,
             0,
             0,
             0});
@@ -3112,7 +3154,7 @@ namespace R42Bot
             // 
             this.snakeSpecial1.Location = new System.Drawing.Point(513, 12);
             this.snakeSpecial1.Maximum = new decimal(new int[] {
-            1024,
+            1091,
             0,
             0,
             0});
@@ -3576,7 +3618,6 @@ namespace R42Bot
             this.tabPage6.Controls.Add(this.checkBox10);
             this.tabPage6.Controls.Add(this.label61);
             this.tabPage6.Controls.Add(this.label60);
-            this.tabPage6.Controls.Add(this.button29);
             this.tabPage6.Controls.Add(this.button28);
             this.tabPage6.Controls.Add(this.button27);
             this.tabPage6.Controls.Add(this.button26);
@@ -3766,16 +3807,6 @@ namespace R42Bot
             this.label60.Size = new System.Drawing.Size(343, 13);
             this.label60.TabIndex = 17;
             this.label60.Text = "________________________________________________________";
-            // 
-            // button29
-            // 
-            this.button29.Location = new System.Drawing.Point(503, 7);
-            this.button29.Name = "button29";
-            this.button29.Size = new System.Drawing.Size(75, 23);
-            this.button29.TabIndex = 16;
-            this.button29.Text = "Crown";
-            this.button29.UseVisualStyleBackColor = true;
-            this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
             // button28
             // 
@@ -5047,7 +5078,6 @@ namespace R42Bot
         private Label label59;
         private Button button22;
         private Button button28;
-        private Button button29;
         private Label label60;
         private Label label61;
         private Label label62;
@@ -5078,6 +5108,9 @@ namespace R42Bot
         private TextBox textBox2;
         private Label label66;
         private CheckBox checkBox17;
+        private CheckBox checkBox23;
+        private CheckBox checkBox22;
+        private CheckBox checkBox18;
     }
 }
 
